@@ -8,7 +8,7 @@ import 'package:pet_care/pages/PetBoardingPage.dart';
 import 'package:pet_care/pages/ProfilePage.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import 'AdvicePage.dart';
+import 'AdvicePage/AdvicePage.dart';
 
 //базовая страница
 class BasePage extends StatelessWidget {
@@ -19,8 +19,8 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      resizeToAvoidBottomInset: false,
+      //extendBodyBehindAppBar: true,
+      //resizeToAvoidBottomInset: false,
       appBar: AppBar(
         //backgroundColor: Color.fromRGBO(246, 194, 107, 10),
         backgroundColor: Colors.transparent,
@@ -39,12 +39,12 @@ class BasePage extends StatelessWidget {
 }
 
 //виджет навигационной панели
-class NavigationBar extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _NavigationBarState createState() => _NavigationBarState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _NavigationBarState extends State<NavigationBar> {
+class _HomePageState extends State<HomePage> {
   int currentindex = 0;
   final titles = [
     'Советы',

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         routes: {
           //'/login': (BuildContext context) => AuthorizationPage(),
           '/start': (BuildContext context) => ProfilePage(),
-          '/home': (BuildContext context) => NavigationBar(),
+          '/home': (BuildContext context) => HomePage(),
         },
         theme: ThemeData(
           primarySwatch: Colors.yellow,
