@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'Article.dart';
+
 class AdviceWidget extends StatelessWidget {
   final Article article;
   AdviceWidget(this.article);
@@ -49,13 +51,6 @@ class AdviceWidget extends StatelessWidget {
           )
         ]));
   }
-}
-
-class Article {
-  final String title;
-  final String image;
-  final String text;
-  const Article({this.title, this.image, this.text});
 }
 
 class AdviceBlock extends StatelessWidget {

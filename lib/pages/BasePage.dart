@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/FeedingCalendarPage.dart';
 import 'package:pet_care/pages/NotesPage.dart';
 import 'package:pet_care/pages/PetBoardingPage.dart';
-import 'package:pet_care/pages/ProfilePage.dart';
+import 'package:pet_care/pages/ProfilePage/ProfilePage.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import 'AdvicePage/AdvicePage.dart';
