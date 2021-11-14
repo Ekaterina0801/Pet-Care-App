@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/FeedingCalendarPage.dart';
-import 'package:pet_care/pages/NotesPage.dart';
+import 'package:pet_care/pages/NotesPage/NotesPage.dart';
 import 'package:pet_care/pages/PetBoardingPage.dart';
 import 'package:pet_care/pages/ProfilePage/ProfilePage.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -19,22 +19,31 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //extendBodyBehindAppBar: true,
-      //resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        //backgroundColor: Color.fromRGBO(246, 194, 107, 10),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text(title,
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 24)),
-      ),
-      body: body,
-      bottomNavigationBar: navigationbar,
-      backgroundColor: Color.fromRGBO(238, 224, 203, 10),
-    );
+        //extendBodyBehindAppBar: true,
+        //resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          //backgroundColor: //Color.fromRGBO(246, 194, 107, 10),
+          backgroundColor: Color.fromRGBO(255, 223, 142, 10),
+          elevation: 0,
+          title: Text(title,
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 24)),
+        ),
+        body: body,
+        // body: Container(
+        //     decoration: BoxDecoration(
+        //       image: DecorationImage(
+        //         image: Image.asset("assets/images/backgroundimage.jpeg").image,
+        //         fit: BoxFit.cover,
+        //       ),
+        //     ),
+        //     child: body),
+        bottomNavigationBar: navigationbar,
+        backgroundColor: Colors.white
+        //Color.fromRGBO(238, 224, 203, 10),
+        );
   }
 }
 

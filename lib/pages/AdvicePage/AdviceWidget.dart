@@ -62,6 +62,16 @@ class AdviceBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
+        // decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.all(
+        //       Radius.circular(30),
+        //     ),
+        //     //shape: BoxShape.values,
+        //     //shape: BoxShape.circle,
+        //     color: Colors.transparent,
+        //     boxShadow: [
+        //       BoxShadow(color: Colors.grey, blurRadius: 4, spreadRadius: 1)
+        //     ]),
         padding: EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -89,7 +99,7 @@ class AdviceBlock extends StatelessWidget {
             ),
             Container(
                 decoration: BoxDecoration(
-                    color: Color.fromRGBO(246, 194, 107, 10),
+                    color: Color.fromRGBO(255, 223, 142, 1),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30))),
@@ -144,7 +154,7 @@ class AdviceMainBlock extends StatelessWidget {
             ),
             Container(
                 decoration: BoxDecoration(
-                    color: Color.fromRGBO(246, 194, 107, 10),
+                    color: Color.fromRGBO(255, 223, 142, 1),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30))),
