@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/AdvicePage/AdviceWidget.dart';
+import 'package:pet_care/pages/NotesPage/NotesPage.dart';
 import 'package:pet_care/repository/advicerepo.dart';
+
+import '../FeedingCalendarPage.dart';
 
 class AdvicePage extends StatelessWidget {
   const AdvicePage({Key key}) : super(key: key);
@@ -21,11 +24,17 @@ class AdvicePage extends StatelessWidget {
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
                     fontSize: 24)),
-            Text("Показать все",
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14))
+            TextButton(
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Container())),
+              child: Text("Показать все",
+                  style: GoogleFonts.comfortaa(
+                      decoration: TextDecoration.underline,
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 14)),
+            )
           ],
         ),
       ),
