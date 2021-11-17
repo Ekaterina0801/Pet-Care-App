@@ -1,8 +1,8 @@
 import 'Passport.dart';
 
-class Profile {
+class ProfilePet {
   final String name;
   final String photo;
   final Passport passport;
-  Profile({this.name, this.photo, this.passport});
+  ProfilePet({this.name, this.photo, this.passport});
 }

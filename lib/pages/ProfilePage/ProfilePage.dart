@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/ProfilePage/AvatarBlock.dart';
 import 'package:pet_care/pages/ProfilePage/MainInfoBlock.dart';
-import 'package:pet_care/repository/profilesrepo.dart';
+import 'package:pet_care/repository/profilespetsrepo.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -14,7 +14,7 @@ class ProfilePage extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: 3,
           itemBuilder: (context, i) {
-            return AvatarBlock(profiles[i].name, profiles[i].photo);
+            return AvatarBlock(profilespets[i].name, profilespets[i].photo);
           },
         ),
       ),

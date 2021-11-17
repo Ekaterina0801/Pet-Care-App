@@ -7,8 +7,6 @@ import 'package:pet_care/repository/advicerepo.dart';
 import '../FeedingCalendarPage.dart';
 
 class AdvicePage extends StatelessWidget {
-  const AdvicePage({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return ListView(children: [

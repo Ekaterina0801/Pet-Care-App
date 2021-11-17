@@ -9,47 +9,35 @@ class AdviceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.red,
-        appBar: AppBar(
-          title: Text(
-            article.title,
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
+    return ListView(children: [
+      Column(
+        children: [
+          Container(
+            child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  child: Text(article.text,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white)),
+                )),
           ),
-        ),
-        body: ListView(children: [
-          Column(
-            children: [
-              Container(
-                child: Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      child: Text(article.text,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white)),
-                    )),
-              ),
-              Container(
-                margin:
-                    EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
-                height: 400,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: Image.asset(article.image).image,
-                      fit: BoxFit.fill,
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(30))),
-              ),
-            ],
-          )
-        ]));
+          Container(
+            margin: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
+            height: 400,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: Image.asset(article.image).image,
+                  fit: BoxFit.fill,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(30))),
+          ),
+        ],
+      )
+    ]);
   }
 }
 
@@ -62,16 +50,6 @@ class AdviceBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        // decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.all(
-        //       Radius.circular(30),
-        //     ),
-        //     //shape: BoxShape.values,
-        //     //shape: BoxShape.circle,
-        //     color: Colors.transparent,
-        //     boxShadow: [
-        //       BoxShadow(color: Colors.grey, blurRadius: 4, spreadRadius: 1)
-        //     ]),
         padding: EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,

@@ -37,6 +37,8 @@ dependencies:
   path:
   intl: ^0.15.7
   share: ^0.6.1
+  colorize_text_avatar: ^1.0.2
+  avatars: ^2.0.0
 
 dev_dependencies:
   flutter_test:
