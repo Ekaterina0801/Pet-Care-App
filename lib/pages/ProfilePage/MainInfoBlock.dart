@@ -4,7 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 class MainInfoBlock extends StatelessWidget {
   final String title;
   final String info;
-  MainInfoBlock(this.title, this.info);
+  final Color myColor;
+  MainInfoBlock(this.title, this.info, this.myColor);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,7 +16,7 @@ class MainInfoBlock extends StatelessWidget {
           height: 90,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Color.fromRGBO(245, 201, 123, 1),
+            color: myColor,
           ),
           child: Container(
               padding: EdgeInsets.only(top: 35),

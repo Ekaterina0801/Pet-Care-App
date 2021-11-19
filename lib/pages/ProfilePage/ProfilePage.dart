@@ -34,10 +34,11 @@ class ProfilePage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            MainInfoBlock("Возраст", "1 год 6 месяцев"),
-            MainInfoBlock("Вес", "15 кг"),
-            MainInfoBlock("Порода", "Корги"),
-            MainInfoBlock("Пол", "Мужской"),
+            MainInfoBlock(
+                "Возраст", "1 год 6 месяцев", Color.fromRGBO(245, 201, 123, 1)),
+            MainInfoBlock("Вес", "15 кг", Colors.red),
+            MainInfoBlock("Порода", "Корги", Colors.blue),
+            MainInfoBlock("Пол", "Мужской", Colors.green),
           ],
         ),
       ),
