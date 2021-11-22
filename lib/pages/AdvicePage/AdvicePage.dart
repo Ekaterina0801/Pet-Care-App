@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/AdvicePage/AdviceList.dart';
 import 'package:pet_care/pages/AdvicePage/AdviceWidget.dart';
-import 'package:pet_care/pages/AdvicePage/Article.dart';
+import 'package:pet_care/pages/AdvicePage/ArticlePage.dart';
 import 'package:pet_care/pages/NotesPage/NotesPage.dart';
 import 'package:pet_care/repository/advicerepo.dart';
 
@@ -25,8 +25,10 @@ class AdvicePage extends StatelessWidget {
                     fontWeight: FontWeight.w800,
                     fontSize: 24)),
             TextButton(
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AdviceList())),
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ArticlePage(articles[0]))),
               child: Text("Показать все",
                   style: GoogleFonts.comfortaa(
                       decoration: TextDecoration.underline,
