@@ -10,7 +10,7 @@ class PetBoardingPage extends StatelessWidget {
     return ListView(
       physics: ScrollPhysics(),
       children: [
-        MyAccountWidget(accounts[0]),
+        MyAccountWidget(accounts[0]),        
         GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

@@ -20,27 +20,37 @@ class MyAccountWidget extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: Text(
-                  'Имя: ' +
-                      myaccount.name +
-                      '\n' +
-                      'E-mail: ' +
-                      myaccount.email +
-                      '\n' +
-                      'Район: ' +
-                      myaccount.district +
-                      '\n' +
-                      'Каких животных можно оставить: ' +
-                      myaccount.kinfofpet,
+              child: Text(myaccount.name,
+                  // '\n' +
+                  // 'E-mail: ' +
+                  // myaccount.email +
+                  // '\n' +
+                  // 'Район: ' +
+                  // myaccount.district +
+                  // '\n' +
+                  // 'Каких животных можно оставить: ' +
+                  // myaccount.kinfofpet,
                   maxLines: 12,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.comfortaa(
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w800,
-                      fontSize: 14)),
+                      fontSize: 18)),
             ),
             SetAgreement(),
+            Container(
+                child: TextButton(
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Container())),
+              child: Text("Перейти к настройкам моего профиля для сервиса",
+                  style: GoogleFonts.comfortaa(
+                      decoration: TextDecoration.underline,
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 14)),
+            )),
           ],
         ));
   }

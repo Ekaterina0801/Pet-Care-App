@@ -56,16 +56,16 @@ class AccountBlock extends StatelessWidget {
                       padding: EdgeInsets.all(5),
                       child: Text(
                           'Имя: ' +
-                              account.name +
-                              '\n' +
-                              'E-mail: ' +
-                              account.email +
-                              '\n' +
-                              'Район: ' +
-                              account.district +
-                              '\n' +
-                              'Каких животных можно оставить: ' +
-                              account.kinfofpet,
+                              account.name,
+                              // '\n' +
+                              // 'E-mail: ' +
+                              // account.email +
+                              // '\n' +
+                              // 'Район: ' +
+                              // account.district +
+                              // '\n' +
+                              // 'Каких животных можно оставить: ' +
+                              // account.kinfofpet,
                           maxLines: 9,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
