@@ -2,7 +2,7 @@ import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pet_care/pages/FeedingCalendarPage.dart';
+import 'package:pet_care/pages/CalendarPage/FeedingCalendarPage.dart';
 import 'package:pet_care/pages/NotesPage/NotesPage.dart';
 import 'package:pet_care/pages/PetBoardingPage/PetBoardingPage.dart';
 import 'package:pet_care/pages/ProfilePage/ProfilePage.dart';
@@ -19,6 +19,7 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         //extendBodyBehindAppBar: true,
         //resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
   final children = [
     AdvicePage(),
     PetBoardingPage(),
-    FeedingCalendarPage(),
+    CalendarPage(),
     NotesPage(),
     ProfilePage(),
   ];

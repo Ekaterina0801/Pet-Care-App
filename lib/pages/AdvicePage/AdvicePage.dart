@@ -6,7 +6,7 @@ import 'package:pet_care/pages/AdvicePage/ArticlePage.dart';
 import 'package:pet_care/pages/NotesPage/NotesPage.dart';
 import 'package:pet_care/repository/advicerepo.dart';
 
-import '../FeedingCalendarPage.dart';
+import '../CalendarPage/FeedingCalendarPage.dart';
 
 class AdvicePage extends StatelessWidget {
   @override

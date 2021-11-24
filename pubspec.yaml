@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: 
+    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -35,10 +37,11 @@ dependencies:
   auto_size_text: ^1.1.2
   sqflite:
   path:
-  intl: ^0.15.7
-  share: ^0.6.1
   colorize_text_avatar: ^1.0.2
   avatars: ^2.0.0
+  table_calendar: ^3.0.3
+  syncfusion_flutter_calendar: ^19.3.55
+  syncfusion_localizations: ^19.3.55
 
 dev_dependencies:
   flutter_test:
