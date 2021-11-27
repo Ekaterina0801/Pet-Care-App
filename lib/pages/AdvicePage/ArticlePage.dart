@@ -11,25 +11,25 @@ class ArticlePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      title: 'Советы',
+        title: 'Советы',
         body: ListView(children: [
-      AdviceBlock(article.title, article.image),
-      Container(
-        color: Colors.grey.withOpacity(0.25),
-        child: Align(
-          alignment: Alignment.center,
-          child: Container(
-            padding: EdgeInsets.all(5),
-            child: Text(article.text,
-                textAlign: TextAlign.left,
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14)),
-          ),
-        ),
-      )
-    ]
+          AdviceBlock(article.title, article.image, 0),
+          Container(
+            color: Colors.grey.withOpacity(0.25),
+            child: Align(
+              alignment: Alignment.center,
+              child: Container(
+                padding: EdgeInsets.all(5),
+                child: Text(article.text,
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.comfortaa(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14)),
+              ),
+            ),
+          )
+        ]
             //appBar: AppBar(
             // title: Text('Cоветы',
             //textAlign: TextAlign.left,
