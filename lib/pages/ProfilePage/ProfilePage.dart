@@ -9,13 +9,17 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(children: [
       Container(
-        height: 200,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 3,
-          itemBuilder: (context, i) {
-            return AvatarBlock(profilespets[i].name, profilespets[i].photo);
-          },
+        padding: EdgeInsets.all(10),
+        child: Row(
+          children: [
+            AvatarBlock(profilespets[1].name, profilespets[1].photo),
+            Container(child:
+                Icon(Icons.plus_one, size: 75),
+                color: Color.fromRGBO(255, 225, 120, 1),
+                height: 100,
+                width: 100
+            )
+          ]
         ),
       ),
       Container(
@@ -35,7 +39,7 @@ class ProfilePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             MainInfoBlock(
-                "Возраст", "1 год 6 месяцев", Color.fromRGBO(245, 201, 123, 1)),
+                "Возраст", "1 год 6 месяцев", Color.fromRGBO(245, 200, 125, 1)),
             MainInfoBlock("Вес", "15 кг", Colors.red),
             MainInfoBlock("Порода", "Корги", Colors.blue),
             MainInfoBlock("Пол", "Мужской", Colors.green),
