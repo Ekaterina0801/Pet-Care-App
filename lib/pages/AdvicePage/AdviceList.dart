@@ -8,7 +8,6 @@ import 'package:pet_care/repository/advicerepo.dart';
 import 'package:pet_care/repository/notesrepo.dart';
 
 class AdviceList extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return BasePage(body: AdviceGrid(), title: "Статьи");
@@ -18,19 +17,20 @@ class AdviceList extends StatelessWidget {
 class AdviceGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container( 
+    return Container(
       padding: EdgeInsets.all(10),
-      child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisExtent: 170,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
-            ),
+      child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisExtent: 220,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+          ),
           itemCount: articles.length,
           physics: ScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) =>
-              Container(child: AdviceBlock(articles[index].title, articles[index].image))),
-      );      
-    
+          itemBuilder: (BuildContext context, int index) => Container(
+              child:
+                  AdviceBlock(articles[index].title, articles[index].image))),
+    );
   }
 }

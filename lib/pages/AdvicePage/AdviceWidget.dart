@@ -84,11 +84,11 @@ class AdviceBlock extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(
-                    height: 50,
+                    height: 70,
                     width: 200,
                     padding: EdgeInsets.all(5),
                     child: Text(title,
-                        maxLines: 2,
+                        maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.comfortaa(

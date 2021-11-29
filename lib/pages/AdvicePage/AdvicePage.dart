@@ -25,10 +25,8 @@ class AdvicePage extends StatelessWidget {
                     fontWeight: FontWeight.w800,
                     fontSize: 24)),
             TextButton(
-              onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ArticlePage(articles[0]))),
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AdviceList())),
               child: Text("Показать все",
                   style: GoogleFonts.comfortaa(
                       decoration: TextDecoration.underline,
@@ -41,7 +39,7 @@ class AdvicePage extends StatelessWidget {
         ),
       ),
       Container(
-        height: 200.0,
+        height: 220.0,
         child: ListView.builder(
           shrinkWrap: true,
           itemCount: 4,
