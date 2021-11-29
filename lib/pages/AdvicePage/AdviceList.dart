@@ -22,19 +22,15 @@ class AdviceGrid extends StatelessWidget {
       child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisExtent: 170,
+            mainAxisExtent: 220,
             crossAxisSpacing: 5,
             mainAxisSpacing: 5,
           ),
           itemCount: articles.length,
           physics: ScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) => InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, '$index');
-              },
-              child: Container(
-                  child: AdviceBlock(
-                      articles[index].title, articles[index].image, index)))),
+          itemBuilder: (BuildContext context, int index) => Container(
+              child: AdviceBlock(
+                  articles[index].title, articles[index].image, 0))),
     );
   }
 }

@@ -42,6 +42,9 @@ dependencies:
   table_calendar: ^3.0.3
   syncfusion_flutter_calendar: ^19.3.55
   syncfusion_localizations: ^19.3.55
+  bloc : ^6.1.0
+  flutter_bloc : ^6.1.0
+  formz: ^0.4.1
 
 dev_dependencies:
   flutter_test:

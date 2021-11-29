@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:pet_care/pages/AdvicePage/ArticlePage.dart';
+import 'package:pet_care/pages/Registration/RegistrationPage.dart';
+import 'package:pet_care/repository/advicerepo.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
-
-import 'pages/AdvicePage/ArticlePage.dart';
 import 'pages/BasePage.dart';
 import 'pages/ProfilePage/ProfilePage.dart';
-import 'repository/advicerepo.dart';
 
 void main() {
   runApp(MyApp());

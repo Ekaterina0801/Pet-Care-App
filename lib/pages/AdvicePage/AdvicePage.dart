@@ -39,7 +39,7 @@ class AdvicePage extends StatelessWidget {
         ),
       ),
       Container(
-        height: 200.0,
+        height: 210.0,
         child: ListView.builder(
           shrinkWrap: true,
           itemCount: 4,
