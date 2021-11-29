@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
           //'/login': (BuildContext context) => AuthorizationPage(),
           '/start': (BuildContext context) => ProfilePage(),
           '/home': (BuildContext context) => HomePage(),
+          '0': (BuildContext context) => ArticlePage(articles[0]),
           '1': (BuildContext context) => ArticlePage(articles[1]),
           '2': (BuildContext context) => ArticlePage(articles[2]),
           '3': (BuildContext context) => ArticlePage(articles[3]),
