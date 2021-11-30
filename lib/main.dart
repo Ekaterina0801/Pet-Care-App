@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'PetCare',
-        initialRoute: '/home',
+        initialRoute: '/login',
         routes: {
-          //'/login': (BuildContext context) => AuthorizationPage(),
           '/start': (BuildContext context) => ProfilePage(),
           '/home': (BuildContext context) => HomePage(),
+          '/login': (BuildContext context) => LoginRegestrationPage(),
           '0': (BuildContext context) => ArticlePage(articles[0]),
           '1': (BuildContext context) => ArticlePage(articles[1]),
           '2': (BuildContext context) => ArticlePage(articles[2]),

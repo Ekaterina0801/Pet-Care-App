@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/AdvicePage/AdviceList.dart';
 import 'package:pet_care/pages/AdvicePage/AdviceWidget.dart';
-import 'package:pet_care/pages/AdvicePage/ArticlePage.dart';
-import 'package:pet_care/pages/NotesPage/NotesPage.dart';
 import 'package:pet_care/repository/advicerepo.dart';
-
-import '../CalendarPage/FeedingCalendarPage.dart';
 
 class AdvicePage extends StatelessWidget {
   @override
@@ -44,7 +40,7 @@ class AdvicePage extends StatelessWidget {
           shrinkWrap: true,
           itemCount: 4,
           itemBuilder: (context, i) {
-            return AdviceBlock(articles[i].title, articles[i].image, 0);
+            return AdviceBlock(articles[i].title, articles[i].image, i);
           },
           padding: const EdgeInsets.all(8),
           scrollDirection: Axis.horizontal,
@@ -75,7 +71,7 @@ class AdvicePage extends StatelessWidget {
           shrinkWrap: true,
           itemCount: 4,
           itemBuilder: (context, i) {
-            return AdviceBlock(articles[i].title, articles[i].image, 0);
+            return AdviceBlock(articles[i].title, articles[i].image, i);
           },
           padding: const EdgeInsets.all(8),
           scrollDirection: Axis.horizontal,
