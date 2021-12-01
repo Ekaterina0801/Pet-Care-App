@@ -26,12 +26,11 @@ class FormblockBloc extends Bloc<FormblockEvent, FormblockInitial> {
     }
 
     if (event is SendSignInForm) {
-      if (state.siginInusername.key.currentState.validate() &&
+      if (state.siginInemail.key.currentState.validate() &&
           state.siginInpassword.key.currentState.validate()) {
         try {
           yield FormblockInitial(currstare: LoginandRegistrationState.Waiting);
-          await LoginNamePassword(
-              username: event.username, password: event.password);
+          await LoginNamePassword(email: event.email, password: event.password);
           yield FormblockInitial(currstare: LoginandRegistrationState.Login);
         } on TextException catch (e) {
           yield FormblockInitial(

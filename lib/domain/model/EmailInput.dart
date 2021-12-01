@@ -10,7 +10,7 @@ class EmailInput extends FormzInput<String, EmailInputError> {
   //заполненное поле
   const EmailInput.dirty({String value = ''}) : super.dirty(value);
 
-  String getUsernameInputErrorText() {
+  String getEmailInputErrorText() {
     switch (errortext) {
       case EmailInputError.invalid:
         return "Неверный формат E-mail";

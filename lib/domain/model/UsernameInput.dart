@@ -1,9 +1,10 @@
 import 'package:formz/formz.dart';
 
-enum UsernameInputError { tolong, toshort }
+//Ошибки при вводе
+enum UsernameInputError { invalid }
 
 class UsernameInput extends FormzInput<String, UsernameInputError> {
-  static UsernameInputError errortext = UsernameInputError.tolong;
+  static UsernameInputError errortext = UsernameInputError.invalid;
   //незаполненное поле
   const UsernameInput.pure() : super.pure('');
   //заполненное поле
@@ -11,28 +12,23 @@ class UsernameInput extends FormzInput<String, UsernameInputError> {
 
   String getUsernameInputErrorText() {
     switch (errortext) {
-      case UsernameInputError.tolong:
-        return "Имя слишком длинное";
-        break;
-      case UsernameInputError.toshort:
-        return "Имя слишком короткое";
+      case UsernameInputError.invalid:
+        return "Неверный формат";
         break;
       default:
         return "";
     }
   }
 
+  //Шаблон имени
+  static final RegExp _usernameRegExp = RegExp(
+    r'^[А-Я][а-я]*$',
+  );
+
   //Валидатор
   @override
   UsernameInputError validator(String value) {
-    if (value.length < 2) {
-      errortext = UsernameInputError.toshort;
-      return UsernameInputError.toshort;
-    }
-    if (value.length > 12) {
-      errortext = UsernameInputError.tolong;
-      return UsernameInputError.tolong;
-    }
-    return null;
+    errortext = UsernameInputError.invalid;
+    return _usernameRegExp.hasMatch(value) ? null : UsernameInputError.invalid;
   }
 }

@@ -10,10 +10,10 @@ class StartLogin extends FormblockEvent {}
 class StartWaiting extends FormblockEvent {}
 
 class SendSignInForm extends FormblockEvent {
-  final String username;
+  final String email;
   final String password;
 
-  SendSignInForm({this.username, this.password});
+  SendSignInForm({this.email, this.password});
 }
 
 class SendSignUpForm extends FormblockEvent {

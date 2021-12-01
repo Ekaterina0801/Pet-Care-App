@@ -32,11 +32,11 @@ class LoginForm extends StatelessWidget {
                 ],
               ),
               InputWidget(
-                controller: _usernamecontroller,
-                title: state.siginInusername.title,
-                lable: state.siginInusername.label,
-                key1: state.siginInusername.key,
-                validator: state.siginInusername.validator,
+                controller: _emailcontroller,
+                title: state.siginUpemail.title,
+                lable: state.siginUpemail.label,
+                key1: state.siginUpemail.key,
+                validator: state.siginUpemail.validator,
               ),
               InputWidget(
                 controller: _passwordcontroller,
@@ -54,7 +54,7 @@ class LoginForm extends StatelessWidget {
                         fontSize: 18)),
                 onPressed: () {
                   block.add(SendSignInForm(
-                      username: _usernamecontroller.text,
+                      email: _emailcontroller.text,
                       password: _passwordcontroller.text));
                 },
               ),
@@ -78,7 +78,7 @@ class LoginForm extends StatelessWidget {
                   state.errorrequest ? Text(state.errortext) : Container()
                 ],
               ),
-              //Логин
+              //Имя
               InputWidget(
                 controller: _usernamecontroller,
                 title: state.siginUpusername.title,

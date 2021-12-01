@@ -35,11 +35,11 @@ class UserAlreadyExistExeption extends TextException {
 }
 
 Future<void> LoginNamePassword({
-  @required String username,
+  @required String email,
   @required String password,
 }) async {
   User user = await TryToLogIn(
-    username: username,
+    email: email,
     password: password,
   );
   if (user != null) {
@@ -54,11 +54,11 @@ Future<void> LoginNamePassword({
   }
 }
 
-Future<User> TryToLogIn({username, password}) =>
+Future<User> TryToLogIn({email, password}) =>
     Future.delayed(Duration(seconds: 1), () {
       return users
           .toList()
-          .firstWhere((elm) => (elm.username == username), orElse: () => null);
+          .firstWhere((elm) => (elm.email == email), orElse: () => null);
     });
 
 Future<bool> UserAlreadyExists({username}) =>

@@ -10,9 +10,14 @@ RegExp _emailRegExp = RegExp(
   r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
 );
 
+//Регекс для имени
+RegExp _usernameRegExp = RegExp(
+  r'^[А-Я][а-я]*$',
+);
+
 class FormblockInitial extends FormblockState {
   //Вход
-  InputWindow siginInusername;
+  InputWindow siginInemail;
   InputWindow siginInpassword;
 
   //Регистрация
@@ -28,14 +33,14 @@ class FormblockInitial extends FormblockState {
     this.errorrequest = false,
     this.currstare = LoginandRegistrationState.Login,
   }) {
-    this.siginInusername = siginInusername ??
+    this.siginInemail = siginInemail ??
         InputWindow(
-          title: "Логин",
-          label: "Введите логин",
+          title: "Электронная почта",
+          label: "Введите электронную почту",
           validator: (s) {
             return ((s.length > 2) && (s.length < 10))
                 ? null
-                : "Некорректная длина логина";
+                : "Некорректная длина";
           },
         );
 
@@ -53,12 +58,12 @@ class FormblockInitial extends FormblockState {
     //Поля регистрации
     this.siginUpusername = siginUpusername ??
         InputWindow(
-          title: "Логин",
-          label: "Придумайте логин",
+          title: "Имя",
+          label: "Введите имя",
           validator: (s) {
-            return ((s.length > 2) && (s.length < 10))
+            return (_usernameRegExp.hasMatch(s))
                 ? null
-                : "Некорректная длина логина";
+                : "Имя должно быть на русском";
           },
         );
 
