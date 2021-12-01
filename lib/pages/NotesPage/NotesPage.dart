@@ -10,7 +10,7 @@ class NotesPage extends StatelessWidget {
       padding: EdgeInsets.all(16),
       child: StaggeredGridView.countBuilder(
           crossAxisCount: 2,
-          itemCount: 16,
+          itemCount: 4,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           staggeredTileBuilder: (index) => StaggeredTile.fit(1),

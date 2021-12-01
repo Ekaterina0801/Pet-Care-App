@@ -61,10 +61,9 @@ Future<User> TryToLogIn({email, password}) =>
           .firstWhere((elm) => (elm.email == email), orElse: () => null);
     });
 
-Future<bool> UserAlreadyExists({username}) =>
+Future<bool> UserAlreadyExists({email}) =>
     Future.delayed(Duration(seconds: 3), () {
-      return users.toList().where((elm) => (elm.username == username)).length >
-          0;
+      return users.toList().where((elm) => (elm.email == email)).length > 0;
     });
 
 Future<void> Registration({
@@ -72,7 +71,7 @@ Future<void> Registration({
   @required String password,
   @required String email,
 }) async {
-  bool b = await UserAlreadyExists(username: username);
+  bool b = await UserAlreadyExists(email: email);
   if (b) {
     throw UserAlreadyExistExeption();
   } else {
