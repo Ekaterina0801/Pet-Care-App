@@ -18,7 +18,7 @@ class LoginForm extends StatelessWidget {
     return BlocConsumer<FormblockBloc, FormblockInitial>(
         listener: (context, state) {
       if (currentuser != null) {
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushReplacementNamed(context, '/home');
       }
       // ignore: missing_return
     }, builder: (context, state) {

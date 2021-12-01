@@ -18,12 +18,8 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        //extendBodyBehindAppBar: true,
-        //resizeToAvoidBottomInset: false,
         appBar: AppBar(
           actions: [],
-          //backgroundColor: //Color.fromRGBO(246, 194, 107, 10),
           backgroundColor: Color.fromRGBO(255, 223, 142, 10),
           elevation: 0,
           title: Text(title,

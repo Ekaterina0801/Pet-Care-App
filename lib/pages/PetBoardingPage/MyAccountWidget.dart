@@ -2,6 +2,8 @@ import 'package:avatars/avatars.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/PetBoardingPage/Account.dart';
+import 'package:pet_care/pages/PetBoardingPage/SettingsService.dart';
+import 'package:pet_care/repository/accounts.dart';
 
 class MyAccountWidget extends StatelessWidget {
   final Account myaccount;
@@ -21,15 +23,6 @@ class MyAccountWidget extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Text(myaccount.name,
-                  // '\n' +
-                  // 'E-mail: ' +
-                  // myaccount.email +
-                  // '\n' +
-                  // 'Район: ' +
-                  // myaccount.district +
-                  // '\n' +
-                  // 'Каких животных можно оставить: ' +
-                  // myaccount.kinfofpet,
                   maxLines: 12,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
@@ -38,19 +31,14 @@ class MyAccountWidget extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                       fontSize: 18)),
             ),
-            SetAgreement(),
             Container(
-                child: TextButton(
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Container())),
-              child: Text("Перейти к настройкам моего профиля для сервиса",
-                  style: GoogleFonts.comfortaa(
-                      decoration: TextDecoration.underline,
-                      color: Colors.black,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 14)),
-            )),
+                padding: EdgeInsets.all(5),
+                child: Text("Электронная почта: ekaterina_dots@mail.ru",
+                    style: GoogleFonts.comfortaa(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14))),
+            SetAgreement(),
           ],
         ));
   }
