@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/ProfilePage/AvatarBlock.dart';
 import 'package:pet_care/pages/ProfilePage/MainInfoBlock.dart';
+import 'package:pet_care/pages/ProfilePage/Passport.dart';
 import 'package:pet_care/repository/profilespetsrepo.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -51,6 +52,16 @@ class ProfilePage extends StatelessWidget {
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.w800,
               fontSize: 20),
+        ),
+      ),
+      Container(
+        padding: EdgeInsets.only(left: 0, top: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Passport("Екатерина", "24.05.2020", "Корги", "Рыжий",
+                "Прививка от бешенства", "Аллергия на говядину"),
+          ],
         ),
       ),
     ]);
