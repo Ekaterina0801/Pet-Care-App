@@ -38,9 +38,9 @@ class FormblockInitial extends FormblockState {
           title: "Электронная почта",
           label: "Введите электронную почту",
           validator: (s) {
-            return ((s.length > 2) && (s.length < 10))
+            return (_emailRegExp.hasMatch(s))
                 ? null
-                : "Некорректная длина";
+                : "Некорректный формат E-mail";
           },
         );
 
