@@ -31,13 +31,6 @@ class MyAccountWidget extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                       fontSize: 18)),
             ),
-            Container(
-                padding: EdgeInsets.all(5),
-                child: Text("Электронная почта: ekaterina_dots@mail.ru",
-                    style: GoogleFonts.comfortaa(
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 14))),
             SetAgreement(),
           ],
         ));

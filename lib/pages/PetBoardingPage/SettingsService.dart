@@ -17,8 +17,10 @@ class SettingsService extends StatefulWidget {
 class _SettingsServiceState extends State<SettingsService> {
   String district = "Советский район";
   String price = "1000";
+  String contacts = "ekaterina_dots@mail.ru";
   var _selected_dist = "";
   var _selected_price = "";
+  var _selected_contacts = "";
   _changeDistrict(String text) {
     setState(() => district = text);
   }
@@ -27,54 +29,147 @@ class _SettingsServiceState extends State<SettingsService> {
     setState(() => price = text);
   }
 
+  _changeContacts(String text) {
+    setState(() => price = text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [],
-        backgroundColor: Color.fromRGBO(255, 223, 142, 10),
-        elevation: 0,
-        title: Text("Настройки профиля для сервиса",
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 24)),
-      ),
-      body: ListView(
-        children: [
-          MyAccountWidget(accounts[0]),
-          Row(
-            children: [
-              Container(
-                  padding: EdgeInsets.all(10),
-                  child: Text("Район: $district ",
-                      style: GoogleFonts.comfortaa(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 16))),
-              IconButton(
-                  icon: Icon(Icons.edit, size: 16),
-                  onPressed: () => _displayDialogDistrict(context)),
-            ],
-          ),
-          //Container(child: SetKindOfPets()),
-          Row(
-            children: [
-              Container(
-                  padding: EdgeInsets.all(10),
-                  child: Text("Стоимость: $price руб./день",
-                      style: GoogleFonts.comfortaa(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 16))),
-              IconButton(
-                  icon: Icon(Icons.edit, size: 16),
-                  onPressed: () => _displayDialogPrice(context)),
-            ],
-          ),
-        ],
-      ),
-    );
+        appBar: AppBar(
+          actions: [],
+          backgroundColor: Color.fromRGBO(255, 223, 142, 10),
+          elevation: 0,
+          title: Text("Настройки",
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 24)),
+        ),
+        body: ListView(
+          children: [
+            MyAccountWidget(accounts[0]),
+            Container(
+              //margin: EdgeInsets.only(bottom: 5),
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(242, 242, 242, 1),
+                  border: Border(),
+                  //borderRadius: BorderRadius.all(Radius.circular(30)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 5,
+                      offset: const Offset(1.0, 1.0),
+                      spreadRadius: 0.0,
+                    )
+                  ]),
+              child: Row(
+                children: [
+                  Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text("Контакты: $contacts ",
+                          style: GoogleFonts.comfortaa(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 16))),
+                  IconButton(
+                      icon: Icon(Icons.edit, size: 16),
+                      onPressed: () => _displayDialogContacts(context)),
+                ],
+              ),
+            ),
+            Container(
+              //margin: EdgeInsets.only(top: 5, bottom: 5),
+              decoration: BoxDecoration(color: Color.fromRGBO(242, 242, 242, 1),
+                  //borderRadius: BorderRadius.all(Radius.circular(30)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 5,
+                      offset: const Offset(1.0, 1.0),
+                      spreadRadius: 0.0,
+                    )
+                  ]),
+              child: Row(
+                children: [
+                  Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text("Район: $district ",
+                          style: GoogleFonts.comfortaa(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 16))),
+                  IconButton(
+                      icon: Icon(Icons.edit, size: 16),
+                      onPressed: () => _displayDialogDistrict(context)),
+                ],
+              ),
+            ),
+            //Container(child: SetKindOfPets()),
+            Container(
+              //margin: EdgeInsets.only(top: 5, bottom: 5),
+              decoration: BoxDecoration(color: Color.fromRGBO(242, 242, 242, 1),
+                  //borderRadius: BorderRadius.all(Radius.circular(30)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 5,
+                      offset: const Offset(1.0, 1.0),
+                      spreadRadius: 0.0,
+                    )
+                  ]),
+              child: Row(
+                children: [
+                  Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text("Стоимость: $price руб./день",
+                          style: GoogleFonts.comfortaa(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 16))),
+                  IconButton(
+                      icon: Icon(Icons.edit, size: 16),
+                      onPressed: () => _displayDialogPrice(context)),
+                ],
+              ),
+            ),
+
+            Container(
+              //margin: EdgeInsets.only(top: 5, bottom: 5),
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(color: Color.fromRGBO(242, 242, 242, 1),
+                  //borderRadius: BorderRadius.all(Radius.circular(30)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 5,
+                      offset: const Offset(1.0, 1.0),
+                      spreadRadius: 0.0,
+                    )
+                  ]),
+              child: Column(children: [
+                Row(
+                  children: [
+                    Container(
+                      //alignment: ,
+                      //padding: EdgeInsets.all(5),
+                      child: Text("Кого готовы брать на передержку?",
+                          textAlign: TextAlign.left,
+                          style: GoogleFonts.comfortaa(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 16)),
+                    ),
+                  ],
+                ),
+                SetKindPets()
+              ]),
+            ),
+          ],
+        )
+        //SetAgreement()
+
+        );
   }
 
   _displayDialogDistrict(BuildContext context) async {
@@ -175,6 +270,49 @@ class _SettingsServiceState extends State<SettingsService> {
     }
   }
 
+  _displayDialogContacts(BuildContext context) async {
+    _selected_contacts = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Expanded(
+            child: AlertDialog(
+          title: Text('Редактировать контакты'),
+          actions: [
+            FlatButton(
+              child: Text(
+                'Принять',
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+          content: Container(
+            padding: EdgeInsets.all(10),
+            child: TextFormField(
+              initialValue: contacts,
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 16),
+              onChanged: _changeContacts,
+            ),
+          ),
+        ));
+      },
+    );
+
+    if (_selected_contacts != null) {
+      setState(() {
+        _selected_contacts = _selected_contacts;
+      });
+    }
+  }
+
   bool isDistrictValid(String district) {
     RegExp regex = new RegExp(r'[А-ЯЁ][а-яё]*$');
     return regex.hasMatch(district);
@@ -186,54 +324,49 @@ class _SettingsServiceState extends State<SettingsService> {
   }
 }
 
-class SetKindOfPets extends StatefulWidget {
+class SetKindPets extends StatefulWidget {
   @override
-  _SetKindOfPetsState createState() => _SetKindOfPetsState();
+  _SetKindPetsState createState() => _SetKindPetsState();
 }
 
-class _SetKindOfPetsState extends State<SetAgreement> {
-  bool isChecked = false;
+class _SetKindPetsState extends State<SetKindPets> {
+  bool isChecked1 = false;
+  bool isChecked2 = false;
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Row(children: [
-          Checkbox(
-              checkColor: Colors.black,
-              value: isChecked,
-              onChanged: (value) {
-                setState(() {
-                  isChecked = value;
-                });
-              }),
-          Container(
-            padding: EdgeInsets.all(5),
-            child: Text("Собаки",
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14)),
-          ),
-        ]),
-        Row(children: [
-          Checkbox(
-              checkColor: Colors.black,
-              value: isChecked,
-              onChanged: (value) {
-                setState(() {
-                  isChecked = value;
-                });
-              }),
-          Container(
-            padding: EdgeInsets.all(5),
-            child: Text("Кошки",
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14)),
-          ),
-        ]),
-      ],
-    );
+    return Row(children: [
+      Checkbox(
+          checkColor: Colors.black,
+          value: isChecked1,
+          onChanged: (value) {
+            setState(() {
+              isChecked1 = value;
+            });
+          }),
+      Container(
+        padding: EdgeInsets.all(5),
+        child: Text("Собаки",
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14)),
+      ),
+      Checkbox(
+          checkColor: Colors.black,
+          value: isChecked2,
+          onChanged: (value) {
+            setState(() {
+              isChecked2 = value;
+            });
+          }),
+      Container(
+        padding: EdgeInsets.all(5),
+        child: Text("Кошки",
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14)),
+      ),
+    ]);
   }
 }
