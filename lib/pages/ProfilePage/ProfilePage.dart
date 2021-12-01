@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/ProfilePage/AvatarBlock.dart';
@@ -11,17 +12,16 @@ class ProfilePage extends StatelessWidget {
     return ListView(children: [
       Container(
         padding: EdgeInsets.all(10),
-        child: Row(
-          children: [
-            AvatarBlock(profilespets[1].name, profilespets[1].photo),
-            Container(child:
-                Icon(Icons.plus_one, size: 75),
-                color: Color.fromRGBO(255, 225, 120, 1),
-                height: 100,
-                width: 100
-            )
-          ]
-        ),
+        child: Row(children: [
+          AvatarBlock(profilespets[1].name, profilespets[1].photo),
+          Container(
+              child: Icon(CupertinoIcons.add, size: 65),
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(255, 223, 142, 10),
+                  borderRadius: BorderRadius.all(Radius.circular(50))),
+              height: 100,
+              width: 100)
+        ]),
       ),
       Container(
         padding: EdgeInsets.all(10),
@@ -63,8 +63,15 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Passport("Екатерина", "24.05.2020", "Корги", "Рыжий",
-                "Прививка от бешенства", "Аллергия на говядину"),
+            Passport(
+                "Екатерина",
+                "24.05.2020",
+                "Корги",
+                "Рыжий",
+                "Прививка от бешенства" +
+                    "\n" +
+                    "Прививка от второго бешенства",
+                "Аллергия на говядину"),
           ],
         ),
       ),
