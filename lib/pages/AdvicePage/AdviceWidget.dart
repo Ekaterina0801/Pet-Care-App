@@ -65,7 +65,9 @@ class AdviceBlock extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.all(5),
                 child: Align(
-                  child: FavouriteWidget(),
+                  child: index == 0 || index == 1
+                      ? FavouriteWidgetNotActive()
+                      : FavouriteWidget(),
                   alignment: Alignment.topRight,
                 ),
               ),
@@ -203,5 +205,16 @@ class _FavouriteWidgetState extends State<FavouriteWidget> {
         _isFavorited = true;
       }
     });
+  }
+}
+
+class FavouriteWidgetNotActive extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: <Widget>[
+      Icon(
+        Icons.star,
+      )
+    ]);
   }
 }

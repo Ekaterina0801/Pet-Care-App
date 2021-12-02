@@ -81,7 +81,7 @@ class ArticleBlock extends StatelessWidget {
                             style: GoogleFonts.comfortaa(
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w800,
-                                fontSize: 14))),
+                                fontSize: 16))),
                   ),
                 )),
           ],

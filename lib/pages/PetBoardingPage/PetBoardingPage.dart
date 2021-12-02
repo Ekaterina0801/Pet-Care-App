@@ -8,7 +8,13 @@ import 'package:pet_care/repository/accounts.dart';
 import 'AccountBlock.dart';
 import 'SettingsService.dart';
 
-class PetBoardingPage extends StatelessWidget {
+class PetBoardingPage extends StatefulWidget {
+  @override
+  State<PetBoardingPage> createState() => _PetBoardingPageState();
+}
+
+class _PetBoardingPageState extends State<PetBoardingPage> {
+  var _selected_info = "";
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -23,6 +29,7 @@ class PetBoardingPage extends StatelessWidget {
                   name: accounts[0].name,
                 ),
               ),
+
               Align(
                 alignment: Alignment.center,
                 child: Text(accounts[0].name,
@@ -48,10 +55,32 @@ class PetBoardingPage extends StatelessWidget {
                         fontSize: 14)),
               )),
             ])),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Container(
-              padding: EdgeInsets.all(10), height: 30, child: Icon(Icons.sort)),
+        Row(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                  padding: EdgeInsets.all(10),
+                  height: 30,
+                  child: Icon(Icons.sort)),
+            ),
+            Flexible(
+              child: Container(
+                padding: EdgeInsets.all(5),
+                child: Text(
+                  "Кто готов взять питомцев на передержку: ",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.comfortaa(
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+              ),
+            )
+          ],
         ),
         GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -65,7 +94,7 @@ class PetBoardingPage extends StatelessWidget {
             scrollDirection: Axis.vertical,
             itemCount: accounts.length,
             itemBuilder: (BuildContext context, int index) =>
-                Container(child: AccountBlock(accounts[index]))),
+                Container(child: AccountBlock(accounts[index], index))),
       ],
     );
   }

@@ -1,12 +1,23 @@
 import 'package:avatars/avatars.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care/repository/accounts.dart';
 
 import 'Account.dart';
 
-class AccountBlock extends StatelessWidget {
+class AccountBlock extends StatefulWidget {
   final Account account;
-  AccountBlock(this.account);
+  final int index;
+  AccountBlock(this.account, this.index);
+
+  @override
+  State<AccountBlock> createState() => _AccountBlockState(index);
+}
+
+class _AccountBlockState extends State<AccountBlock> {
+  final int index;
+  _AccountBlockState(this.index);
+  var _selected_info = "";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,7 +49,7 @@ class AccountBlock extends StatelessWidget {
                     Avatar(
                       shape: AvatarShape.circle(50),
                       //shape: Shape.Circular,
-                      name: account.name,
+                      name: widget.account.name,
                       //numberLetters: 2,
                     ),
                   ])),
@@ -57,27 +68,26 @@ class AccountBlock extends StatelessWidget {
                       child: Center(
                           child: ListView(children: [
                         Text(
-                            'Имя: ' +
-                                account.name +
+                            widget.account.name +
                                 '\n' +
-                                'Вид животного на передержку: ' +
-                                account.kinfofpet +
+                                widget.account.kinfofpet +
                                 '\n' +
-                                'Цена в день(руб):' +
-                                account.price,
+                                widget.account.price +
+                                ' руб/день',
                             maxLines: 9,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
                             style: GoogleFonts.comfortaa(
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w800,
-                                fontSize: 13)),
-                        OutlinedButton(
-                            onPressed: () {},
+                                fontSize: 15)),
+                        TextButton(
+                            onPressed: () => _displayDialogInfo(index, context),
                             child: Text('Подробнее',
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.comfortaa(
+                                    decoration: TextDecoration.underline,
                                     color: Colors.black,
                                     fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w800,
@@ -90,5 +100,61 @@ class AccountBlock extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _displayDialogInfo(int index, BuildContext context) async {
+    _selected_info = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Expanded(
+            child: AlertDialog(
+          title: Text('Информация: '),
+          actions: [
+            FlatButton(
+              child: Text(
+                'Ок',
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+          content: Flexible(
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                "Имя: " +
+                    accounts[index].name +
+                    "\n" +
+                    "Кого готовы взять на передержку: " +
+                    accounts[index].kinfofpet +
+                    "\n" +
+                    "Контакты: " +
+                    accounts[index].email +
+                    "\n" +
+                    "Стоимость передержки: " +
+                    accounts[index].price +
+                    "\nРайон: " +
+                    accounts[index].district,
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+        ));
+      },
+    );
+
+    if (_selected_info != null) {
+      setState(() {
+        _selected_info = _selected_info;
+      });
+    }
   }
 }
