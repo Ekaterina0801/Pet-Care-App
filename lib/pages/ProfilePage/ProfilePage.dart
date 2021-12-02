@@ -38,7 +38,7 @@ class ProfilePage extends StatelessWidget {
         margin: EdgeInsets.all(5),
         decoration: BoxDecoration(
             //boxShadow: BoxShadow(blurRadius: BorderRadius.all(10)),
-            color: Color.fromRGBO(240, 240, 240, 1),
+            //color: Color.fromRGBO(240, 240, 240, 1),
             borderRadius: BorderRadius.all(Radius.circular(10))),
         padding: EdgeInsets.all(8),
         child: Row(

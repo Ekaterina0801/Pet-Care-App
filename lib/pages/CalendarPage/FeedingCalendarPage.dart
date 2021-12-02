@@ -16,27 +16,49 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return SfCalendar(
       firstDayOfWeek: 1,
-      todayHighlightColor: Colors.orange,
+
+      //viewNavigationMode: ,
+      todayHighlightColor: Color.fromRGBO(255, 223, 142, 1),
+      todayTextStyle: GoogleFonts.comfortaa(
+          color: Colors.black,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.w600,
+          fontSize: 14),
+      allowAppointmentResize: true,
       blackoutDatesTextStyle: GoogleFonts.comfortaa(
           color: Colors.black,
           fontStyle: FontStyle.normal,
           fontWeight: FontWeight.w800,
           fontSize: 14),
+      appointmentTimeTextFormat: 'HH:mm',
       appointmentTextStyle: GoogleFonts.comfortaa(
           color: Colors.black,
           fontStyle: FontStyle.normal,
           fontWeight: FontWeight.w800,
-          fontSize: 14),
-      monthViewSettings: MonthViewSettings(showAgenda: true),
-      // monthCellBuilder:
-      //     (BuildContext buildContext, MonthCellDetails details) {
-      //   return Container(
-      //     color: Colors.red,
-      //     child: Text(
-      //       details.date.day.toString(),
-      //     ),
-      //   );
-      // },
+          fontSize: 16),
+      monthViewSettings: MonthViewSettings(
+          dayFormat: "EEE",
+          showAgenda: true,
+          appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+          //appointmentDisplayCount: 4,
+
+          agendaStyle: AgendaStyle(
+            dayTextStyle: GoogleFonts.comfortaa(
+                color: Colors.black,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
+            dateTextStyle: GoogleFonts.comfortaa(
+                color: Colors.black,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
+            appointmentTextStyle: GoogleFonts.comfortaa(
+                color: Colors.black,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
+          )),
       scheduleViewMonthHeaderBuilder:
           (BuildContext buildContext, ScheduleViewMonthHeaderDetails details) {
         return Container(
@@ -47,13 +69,12 @@ class _CalendarPageState extends State<CalendarPage> {
                   details.date.year.toString(),
             ));
       },
-
       showNavigationArrow: true,
 
       allowedViews: [
         CalendarView.day,
-        CalendarView.week,
         CalendarView.month,
+        CalendarView.week,
         CalendarView.schedule
       ],
       view: CalendarView.month,
@@ -74,12 +95,34 @@ List<Meeting> _getDataSource() {
   final DateTime today = DateTime.now();
   final DateTime startTime =
       DateTime(today.year, today.month, today.day, 9, 0, 0);
-  final DateTime endTime = startTime.add(const Duration(hours: 2));
+  final DateTime endTime = startTime.add(const Duration(hours: 1));
+  meetings.add(
+    Meeting('Покормить Гарри завтраком', startTime, endTime,
+        Color.fromRGBO(255, 223, 142, 10), false),
+  );
   meetings.add(
     Meeting(
-        'Купить таблетку для Гарри', startTime, endTime, Colors.orange, false),
+        'Покормить Гарри ужином',
+        DateTime(today.year, today.month, today.day, 19, 0, 0),
+        DateTime(today.year, today.month, today.day, 21, 0, 0),
+        Color.fromRGBO(255, 223, 142, 10),
+        false),
   );
+  meetings.add(Meeting(
+      'Забрать заказ с игрушкой для питомца',
+      DateTime.utc(2021, 12, 21),
+      DateTime.utc(2021, 12, 21),
+      Color.fromRGBO(208, 76, 49, 100),
+      false));
 
+  meetings.add(Meeting(
+      'Защита проекта',
+      DateTime.utc(2021, 12, 14, 18, 0),
+      DateTime.utc(2021, 12, 14, 21, 0),
+      Color.fromRGBO(131, 184, 107, 60),
+      false));
+  meetings.add(Meeting('Дать таблетку', DateTime.utc(2021, 12, 15),
+      DateTime.utc(2021, 12, 15), Color.fromRGBO(129, 181, 217, 10), false));
   return meetings;
 }
 

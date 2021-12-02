@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/NotesPage/Note.dart';
 
 class NotesWidget extends StatelessWidget {
@@ -46,10 +47,11 @@ class NotesWidget extends StatelessWidget {
               note.text,
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w800,
-              ),
+              style: GoogleFonts.comfortaa(
+                  color: Colors.black,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 16),
             ),
           ),
           Row(
@@ -61,10 +63,11 @@ class NotesWidget extends StatelessWidget {
                   decoration: BoxDecoration(),
                   child: Text(
                     note.date,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: GoogleFonts.comfortaa(
+                        color: Colors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14),
                   ),
                 ),
               ),
