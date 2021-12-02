@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/ProfilePage/AvatarBlock.dart';
 import 'package:pet_care/pages/ProfilePage/MainInfoBlock.dart';
+import 'package:pet_care/pages/ProfilePage/Passport.dart';
 import 'package:pet_care/repository/profilespetsrepo.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -9,14 +11,17 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(children: [
       Container(
-        height: 200,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 3,
-          itemBuilder: (context, i) {
-            return AvatarBlock(profilespets[i].name, profilespets[i].photo);
-          },
-        ),
+        padding: EdgeInsets.all(10),
+        child: Row(children: [
+          AvatarBlock(profilespets[1].name, profilespets[1].photo),
+          Container(
+              child: Icon(CupertinoIcons.add, size: 65),
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(255, 223, 142, 10),
+                  borderRadius: BorderRadius.all(Radius.circular(50))),
+              height: 100,
+              width: 100)
+        ]),
       ),
       Container(
         padding: EdgeInsets.all(10),
@@ -30,15 +35,24 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
       Container(
-        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+            //boxShadow: BoxShadow(blurRadius: BorderRadius.all(10)),
+            //color: Color.fromRGBO(240, 240, 240, 1),
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        padding: EdgeInsets.all(8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            MainInfoBlock("Возраст", "1 год \n6 месяцев",
+                Color.fromRGBO(208, 76, 49, 100)),
             MainInfoBlock(
-                "Возраст", "1 год 6 месяцев", Color.fromRGBO(245, 201, 123, 1)),
-            MainInfoBlock("Вес", "15 кг", Colors.red),
-            MainInfoBlock("Порода", "Корги", Colors.blue),
-            MainInfoBlock("Пол", "Мужской", Colors.green),
+              "Вес",
+              "15 кг",
+              Color.fromRGBO(255, 223, 142, 10),
+            ),
+            MainInfoBlock("Порода", "Корги", Color.fromRGBO(129, 181, 217, 60)),
+            MainInfoBlock("Пол", "Мужской", Color.fromRGBO(131, 184, 107, 60)),
           ],
         ),
       ),
@@ -51,6 +65,23 @@ class ProfilePage extends StatelessWidget {
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.w800,
               fontSize: 20),
+        ),
+      ),
+      Container(
+        padding: EdgeInsets.only(left: 0, top: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Passport(
+                "Екатерина",
+                "30.01.2020",
+                "Корги",
+                "Рыжий",
+                "Прививка от бешенства" +
+                    "\n" +
+                    "Прививка от второго бешенства",
+                "Аллергия на говядину"),
+          ],
         ),
       ),
     ]);

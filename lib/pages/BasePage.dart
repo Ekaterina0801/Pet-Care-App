@@ -1,4 +1,3 @@
-import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,11 +18,8 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        //extendBodyBehindAppBar: true,
-        //resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          //backgroundColor: //Color.fromRGBO(246, 194, 107, 10),
+          actions: [],
           backgroundColor: Color.fromRGBO(255, 223, 142, 10),
           elevation: 0,
           title: Text(title,
@@ -33,18 +29,8 @@ class BasePage extends StatelessWidget {
                   fontSize: 24)),
         ),
         body: body,
-        // body: Container(
-        //     decoration: BoxDecoration(
-        //       image: DecorationImage(
-        //         image: Image.asset("assets/images/backgroundimage.jpeg").image,
-        //         fit: BoxFit.cover,
-        //       ),
-        //     ),
-        //     child: body),
         bottomNavigationBar: navigationbar,
-        backgroundColor: Colors.white
-        //Color.fromRGBO(238, 224, 203, 10),
-        );
+        backgroundColor: Colors.white);
   }
 }
 

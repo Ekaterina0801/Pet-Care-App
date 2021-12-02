@@ -44,11 +44,16 @@ class AdviceWidget extends StatelessWidget {
 class AdviceBlock extends StatelessWidget {
   final String title;
   final String image;
-  AdviceBlock(this.title, this.image);
+  final int index;
+
+  AdviceBlock(this.title, this.image, this.index);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '$index');
+      },
       child: Container(
         padding: EdgeInsets.all(10),
         child: Column(
@@ -84,17 +89,19 @@ class AdviceBlock extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(
-                    height: 50,
+                    height: 70,
                     width: 200,
                     padding: EdgeInsets.all(5),
-                    child: Text(title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14)),
+                    child: Center(
+                      child: Text(title,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.comfortaa(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14)),
+                    ),
                   ),
                 )),
           ],
@@ -113,12 +120,13 @@ class AdviceMainBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
+        margin: EdgeInsets.all(15),
         padding: EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-              height: 200,
+              height: 180,
               decoration: BoxDecoration(
                   image: DecorationImage(
                     image: Image.asset(
@@ -139,17 +147,19 @@ class AdviceMainBlock extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(
-                    height: 50,
+                    height: 60,
                     width: 200,
-                    padding: EdgeInsets.all(5),
-                    child: Text(title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14)),
+                    padding: EdgeInsets.all(10),
+                    child: Center(
+                      child: Text(title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.comfortaa(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14)),
+                    ),
                   ),
                 )),
           ],

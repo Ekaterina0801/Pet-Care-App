@@ -8,7 +8,6 @@ import 'package:pet_care/repository/advicerepo.dart';
 import 'package:pet_care/repository/notesrepo.dart';
 
 class AdviceList extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return BasePage(body: AdviceGrid(), title: "Статьи");
@@ -18,19 +17,48 @@ class AdviceList extends StatelessWidget {
 class AdviceGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container( 
-      padding: EdgeInsets.all(10),
-      child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisExtent: 170,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
-            ),
+    return Container(
+      padding: EdgeInsets.all(5),
+      child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisExtent: 200,
+            crossAxisSpacing: 2,
+            mainAxisSpacing: 1,
+          ),
           itemCount: articles.length,
           physics: ScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) =>
-              Container(child: AdviceBlock(articles[index].title, articles[index].image))),
-      );      
-    
+          itemBuilder: (BuildContext context, int index) => Container(
+              child: AdviceBlock(
+                  articles[index].title, articles[index].image, index))),
+    );
+  }
+}
+
+class AdviceListFavourite extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BasePage(body: AdviceGridFavoirite(), title: "Избранное");
+  }
+}
+
+class AdviceGridFavoirite extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisExtent: 220,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+          ),
+          itemCount: 2,
+          physics: ScrollPhysics(),
+          itemBuilder: (BuildContext context, int index) => Container(
+              child: AdviceBlock(
+                  articles[index].title, articles[index].image, index))),
+    );
   }
 }

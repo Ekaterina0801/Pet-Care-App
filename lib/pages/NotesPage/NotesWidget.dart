@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/NotesPage/Note.dart';
 
 class NotesWidget extends StatelessWidget {
@@ -9,6 +10,7 @@ class NotesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //height: 100,
       decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           color: Color.fromRGBO(255, 223, 142, 10),
@@ -22,6 +24,8 @@ class NotesWidget extends StatelessWidget {
             )
           ]),
       child: Column(
+        //crossAxisAlignment: CrossAxisAlignment.baseline,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
@@ -41,13 +45,15 @@ class NotesWidget extends StatelessWidget {
             padding: EdgeInsets.all(10),
             child: Text(
               note.text,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.comfortaa(
+                  color: Colors.black,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 16),
             ),
           ),
-          Container(),
           Row(
             children: [
               Align(
@@ -57,10 +63,11 @@ class NotesWidget extends StatelessWidget {
                   decoration: BoxDecoration(),
                   child: Text(
                     note.date,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: GoogleFonts.comfortaa(
+                        color: Colors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14),
                   ),
                 ),
               ),

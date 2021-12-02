@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/AdvicePage/AdviceList.dart';
 import 'package:pet_care/pages/AdvicePage/AdviceWidget.dart';
-import 'package:pet_care/pages/AdvicePage/ArticlePage.dart';
-import 'package:pet_care/pages/NotesPage/NotesPage.dart';
+import 'package:pet_care/pages/BasePage.dart';
 import 'package:pet_care/repository/advicerepo.dart';
-
-import '../CalendarPage/FeedingCalendarPage.dart';
 
 class AdvicePage extends StatelessWidget {
   @override
@@ -25,10 +22,8 @@ class AdvicePage extends StatelessWidget {
                     fontWeight: FontWeight.w800,
                     fontSize: 24)),
             TextButton(
-              onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ArticlePage(articles[0]))),
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AdviceList())),
               child: Text("Показать все",
                   style: GoogleFonts.comfortaa(
                       decoration: TextDecoration.underline,
@@ -41,12 +36,12 @@ class AdvicePage extends StatelessWidget {
         ),
       ),
       Container(
-        height: 200.0,
+        height: 210.0,
         child: ListView.builder(
           shrinkWrap: true,
           itemCount: 4,
           itemBuilder: (context, i) {
-            return AdviceBlock(articles[i].title, articles[i].image);
+            return AdviceBlock(articles[i].title, articles[i].image, i);
           },
           padding: const EdgeInsets.all(8),
           scrollDirection: Axis.horizontal,
@@ -63,11 +58,19 @@ class AdvicePage extends StatelessWidget {
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
                     fontSize: 24)),
-            Text("Показать все",
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14)),
+            TextButton(
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AdviceListFavourite())),
+              child: Text("Показать все",
+                  style: GoogleFonts.comfortaa(
+                      decoration: TextDecoration.underline,
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 14)),
+            )
           ],
         ),
       ),
@@ -75,9 +78,9 @@ class AdvicePage extends StatelessWidget {
         height: 260.0,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: 4,
+          itemCount: 2,
           itemBuilder: (context, i) {
-            return AdviceBlock(articles[i].title, articles[i].image);
+            return AdviceBlock(articles[i].title, articles[i].image, i);
           },
           padding: const EdgeInsets.all(8),
           scrollDirection: Axis.horizontal,

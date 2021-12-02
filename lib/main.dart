@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:pet_care/pages/AdvicePage/AdvicePage.dart';
+import 'package:pet_care/pages/AdvicePage/ArticlePage.dart';
+import 'package:pet_care/pages/Registration/RegistrationPage.dart';
+import 'package:pet_care/repository/advicerepo.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
-
 import 'pages/BasePage.dart';
 import 'pages/ProfilePage/ProfilePage.dart';
 
@@ -14,11 +17,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'PetCare',
-        initialRoute: '/home',
+        initialRoute: '/login',
         routes: {
-          //'/login': (BuildContext context) => AuthorizationPage(),
           '/start': (BuildContext context) => ProfilePage(),
           '/home': (BuildContext context) => HomePage(),
+          '/login': (BuildContext context) => LoginRegestrationPage(),
+          '0': (BuildContext context) => ArticlePage(articles[0]),
+          '1': (BuildContext context) => ArticlePage(articles[1]),
+          '2': (BuildContext context) => ArticlePage(articles[2]),
+          '3': (BuildContext context) => ArticlePage(articles[3]),
+          '4': (BuildContext context) => ArticlePage(articles[4]),
+          '5': (BuildContext context) => ArticlePage(articles[5]),
+          '6': (BuildContext context) => ArticlePage(articles[6]),
+          '7': (BuildContext context) => ArticlePage(articles[7]),
         },
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
