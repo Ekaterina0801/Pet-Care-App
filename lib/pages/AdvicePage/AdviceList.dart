@@ -34,3 +34,31 @@ class AdviceGrid extends StatelessWidget {
     );
   }
 }
+
+class AdviceListFavourite extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BasePage(body: AdviceGridFavoirite(), title: "Избранное");
+  }
+}
+
+class AdviceGridFavoirite extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisExtent: 220,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+          ),
+          itemCount: 2,
+          physics: ScrollPhysics(),
+          itemBuilder: (BuildContext context, int index) => Container(
+              child: AdviceBlock(
+                  articles[index].title, articles[index].image, index))),
+    );
+  }
+}

@@ -58,11 +58,19 @@ class AdvicePage extends StatelessWidget {
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
                     fontSize: 24)),
-            Text("Показать все",
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14)),
+            TextButton(
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AdviceListFavourite())),
+              child: Text("Показать все",
+                  style: GoogleFonts.comfortaa(
+                      decoration: TextDecoration.underline,
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 14)),
+            )
           ],
         ),
       ),
@@ -70,7 +78,7 @@ class AdvicePage extends StatelessWidget {
         height: 260.0,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: 4,
+          itemCount: 2,
           itemBuilder: (context, i) {
             return AdviceBlock(articles[i].title, articles[i].image, i);
           },
