@@ -188,7 +188,8 @@ class _WaitingWidget extends StatelessWidget {
       child: Container(
         width: 100,
         height: 100,
-        color: Colors.amber,
+        child: Image.asset('assets/images/loading_gif.gif'),
+        //color: Colors.amber,
       ),
     );
   }
