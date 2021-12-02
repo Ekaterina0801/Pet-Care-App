@@ -30,9 +30,7 @@ class ArticlePage extends StatelessWidget {
               ),
             ),
           )
-        ]
-          
-            ));
+        ]));
   }
 }
 

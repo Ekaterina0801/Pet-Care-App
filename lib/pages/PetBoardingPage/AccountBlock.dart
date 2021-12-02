@@ -54,25 +54,35 @@ class AccountBlock extends StatelessWidget {
                       height: 125,
                       width: 220,
                       padding: EdgeInsets.all(5),
-                      child: Text(
-                          'Имя: ' +
-                              account.name,
-                              // '\n' +
-                              // 'E-mail: ' +
-                              // account.email +
-                              // '\n' +
-                              // 'Район: ' +
-                              // account.district +
-                              // '\n' +
-                              // 'Каких животных можно оставить: ' +
-                              // account.kinfofpet,
-                          maxLines: 9,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.comfortaa(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 13)),
+                      child: Center(
+                          child: ListView(children: [
+                        Text(
+                            'Имя: ' +
+                                account.name +
+                                '\n' +
+                                'Вид животного на передержку: ' +
+                                account.kinfofpet +
+                                '\n' +
+                                'Цена в день(руб):' +
+                                account.price,
+                            maxLines: 9,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.comfortaa(
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 13)),
+                        OutlinedButton(
+                            onPressed: () {},
+                            child: Text('Подробнее',
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.comfortaa(
+                                    color: Colors.black,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 13)))
+                      ])),
                     ),
                   )),
             ],
