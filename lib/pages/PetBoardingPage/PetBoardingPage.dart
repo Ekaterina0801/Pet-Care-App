@@ -1,4 +1,5 @@
 import 'package:avatars/avatars.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/PetBoardingPage/MyAccountWidget.dart';
@@ -47,6 +48,11 @@ class PetBoardingPage extends StatelessWidget {
                         fontSize: 14)),
               )),
             ])),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Container(
+              padding: EdgeInsets.all(10), height: 30, child: Icon(Icons.sort)),
+        ),
         GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
