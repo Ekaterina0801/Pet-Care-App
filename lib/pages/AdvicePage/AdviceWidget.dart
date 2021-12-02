@@ -114,11 +114,15 @@ class AdviceBlock extends StatelessWidget {
 class AdviceMainBlock extends StatelessWidget {
   final String title;
   final String image;
+
   AdviceMainBlock(this.title, this.image);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, '0');
+      },
       child: Container(
         margin: EdgeInsets.all(15),
         padding: EdgeInsets.all(10),

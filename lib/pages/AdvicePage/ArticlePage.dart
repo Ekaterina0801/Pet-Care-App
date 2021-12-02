@@ -16,7 +16,7 @@ class ArticlePage extends StatelessWidget {
           Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
-            color: Colors.grey.withOpacity(0.25),
+            color: Color.fromRGBO(255, 223, 142, 100),
             child: Align(
               alignment: Alignment.center,
               child: Container(
@@ -26,7 +26,7 @@ class ArticlePage extends StatelessWidget {
                     style: GoogleFonts.comfortaa(
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w800,
-                        fontSize: 14)),
+                        fontSize: 20)),
               ),
             ),
           )
