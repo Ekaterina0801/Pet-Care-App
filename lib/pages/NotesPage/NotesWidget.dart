@@ -9,7 +9,7 @@ class NotesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
+      //height: 100,
       decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           color: Color.fromRGBO(255, 223, 142, 10),
@@ -24,6 +24,7 @@ class NotesWidget extends StatelessWidget {
           ]),
       child: Column(
         //crossAxisAlignment: CrossAxisAlignment.baseline,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
@@ -43,13 +44,14 @@ class NotesWidget extends StatelessWidget {
             padding: EdgeInsets.all(10),
             child: Text(
               note.text,
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 18,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w800,
               ),
             ),
           ),
-          Container(),
           Row(
             children: [
               Align(

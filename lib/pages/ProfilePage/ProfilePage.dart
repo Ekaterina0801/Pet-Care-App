@@ -35,12 +35,17 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
       Container(
-        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+            //boxShadow: BoxShadow(blurRadius: BorderRadius.all(10)),
+            color: Color.fromRGBO(230, 224, 215, 50),
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        padding: EdgeInsets.all(8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            MainInfoBlock(
-                "Возраст", "1 год 6 месяцев", Color.fromRGBO(245, 200, 125, 1)),
+            MainInfoBlock("Возраст", "1 год \n11 месяцев",
+                Color.fromRGBO(245, 200, 125, 1)),
             MainInfoBlock("Вес", "15 кг", Colors.red),
             MainInfoBlock("Порода", "Корги", Colors.blue),
             MainInfoBlock("Пол", "Мужской", Colors.green),
@@ -65,7 +70,7 @@ class ProfilePage extends StatelessWidget {
           children: [
             Passport(
                 "Екатерина",
-                "24.05.2020",
+                "30.01.2020",
                 "Корги",
                 "Рыжий",
                 "Прививка от бешенства" +
