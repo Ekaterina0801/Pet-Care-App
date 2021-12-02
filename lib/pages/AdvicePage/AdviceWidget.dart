@@ -92,14 +92,16 @@ class AdviceBlock extends StatelessWidget {
                     height: 70,
                     width: 200,
                     padding: EdgeInsets.all(5),
-                    child: Text(title,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14)),
+                    child: Center(
+                      child: Text(title,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.comfortaa(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14)),
+                    ),
                   ),
                 )),
           ],
@@ -118,12 +120,13 @@ class AdviceMainBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
+        margin: EdgeInsets.all(15),
         padding: EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-              height: 200,
+              height: 180,
               decoration: BoxDecoration(
                   image: DecorationImage(
                     image: Image.asset(
@@ -144,17 +147,19 @@ class AdviceMainBlock extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(
-                    height: 50,
+                    height: 60,
                     width: 200,
-                    padding: EdgeInsets.all(5),
-                    child: Text(title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14)),
+                    padding: EdgeInsets.all(10),
+                    child: Center(
+                      child: Text(title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.comfortaa(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14)),
+                    ),
                   ),
                 )),
           ],

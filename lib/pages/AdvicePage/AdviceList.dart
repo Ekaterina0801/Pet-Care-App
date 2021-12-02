@@ -18,19 +18,19 @@ class AdviceGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(5),
       child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisExtent: 220,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
+            mainAxisExtent: 200,
+            crossAxisSpacing: 2,
+            mainAxisSpacing: 1,
           ),
           itemCount: articles.length,
           physics: ScrollPhysics(),
           itemBuilder: (BuildContext context, int index) => Container(
               child: AdviceBlock(
-                  articles[index].title, articles[index].image, 0))),
+                  articles[index].title, articles[index].image, index))),
     );
   }
 }

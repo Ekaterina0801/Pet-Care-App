@@ -27,6 +27,9 @@ class MyApp extends StatelessWidget {
           '2': (BuildContext context) => ArticlePage(articles[2]),
           '3': (BuildContext context) => ArticlePage(articles[3]),
           '4': (BuildContext context) => ArticlePage(articles[4]),
+          '5': (BuildContext context) => ArticlePage(articles[5]),
+          '6': (BuildContext context) => ArticlePage(articles[6]),
+          '7': (BuildContext context) => ArticlePage(articles[7]),
         },
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
