@@ -36,10 +36,13 @@ class _CalendarPageState extends State<CalendarPage> {
           fontStyle: FontStyle.normal,
           fontWeight: FontWeight.w800,
           fontSize: 16),
+      //showCurrentTimeIndicator: true,
       monthViewSettings: MonthViewSettings(
-          dayFormat: "EEE",
+          //dayFormat: "EEE",
+
           showAgenda: true,
           appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+
           //appointmentDisplayCount: 4,
 
           agendaStyle: AgendaStyle(
@@ -74,19 +77,13 @@ class _CalendarPageState extends State<CalendarPage> {
       allowedViews: [
         CalendarView.day,
         CalendarView.month,
-        CalendarView.week,
         CalendarView.schedule
       ],
       view: CalendarView.month,
       dataSource: MeetingDataSource(_getDataSource()),
       showDatePickerButton: true,
-      selectionDecoration: BoxDecoration(),
+      //selectionDecoration: BoxDecoration(color: Colors.amber),
     );
-    /*
-        FloatingActionButton(
-            onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Container())))
-                */
   }
 }
 

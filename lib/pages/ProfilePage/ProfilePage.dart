@@ -11,16 +11,23 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(children: [
       Container(
+        color: Color.fromRGBO(255, 223, 142, 10),
         padding: EdgeInsets.all(10),
-        child: Row(children: [
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           AvatarBlock(profilespets[1].name, profilespets[1].photo),
           Container(
-              child: Icon(CupertinoIcons.add, size: 65),
+              child: Icon(
+                CupertinoIcons.add,
+                size: 55,
+                color: Colors.black,
+              ),
               decoration: BoxDecoration(
-                  color: Color.fromRGBO(255, 223, 142, 10),
+                  color: Color.fromRGBO(240, 240, 240, 1),
+                  //color: Color.fromRGBO(255, 223, 142, 10),
+                  border: Border.all(color: Colors.black),
                   borderRadius: BorderRadius.all(Radius.circular(50))),
-              height: 100,
-              width: 100)
+              height: 70,
+              width: 70)
         ]),
       ),
       Container(
@@ -35,12 +42,12 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
       Container(
-        margin: EdgeInsets.all(5),
+        margin: EdgeInsets.all(2),
         decoration: BoxDecoration(
             //boxShadow: BoxShadow(blurRadius: BorderRadius.all(10)),
             //color: Color.fromRGBO(240, 240, 240, 1),
             borderRadius: BorderRadius.all(Radius.circular(10))),
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(4),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -51,8 +58,8 @@ class ProfilePage extends StatelessWidget {
               "15 кг",
               Color.fromRGBO(255, 223, 142, 10),
             ),
-            MainInfoBlock("Порода", "Корги", Color.fromRGBO(129, 181, 217, 60)),
-            MainInfoBlock("Пол", "Мужской", Color.fromRGBO(131, 184, 107, 60)),
+            MainInfoBlock("Порода", "Корги", Color.fromRGBO(131, 184, 107, 60)),
+            MainInfoBlock("Пол", "Мужской", Color.fromRGBO(129, 181, 217, 60)),
           ],
         ),
       ),
@@ -72,15 +79,8 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Passport(
-                "Екатерина",
-                "30.01.2020",
-                "Корги",
-                "Рыжий",
-                "Прививка от бешенства" +
-                    "\n" +
-                    "Прививка от второго бешенства",
-                "Аллергия на говядину"),
+            Passport("Екатерина", "30.01.2020", "Корги", "Рыжий",
+                "Прививка от бешенства", "Аллергия на говядину"),
           ],
         ),
       ),

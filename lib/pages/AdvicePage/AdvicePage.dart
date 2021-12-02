@@ -41,8 +41,7 @@ class AdvicePage extends StatelessWidget {
           shrinkWrap: true,
           itemCount: 4,
           itemBuilder: (context, i) {
-            return AdviceBlock(
-                articles[i + 1].title, articles[i + 1].image, i + 1);
+            return AdviceBlock(articles[i].title, articles[i].image, i);
           },
           padding: const EdgeInsets.all(8),
           scrollDirection: Axis.horizontal,

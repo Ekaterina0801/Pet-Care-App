@@ -124,6 +124,17 @@ class LoginForm extends StatelessWidget {
                   onPressed: () {
                     block.add(StartLogin());
                   }),
+              Container(
+                  height: 50,
+                  padding: EdgeInsets.all(10),
+                  child: Flexible(
+                      child: Text(
+                          "P.S. Для демонстрации будет показан профиль одного из участников",
+                          style: GoogleFonts.comfortaa(
+                              color: Colors.black,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14))))
             ],
           );
         case LoginandRegistrationState.Waiting:
@@ -167,9 +178,15 @@ class InputWidget extends StatelessWidget {
               controller: controller,
               validator: validator,
               decoration: InputDecoration(
+                labelStyle: GoogleFonts.comfortaa(
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 13),
                 hoverColor: Colors.black,
                 focusColor: Colors.black,
                 fillColor: Colors.black,
+                hintStyle: TextStyle(color: Colors.black),
                 labelText: lable,
                 helperText: '',
               ),
