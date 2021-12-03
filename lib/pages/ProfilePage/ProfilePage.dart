@@ -80,7 +80,7 @@ class ProfilePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Passport("Екатерина", "30.01.2020", "Корги", "Рыжий",
-                "Прививка от бешенства", "Аллергия на говядину"),
+                "Прививка от бешенства", "Нет"),
           ],
         ),
       ),
