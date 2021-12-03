@@ -136,17 +136,6 @@ class LoginForm extends StatelessWidget {
                   onPressed: () {
                     block.add(StartLogin());
                   }),
-              Container(
-                  height: 50,
-                  padding: EdgeInsets.all(10),
-                  child: Flexible(
-                      child: Text(
-                          "Для демонстрации будет показан профиль одного из участников",
-                          style: GoogleFonts.comfortaa(
-                              color: Colors.black,
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 14))))
             ],
           );
         case LoginandRegistrationState.Waiting:
