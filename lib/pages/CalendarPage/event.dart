@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Класс для события в календаре
 class Event {
   final String title;
   final String description;

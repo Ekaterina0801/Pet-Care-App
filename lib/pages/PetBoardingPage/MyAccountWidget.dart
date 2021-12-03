@@ -2,16 +2,14 @@ import 'package:avatars/avatars.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/PetBoardingPage/Account.dart';
-import 'package:pet_care/pages/PetBoardingPage/SettingsService.dart';
-import 'package:pet_care/repository/accounts.dart';
 
+//виджет для отображения аккаунта на странице передержки
 class MyAccountWidget extends StatelessWidget {
   final Account myaccount;
   MyAccountWidget(this.myaccount);
   @override
   Widget build(BuildContext context) {
     return Container(
-        //padding: EdgeInsets.all(5),
         decoration: BoxDecoration(color: Color.fromRGBO(255, 223, 142, 10)),
         child: Column(
           children: [

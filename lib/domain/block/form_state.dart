@@ -59,7 +59,7 @@ class FormblockInitial extends FormblockState {
     this.siginUpusername = siginUpusername ??
         InputWindow(
           title: "Имя",
-          label: "Введите имя",
+          label: "Введите имя и фамилию",
           validator: (s) {
             return (_usernameRegExp.hasMatch(s))
                 ? null

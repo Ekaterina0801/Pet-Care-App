@@ -45,7 +45,10 @@ class LoginForm extends StatelessWidget {
                 key1: state.siginInpassword.key,
                 validator: state.siginInpassword.validator,
               ),
-              TextButton(
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        Color.fromRGBO(255, 223, 142, 10))),
                 child: Text('Вход',
                     style: GoogleFonts.comfortaa(
                         color: Colors.black,
@@ -58,7 +61,10 @@ class LoginForm extends StatelessWidget {
                       password: _passwordcontroller.text));
                 },
               ),
-              TextButton(
+              ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromRGBO(255, 223, 142, 10))),
                   child: Text('Регистрация',
                       style: GoogleFonts.comfortaa(
                           color: Colors.black,
@@ -101,7 +107,10 @@ class LoginForm extends StatelessWidget {
                 key1: state.siginUppassword.key,
                 validator: state.siginUppassword.validator,
               ),
-              TextButton(
+              ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromRGBO(255, 223, 142, 10))),
                   child: Text('Зарегистрироваться',
                       style: GoogleFonts.comfortaa(
                           color: Colors.black,
@@ -114,7 +123,10 @@ class LoginForm extends StatelessWidget {
                         password: _passwordcontroller.text,
                         email: _emailcontroller.text));
                   }),
-              TextButton(
+              ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromRGBO(255, 223, 142, 10))),
                   child: Text('Вход',
                       style: GoogleFonts.comfortaa(
                           color: Colors.black,
@@ -129,7 +141,7 @@ class LoginForm extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   child: Flexible(
                       child: Text(
-                          "P.S. Для демонстрации будет показан профиль одного из участников",
+                          "Для демонстрации будет показан профиль одного из участников",
                           style: GoogleFonts.comfortaa(
                               color: Colors.black,
                               fontStyle: FontStyle.normal,
@@ -161,7 +173,7 @@ class InputWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(15),
           child: Text(title,
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,
@@ -182,10 +194,11 @@ class InputWidget extends StatelessWidget {
                     color: Colors.black,
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
-                    fontSize: 13),
+                    fontSize: 15),
                 hoverColor: Colors.black,
                 focusColor: Colors.black,
-                fillColor: Colors.black,
+                fillColor: Color.fromRGBO(240, 240, 240, 1),
+                filled: true,
                 hintStyle: TextStyle(color: Colors.black),
                 labelText: lable,
                 helperText: '',

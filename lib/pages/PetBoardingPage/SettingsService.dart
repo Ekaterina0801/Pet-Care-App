@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/PetBoardingPage/MyAccountWidget.dart';
 import 'package:pet_care/repository/accounts.dart';
 
+//Страница для настроек аккаунта для сервиса передержки
 class SettingsService extends StatefulWidget {
   final String email;
   final String district;
@@ -106,11 +107,9 @@ class _SettingsServiceState extends State<SettingsService> {
                 ],
               ),
             ),
-            //Container(child: SetKindOfPets()),
             Container(
-              //margin: EdgeInsets.only(top: 5, bottom: 5),
-              decoration: BoxDecoration(color: Color.fromRGBO(242, 242, 242, 1),
-                  //borderRadius: BorderRadius.all(Radius.circular(30)),
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(242, 242, 242, 1),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey,
@@ -134,12 +133,10 @@ class _SettingsServiceState extends State<SettingsService> {
                 ],
               ),
             ),
-
             Container(
-              //margin: EdgeInsets.only(top: 5, bottom: 5),
               padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(color: Color.fromRGBO(242, 242, 242, 1),
-                  //borderRadius: BorderRadius.all(Radius.circular(30)),
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(242, 242, 242, 1),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey,
@@ -152,8 +149,6 @@ class _SettingsServiceState extends State<SettingsService> {
                 Row(
                   children: [
                     Container(
-                      //alignment: ,
-                      //padding: EdgeInsets.all(5),
                       child: Text("Кого готовы брать на передержку?",
                           textAlign: TextAlign.left,
                           style: GoogleFonts.comfortaa(
@@ -167,10 +162,7 @@ class _SettingsServiceState extends State<SettingsService> {
               ]),
             ),
           ],
-        )
-        //SetAgreement()
-
-        );
+        ));
   }
 
   _displayDialogDistrict(BuildContext context) async {

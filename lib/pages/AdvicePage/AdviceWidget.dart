@@ -1,46 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'Article.dart';
-
-class AdviceWidget extends StatelessWidget {
-  final Article article;
-  AdviceWidget(this.article);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(children: [
-      Column(
-        children: [
-          Container(
-            child: Align(
-                alignment: Alignment.center,
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  child: Text(article.text,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white)),
-                )),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
-            height: 400,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: Image.asset(article.image).image,
-                  fit: BoxFit.fill,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(30))),
-          ),
-        ],
-      )
-    ]);
-  }
-}
-
+//Виджет - блок совета
 class AdviceBlock extends StatelessWidget {
   final String title;
   final String image;

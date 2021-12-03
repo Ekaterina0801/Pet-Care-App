@@ -1,3 +1,4 @@
+//Класс для аккаунта
 class Account {
   final String name;
   final String email;

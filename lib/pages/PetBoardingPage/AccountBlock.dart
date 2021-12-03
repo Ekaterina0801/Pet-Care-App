@@ -5,6 +5,7 @@ import 'package:pet_care/repository/accounts.dart';
 
 import 'Account.dart';
 
+//Виджет для блока-виджета аккаунта
 class AccountBlock extends StatefulWidget {
   final Account account;
   final int index;
@@ -48,9 +49,7 @@ class _AccountBlockState extends State<AccountBlock> {
                   child: Column(children: [
                     Avatar(
                       shape: AvatarShape.circle(50),
-                      //shape: Shape.Circular,
                       name: widget.account.name,
-                      //numberLetters: 2,
                     ),
                   ])),
               Container(

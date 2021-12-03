@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:pet_care/pages/AdvicePage/AdviceWidget.dart';
-import 'package:pet_care/pages/AdvicePage/Article.dart';
 import 'package:pet_care/pages/BasePage.dart';
-import 'package:pet_care/pages/NotesPage/Note.dart';
 import 'package:pet_care/repository/advicerepo.dart';
-import 'package:pet_care/repository/notesrepo.dart';
 
+//Страница с полным списком статей
 class AdviceList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -35,6 +32,7 @@ class AdviceGrid extends StatelessWidget {
   }
 }
 
+//Страница со списокм статей, которые находтся в избранном
 class AdviceListFavourite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -14,7 +14,6 @@ class NotesWidget extends StatelessWidget {
       decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           color: Color.fromRGBO(255, 223, 142, 10),
-          //Colors.white,
           boxShadow: [
             BoxShadow(
               color: Colors.grey,
@@ -24,24 +23,10 @@ class NotesWidget extends StatelessWidget {
             )
           ]),
       child: Column(
-        //crossAxisAlignment: CrossAxisAlignment.baseline,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            // decoration: BoxDecoration(
-            //     shape: BoxShape.rectangle,
-            //     color: Color.fromRGBO(255, 223, 142, 10),
-            //     //Colors.white,
-            //     boxShadow: [
-            //       BoxShadow(
-            //         color: Colors.grey,
-            //         blurRadius: 4,
-            //         offset: const Offset(0.0, 0.0),
-            //         spreadRadius: 2.0,
-            //       )
-            //     ]),
-            //decoration: BoxDecoration(color: Colors.grey),
             padding: EdgeInsets.all(10),
             child: Text(
               note.text,

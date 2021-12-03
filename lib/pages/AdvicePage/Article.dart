@@ -1,3 +1,4 @@
+//Класс статьи
 class Article {
   final String title;
   final String image;

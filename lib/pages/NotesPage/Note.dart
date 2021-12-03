@@ -1,3 +1,4 @@
+//Класс для заметки
 class Note {
   final String text;
   final String date;

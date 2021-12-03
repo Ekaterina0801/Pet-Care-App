@@ -4,6 +4,7 @@ import 'package:pet_care/pages/BasePage.dart';
 
 import 'Article.dart';
 
+//Станица статьи
 class ArticlePage extends StatelessWidget {
   final Article article;
   ArticlePage(this.article);
@@ -34,6 +35,7 @@ class ArticlePage extends StatelessWidget {
   }
 }
 
+//Виджет лля отображения на странице статьи изображения и заголовка статьи
 class ArticleBlock extends StatelessWidget {
   final String title;
   final String image;

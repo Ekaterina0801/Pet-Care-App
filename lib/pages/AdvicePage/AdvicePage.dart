@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/AdvicePage/AdviceList.dart';
 import 'package:pet_care/pages/AdvicePage/AdviceWidget.dart';
-import 'package:pet_care/pages/BasePage.dart';
 import 'package:pet_care/repository/advicerepo.dart';
 
+//главная страница советов
 class AdvicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
+//Страница для отображения календаря
 class CalendarPage extends StatefulWidget {
-  //const CalendarPage({ Key? key }) : super(key: key);
-
   @override
   _CalendarPageState createState() => _CalendarPageState();
 }
@@ -16,8 +13,6 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return SfCalendar(
       firstDayOfWeek: 1,
-
-      //viewNavigationMode: ,
       todayHighlightColor: Color.fromRGBO(255, 223, 142, 1),
       todayTextStyle: GoogleFonts.comfortaa(
           color: Colors.black,
@@ -36,15 +31,9 @@ class _CalendarPageState extends State<CalendarPage> {
           fontStyle: FontStyle.normal,
           fontWeight: FontWeight.w800,
           fontSize: 16),
-      //showCurrentTimeIndicator: true,
       monthViewSettings: MonthViewSettings(
-          //dayFormat: "EEE",
-
           showAgenda: true,
           appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
-
-          //appointmentDisplayCount: 4,
-
           agendaStyle: AgendaStyle(
             dayTextStyle: GoogleFonts.comfortaa(
                 color: Colors.black,
@@ -73,7 +62,6 @@ class _CalendarPageState extends State<CalendarPage> {
             ));
       },
       showNavigationArrow: true,
-
       allowedViews: [
         CalendarView.day,
         CalendarView.month,
@@ -82,7 +70,6 @@ class _CalendarPageState extends State<CalendarPage> {
       view: CalendarView.month,
       dataSource: MeetingDataSource(_getDataSource()),
       showDatePickerButton: true,
-      //selectionDecoration: BoxDecoration(color: Colors.amber),
     );
   }
 }
@@ -163,68 +150,3 @@ class Meeting {
   Color background;
   bool isAllDay;
 }
-/*
-class FeedingCalendarPage extends StatefulWidget {
-  const FeedingCalendarPage({Key key}) : super(key: key);
-
-  @override
-  State<FeedingCalendarPage> createState() => _FeedingCalendarPageState();
-}
-
-class _FeedingCalendarPageState extends State<FeedingCalendarPage> {
-  CalendarFormat format = CalendarFormat.month;
-  DateTime selectedDay = DateTime.now();
-  DateTime focusedDay = DateTime.now();
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TableCalendar(
-          firstDay: DateTime.utc(2010, 10, 16),
-          lastDay: DateTime.utc(2030, 3, 14),
-          focusedDay: focusedDay,
-          onDaySelected: (DateTime selectDay, DateTime focusDay) {
-            setState(() {
-              selectedDay = selectedDay;
-              focusedDay = focusedDay;
-            });
-            print(focusDay);
-          },
-          calendarStyle: CalendarStyle(
-            isTodayHighlighted: true,
-            selectedDecoration:
-                BoxDecoration(color: Colors.green, shape: BoxShape.circle),
-          ),
-         // eventLoader: (day) {
-            //return _getEventsForDay(day);
-         // },
-          selectedDayPredicate: (day) {
-            return isSameDay(selectedDay, day);
-          },
-          calendarFormat: format,
-          onFormatChanged: (CalendarFormat _format) {
-            setState(() {
-              format = _format;
-            });
-          },
-        )
-      ],
-    );
-  }
-}
-/*
-List<Event> _getEventsForDay(DateTime day) {
-  return events[day] ?? [];
-}
-
-final events = LinkedHashMap[
-  
-];
-*/
-/*
-final events = LinkedHashMap(
-  equals: isSameDay,
-  hashCode: getHashCode,
-)..addAll(eventSource);
-*/
-*/
