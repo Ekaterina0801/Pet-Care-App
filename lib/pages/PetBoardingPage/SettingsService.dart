@@ -17,7 +17,7 @@ class SettingsService extends StatefulWidget {
 }
 
 class _SettingsServiceState extends State<SettingsService> {
-  String district = "Советский район";
+  String district = "Советский";
   String price = "1000";
   String contacts = "ekaterina_dots@mail.ru";
   var _selected_dist = "";
@@ -32,7 +32,7 @@ class _SettingsServiceState extends State<SettingsService> {
   }
 
   _changeContacts(String text) {
-    setState(() => price = text);
+    setState(() => contacts = text);
   }
 
   @override
@@ -42,21 +42,20 @@ class _SettingsServiceState extends State<SettingsService> {
           actions: [],
           backgroundColor: Color.fromRGBO(255, 223, 142, 10),
           elevation: 0,
-          title: Text("Настройки",
-              style: GoogleFonts.comfortaa(
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 24)),
+          title: Flexible(
+            child: Text("Настройки",
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 24)),
+          ),
         ),
         body: ListView(
           children: [
             MyAccountWidget(accounts[0]),
             Container(
-              //margin: EdgeInsets.only(bottom: 5),
               decoration: BoxDecoration(
                   color: Color.fromRGBO(242, 242, 242, 1),
-                  border: Border(),
-                  //borderRadius: BorderRadius.all(Radius.circular(30)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey,
@@ -65,19 +64,27 @@ class _SettingsServiceState extends State<SettingsService> {
                       spreadRadius: 0.0,
                     )
                   ]),
-              child: Row(
-                children: [
-                  Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text("Контакты: $contacts ",
-                          style: GoogleFonts.comfortaa(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 16))),
-                  IconButton(
-                      icon: Icon(Icons.edit, size: 16),
-                      onPressed: () => _displayDialogContacts(context)),
-                ],
+              child: Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Flexible(
+                            child: Text("Контакты: $contacts ",
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.comfortaa(
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 16)),
+                          )),
+                    ),
+                    IconButton(
+                        icon: Icon(Icons.edit, size: 16),
+                        onPressed: () => _displayDialogContacts(context)),
+                  ],
+                ),
               ),
             ),
             Container(
@@ -93,14 +100,18 @@ class _SettingsServiceState extends State<SettingsService> {
                     )
                   ]),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                       padding: EdgeInsets.all(10),
-                      child: Text("Район: $district ",
-                          style: GoogleFonts.comfortaa(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 16))),
+                      child: Flexible(
+                        child: Text("Район: $district ",
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.comfortaa(
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 16)),
+                      )),
                   IconButton(
                       icon: Icon(Icons.edit, size: 16),
                       onPressed: () => _displayDialogDistrict(context)),
@@ -119,14 +130,18 @@ class _SettingsServiceState extends State<SettingsService> {
                     )
                   ]),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                       padding: EdgeInsets.all(10),
-                      child: Text("Стоимость: $price руб./день",
-                          style: GoogleFonts.comfortaa(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 16))),
+                      child: Flexible(
+                        child: Text("Стоимость: $price руб./день",
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.comfortaa(
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 16)),
+                      )),
                   IconButton(
                       icon: Icon(Icons.edit, size: 16),
                       onPressed: () => _displayDialogPrice(context)),
@@ -147,14 +162,18 @@ class _SettingsServiceState extends State<SettingsService> {
                   ]),
               child: Column(children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      child: Text("Кого готовы брать на передержку?",
-                          textAlign: TextAlign.left,
-                          style: GoogleFonts.comfortaa(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 16)),
+                      child: Flexible(
+                        child: Text("Кого готовы брать на передержку?",
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.comfortaa(
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 16)),
+                      ),
                     ),
                   ],
                 ),
@@ -185,6 +204,7 @@ class _SettingsServiceState extends State<SettingsService> {
       content: Container(
         padding: EdgeInsets.all(10),
         child: TextFormField(
+          maxLength: 20,
           initialValue: district,
           style: GoogleFonts.comfortaa(
               fontStyle: FontStyle.normal,
@@ -228,6 +248,7 @@ class _SettingsServiceState extends State<SettingsService> {
           padding: EdgeInsets.all(10),
           child: TextFormField(
             initialValue: price,
+            maxLength: 12,
             style: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w800,
@@ -248,7 +269,7 @@ class _SettingsServiceState extends State<SettingsService> {
         });
   }
 
-  _displayDialogContacts(BuildContext context) async {
+  _displayDialogContacts(BuildContext context) {
     AlertDialog alert = AlertDialog(
         title: Text('Редактировать контакты'),
         actions: [
@@ -268,6 +289,7 @@ class _SettingsServiceState extends State<SettingsService> {
         content: Container(
           padding: EdgeInsets.all(10),
           child: TextFormField(
+            maxLength: 30,
             initialValue: contacts,
             style: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,

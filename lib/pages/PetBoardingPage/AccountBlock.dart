@@ -81,7 +81,7 @@ class _AccountBlockState extends State<AccountBlock> {
                                 fontWeight: FontWeight.w800,
                                 fontSize: 15)),
                         TextButton(
-                            onPressed: () => _displayDialogInfo(index, context),
+                            onPressed: () => _displayDialogInfo(context),
                             child: Text('Подробнее',
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.center,
@@ -101,7 +101,7 @@ class _AccountBlockState extends State<AccountBlock> {
     );
   }
 
-  _displayDialogInfo(int index, BuildContext context) async {
+  _displayDialogInfo(BuildContext context) {
     AlertDialog alert = AlertDialog(
       title: Text('Информация: '),
       actions: [
@@ -118,30 +118,26 @@ class _AccountBlockState extends State<AccountBlock> {
           },
         )
       ],
-      content: Flexible(
-        child: Container(
-          width: 200,
-          height: 200,
-          padding: EdgeInsets.all(10),
-          child: Text(
-            "Имя: " +
-                accounts[index].name +
-                "\n" +
-                "Кого готовы взять на передержку: " +
-                accounts[index].kinfofpet +
-                "\n" +
-                "Контакты: " +
-                accounts[index].email +
-                "\n" +
-                "Стоимость передержки: " +
-                accounts[index].price +
-                "\nРайон: " +
-                accounts[index].district,
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 16),
-          ),
+      content: Container(
+        padding: EdgeInsets.all(10),
+        child: Text(
+          "Имя: " +
+              accounts[index].name +
+              "\n" +
+              "Кого готовы взять на передержку: " +
+              accounts[index].kinfofpet +
+              "\n" +
+              "Контакты: " +
+              accounts[index].email +
+              "\n" +
+              "Стоимость передержки: " +
+              accounts[index].price +
+              "\nРайон: " +
+              accounts[index].district,
+          style: GoogleFonts.comfortaa(
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w800,
+              fontSize: 16),
         ),
       ),
     );
