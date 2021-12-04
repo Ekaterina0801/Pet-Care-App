@@ -102,58 +102,54 @@ class _AccountBlockState extends State<AccountBlock> {
   }
 
   _displayDialogInfo(int index, BuildContext context) async {
-    _selected_info = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Expanded(
-            child: AlertDialog(
-          title: Text('Информация: '),
-          actions: [
-            FlatButton(
-              child: Text(
-                'Ок',
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-          content: Flexible(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                "Имя: " +
-                    accounts[index].name +
-                    "\n" +
-                    "Кого готовы взять на передержку: " +
-                    accounts[index].kinfofpet +
-                    "\n" +
-                    "Контакты: " +
-                    accounts[index].email +
-                    "\n" +
-                    "Стоимость передержки: " +
-                    accounts[index].price +
-                    "\nРайон: " +
-                    accounts[index].district,
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16),
-              ),
-            ),
+    AlertDialog alert = AlertDialog(
+      title: Text('Информация: '),
+      actions: [
+        FlatButton(
+          child: Text(
+            'Ок',
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
           ),
-        ));
-      },
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        )
+      ],
+      content: Flexible(
+        child: Container(
+          width: 200,
+          height: 200,
+          padding: EdgeInsets.all(10),
+          child: Text(
+            "Имя: " +
+                accounts[index].name +
+                "\n" +
+                "Кого готовы взять на передержку: " +
+                accounts[index].kinfofpet +
+                "\n" +
+                "Контакты: " +
+                accounts[index].email +
+                "\n" +
+                "Стоимость передержки: " +
+                accounts[index].price +
+                "\nРайон: " +
+                accounts[index].district,
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 16),
+          ),
+        ),
+      ),
     );
 
-    if (_selected_info != null) {
-      setState(() {
-        _selected_info = _selected_info;
-      });
-    }
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        });
   }
 }

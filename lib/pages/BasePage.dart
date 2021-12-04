@@ -61,73 +61,76 @@ class _HomePageState extends State<HomePage> {
     return BasePage(
       title: titles[currentindex],
       body: children[currentindex],
-      navigationbar: Container(
-        child: SalomonBottomBar(
-          selectedItemColor: Colors.black,
-          currentIndex: currentindex,
-          onTap: (index) {
-            setState(() {
-              currentindex = index;
-            });
-          },
-          items: [
-            SalomonBottomBarItem(
-              icon: Icon(
-                CupertinoIcons.book,
-                size: 25,
-              ),
-              title: Text('Советы',
-                  style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                  )),
+      navigationbar: SalomonBottomBar(
+        selectedItemColor: Colors.black,
+        currentIndex: currentindex,
+        onTap: (index) {
+          setState(() {
+            currentindex = index;
+          });
+        },
+        items: [
+          SalomonBottomBarItem(
+            icon: Icon(
+              CupertinoIcons.book,
+              size: 23,
             ),
-            SalomonBottomBarItem(
-              icon: Icon(
-                CupertinoIcons.location,
-                size: 25,
-              ),
-              title: Text('Сервис',
-                  style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                  )),
+            title: Text('Советы',
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(
+              CupertinoIcons.location,
+              size: 23,
             ),
-            SalomonBottomBarItem(
-              icon: Icon(
-                CupertinoIcons.calendar,
-                size: 25,
-              ),
-              title: Text('Календарь',
-                  style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                  )),
+            title: Text('Сервис',
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(
+              CupertinoIcons.calendar,
+              size: 23,
             ),
-            SalomonBottomBarItem(
-              icon: Icon(
-                CupertinoIcons.pen,
-                size: 25,
-              ),
-              title: Text('Записки',
-                  style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                  )),
+            title: Text('Календарь',
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(
+              CupertinoIcons.pen,
+              size: 23,
             ),
-            SalomonBottomBarItem(
-              icon: Icon(
-                CupertinoIcons.person,
-                size: 25,
-              ),
-              title: Text('Профиль',
-                  style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                  )),
+            title: Text('Записки',
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(
+              CupertinoIcons.person,
+              size: 23,
             ),
-          ],
-        ),
+            title: Text('Профиль',
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
+          ),
+        ],
       ),
     );
   }

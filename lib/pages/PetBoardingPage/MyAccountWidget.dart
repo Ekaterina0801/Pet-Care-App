@@ -45,13 +45,15 @@ class _SetAgreementState extends State<SetAgreement> {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      Container(
-        padding: EdgeInsets.all(5),
-        child: Text("Согласие брать питомцев на передержку:",
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14)),
+      Flexible(
+        child: Container(
+          padding: EdgeInsets.all(5),
+          child: Text("Согласие брать питомцев на передержку:",
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 14)),
+        ),
       ),
       Checkbox(
           checkColor: Colors.black,

@@ -165,145 +165,122 @@ class _SettingsServiceState extends State<SettingsService> {
         ));
   }
 
-  _displayDialogDistrict(BuildContext context) async {
-    _selected_dist = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Expanded(
-            child: AlertDialog(
-          title: Text('Редактировать район'),
-          actions: [
-            FlatButton(
-              child: Text(
-                'Принять',
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-          content: Container(
-            padding: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: district,
-              style: GoogleFonts.comfortaa(
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 16),
-              onChanged: _changeDistrict,
-              validator: (email) {
-                if (isDistrictValid(email))
-                  return null;
-                else
-                  return 'Введите корректный район';
-              },
-            ),
+  _displayDialogDistrict(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      title: Text('Редактировать район'),
+      actions: [
+        FlatButton(
+          child: Text(
+            'Принять',
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
           ),
-        ));
-      },
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        )
+      ],
+      content: Container(
+        padding: EdgeInsets.all(10),
+        child: TextFormField(
+          initialValue: district,
+          style: GoogleFonts.comfortaa(
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w800,
+              fontSize: 16),
+          onChanged: _changeDistrict,
+          validator: (email) {
+            if (isDistrictValid(email))
+              return null;
+            else
+              return 'Введите корректный район';
+          },
+        ),
+      ),
     );
-
-    if (_selected_dist != null) {
-      setState(() {
-        _selected_dist = _selected_dist;
-      });
-    }
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        });
   }
 
-  _displayDialogPrice(BuildContext context) async {
-    _selected_price = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Expanded(
-            child: AlertDialog(
-          title: Text('Редактировать стоимость'),
-          actions: [
-            FlatButton(
-              child: Text(
-                'Принять',
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-          content: Container(
-            padding: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: price,
+  _displayDialogPrice(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+        title: Text('Редактировать стоимость'),
+        actions: [
+          FlatButton(
+            child: Text(
+              'Принять',
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800,
-                  fontSize: 16),
-              onChanged: _changePrice,
-              validator: (price) {
-                if (isPriceValid(price))
-                  return null;
-                else
-                  return 'Введите корректную стоимость';
-              },
+                  fontSize: 14),
             ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )
+        ],
+        content: Container(
+          padding: EdgeInsets.all(10),
+          child: TextFormField(
+            initialValue: price,
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 16),
+            onChanged: _changePrice,
+            validator: (price) {
+              if (isPriceValid(price))
+                return null;
+              else
+                return 'Введите корректную стоимость';
+            },
           ),
         ));
-      },
-    );
-
-    if (_selected_price != null) {
-      setState(() {
-        _selected_price = _selected_price;
-      });
-    }
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        });
   }
 
   _displayDialogContacts(BuildContext context) async {
-    _selected_contacts = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Expanded(
-            child: AlertDialog(
-          title: Text('Редактировать контакты'),
-          actions: [
-            FlatButton(
-              child: Text(
-                'Принять',
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-          content: Container(
-            padding: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: contacts,
+    AlertDialog alert = AlertDialog(
+        title: Text('Редактировать контакты'),
+        actions: [
+          FlatButton(
+            child: Text(
+              'Принять',
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800,
-                  fontSize: 16),
-              onChanged: _changeContacts,
+                  fontSize: 14),
             ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )
+        ],
+        content: Container(
+          padding: EdgeInsets.all(10),
+          child: TextFormField(
+            initialValue: contacts,
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 16),
+            onChanged: _changeContacts,
           ),
         ));
-      },
-    );
-
-    if (_selected_contacts != null) {
-      setState(() {
-        _selected_contacts = _selected_contacts;
-      });
-    }
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        });
   }
 
   bool isDistrictValid(String district) {
