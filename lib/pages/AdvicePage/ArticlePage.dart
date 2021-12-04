@@ -27,7 +27,7 @@ class ArticlePage extends StatelessWidget {
                     style: GoogleFonts.comfortaa(
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w800,
-                        fontSize: 20)),
+                        fontSize: 16)),
               ),
             ),
           )
