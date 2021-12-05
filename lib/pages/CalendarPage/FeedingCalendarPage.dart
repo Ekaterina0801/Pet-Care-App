@@ -39,13 +39,29 @@ class _CalendarPageState extends State<CalendarPage> {
       // },
       scheduleViewMonthHeaderBuilder:
           (BuildContext buildContext, ScheduleViewMonthHeaderDetails details) {
-        return Container(
-            color: Colors.red,
-            child: Text(
-              details.date.month.toString() +
-                  ' ,' +
-                  details.date.year.toString(),
-            ));
+        final String monthName = _getMonthName(details.date.month);
+        return Stack(
+          children: [
+            Image(
+                image: ExactAssetImage('images/pets1.jpg'),
+                fit: BoxFit.cover,
+                width: details.bounds.width,
+                height: 180),
+            Positioned(
+              left: 55,
+              right: 0,
+              top: 20,
+              bottom: 0,
+              child: Text(
+                monthName + ' ' + details.date.year.toString(),
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 18),
+              ),
+            )
+          ],
+        );
       },
 
       showNavigationArrow: true,
@@ -188,3 +204,31 @@ final events = LinkedHashMap(
 )..addAll(eventSource);
 */
 */
+
+String _getMonthName(int month) {
+  if (month == 01) {
+    return 'Январь';
+  } else if (month == 02) {
+    return 'Февраль';
+  } else if (month == 03) {
+    return 'Март';
+  } else if (month == 04) {
+    return 'Апрель';
+  } else if (month == 05) {
+    return 'Май';
+  } else if (month == 06) {
+    return 'Июнь';
+  } else if (month == 07) {
+    return 'Июль';
+  } else if (month == 08) {
+    return 'Август';
+  } else if (month == 09) {
+    return 'Сентябрь';
+  } else if (month == 10) {
+    return 'Октябрь';
+  } else if (month == 11) {
+    return 'Ноябрь';
+  } else {
+    return 'Декабрь';
+  }
+}
