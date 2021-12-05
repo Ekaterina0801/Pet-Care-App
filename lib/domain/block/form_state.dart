@@ -12,7 +12,7 @@ RegExp _emailRegExp = RegExp(
 
 //Регекс для имени
 RegExp _usernameRegExp = RegExp(
-  r'^[А-Я][а-я]*$',
+  r'^[А-Яа-я ]*$',
 );
 
 class FormblockInitial extends FormblockState {
