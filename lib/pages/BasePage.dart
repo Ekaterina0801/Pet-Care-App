@@ -20,8 +20,9 @@ class BasePage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           actions: [],
+          shadowColor: Colors.grey,
           backgroundColor: Color.fromRGBO(255, 223, 142, 10),
-          elevation: 0,
+          elevation: 3,
           title: Text(title,
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,

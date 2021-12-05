@@ -9,6 +9,7 @@ class LoginRegestrationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 3,
         title: Text('Вход и регистрация',
             style: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,

@@ -12,12 +12,13 @@ class NotesWidget extends StatelessWidget {
     return Container(
       //height: 100,
       decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
           shape: BoxShape.rectangle,
-          color: Color.fromRGBO(255, 223, 142, 10),
+          color: Color.fromRGBO(251, 236, 192, 10),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey,
-              blurRadius: 4,
+              color: Color.fromRGBO(198, 191, 172, 1),
+              blurRadius: 0.5,
               offset: const Offset(0.0, 0.0),
               spreadRadius: 2.0,
             )

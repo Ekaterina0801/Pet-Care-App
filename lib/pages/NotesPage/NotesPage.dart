@@ -8,7 +8,7 @@ class NotesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(15),
         itemCount: notes.length + 1,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
