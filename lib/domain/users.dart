@@ -31,7 +31,7 @@ class UserDontExistException extends TextException {
 //Пользователь с таким именем уже существует
 class UserAlreadyExistExeption extends TextException {
   UserAlreadyExistExeption()
-      : super(text: "Такое имя уже использовано другим пользователем");
+      : super(text: "Такая почта уже использована другим пользователем");
 }
 
 Future<void> LoginNamePassword({

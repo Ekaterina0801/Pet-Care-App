@@ -13,7 +13,7 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return SfCalendar(
       firstDayOfWeek: 1,
-      todayHighlightColor: Color.fromRGBO(255, 223, 142, 1),
+      todayHighlightColor: Color.fromRGBO(208, 76, 49, 80),
       todayTextStyle: GoogleFonts.comfortaa(
           color: Colors.black,
           fontStyle: FontStyle.normal,

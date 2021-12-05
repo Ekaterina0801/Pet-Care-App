@@ -35,7 +35,7 @@ class NotesWidget extends StatelessWidget {
               style: GoogleFonts.comfortaa(
                   color: Colors.black,
                   fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w900,
+                  fontWeight: FontWeight.w800,
                   fontSize: 16),
             ),
           ),
