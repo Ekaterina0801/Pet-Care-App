@@ -15,10 +15,11 @@ class Passport extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        InfoWidget("Владелец", nameowner),
-        InfoWidget("Дата рождения питомца", dateb),
-        InfoWidget("Прививки", vac),
-        InfoWidget("Болезни", ill),
+        InfoWidget("Владелец: ", nameowner),
+        InfoWidget("Порода:", breed),
+        InfoWidget("Дата рождения питомца: ", dateb),
+        InfoWidget("Прививки:", vac),
+        InfoWidget("Болезни: ", ill),
       ],
     );
   }

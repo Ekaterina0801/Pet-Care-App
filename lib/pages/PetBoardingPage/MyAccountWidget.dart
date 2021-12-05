@@ -10,7 +10,15 @@ class MyAccountWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(color: Color.fromRGBO(255, 223, 142, 10)),
+        decoration:
+            BoxDecoration(color: Color.fromRGBO(255, 223, 142, 10), boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 4,
+            offset: const Offset(0.0, 0.0),
+            spreadRadius: 0.0,
+          )
+        ]),
         child: Column(
           children: [
             Container(

@@ -25,7 +25,7 @@ class IncorrectPasswordException extends TextException {
 
 class UserDontExistException extends TextException {
   UserDontExistException()
-      : super(text: "Пользователя с таким именем не существует");
+      : super(text: "Пользователя с такой почтой не существует");
 }
 
 //Пользователь с таким именем уже существует

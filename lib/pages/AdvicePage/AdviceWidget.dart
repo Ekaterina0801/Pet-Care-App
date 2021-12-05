@@ -22,7 +22,7 @@ class AdviceBlock extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black26,
-                blurRadius: 0.3,
+                blurRadius: 5,
                 offset: const Offset(0.0, 0.0),
                 spreadRadius: 0.0,
               )
@@ -105,7 +105,7 @@ class AdviceMainBlock extends StatelessWidget {
                 color: Colors.black26,
                 blurRadius: 5,
                 offset: const Offset(0.0, 0.0),
-                spreadRadius: 0.0,
+                spreadRadius: 2.0,
               )
             ]),
         margin: EdgeInsets.all(15),

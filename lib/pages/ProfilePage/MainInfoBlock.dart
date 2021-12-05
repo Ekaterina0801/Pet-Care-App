@@ -12,7 +12,7 @@ class MainInfoBlock extends StatelessWidget {
       children: [
         Container(
           //padding: EdgeInsets.all(10),
-          width: MediaQuery.of(context).size.width * 0.25 - 6,
+          width: MediaQuery.of(context).size.width * 0.3 - 6,
           height: 90,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),

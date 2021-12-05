@@ -23,19 +23,33 @@ class ProfilePage extends StatelessWidget {
         padding: EdgeInsets.all(10),
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           AvatarBlock(profilespets[1].name, profilespets[1].photo),
-          Container(
-              child: Icon(
-                CupertinoIcons.add,
-                size: 55,
-                color: Colors.black,
-              ),
-              decoration: BoxDecoration(
-                  color: Color.fromRGBO(240, 240, 240, 1),
-                  //color: Color.fromRGBO(255, 223, 142, 10),
-                  border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.all(Radius.circular(50))),
-              height: 70,
-              width: 70)
+          Column(
+            children: [
+              Container(
+                  child: Icon(
+                    CupertinoIcons.add,
+                    size: 55,
+                    color: Colors.black,
+                  ),
+                  decoration: BoxDecoration(
+                      color: Color.fromRGBO(240, 240, 240, 1),
+                      //color: Color.fromRGBO(255, 223, 142, 10),
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.all(Radius.circular(50))),
+                  height: 70,
+                  width: 70),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: Text(
+                  "Добавить",
+                  style: GoogleFonts.comfortaa(
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 12),
+                ),
+              )
+            ],
+          )
         ]),
       ),
       Container(
@@ -50,7 +64,7 @@ class ProfilePage extends StatelessWidget {
         ),
       ),
       Container(
-        margin: EdgeInsets.all(2),
+        margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
             //boxShadow: BoxShadow(blurRadius: BorderRadius.all(10)),
             //color: Color.fromRGBO(240, 240, 240, 1),
@@ -66,7 +80,7 @@ class ProfilePage extends StatelessWidget {
               "15 кг",
               Color.fromRGBO(255, 223, 142, 10),
             ),
-            MainInfoBlock("Порода", "Корги", Color.fromRGBO(131, 184, 107, 60)),
+            // MainInfoBlock("Порода", "Корги", Color.fromRGBO(131, 184, 107, 60)),
             MainInfoBlock("Пол", "Мужской", Color.fromRGBO(129, 181, 217, 60)),
           ],
         ),

@@ -21,7 +21,16 @@ class _PetBoardingPageState extends State<PetBoardingPage> {
       physics: ScrollPhysics(),
       children: [
         Container(
-            decoration: BoxDecoration(color: Color.fromRGBO(255, 223, 142, 10)),
+            decoration: BoxDecoration(
+                color: Color.fromRGBO(255, 223, 142, 10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 4,
+                    offset: const Offset(0.0, 0.0),
+                    spreadRadius: 0.0,
+                  )
+                ]),
             child: Column(children: [
               Container(
                 child: Avatar(
@@ -63,7 +72,7 @@ class _PetBoardingPageState extends State<PetBoardingPage> {
             ),
             Flexible(
               child: Container(
-                padding: EdgeInsets.all(5),
+                padding: EdgeInsets.all(10),
                 child: Text(
                   "Кто готов взять питомцев на передержку: ",
                   textAlign: TextAlign.center,

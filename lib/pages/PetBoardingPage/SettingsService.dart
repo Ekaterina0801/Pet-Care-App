@@ -40,8 +40,8 @@ class _SettingsServiceState extends State<SettingsService> {
     return Scaffold(
         appBar: AppBar(
           actions: [],
+          elevation: 0,
           backgroundColor: Color.fromRGBO(255, 223, 142, 10),
-          elevation: 3,
           title: Text("Настройки",
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,
