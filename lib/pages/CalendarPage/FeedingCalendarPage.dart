@@ -92,12 +92,8 @@ List<Meeting> _getDataSource() {
         Color.fromRGBO(255, 223, 142, 10),
         false),
   );
-  meetings.add(Meeting(
-      'Забрать заказ с игрушкой для питомца',
-      DateTime.utc(2021, 12, 21),
-      DateTime.utc(2021, 12, 21),
-      Color.fromRGBO(208, 76, 49, 100),
-      false));
+  meetings.add(Meeting('Забрать заказ с игрушкой', DateTime.utc(2021, 12, 21),
+      DateTime.utc(2021, 12, 21), Color.fromRGBO(208, 76, 49, 100), false));
 
   meetings.add(Meeting(
       'Защита проекта',
