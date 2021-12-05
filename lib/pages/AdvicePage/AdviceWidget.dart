@@ -18,7 +18,7 @@ class AdviceBlock extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(30)),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
             boxShadow: [
               BoxShadow(
                 color: Colors.black26,
@@ -51,15 +51,15 @@ class AdviceBlock extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30))),
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20))),
             ),
             Container(
                 decoration: BoxDecoration(
                     color: Color.fromRGBO(255, 223, 142, 1),
                     borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30))),
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20))),
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(
@@ -99,7 +99,7 @@ class AdviceMainBlock extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(30)),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
             boxShadow: [
               BoxShadow(
                 color: Colors.black26,
@@ -123,15 +123,15 @@ class AdviceMainBlock extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30))),
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20))),
             ),
             Container(
                 decoration: BoxDecoration(
                     color: Color.fromRGBO(255, 223, 142, 1),
                     borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30))),
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20))),
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(

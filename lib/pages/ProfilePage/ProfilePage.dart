@@ -11,7 +11,15 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(children: [
       Container(
-        color: Color.fromRGBO(255, 223, 142, 10),
+        decoration:
+            BoxDecoration(color: Color.fromRGBO(255, 223, 142, 10), boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 4,
+            offset: const Offset(0.0, 0.0),
+            spreadRadius: 0.0,
+          )
+        ]),
         padding: EdgeInsets.all(10),
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           AvatarBlock(profilespets[1].name, profilespets[1].photo),
