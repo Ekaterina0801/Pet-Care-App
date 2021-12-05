@@ -19,7 +19,7 @@ class AdviceGrid extends StatelessWidget {
       child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisExtent: 200,
+            mainAxisExtent: 193,
             crossAxisSpacing: 2,
             mainAxisSpacing: 1,
           ),
@@ -48,7 +48,7 @@ class AdviceGridFavoirite extends StatelessWidget {
       child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisExtent: 220,
+            mainAxisExtent: 193,
             crossAxisSpacing: 5,
             mainAxisSpacing: 5,
           ),

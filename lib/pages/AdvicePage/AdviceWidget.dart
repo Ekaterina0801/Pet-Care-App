@@ -16,7 +16,18 @@ class AdviceBlock extends StatelessWidget {
         Navigator.pushNamed(context, '$index');
       },
       child: Container(
-        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 0.3,
+                offset: const Offset(0.0, 0.0),
+                spreadRadius: 0.0,
+              )
+            ]),
+        //padding: EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -87,8 +98,18 @@ class AdviceMainBlock extends StatelessWidget {
         Navigator.pushNamed(context, '0');
       },
       child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 5,
+                offset: const Offset(0.0, 0.0),
+                spreadRadius: 0.0,
+              )
+            ]),
         margin: EdgeInsets.all(15),
-        padding: EdgeInsets.all(10),
+        //padding: EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

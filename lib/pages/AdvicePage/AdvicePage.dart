@@ -36,7 +36,7 @@ class AdvicePage extends StatelessWidget {
         ),
       ),
       Container(
-        height: 210.0,
+        height: 208.0,
         child: ListView.builder(
           shrinkWrap: true,
           itemCount: 4,
@@ -75,7 +75,7 @@ class AdvicePage extends StatelessWidget {
         ),
       ),
       Container(
-        height: 260.0,
+        height: 208.0,
         child: ListView.builder(
           shrinkWrap: true,
           itemCount: 2,
