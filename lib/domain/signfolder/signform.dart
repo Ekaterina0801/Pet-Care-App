@@ -136,6 +136,19 @@ class LoginForm extends StatelessWidget {
                   onPressed: () {
                     block.add(StartLogin());
                   }),
+              Container(
+                //width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.all(10),
+                child: Center(
+                  child: Text(
+                    "Для демонстрации будет показан профиль одного из разработчиков",
+                    style: GoogleFonts.comfortaa(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16),
+                  ),
+                ),
+              ),
             ],
           );
         case LoginandRegistrationState.Waiting:

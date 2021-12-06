@@ -135,7 +135,20 @@ class _PetBoardingPageState extends State<PetBoardingPage> {
       content: Column(
         children: [
           Container(
-            width: MediaQuery.of(context).size.width - 10,
+            //width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.all(10),
+            child: Center(
+              child: Text(
+                "(Фильтр с заглушками, на стадии разработки)",
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          Container(
+            //width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.all(10),
             child: Center(
               child: Text(
@@ -186,68 +199,18 @@ class _PetBoardingPageState extends State<PetBoardingPage> {
                 fontWeight: FontWeight.w800,
                 fontSize: 16),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    Text(
-                      '0-500',
-                      style: GoogleFonts.comfortaa(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 16),
-                    ),
-                    Icon(Icons.check_box_outlined, size: 20)
-                  ],
-                ),
-              ),
-              Column(
-                children: [
-                  Text(
-                    '501-1000',
-                    style: GoogleFonts.comfortaa(
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16),
-                  ),
-                  Icon(Icons.check_box_outlined, size: 20)
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    '1001-1500',
-                    style: GoogleFonts.comfortaa(
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16),
-                  ),
-                  Icon(
-                    Icons.check_box_outlined,
-                    size: 20,
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Text(
-                    '>1500',
-                    style: GoogleFonts.comfortaa(
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16),
-                  ),
-                  Icon(
-                    Icons.check_box_outlined,
-                    size: 20,
-                  )
-                ],
-              )
-            ],
-          ),
+          Slider(
+            thumbColor: Color.fromRGBO(255, 223, 142, 10),
+            activeColor: Color.fromRGBO(255, 223, 142, 10),
+            min: 0.0,
+            max: 3000.0,
+            value: _value,
+            onChanged: (value) {
+              setState(() {
+                _value = value;
+              });
+            },
+          )
         ],
       ),
     );
