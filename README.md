@@ -8,4 +8,4 @@
 
 Первое время функционал будет доступен для владельцев кошек и собак. Далее – по возможности расширен.
 
-[Ссылка на репозиторий BackEnd] (https://github.com/vadimka-8888/PetCare_BackEnd)
+[Ссылка на репозиторий BackEnd](https://github.com/vadimka-8888/PetCare_BackEnd)
