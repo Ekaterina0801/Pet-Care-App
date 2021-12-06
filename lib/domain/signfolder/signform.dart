@@ -24,130 +24,138 @@ class LoginForm extends StatelessWidget {
     }, builder: (context, state) {
       switch (state.currstare) {
         case LoginandRegistrationState.Login:
-          return Column(
+          return ListView(
             children: [
               Column(
                 children: [
-                  state.errorrequest ? Text(state.errortext) : Container()
+                  Column(
+                    children: [
+                      state.errorrequest ? Text(state.errortext) : Container()
+                    ],
+                  ),
+                  InputWidget(
+                    controller: _emailcontroller,
+                    title: state.siginUpemail.title,
+                    lable: state.siginUpemail.label,
+                    key1: state.siginUpemail.key,
+                    validator: state.siginUpemail.validator,
+                  ),
+                  InputWidget(
+                    controller: _passwordcontroller,
+                    title: state.siginInpassword.title,
+                    lable: state.siginInpassword.label,
+                    key1: state.siginInpassword.key,
+                    validator: state.siginInpassword.validator,
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromRGBO(255, 223, 142, 10))),
+                    child: Text('Вход',
+                        style: GoogleFonts.comfortaa(
+                            color: Colors.black,
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 18)),
+                    onPressed: () {
+                      block.add(SendSignInForm(
+                          email: _emailcontroller.text,
+                          password: _passwordcontroller.text));
+                    },
+                  ),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromRGBO(255, 223, 142, 10))),
+                      child: Text('Регистрация',
+                          style: GoogleFonts.comfortaa(
+                              color: Colors.black,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 18)),
+                      onPressed: () {
+                        block.add(StartRegistration());
+                      }),
                 ],
               ),
-              InputWidget(
-                controller: _emailcontroller,
-                title: state.siginUpemail.title,
-                lable: state.siginUpemail.label,
-                key1: state.siginUpemail.key,
-                validator: state.siginUpemail.validator,
-              ),
-              InputWidget(
-                controller: _passwordcontroller,
-                title: state.siginInpassword.title,
-                lable: state.siginInpassword.label,
-                key1: state.siginInpassword.key,
-                validator: state.siginInpassword.validator,
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Color.fromRGBO(255, 223, 142, 10))),
-                child: Text('Вход',
-                    style: GoogleFonts.comfortaa(
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 18)),
-                onPressed: () {
-                  block.add(SendSignInForm(
-                      email: _emailcontroller.text,
-                      password: _passwordcontroller.text));
-                },
-              ),
-              ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(255, 223, 142, 10))),
-                  child: Text('Регистрация',
-                      style: GoogleFonts.comfortaa(
-                          color: Colors.black,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 18)),
-                  onPressed: () {
-                    block.add(StartRegistration());
-                  }),
             ],
           );
         case LoginandRegistrationState.Regestration:
-          return Column(
+          return ListView(
             children: [
               Column(
                 children: [
-                  state.errorrequest ? Text(state.errortext) : Container()
-                ],
-              ),
-              //Имя
-              InputWidget(
-                controller: _usernamecontroller,
-                title: state.siginUpusername.title,
-                lable: state.siginUpusername.label,
-                key1: state.siginUpusername.key,
-                validator: state.siginUpusername.validator,
-              ),
-              InputWidget(
-                controller: _emailcontroller,
-                title: state.siginUpemail.title,
-                lable: state.siginUpemail.label,
-                key1: state.siginUpemail.key,
-                validator: state.siginUpemail.validator,
-              ),
-              //Пароль
-              InputWidget(
-                controller: _passwordcontroller,
-                title: state.siginUppassword.title,
-                lable: state.siginUppassword.label,
-                key1: state.siginUppassword.key,
-                validator: state.siginUppassword.validator,
-              ),
-              ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(255, 223, 142, 10))),
-                  child: Text('Зарегистрироваться',
-                      style: GoogleFonts.comfortaa(
-                          color: Colors.black,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 18)),
-                  onPressed: () {
-                    block.add(SendSignUpForm(
-                        username: _usernamecontroller.text,
-                        password: _passwordcontroller.text,
-                        email: _emailcontroller.text));
-                  }),
-              ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromRGBO(255, 223, 142, 10))),
-                  child: Text('Вход',
-                      style: GoogleFonts.comfortaa(
-                          color: Colors.black,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 18)),
-                  onPressed: () {
-                    block.add(StartLogin());
-                  }),
-              Container(
-                //width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.all(10),
-                child: Center(
-                  child: Text(
-                    "Для демонстрации будет показан профиль одного из разработчиков",
-                    style: GoogleFonts.comfortaa(
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16),
+                  Column(
+                    children: [
+                      state.errorrequest ? Text(state.errortext) : Container()
+                    ],
                   ),
-                ),
+                  //Имя
+                  InputWidget(
+                    controller: _usernamecontroller,
+                    title: state.siginUpusername.title,
+                    lable: state.siginUpusername.label,
+                    key1: state.siginUpusername.key,
+                    validator: state.siginUpusername.validator,
+                  ),
+                  InputWidget(
+                    controller: _emailcontroller,
+                    title: state.siginUpemail.title,
+                    lable: state.siginUpemail.label,
+                    key1: state.siginUpemail.key,
+                    validator: state.siginUpemail.validator,
+                  ),
+                  //Пароль
+                  InputWidget(
+                    controller: _passwordcontroller,
+                    title: state.siginUppassword.title,
+                    lable: state.siginUppassword.label,
+                    key1: state.siginUppassword.key,
+                    validator: state.siginUppassword.validator,
+                  ),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromRGBO(255, 223, 142, 10))),
+                      child: Text('Зарегистрироваться',
+                          style: GoogleFonts.comfortaa(
+                              color: Colors.black,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 18)),
+                      onPressed: () {
+                        block.add(SendSignUpForm(
+                            username: _usernamecontroller.text,
+                            password: _passwordcontroller.text,
+                            email: _emailcontroller.text));
+                      }),
+                  ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromRGBO(255, 223, 142, 10))),
+                      child: Text('Вход',
+                          style: GoogleFonts.comfortaa(
+                              color: Colors.black,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 18)),
+                      onPressed: () {
+                        block.add(StartLogin());
+                      }),
+                  Container(
+                    //width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.all(10),
+                    child: Center(
+                      child: Text(
+                        "Для демонстрации будет показан профиль одного из разработчиков",
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 16),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           );

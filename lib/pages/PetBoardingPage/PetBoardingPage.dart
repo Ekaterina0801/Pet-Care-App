@@ -121,7 +121,7 @@ class _PetBoardingPageState extends State<PetBoardingPage> {
       actions: [
         FlatButton(
           child: Text(
-            'Ок',
+            'Принять',
             style: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w800,
@@ -200,6 +200,8 @@ class _PetBoardingPageState extends State<PetBoardingPage> {
                 fontSize: 16),
           ),
           Slider(
+            divisions: 3000,
+            label: '${_value.round()}',
             thumbColor: Color.fromRGBO(255, 223, 142, 10),
             activeColor: Color.fromRGBO(255, 223, 142, 10),
             min: 0.0,
