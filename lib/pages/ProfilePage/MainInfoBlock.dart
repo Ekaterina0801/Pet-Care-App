@@ -15,6 +15,14 @@ class MainInfoBlock extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.3 - 6,
           height: 90,
           decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 2,
+                offset: const Offset(1.0, 1.0),
+                spreadRadius: 0.0,
+              )
+            ],
             borderRadius: BorderRadius.circular(10),
             color: myColor,
           ),

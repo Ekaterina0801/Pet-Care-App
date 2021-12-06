@@ -67,8 +67,11 @@ class _PetBoardingPageState extends State<PetBoardingPage> {
               alignment: Alignment.topLeft,
               child: Container(
                   padding: EdgeInsets.all(10),
-                  height: 30,
-                  child: Icon(Icons.sort)),
+                  //height: 30,
+                  child: IconButton(
+                    icon: Icon(Icons.sort),
+                    onPressed: () => _displayFilter(context),
+                  )),
             ),
             Flexible(
               child: Container(
@@ -103,5 +106,156 @@ class _PetBoardingPageState extends State<PetBoardingPage> {
                 Container(child: AccountBlock(accounts[index], index))),
       ],
     );
+  }
+
+  double _value = 20;
+  _displayFilter(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      title: Text(
+        'Фильтр: ',
+        style: GoogleFonts.comfortaa(
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w800,
+            fontSize: 18),
+      ),
+      actions: [
+        FlatButton(
+          child: Text(
+            'Ок',
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        )
+      ],
+      content: Column(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width - 10,
+            padding: EdgeInsets.all(10),
+            child: Center(
+              child: Text(
+                "Вид животного",
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16),
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    Text(
+                      'Собаки',
+                      style: GoogleFonts.comfortaa(
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16),
+                    ),
+                    Icon(Icons.check_box_outlined, size: 20)
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  Text(
+                    'Кошки',
+                    style: GoogleFonts.comfortaa(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16),
+                  ),
+                  Icon(Icons.check_box_outlined, size: 20)
+                ],
+              )
+            ],
+          ),
+          Text(
+            "Стоимость",
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 16),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    Text(
+                      '0-500',
+                      style: GoogleFonts.comfortaa(
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16),
+                    ),
+                    Icon(Icons.check_box_outlined, size: 20)
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  Text(
+                    '501-1000',
+                    style: GoogleFonts.comfortaa(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16),
+                  ),
+                  Icon(Icons.check_box_outlined, size: 20)
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    '1001-1500',
+                    style: GoogleFonts.comfortaa(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16),
+                  ),
+                  Icon(
+                    Icons.check_box_outlined,
+                    size: 20,
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    '>1500',
+                    style: GoogleFonts.comfortaa(
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16),
+                  ),
+                  Icon(
+                    Icons.check_box_outlined,
+                    size: 20,
+                  )
+                ],
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        });
   }
 }

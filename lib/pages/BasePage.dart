@@ -22,7 +22,7 @@ class BasePage extends StatelessWidget {
           actions: [],
           shadowColor: Colors.grey,
           backgroundColor: Color.fromRGBO(255, 223, 142, 10),
-          elevation: (title == 'Профиль') || (title == 'Сервис') ? 0 : 3,
+          elevation: (title == 'Профиль') || (title == 'Сервис') ? 0 : 2,
           title: Text(title,
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,

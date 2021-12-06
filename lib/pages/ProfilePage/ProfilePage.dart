@@ -65,23 +65,21 @@ class ProfilePage extends StatelessWidget {
       ),
       Container(
         margin: EdgeInsets.all(8),
-        decoration: BoxDecoration(
-            //boxShadow: BoxShadow(blurRadius: BorderRadius.all(10)),
-            //color: Color.fromRGBO(240, 240, 240, 1),
-            borderRadius: BorderRadius.all(Radius.circular(10))),
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
         padding: EdgeInsets.all(4),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             MainInfoBlock("Возраст", "1 год \n10 месяцев",
-                Color.fromRGBO(208, 76, 49, 100)),
+                Color.fromRGBO(131, 184, 107, 80)),
             MainInfoBlock(
               "Вес",
               "15 кг",
               Color.fromRGBO(255, 223, 142, 10),
             ),
             // MainInfoBlock("Порода", "Корги", Color.fromRGBO(131, 184, 107, 60)),
-            MainInfoBlock("Пол", "Мужской", Color.fromRGBO(129, 181, 217, 60)),
+            MainInfoBlock("Пол", "Мужской", Color.fromRGBO(129, 181, 217, 90)),
           ],
         ),
       ),
