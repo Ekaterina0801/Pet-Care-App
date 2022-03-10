@@ -1,19 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/pages/BasePage.dart';
+import 'package:pet_care/repository/advicerepo.dart';
 
 import 'Article.dart';
+import 'requests/controllers/ArticleController.dart';
+import 'requests/models/ArticleJ.dart';
 
-//Станица статьи
-class ArticlePage extends StatelessWidget {
-  final Article article;
+//Страница статьи
+class ArticlePage extends StatefulWidget {
+  final ArticleTest article;
   ArticlePage(this.article);
+
+  @override
+  _ArticlePageState createState() => _ArticlePageState();
+}
+
+class _ArticlePageState extends StateMVC {
+
+  ArticleController _controller;
+  _ArticlePageState():super(ArticleController())
+  {
+    _controller = controller as ArticleController;
+  }
+  @override
+  void initState() {
+    super.initState();
+    _controller.init();
+  }
   @override
   Widget build(BuildContext context) {
+    final state = _controller.currentState;
+    if (state is ArticleResultLoading) {
+      // загрузка
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else if (state is ArticleResultFailure) {
+      // ошибка
+      return Center(
+        child: Text(
+          state.error,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headline4.copyWith(color: Colors.red)
+        ),
+      );
+    } else{
+    final articles = (state as ArticleResultSuccess).articleList.articles;
     return BasePage(
         title: 'Советы',
         body: ListView(children: [
-          ArticleBlock(article.title, article.image),
+          ArticleBlock(articles[0].title, articless[0].image),
           Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
@@ -22,7 +60,7 @@ class ArticlePage extends StatelessWidget {
               alignment: Alignment.center,
               child: Container(
                 padding: EdgeInsets.all(5),
-                child: Text(article.text,
+                child: Text(articles[0].body,
                     textAlign: TextAlign.left,
                     style: GoogleFonts.comfortaa(
                         fontStyle: FontStyle.normal,
@@ -32,7 +70,7 @@ class ArticlePage extends StatelessWidget {
             ),
           )
         ]));
-  }
+  }}
 }
 
 //Виджет лля отображения на странице статьи изображения и заголовка статьи

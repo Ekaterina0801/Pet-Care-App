@@ -45,6 +45,8 @@ dependencies:
   bloc : ^6.1.0
   flutter_bloc : ^6.1.0
   formz: ^0.4.1
+  http: ^0.13.4
+  mvc_pattern: ^8.2.2
 
 dev_dependencies:
   flutter_test:
