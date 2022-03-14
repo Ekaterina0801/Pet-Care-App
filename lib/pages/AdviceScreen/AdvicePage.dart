@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:pet_care/pages/AdvicePage/AdviceList.dart';
+
 import 'package:pet_care/repository/advicerepo.dart';
 import 'package:http/http.dart' as http;
 
+import 'AdviceList.dart';
 import 'AdviceWidget.dart';
 import 'requests/controllers/ArticleController.dart';
 import 'requests/models/ArticleJ.dart';

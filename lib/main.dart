@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:pet_care/pages/AdvicePage/AdviceList.dart';
+import 'package:pet_care/dommain/myuser.dart';
+import 'package:pet_care/pages/AdviceScreen/AdviceList.dart';
+
 import 'package:pet_care/pages/AdviceScreen/ArticlePage.dart';
 import 'package:pet_care/pages/Registration/RegistrationPage.dart';
+import 'package:pet_care/pages/login.dart';
+import 'package:pet_care/pages/providers/auth.dart';
+import 'package:pet_care/pages/providers/userprovider.dart';
+import 'package:pet_care/pages/register.dart';
+import 'package:pet_care/pages/util/shared_preference.dart';
+import 'package:pet_care/pages/welcome.dart';
 import 'package:pet_care/repository/advicerepo.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'pages/BasePage.dart';
 import 'pages/ProfilePage/ProfilePage.dart';
@@ -15,15 +24,36 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'PetCare',
-        initialRoute: '/home',
-        routes: {
-          '/test':(BuildContext context)=>ArticleListPage(),
-          '/start': (BuildContext context) => ProfilePage(),
-          '/home': (BuildContext context) => HomePage(),
-          '/login': (BuildContext context) => LoginRegestrationPage(),
-          '0': (BuildContext context) => ArticlePage(articless[0]),
+    Future<MyUser> getUserData() => UserPreferences().getUser();
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+    child: MaterialApp(
+      home: FutureBuilder(
+              future: getUserData(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                  case ConnectionState.waiting:
+                    return CircularProgressIndicator();
+                  default:
+                    if (snapshot.hasError)
+                      return Text('Error: ${snapshot.error}');
+                    else if (snapshot.data.email== null)
+                      return Login();
+                    else
+                      UserPreferences().removeUser();
+                    return Welcome(user: snapshot.data);
+                }
+              }),
+          routes: {
+            //'/dashboard': (context) => DashBoard(),
+            '/login': (context) => Login(),
+            '/register': (context) => Register(),
+            '0': (BuildContext context) => ArticlePage(articless[0]),
           '1': (BuildContext context) => ArticlePage(articless[1]),
           '2': (BuildContext context) => ArticlePage(articless[2]),
           '3': (BuildContext context) => ArticlePage(articless[3]),
@@ -39,8 +69,19 @@ class MyApp extends StatelessWidget {
           '13': (BuildContext context) => ArticlePage(articless[13]),
           '14': (BuildContext context) => ArticlePage(articless[14]),
           '15': (BuildContext context) => ArticlePage(articless[15]),
+           '/home': (BuildContext context) => HomePage(),
+          },
+        title: 'PetCare',
+        initialRoute: '/login',
+        /*
+        routes: {
+          '/test':(BuildContext context)=>ArticleListPage(),
+          '/start': (BuildContext context) => ProfilePage(),
+          '/home': (BuildContext context) => HomePage(),
+          '/login': (BuildContext context) => LoginRegestrationPage(),
+          
           //'7': (BuildContext context) => ArticlePage(articles[7]),
-        },
+        },*/
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           SfGlobalLocalizations.delegate
@@ -52,6 +93,6 @@ class MyApp extends StatelessWidget {
         locale: Locale('ru'),
         theme: ThemeData(
           primarySwatch: Colors.yellow,
-        ));
+        )));
   }
 }
