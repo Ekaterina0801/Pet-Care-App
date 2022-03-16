@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 MaterialButton longButtons(String title, Function fun,
-    {Color color: const Color(0xfff063057), Color textColor: Colors.white}) {
+    {Color color: const Color.fromRGBO(255, 223, 142, 10), Color textColor: Colors.black}) {
   return MaterialButton(
     onPressed: fun,
     textColor: textColor,

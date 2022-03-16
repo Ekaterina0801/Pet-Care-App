@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
@@ -16,20 +17,114 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final formKey = new GlobalKey<FormState>();
 
-  String _username, _password;
+  String _email, _password;
 
   @override
   Widget build(BuildContext context) {
     AuthProvider auth = Provider.of<AuthProvider>(context);
 
-    final usernameField = TextFormField(
+    final emailField = 
+
+  
+
+/*
+Column(
+      children: [
+        Container(
+          padding: EdgeInsets.all(15),
+          child: Text("Электронная почта",
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 18)),
+        ),
+        Container(
+          padding: EdgeInsets.all(10),
+          child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            //key: key1,
+            child: TextFormField(
+              autofocus: false,
+              onSaved: (value) => _email = value,
+              validator: validateEmail,
+              decoration: InputDecoration(
+                labelStyle: GoogleFonts.comfortaa(
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 15),
+                hoverColor: Colors.black,
+                focusColor: Colors.black,
+                fillColor: Color.fromRGBO(240, 240, 240, 1),
+                filled: true,
+                hintStyle: TextStyle(color: Colors.black),
+                prefixIcon: Icon(Icons.email, color: Colors.black),
+    // hintText: hintText,
+    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
+                //labelText: lable,
+                helperText: '',
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  
+*/
+
+    TextFormField(
       autofocus: false,
       validator: validateEmail,
-      onSaved: (value) => _username = value,
+      onSaved: (value) => _email = value,
       decoration: buildInputDecoration("Confirm password", Icons.email),
     );
 
-    final passwordField = TextFormField(
+    final passwordField = 
+    /*
+    Column(
+      children: [
+        Container(
+          padding: EdgeInsets.all(15),
+          child: Text("Пароль",
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 18)),
+        ),
+        Container(
+          padding: EdgeInsets.all(10),
+          child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            //key: key1,
+            child: TextFormField(
+              autofocus: false,
+              onSaved: (value) => _password = value,
+              validator: (value) => value.isEmpty ? "Please enter password" : null,
+              decoration: InputDecoration(
+                labelStyle: GoogleFonts.comfortaa(
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 15),
+                hoverColor: Colors.black,
+                focusColor: Colors.black,
+                fillColor: Color.fromRGBO(240, 240, 240, 1),
+                filled: true,
+                hintStyle: TextStyle(color: Colors.black),
+                prefixIcon: Icon(Icons.lock, color: Colors.black),
+    // hintText: hintText,
+    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
+                //labelText: lable,
+                helperText: '',
+              ),
+            ),
+          ),
+        ),
+      ],
+    );*/
+    TextFormField(
       autofocus: false,
       obscureText: true,
       validator: (value) => value.isEmpty ? "Please enter password" : null,
@@ -41,7 +136,7 @@ class _LoginState extends State<Login> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         CircularProgressIndicator(),
-        Text(" Authenticating ... Please wait")
+        Text(" Авторизация...Подождите")
       ],
     );
 
@@ -50,7 +145,7 @@ class _LoginState extends State<Login> {
       children: <Widget>[
         FlatButton(
           padding: EdgeInsets.all(0.0),
-          child: Text("Forgot password?",
+          child: Text("Забыли пароль?",
               style: TextStyle(fontWeight: FontWeight.w300)),
           onPressed: () {
 //            Navigator.pushReplacementNamed(context, '/reset-password');
@@ -58,7 +153,7 @@ class _LoginState extends State<Login> {
         ),
         FlatButton(
           padding: EdgeInsets.only(left: 0.0),
-          child: Text("Sign up", style: TextStyle(fontWeight: FontWeight.w300)),
+          child: Text("Регистрация", style: TextStyle(fontWeight: FontWeight.w300)),
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/register');
           },
@@ -73,7 +168,7 @@ class _LoginState extends State<Login> {
         form.save();
 
         final Future<Map<String, dynamic>> successfulMessage =
-            auth.login(_username, _password);
+            auth.login(_email, _password);
 
         successfulMessage.then((response) {
           if (response['status']) {
@@ -103,18 +198,17 @@ class _LoginState extends State<Login> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 15.0),
-                label("Email"),
-                SizedBox(height: 5.0),
-                usernameField,
-                SizedBox(height: 20.0),
-                label("Password"),
-                SizedBox(height: 5.0),
+                //SizedBox(height: 15.0),
+                //label("Электронная почта"),
+                //SizedBox(height: 5.0),
+                emailField,
+                //SizedBox(height: 20.0),
+                //SizedBox(height: 5.0),
                 passwordField,
-                SizedBox(height: 20.0),
+                //SizedBox(height: 20.0),
                 auth.loggedInStatus == Status.Authenticating
                     ? loading
-                    : longButtons("Login", doLogin),
+                    : longButtons("Вход", doLogin),
                 SizedBox(height: 5.0),
                 forgotLabel
               ],

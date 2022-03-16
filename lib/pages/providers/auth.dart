@@ -64,7 +64,7 @@ class AuthProvider with ChangeNotifier {
       Uri.parse(AppUrl.login),
       body: json.encode(user.toMap()),
       //print(body);
-      //headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json'},
     );
     print(response.body);
     if (response.statusCode == 200||response.statusCode==201) {

@@ -24,8 +24,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
     Future<MyUser> getUserData() => UserPreferences().getUser();
-
+    //var t = UserPreferences().getUser();
+    //MyUser user = Provider.of<UserProvider>(context).user;
+    //print(user.name);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
@@ -34,7 +37,9 @@ class MyApp extends StatelessWidget {
     child: MaterialApp(
       home: FutureBuilder(
               future: getUserData(),
+              
               builder: (context, snapshot) {
+               // print(snapshot.data.name);
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
@@ -45,12 +50,11 @@ class MyApp extends StatelessWidget {
                     else if (snapshot.data.email== null)
                       return Login();
                     else
-                      UserPreferences().removeUser();
-                    return Welcome(user: snapshot.data);
+                      //UserPreferences().removeUser();
+                    return HomePage();
                 }
               }),
           routes: {
-            //'/dashboard': (context) => DashBoard(),
             '/login': (context) => Login(),
             '/register': (context) => Register(),
             '0': (BuildContext context) => ArticlePage(articless[0]),
@@ -72,7 +76,7 @@ class MyApp extends StatelessWidget {
            '/home': (BuildContext context) => HomePage(),
           },
         title: 'PetCare',
-        initialRoute: '/login',
+        //initialRoute: '/login',
         /*
         routes: {
           '/test':(BuildContext context)=>ArticleListPage(),

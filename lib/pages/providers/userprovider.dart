@@ -9,6 +9,11 @@ class UserProvider with ChangeNotifier {
 
   void setUser(MyUser user) {
     _user = user;
-    notifyListeners();
+    Future.delayed(Duration.zero,(){
+       //your code goes here
+       notifyListeners();
+  });
+
+    
   }
 }
