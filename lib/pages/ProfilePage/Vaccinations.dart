@@ -6,7 +6,7 @@ import '../BasePage.dart';
 
 List<String> photos = ["./assets/images/article_2.6.jpg","./assets/images/article_1.2.jpg","./assets/images/article_1.1.jpg"];
 List<String> date = ["01.02.2021","01.04.2021","12.05.2021"];
-List<String> titles = ["Укусил комарик", "Снова укусил комарик", "Болел живот из-за переедания"];
+List<String> titles = ["Прививка от бешенства", "Другая важная прививка", "Третья важная прививка"];
 
 class VaccinationsPage extends StatelessWidget {
 
