@@ -5,8 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:pet_care/dommain/myuser.dart';
-import 'package:pet_care/pages/util/appurl.dart';
-import 'package:pet_care/pages/util/shared_preference.dart';
+import 'package:pet_care/pages/Registration/util/appurl.dart';
+import 'package:pet_care/pages/Registration/util/shared_preference.dart';
+
 
 
 

@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/dommain/myuser.dart';
+import 'package:pet_care/pages/Registration/util/validators.dart';
+import 'package:pet_care/pages/Registration/util/widgets.dart';
 import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
-import 'package:pet_care/pages/util/validators.dart';
-import 'package:pet_care/pages/util/widgets.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {

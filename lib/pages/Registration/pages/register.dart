@@ -1,10 +1,10 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_care/dommain/myuser.dart';
+import 'package:pet_care/pages/Registration/util/validators.dart';
+import 'package:pet_care/pages/Registration/util/widgets.dart';
 import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
-import 'package:pet_care/pages/util/validators.dart';
-import 'package:pet_care/pages/util/widgets.dart';
 import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {

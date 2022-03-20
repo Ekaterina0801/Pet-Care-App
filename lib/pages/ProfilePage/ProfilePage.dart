@@ -5,34 +5,19 @@ import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/ProfilePage/AvatarBlock.dart';
 import 'package:pet_care/pages/ProfilePage/MainInfoBlock.dart';
 import 'package:pet_care/pages/ProfilePage/Passport.dart';
+import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
-import 'package:pet_care/pages/util/shared_preference.dart';
 import 'package:pet_care/repository/profilespetsrepo.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-//
-//var user = UserPreferences().getUser().then((u ) => setState((user = u.toMap();)));
 
-
-
-//user = UserPreferences().getUser().
 class ProfilePage extends StatelessWidget {
 MyUser user;
-//var t = UserPreferences().getUser().then((u) => setState((user =u;)));
-
-
 
   @override
   
   Widget build(BuildContext context) {
   Future<MyUser> getUserData() => UserPreferences().getUser();
-  //user = Provider.of<UserProvider>(context).user;
-  //var t = UserPreferences().getUser();
-  //var tt = getUserData();
-  //t.then((value){user=value;print("Ready");});
-  //user = Provider.of<UserProvider>(context).user;
-  //print(user.name);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),

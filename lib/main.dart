@@ -4,13 +4,11 @@ import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/AdviceScreen/AdviceList.dart';
 
 import 'package:pet_care/pages/AdviceScreen/ArticlePage.dart';
-import 'package:pet_care/pages/Registration/RegistrationPage.dart';
-import 'package:pet_care/pages/login.dart';
+import 'package:pet_care/pages/Registration/pages/login.dart';
+import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
-import 'package:pet_care/pages/register.dart';
-import 'package:pet_care/pages/util/shared_preference.dart';
-import 'package:pet_care/pages/welcome.dart';
+import 'package:pet_care/pages/Registration/pages/register.dart';
 import 'package:pet_care/repository/advicerepo.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care/pages/ProfilePage/Vaccinations.dart';
 
 class Passport extends StatelessWidget {
   final String nameowner;
@@ -18,7 +19,15 @@ class Passport extends StatelessWidget {
         InfoWidget("Владелец: ", nameowner),
         InfoWidget("Порода:", breed),
         InfoWidget("Дата рождения питомца: ", dateb),
-        InfoWidget("Прививки:", vac),
+        TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => VaccinationsPage())),
+            child: const Text('Прививки'),
+          ),
+        //InfoWidget("Прививки:", vac),
         InfoWidget("Болезни: ", ill),
       ],
     );
