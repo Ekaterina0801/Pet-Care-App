@@ -8,102 +8,139 @@ class CalendarPage extends StatefulWidget {
   _CalendarPageState createState() => _CalendarPageState();
 }
 
+//Отображение календаря и кнопка добавления события
 class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
-      Container(
-          child: SfCalendar(
-            firstDayOfWeek: 1,
-            todayHighlightColor: Color.fromRGBO(208, 76, 49, 80),
-            todayTextStyle: GoogleFonts.comfortaa(
-                color: Colors.black,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w600,
-                fontSize: 14),
-            allowAppointmentResize: true,
-            blackoutDatesTextStyle: GoogleFonts.comfortaa(
-                color: Colors.black,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14),
-            appointmentTimeTextFormat: 'HH:mm',
-            appointmentTextStyle: GoogleFonts.comfortaa(
-                color: Colors.black,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 16),
-            monthViewSettings: MonthViewSettings(
-                showAgenda: true,
-                agendaItemHeight: 70,
-                appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
-                agendaStyle: AgendaStyle(
-                  dayTextStyle: GoogleFonts.comfortaa(
-                      color: Colors.black,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 14),
-                  dateTextStyle: GoogleFonts.comfortaa(
-                      color: Colors.black,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 14),
-                  appointmentTextStyle: GoogleFonts.comfortaa(
-                      color: Colors.black,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 14),
-                )),
-            scheduleViewMonthHeaderBuilder: (BuildContext buildContext,
-                ScheduleViewMonthHeaderDetails details) {
-              final String monthName = _getMonthName(details.date.month);
-              return Stack(
-                children: [
-                  Image(
-                      image: ExactAssetImage('assets/images/pets1.jpg'),
-                      fit: BoxFit.cover,
-                      width: details.bounds.width,
-                      height: 180),
-                  Positioned(
-                    left: 55,
-                    right: 0,
-                    top: 20,
-                    bottom: 0,
-                    child: Text(
-                      monthName + ' ' + details.date.year.toString(),
-                      style: GoogleFonts.comfortaa(
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 18),
-                    ),
-                  )
-                ],
-              );
+    return ListView(
+      children: [
+        Container(
+            child: SfCalendar(
+              firstDayOfWeek: 1,
+              todayHighlightColor: Color.fromRGBO(208, 76, 49, 80),
+              todayTextStyle: GoogleFonts.comfortaa(
+                  color: Colors.black,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14),
+              allowAppointmentResize: true,
+              blackoutDatesTextStyle: GoogleFonts.comfortaa(
+                  color: Colors.black,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 14),
+              appointmentTimeTextFormat: 'HH:mm',
+              appointmentTextStyle: GoogleFonts.comfortaa(
+                  color: Colors.black,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 16),
+              monthViewSettings: MonthViewSettings(
+                  showAgenda: true,
+                  agendaItemHeight: 70,
+                  appointmentDisplayMode:
+                      MonthAppointmentDisplayMode.appointment,
+                  agendaStyle: AgendaStyle(
+                    dayTextStyle: GoogleFonts.comfortaa(
+                        color: Colors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14),
+                    dateTextStyle: GoogleFonts.comfortaa(
+                        color: Colors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14),
+                    appointmentTextStyle: GoogleFonts.comfortaa(
+                        color: Colors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14),
+                  )),
+              scheduleViewMonthHeaderBuilder: (BuildContext buildContext,
+                  ScheduleViewMonthHeaderDetails details) {
+                final String monthName = _getMonthName(details.date.month);
+                return Stack(
+                  children: [
+                    Image(
+                        image: ExactAssetImage('assets/images/pets1.jpg'),
+                        fit: BoxFit.cover,
+                        width: details.bounds.width,
+                        height: 180),
+                    Positioned(
+                      left: 55,
+                      right: 0,
+                      top: 20,
+                      bottom: 0,
+                      child: Text(
+                        monthName + ' ' + details.date.year.toString(),
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 18),
+                      ),
+                    )
+                  ],
+                );
+              },
+              showNavigationArrow: true,
+              allowedViews: [
+                CalendarView.day,
+                CalendarView.month,
+                CalendarView.schedule
+              ],
+              view: CalendarView.month,
+              dataSource: MeetingDataSource(_getDataSource()),
+              showDatePickerButton: true,
+            ),
+            height: 700),
+        FlatButton(
+            height: 50,
+            color: Colors.grey.shade100,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                      opaque: false,
+                      pageBuilder: (BuildContext context, _, __) =>
+                          AddEventWidget()));
             },
-            showNavigationArrow: true,
-            allowedViews: [
-              CalendarView.day,
-              CalendarView.month,
-              CalendarView.schedule
-            ],
-            view: CalendarView.month,
-            dataSource: MeetingDataSource(_getDataSource()),
-            showDatePickerButton: true,
-          ),
-          height: 700),
-      FlatButton(
-          height: 50,
-          color: Colors.grey.shade100,
-          onPressed: () {},
-          child: Align(
-              alignment: Alignment.bottomLeft,
-              child: Text('+ Добавить событие',
-                  style: GoogleFonts.comfortaa(
-                      color: Colors.black,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 14))))
-    ]);
+            child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Text('+ Добавить событие',
+                    style: GoogleFonts.comfortaa(
+                        color: Colors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14))))
+      ],
+    );
+  }
+}
+
+//Диалоговое окно для добавления события
+class AddEventWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Align(alignment: Alignment.bottomCenter,
+      child: Text('Добавить событие',
+          style: GoogleFonts.comfortaa(
+              color: Colors.black,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w800,
+              fontSize: 14))),
+      actions: [
+        Align(
+            alignment: Alignment.bottomLeft,
+            child: Text('Введите дату события:',
+                style: GoogleFonts.comfortaa(
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 11)))
+      ],
+    );
   }
 }
 
