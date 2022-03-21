@@ -209,13 +209,11 @@ Column(
                 Container(
                   child: Row(
                     children: [
-                       Text("Авторизация",
-                            //textDirection: TextDirection.ltr,     
-                            //textAlign: TextAlign.center,            
+                       Text("Авторизация",           
                             style:  GoogleFonts.comfortaa(
                             fontStyle: FontStyle.normal,
                             fontWeight: FontWeight.w800, 
-                            fontSize: 26                  
+                            fontSize: 28                  
                             )
                           ),
 
