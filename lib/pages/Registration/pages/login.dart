@@ -1,5 +1,4 @@
 import 'package:another_flushbar/flushbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/dommain/myuser.dart';
@@ -51,8 +50,7 @@ class _LoginState extends State<Login> {
     final forgotLabel = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        FlatButton(
-          //padding: EdgeInsets.all(0.0),
+        ElevatedButton(
           child: Text("Забыли пароль?",
               style: GoogleFonts.comfortaa(fontWeight: FontWeight.w300, 
                                fontStyle: FontStyle.italic,
@@ -61,7 +59,7 @@ class _LoginState extends State<Login> {
 //            Navigator.pushReplacementNamed(context, '/reset-password');
           },
         ),
-        FlatButton(
+        ElevatedButton(
           //padding: EdgeInsets.only(left: 0.0),
           child: Text("Регистрация", 
           style: GoogleFonts.comfortaa(fontWeight: FontWeight.w300,

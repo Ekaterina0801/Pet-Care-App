@@ -15,7 +15,7 @@ MaterialButton longButtons(String title, Function fun,
         title,
         style: GoogleFonts.comfortaa(
               fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w600, 
+              fontWeight: FontWeight.w400, 
               fontSize: 20                  
               ),
         textAlign: TextAlign.center,              
