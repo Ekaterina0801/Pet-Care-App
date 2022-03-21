@@ -81,49 +81,6 @@ Column(
     );
 
     final passwordField = 
-    /*
-    Column(
-      children: [
-        Container(
-          padding: EdgeInsets.all(15),
-          child: Text("Пароль",
-              style: GoogleFonts.comfortaa(
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 18)),
-        ),
-        Container(
-          padding: EdgeInsets.all(10),
-          child: Form(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            //key: key1,
-            child: TextFormField(
-              autofocus: false,
-              onSaved: (value) => _password = value,
-              validator: (value) => value.isEmpty ? "Please enter password" : null,
-              decoration: InputDecoration(
-                labelStyle: GoogleFonts.comfortaa(
-                    color: Colors.black,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 15),
-                hoverColor: Colors.black,
-                focusColor: Colors.black,
-                fillColor: Color.fromRGBO(240, 240, 240, 1),
-                filled: true,
-                hintStyle: TextStyle(color: Colors.black),
-                prefixIcon: Icon(Icons.lock, color: Colors.black),
-    // hintText: hintText,
-    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),
-                //labelText: lable,
-                helperText: '',
-              ),
-            ),
-          ),
-        ),
-      ],
-    );*/
     TextFormField(
       autofocus: false,
       obscureText: true,
@@ -139,10 +96,6 @@ Column(
         Text(" Авторизация...Подождите")
       ],
     );
-    //GoogleFonts.comfortaa(
-                  //fontStyle: FontStyle.normal,
-                  //fontWeight: FontWeight.w800,
-                  //fontSize: 24)
     final forgotLabel = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -217,11 +170,7 @@ Column(
                             )
                           ),
 
-                  //GoogleFonts.comfortaa(
-                  //fontStyle: FontStyle.normal,
-                  //fontWeight: FontWeight.w800,
-                  //fontSize: 24)
-                     
+                
                     ],
                   ),
                 ),
