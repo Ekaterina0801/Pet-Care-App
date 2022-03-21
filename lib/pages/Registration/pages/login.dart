@@ -139,21 +139,29 @@ Column(
         Text(" Авторизация...Подождите")
       ],
     );
-
+    //GoogleFonts.comfortaa(
+                  //fontStyle: FontStyle.normal,
+                  //fontWeight: FontWeight.w800,
+                  //fontSize: 24)
     final forgotLabel = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         FlatButton(
-          padding: EdgeInsets.all(0.0),
+          //padding: EdgeInsets.all(0.0),
           child: Text("Забыли пароль?",
-              style: TextStyle(fontWeight: FontWeight.w300)),
+              style: GoogleFonts.comfortaa(fontWeight: FontWeight.w300, 
+                               fontStyle: FontStyle.italic,
+                               fontSize: 20)),
           onPressed: () {
 //            Navigator.pushReplacementNamed(context, '/reset-password');
           },
         ),
         FlatButton(
-          padding: EdgeInsets.only(left: 0.0),
-          child: Text("Регистрация", style: TextStyle(fontWeight: FontWeight.w300)),
+          //padding: EdgeInsets.only(left: 0.0),
+          child: Text("Регистрация", 
+          style: GoogleFonts.comfortaa(fontWeight: FontWeight.w300,
+                           fontStyle: FontStyle.italic,
+                           fontSize: 20)),
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/register');
           },
@@ -192,20 +200,42 @@ Column(
     return SafeArea(
       child: Scaffold(
         body: Container(
-          padding: EdgeInsets.all(40.0),
+         padding: EdgeInsets.all(30.0),
           child: Form(
             key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //SizedBox(height: 15.0),
-                //label("Электронная почта"),
-                //SizedBox(height: 5.0),
+                Container(
+                  child: Row(
+                    children: [
+                       Text("Авторизация",
+                            //textDirection: TextDirection.ltr,     
+                            //textAlign: TextAlign.center,            
+                            style:  GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800, 
+                            fontSize: 26                  
+                            )
+                          ),
+
+                  //GoogleFonts.comfortaa(
+                  //fontStyle: FontStyle.normal,
+                  //fontWeight: FontWeight.w800,
+                  //fontSize: 24)
+                     
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15.0),
+                label("Электронная почта"),
+                SizedBox(height: 5.0),
                 emailField,
-                //SizedBox(height: 20.0),
-                //SizedBox(height: 5.0),
+                SizedBox(height: 20.0),
+                SizedBox(height: 5.0),
+                label("Пароль"),
                 passwordField,
-                //SizedBox(height: 20.0),
+                SizedBox(height: 20.0),
                 auth.loggedInStatus == Status.Authenticating
                     ? loading
                     : longButtons("Вход", doLogin),
