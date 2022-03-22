@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -121,6 +123,7 @@ class _CalendarPageState extends State<CalendarPage> {
 //Диалоговое окно для добавления события
 class AddEventWidget extends StatelessWidget {
   @override
+  final DateTime today = DateTime.now();
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Align(alignment: Alignment.bottomCenter,
@@ -129,7 +132,7 @@ class AddEventWidget extends StatelessWidget {
               color: Colors.black,
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.w800,
-              fontSize: 14))),
+              fontSize: 16))),
       actions: [
         Align(
             alignment: Alignment.bottomLeft,
@@ -138,7 +141,13 @@ class AddEventWidget extends StatelessWidget {
                     color: Colors.black,
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
-                    fontSize: 11)))
+                    fontSize: 14))),
+        DatePickerDialog(
+          initialDate: today, 
+          firstDate: DateTime.utc(2021, 12, 15), 
+          lastDate: DateTime.utc(2022, 03, 11),
+          helpText: 'Введите дату события:',),
+        
       ],
     );
   }
