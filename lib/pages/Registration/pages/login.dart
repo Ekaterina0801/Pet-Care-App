@@ -50,19 +50,21 @@ class _LoginState extends State<Login> {
     final forgotLabel = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        ElevatedButton(
+        TextButton(
           child: Text("Забыли пароль?",
-              style: GoogleFonts.comfortaa(fontWeight: FontWeight.w300, 
+              style: GoogleFonts.comfortaa(color: Color.fromARGB(255, 0, 0, 0),
+                               fontWeight: FontWeight.w300, 
                                fontStyle: FontStyle.italic,
                                fontSize: 20)),
           onPressed: () {
 //            Navigator.pushReplacementNamed(context, '/reset-password');
           },
         ),
-        ElevatedButton(
+        TextButton(
           //padding: EdgeInsets.only(left: 0.0),
           child: Text("Регистрация", 
-          style: GoogleFonts.comfortaa(fontWeight: FontWeight.w300,
+          style: GoogleFonts.comfortaa(color: Color.fromARGB(255, 0, 0, 0),
+                           fontWeight: FontWeight.w300,
                            fontStyle: FontStyle.italic,
                            fontSize: 20)),
           onPressed: () {
