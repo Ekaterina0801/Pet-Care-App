@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/NotesPage/Note.dart';
 
 class NotesWidget extends StatelessWidget {
-  final Note note;
+  final Note1 note;
   NotesWidget(this.note);
 
   @override
@@ -30,7 +30,8 @@ class NotesWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(10),
             child: Text(
-              note.text,
+           
+              note.body,
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
               style: GoogleFonts.comfortaa(
@@ -49,6 +50,7 @@ class NotesWidget extends StatelessWidget {
                   decoration: BoxDecoration(),
                   child: Text(
                     note.date,
+         
                     style: GoogleFonts.comfortaa(
                         color: Colors.black,
                         fontStyle: FontStyle.normal,
