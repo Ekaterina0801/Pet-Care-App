@@ -46,7 +46,7 @@ class VaccinationsCard extends StatelessWidget {
         Container(
           margin: EdgeInsets.all(20),
           child: Text(date,textAlign: TextAlign.left,
-                    style: GoogleFonts.comfortaa(
+                    style: GoogleFonts.comfortaa( 
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w800,
                         fontSize: 16)),
@@ -56,6 +56,7 @@ class VaccinationsCard extends StatelessWidget {
           child: Row(
             children: [
               Container(
+                margin: EdgeInsets.all(20),
                 child: Text(title,textAlign: TextAlign.left,
                           style: GoogleFonts.comfortaa(
                               fontStyle: FontStyle.normal,

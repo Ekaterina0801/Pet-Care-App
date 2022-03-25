@@ -41,7 +41,7 @@ abstract class ArticleResult{}
 
 //указатель на успешный запрос
 class ArticleResultSuccess extends ArticleResult {
-  final ArticleList articleList;
+  final List<Article> articleList;
   ArticleResultSuccess(this.articleList);
 }
 

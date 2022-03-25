@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/ProfilePage/Vaccinations.dart';
 
+import 'Disease.dart';
+
 class Passport extends StatelessWidget {
   final String nameowner;
   final String dateb;
@@ -28,7 +30,22 @@ class Passport extends StatelessWidget {
             child: const Text('Прививки'),
           ),
         //InfoWidget("Прививки:", vac),
-        InfoWidget("Болезни: ", ill),
+        //InfoWidget("Болезни: ", ill),
+        Card(
+          
+          child: Row(
+            children: [
+              TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 20,color: Colors.black),
+                  ),
+                  onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => DiseasePage())),
+                  child: const Text('Болезни',style:TextStyle(color: Colors.black)),
+                ),
+            ],
+          ),
+        ),
       ],
     );
   }

@@ -16,7 +16,7 @@ class ArticleController extends ControllerMVC {
   void init() async {
     try {
       // получаем данные из репозитория
-      final articleList = await repo.fetchArticles();
+      final articleList = await repo.getArticles();
       // если все ок то обновляем состояние на успешное
       setState(() => currentState = ArticleResultSuccess(articleList));
     } catch (error) {
