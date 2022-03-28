@@ -28,7 +28,7 @@ class _LoginState extends State<Login> {
       autofocus: false,
       validator: validateEmail,
       onSaved: (value) => _email = value,
-      decoration: buildInputDecoration("Confirm password", Icons.email),
+      decoration: buildInputDecoration("Confirm password FFFFFF", Icons.email),
     );
 
     final passwordField = 
