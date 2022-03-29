@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../BasePage.dart';
@@ -48,35 +49,42 @@ class VaccinationsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset(image),
-        Container(
-          margin: EdgeInsets.all(20),
-          child: Text(date,
-              textAlign: TextAlign.left,
-              style: GoogleFonts.comfortaa(
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 16)),
-        ),
-        Container(
-          decoration: BoxDecoration(color: Color.fromRGBO(255, 223, 142, 100)),
-          child: Row(
-            children: [
-              Container(
+    return Container(
+        decoration: BoxDecoration(color: Color.fromRGBO(255, 223, 142, 100)),
+        child: Column(
+          children: [
+            Image.asset(image),
+            Container(
                 margin: EdgeInsets.all(20),
-                child: Text(title,
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.comfortaa(
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16)),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(date,
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.comfortaa(
+                        decoration: TextDecoration.underline,
+                        //  fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14)),
+                ),
+                ),
+            Container(
+              //decoration:
+              //    BoxDecoration(color: Color.fromRGBO(255, 223, 142, 100)),
+              child: Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    child: Text(title,
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14)),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-      ],
-    );
+            ),
+          ],
+        ));
   }
 }
