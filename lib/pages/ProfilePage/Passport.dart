@@ -21,43 +21,42 @@ class Passport extends StatelessWidget {
         InfoWidget("Владелец: ", nameowner),
         InfoWidget("Порода:", breed),
         InfoWidget("Дата рождения питомца: ", dateb),
-        Padding( 
-          padding: EdgeInsets.all(7),
-          child: Container(
-          height:55,
-          width: 400,
-          child: RaisedButton(
-        color: Color.fromRGBO(255, 223, 142, 10),
-        onPressed:  () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => VaccinationsPage())),
-        child: Text('Прививки',
-                     textAlign: TextAlign.left,
-                     style: GoogleFonts.comfortaa(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16)
-                    )
-          ) ) ),
-        Padding( 
-        padding: EdgeInsets.all(7),
-        child: Container(
-          height:55,
-          width: 400,
-          child: RaisedButton(
-          color: Color.fromRGBO(255, 223, 142, 10),
-          onPressed: () => Navigator.push(context,
+        Padding(
+            padding: EdgeInsets.all(7),
+            child: Container(
+                height: 55,
+                width: 400,
+                child: RaisedButton(
+                    color: Color.fromRGBO(255, 223, 142, 10),
+                    splashColor: Color.fromRGBO(240, 240, 240, 10),
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => VaccinationsPage())),
+                    child: Text('Прививки',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 17))))),
+        Padding(
+            padding: EdgeInsets.all(7),
+            child: Container(
+                height: 55,
+                width: 400,
+                child: RaisedButton(
+                    color: Color.fromRGBO(255, 223, 142, 10),
+                    splashColor: Color.fromRGBO(240, 240, 240, 10),
+                    onPressed: () => Navigator.push(context,
                         MaterialPageRoute(builder: (context) => DiseasePage())),
-        child: Text('Болезни',
-                     textAlign: TextAlign.left,
-                     style: GoogleFonts.comfortaa(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16)
-                    )
-            ) ) ),
-    
+                    child: Text('Болезни',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 17))))),
       ],
-      );
+    );
   }
 }
 
