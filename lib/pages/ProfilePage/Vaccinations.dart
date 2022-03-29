@@ -55,18 +55,18 @@ class VaccinationsCard extends StatelessWidget {
           children: [
             Image.asset(image),
             Container(
-                margin: EdgeInsets.all(20),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(date,
-                      textAlign: TextAlign.left,
-                      style: GoogleFonts.comfortaa(
+              margin: EdgeInsets.all(20),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(date,
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.comfortaa(
                         decoration: TextDecoration.underline,
                         //  fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14)),
-                ),
-                ),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16)),
+              ),
+            ),
             Container(
               //decoration:
               //    BoxDecoration(color: Color.fromRGBO(255, 223, 142, 100)),
