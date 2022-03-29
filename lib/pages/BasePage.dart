@@ -7,7 +7,10 @@ import 'package:pet_care/pages/PetBoardingPage/PetBoardingPage.dart';
 import 'package:pet_care/pages/ProfilePage/ProfilePage.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import 'AdvicePage/AdvicePage.dart';
+import 'AdviceScreen/AdvicePage.dart';
+import 'NotesPage/notes_page.dart';
+
+
 
 //базовая страница
 class BasePage extends StatelessWidget {
@@ -54,7 +57,7 @@ class _HomePageState extends State<HomePage> {
     AdvicePage(),
     PetBoardingPage(),
     CalendarPage(),
-    NotesPage(),
+    NotesPage1(),
     ProfilePage(),
   ];
   @override

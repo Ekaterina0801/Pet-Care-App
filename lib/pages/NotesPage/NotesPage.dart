@@ -4,12 +4,13 @@ import 'package:pet_care/pages/NotesPage/NotesWidget.dart';
 import 'package:pet_care/repository/notesrepo.dart';
 
 //Страница для отображения заметок
-class NotesPage extends StatelessWidget {
+class NotesPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
         padding: EdgeInsets.all(15),
-        itemCount: notes.length + 1,
+        itemCount: 
+        notes.length + 1,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 10,
@@ -17,7 +18,8 @@ class NotesPage extends StatelessWidget {
           childAspectRatio: 1.2,
         ),
         itemBuilder: (BuildContext context, int index) => Container(
-            child: index == notes.length
+            child: index == 
+            notes.length
                 ? Container(
                     child: Icon(
                     CupertinoIcons.add,

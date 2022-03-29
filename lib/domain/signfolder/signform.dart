@@ -20,8 +20,8 @@ class LoginForm extends StatelessWidget {
       if (currentuser != null) {
         Navigator.pushReplacementNamed(context, '/home');
       }
-      // ignore: missing_return
-    }, builder: (context, state) {
+      // ignore: missing_return                                                                                
+    }, builder: (context, state) {  
       switch (state.currstare) {
         case LoginandRegistrationState.Login:
           return ListView(

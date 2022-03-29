@@ -45,6 +45,13 @@ dependencies:
   bloc : ^6.1.0
   flutter_bloc : ^6.1.0
   formz: ^0.4.1
+  http: ^0.13.4
+  mvc_pattern: ^8.2.2
+  provider: ^4.0.2
+  shared_preferences: ^2.0.13
+  another_flushbar: ^1.10.28
+  flutter_login: ^1.0.15
+
 
 dev_dependencies:
   flutter_test:

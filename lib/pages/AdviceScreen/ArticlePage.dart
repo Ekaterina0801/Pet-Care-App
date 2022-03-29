@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/pages/BasePage.dart';
+import 'package:pet_care/repository/advicerepo.dart';
 
 import 'Article.dart';
+import 'requests/controllers/ArticleController.dart';
+import 'requests/models/ArticleJ.dart';
 
 //Страница статьи
 class ArticlePage extends StatelessWidget {
   final Article article;
   ArticlePage(this.article);
+
   @override
   Widget build(BuildContext context) {
+
     return BasePage(
         title: 'Советы',
         body: ListView(children: [
-          ArticleBlock(article.title, article.image),
+          ArticleBlock(article.title,articless[0].image),
           Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
@@ -22,7 +28,7 @@ class ArticlePage extends StatelessWidget {
               alignment: Alignment.center,
               child: Container(
                 padding: EdgeInsets.all(5),
-                child: Text(article.text,
+                child: Text(article.body,
                     textAlign: TextAlign.left,
                     style: GoogleFonts.comfortaa(
                         fontStyle: FontStyle.normal,
@@ -32,8 +38,8 @@ class ArticlePage extends StatelessWidget {
             ),
           )
         ]));
-  }
-}
+  }}
+
 
 //Виджет для отображения на странице статьи изображения и заголовка статьи
 class ArticleBlock extends StatelessWidget {

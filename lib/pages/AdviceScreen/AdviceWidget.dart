@@ -6,15 +6,17 @@ class AdviceBlock extends StatelessWidget {
   final String title;
   final String image;
   final int index;
+  final void Function() tap;
 
-  AdviceBlock(this.title, this.image, this.index);
+  AdviceBlock(this.title, this.image, this.index,this.tap);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, '$index');
-      },
+      onTap: tap,
+      //onTap: () {
+        //Navigator.pushNamed(context, '$index');
+      //},
       child: Container(
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -88,15 +90,15 @@ class AdviceBlock extends StatelessWidget {
 class AdviceMainBlock extends StatelessWidget {
   final String title;
   final String image;
+  final void Function() tap;
 
-  AdviceMainBlock(this.title, this.image);
+  AdviceMainBlock(this.title, this.image,this.tap);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, '0');
-      },
+      onTap: tap,
+      
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20)),
