@@ -21,31 +21,40 @@ class Passport extends StatelessWidget {
         InfoWidget("Владелец: ", nameowner),
         InfoWidget("Порода:", breed),
         InfoWidget("Дата рождения питомца: ", dateb),
-        TextButton(
-            style: TextButton.styleFrom(
-              textStyle: const TextStyle(fontSize: 20),
-            ),
-            onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => VaccinationsPage())),
-            child: const Text('Прививки'),
-          ),
-        //InfoWidget("Прививки:", vac),
-        //InfoWidget("Болезни: ", ill),
-        Card(
-          
-          child: Row(
-            children: [
-              TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20,color: Colors.black),
-                  ),
-                  onPressed: () => Navigator.push(context,
+        Padding(
+            padding: EdgeInsets.all(7),
+            child: Container(
+                height: 55,
+                width: 400,
+                child: RaisedButton(
+                    color: Color.fromRGBO(255, 223, 142, 10),
+                    splashColor: Color.fromRGBO(240, 240, 240, 10),
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => VaccinationsPage())),
+                    child: Text('Прививки',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 17))))),
+        Padding(
+            padding: EdgeInsets.all(7),
+            child: Container(
+                height: 55,
+                width: 400,
+                child: RaisedButton(
+                    color: Color.fromRGBO(255, 223, 142, 10),
+                    splashColor: Color.fromRGBO(240, 240, 240, 10),
+                    onPressed: () => Navigator.push(context,
                         MaterialPageRoute(builder: (context) => DiseasePage())),
-                  child: const Text('Болезни',style:TextStyle(color: Colors.black)),
-                ),
-            ],
-          ),
-        ),
+                    child: Text('Болезни',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 17))))),
       ],
     );
   }
@@ -89,3 +98,43 @@ class InfoWidget extends StatelessWidget {
     );
   }
 }
+ /*FloatingActionButton.extended(
+        backgroundColor: Colors.orange,
+        elevation: 1,
+        onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => VaccinationsPage())),
+        label: Text('Прививки',
+        textAlign: TextAlign.left,
+                      style: GoogleFonts.comfortaa(
+                        fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14)
+                    )
+      ),
+        TextButton(
+            style: TextButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => VaccinationsPage())),
+            child: const Text('Прививки'),
+          ),*/
+        //InfoWidget("Прививки:", vac),
+        //InfoWidget("Болезни: ", ill),
+
+
+         /*  Card(
+          
+          child: Row(
+            children: [
+              TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 20,color: Colors.black),
+                  ),
+                  onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => DiseasePage())),
+                  child: const Text('Болезни',style:TextStyle(color: Colors.black)),
+                ),
+            ],
+          ),
+        ),*/
