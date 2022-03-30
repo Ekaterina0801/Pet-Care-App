@@ -15,7 +15,11 @@ DateTime dateToday =
     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 DateTime dateBirth = DateTime.utc(2020, 10, 10);
 String age = ((dateToday.year - dateBirth.year) +
-    0.1 * (dateToday.month - dateBirth.month)).toStringAsFixed(1);
+        0.1 * (dateToday.month - dateBirth.month))
+    .toStringAsFixed(1);
+String age_years = (dateToday.year - dateBirth.year).round().toString();
+String age_month = (dateToday.month - dateBirth.month).round().abs().toString();
+String age_string = "${age_years} года \n${age_month} месяцев";
 
 class ProfilePage extends StatelessWidget {
   MyUser user;
@@ -111,8 +115,8 @@ class ProfilePage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      MainInfoBlock("Возраст", age,
-                          Color.fromRGBO(131, 184, 107, 80)),
+                      MainInfoBlock(
+                          "Возраст", age_string, Color.fromRGBO(131, 184, 107, 80)),
                       MainInfoBlock(
                         "Вес",
                         "15 кг",
