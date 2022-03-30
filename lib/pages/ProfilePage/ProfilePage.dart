@@ -20,6 +20,7 @@ String age = ((dateToday.year - dateBirth.year) +
 String age_years = (dateToday.year - dateBirth.year).round().toString();
 String age_month = (dateToday.month - dateBirth.month).round().abs().toString();
 String age_string = "${age_years} года \n${age_month} месяцев";
+String dateBirth_string = "${dateBirth.day}.${dateBirth.month}.${dateBirth.year}";
 
 class ProfilePage extends StatelessWidget {
   MyUser user;
@@ -144,7 +145,7 @@ class ProfilePage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Passport(user.name, "30.01.2020", "Корги", "Рыжий",
+                      Passport(user.name, dateBirth_string, "Корги", "Рыжий",
                           "Прививка от бешенства", "Нет"),
                     ],
                   ),
