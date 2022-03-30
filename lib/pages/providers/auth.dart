@@ -33,18 +33,17 @@ class AuthProvider with ChangeNotifier {
   Future<Map<String, dynamic>> login(String email, String password) async {
     var result;
     //var jsonString = '[{"email": $email,"username": $password}]';
-    var jsonString = await http.get(Uri.parse(Uri.encodeFull('https://jsonplaceholder.typicode.com/users')));
-    //Map<String,dynamic> userMap = 
+    var jsonString = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
     var l = jsonDecode(jsonString.body);
     var m = null;
     MyUser user = null;
-    for(var i in l)
+    for(var i in l.values)
     {
-      if(i['email']==email)
+      if(i['Email']==email)
       {
          user = MyUser.fromJson(i); 
-         print(i['email']);
-         print(i['userId']);
+         print(i['Email']);
+         print(i['UserID']);
          break;
       }
     }

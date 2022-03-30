@@ -1,23 +1,36 @@
 class MyUser {
-  int id;
-  String name;
-  String password;
+  int userid;
+  String firstname;
+  String lastname;
   String email;
-  List<String> address;
+  String password;
+  String district;
+  bool readyforoverposure;
   
 
-  MyUser({this.id, this.name, this.email, this.password, this.address});
+  MyUser({this.userid,this.email,this.password,this.firstname,this.lastname,this.district,this.readyforoverposure});
 
   factory MyUser.fromJson(Map<String, dynamic> responseData) {
     return MyUser(
-        id: responseData['id'],
-        name: responseData['name'],
-        email: responseData['email'],
-        password: responseData['username'],
-        address: null,
-        //address: responseData['address'],
-        
+        userid: responseData['UserID'],
+        firstname: responseData['FirstName'],
+        lastname: responseData['LastName'],
+        email: responseData['Email'],
+        password: responseData['Password'],
+        district: responseData['District'],
+        readyforoverposure: responseData['ReadyForOverposure']      
     );
   }
-  Map toMap() => {"id":id, "name":name, "password": password,"email":email,"address":address};
+
+  Map<String, dynamic> toJson() => {
+        'UserID': userid,
+        'FirstName': firstname,
+        'LastName': lastname,
+        'Password':password,
+        'Email':email,
+        'District':district,
+        'ReadyForOverposure':readyforoverposure
+      };
+
+  Map toMap() => {"UserID":userid, "FirstName":firstname, "LastName":lastname,"Password": password,"Email":email,"District":district};
 }

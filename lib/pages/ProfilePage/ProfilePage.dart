@@ -131,7 +131,7 @@ MyUser user;
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Passport(user.name, "30.01.2020", "Корги", "Рыжий",
+                Passport(user.firstname+" "+user.lastname, "30.01.2020", "Корги", "Рыжий",
                     "Прививка от бешенства", "Нет"),
               ],
             ),
