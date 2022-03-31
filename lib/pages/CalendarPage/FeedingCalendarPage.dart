@@ -126,13 +126,14 @@ class AddEventWidget extends StatelessWidget {
   final DateTime today = DateTime.now();
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Align(alignment: Alignment.bottomCenter,
-      child: Text('Добавить событие',
-          style: GoogleFonts.comfortaa(
-              color: Colors.black,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w800,
-              fontSize: 16))),
+      title: Align(
+          alignment: Alignment.bottomCenter,
+          child: Text('Добавить событие',
+              style: GoogleFonts.comfortaa(
+                  color: Colors.black,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 16))),
       actions: [
         Align(
             alignment: Alignment.bottomLeft,
@@ -143,11 +144,11 @@ class AddEventWidget extends StatelessWidget {
                     fontWeight: FontWeight.w800,
                     fontSize: 14))),
         DatePickerDialog(
-          initialDate: today, 
-          firstDate: DateTime.utc(2021, 12, 15), 
-          lastDate: DateTime.utc(2022, 03, 11),
-          helpText: 'Введите дату события:',),
-        
+          initialDate: today,
+          firstDate: DateTime.utc(1980, 01, 01),
+          lastDate: DateTime.utc(2082, 01, 01),
+          helpText: 'Введите дату события:',
+        ),
       ],
     );
   }
