@@ -19,7 +19,7 @@ class ArticlePage extends StatelessWidget {
     return BasePage(
         title: 'Советы',
         body: ListView(children: [
-          ArticleBlock(article.title,articless[0].image),
+          ArticleBlock(article.title,article.image),
           Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
@@ -60,7 +60,7 @@ class ArticleBlock extends StatelessWidget {
               width: 1000,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: Image.asset(
+                    image: Image.network(
                       image,
                     ).image,
                     fit: BoxFit.fill,
