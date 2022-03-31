@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/ProfilePage/Vaccinations.dart';
+import 'package:pet_care/pages/Registration/util/widgets.dart';
 
 import 'Disease.dart';
 
@@ -130,6 +131,10 @@ class RemakeNameWidget extends StatelessWidget {
   final String title;
   final String info;
   RemakeNameWidget(this.title, this.info);
+
+  var name = "";
+  var surname = "";
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -150,6 +155,11 @@ class RemakeNameWidget extends StatelessWidget {
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
                     fontSize: 14))),
+        TextFormField(
+          autofocus: false,
+          onSaved: (value) => name = value,
+        ),
+        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
         Align(
             alignment: Alignment.bottomLeft,
             child: Text('Введите фамилию:',
@@ -157,11 +167,34 @@ class RemakeNameWidget extends StatelessWidget {
                     color: Colors.black,
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
-                    fontSize: 14)))
+                    fontSize: 14))),
+        TextFormField(
+          autofocus: false,
+          onSaved: (value) => surname = value,
+        ),
+        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+//        longButtons(
+//          "Принять", doRename(info,name, surname)
+//       )
+         RaisedButton(
+                    color: Color.fromRGBO(255, 223, 142, 10),
+                    splashColor: Color.fromARGB(199, 240, 240, 240),
+                    onPressed: () => (doRename(info,name,surname)) =>
+                   (Navigator.pop(context, true)),
+                    child: Text('Принять',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 11)))
       ],
     );
   }
 }
+
+var doRename = (info, name, surname) {
+  info = name + " " + surname;
+};
 
 //Диалоговое окно для изменения породы питомца
 class RemakeBreedWidget extends StatelessWidget {
@@ -204,7 +237,7 @@ class RemakeDateBirthWidget extends StatelessWidget {
     return AlertDialog(
       title: Align(
           alignment: Alignment.bottomCenter,
-          child: Text('Изминение даты рождения питомца',
+          child: Text('Изменение даты рождения питомца',
               style: GoogleFonts.comfortaa(
                   color: Colors.black,
                   fontStyle: FontStyle.normal,
