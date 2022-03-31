@@ -6,9 +6,9 @@ import 'package:pet_care/pages/Registration/util/widgets.dart';
 import 'Disease.dart';
 
 class Passport extends StatelessWidget {
-  final String nameowner;
-  final String dateb;
-  final String breed;
+  String nameowner;
+  String dateb;
+  String breed;
   final String color;
   final String vac;
   final String ill;
@@ -129,7 +129,7 @@ class ChooseRemakeWidget extends StatelessWidget {
 //Диалоговое окно для изменения имени владельца
 class RemakeNameWidget extends StatelessWidget {
   final String title;
-  final String info;
+  String info;
   RemakeNameWidget(this.title, this.info);
 
   var name = "";
@@ -193,13 +193,13 @@ class RemakeNameWidget extends StatelessWidget {
 }
 
 var doRename = (info, name, surname) {
-  info = name + " " + surname;
+   info = name + " " + surname;
 };
 
 //Диалоговое окно для изменения породы питомца
 class RemakeBreedWidget extends StatelessWidget {
   final String title;
-  final String info;
+  String info;
   RemakeBreedWidget(this.title, this.info);
   @override
   Widget build(BuildContext context) {
@@ -221,6 +221,25 @@ class RemakeBreedWidget extends StatelessWidget {
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
                     fontSize: 14))),
+        TextFormField(
+        autofocus: false,
+        onSaved: (value) => info = value,
+        ),
+        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+//        longButtons(
+//          "Принять", 
+//       )
+         RaisedButton(
+                    color: Color.fromRGBO(255, 223, 142, 10),
+                    splashColor: Color.fromARGB(199, 240, 240, 240),
+                    onPressed: () => 
+                    (Navigator.pop(context, true)),
+                    child: Text('Принять',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 11))),
       ],
     );
   }
@@ -229,7 +248,7 @@ class RemakeBreedWidget extends StatelessWidget {
 //Диалоговое окно для изменения даты рождения питомца
 class RemakeDateBirthWidget extends StatelessWidget {
   final String title;
-  final String info;
+  String info;
   RemakeDateBirthWidget(this.title, this.info);
   @override
   final DateTime today = DateTime.now();
@@ -252,12 +271,25 @@ class RemakeDateBirthWidget extends StatelessWidget {
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
                     fontSize: 14))),
-        DatePickerDialog(
-          initialDate: today,
-          firstDate: DateTime.utc(1980, 01, 01),
-          lastDate: DateTime.utc(2082, 01, 01),
-          helpText: 'Введите дату рождения:',
+        TextFormField(
+        autofocus: false,
+        onSaved: (value) => info = value,
         ),
+        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+//        longButtons(
+//          "Принять", 
+//       )
+         RaisedButton(
+                    color: Color.fromRGBO(255, 223, 142, 10),
+                    splashColor: Color.fromARGB(199, 240, 240, 240),
+                    onPressed: () => 
+                    (Navigator.pop(context, true)),
+                    child: Text('Принять',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 11))),
       ],
     );
   }
