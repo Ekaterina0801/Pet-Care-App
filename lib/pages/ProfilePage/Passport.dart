@@ -18,7 +18,7 @@ class Passport extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        InfoWidget("Владелец: ", nameowner),
+        InfoWidget("Владелец:", nameowner),
         InfoWidget("Порода:", breed),
         InfoWidget("Дата рождения питомца: ", dateb),
         Padding(
@@ -71,7 +71,6 @@ class InfoWidget extends StatelessWidget {
       child: Row(children: [
         Expanded(
           child: Card(
-              //color: Colors.blue,
               color: Color.fromRGBO(240, 240, 240, 1),
               shadowColor: Colors.grey,
               child: ListTile(
@@ -91,17 +90,17 @@ class InfoWidget extends StatelessWidget {
                       fontSize: 15),
                 ),
                 leading: FlatButton(
-                    child: Icon(Icons.edit),
-            color: Colors.grey.shade100,
-                    onPressed: () {
-              Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      opaque: false,
-                      pageBuilder: (BuildContext context, _, __) =>
-                          RemakeInfoWidget()));
-            },
-                        ),
+                  child: Icon(Icons.edit),
+                  color: Colors.grey.shade100,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                            opaque: false,
+                            pageBuilder: (BuildContext context, _, __) =>
+                                ChooseRemakeWidget(title, info)));
+                  },
+                ),
                 isThreeLine: true,
               )),
         )
@@ -109,15 +108,34 @@ class InfoWidget extends StatelessWidget {
     );
   }
 }
-//Диалоговое окно для изменения
-class RemakeInfoWidget extends StatelessWidget {
+
+//Функция, выбирающая нужное диалоговое окно
+class ChooseRemakeWidget extends StatelessWidget {
+  final String title;
+  final String info;
+  ChooseRemakeWidget(this.title, this.info);
   @override
-  final DateTime today = DateTime.now();
+  Widget build(BuildContext context) {
+    if (title == "Владелец:")
+      return RemakeNameWidget(title, info);
+    else if (title == "Порода:")
+      return RemakeBreedWidget(title, info);
+    else
+      return RemakeDateBirthWidget(title, info);
+  }
+}
+
+//Диалоговое окно для изменения имени владельца
+class RemakeNameWidget extends StatelessWidget {
+  final String title;
+  final String info;
+  RemakeNameWidget(this.title, this.info);
+  @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Align(
           alignment: Alignment.bottomCenter,
-          child: Text('Добавить событие',
+          child: Text('Изменение имени владельца',
               style: GoogleFonts.comfortaa(
                   color: Colors.black,
                   fontStyle: FontStyle.normal,
@@ -126,7 +144,76 @@ class RemakeInfoWidget extends StatelessWidget {
       actions: [
         Align(
             alignment: Alignment.bottomLeft,
-            child: Text('Введите дату события:',
+            child: Text('Введите имя:',
+                style: GoogleFonts.comfortaa(
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14))),
+        Align(
+            alignment: Alignment.bottomLeft,
+            child: Text('Введите фамилию:',
+                style: GoogleFonts.comfortaa(
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14)))
+      ],
+    );
+  }
+}
+
+//Диалоговое окно для изменения породы питомца
+class RemakeBreedWidget extends StatelessWidget {
+  final String title;
+  final String info;
+  RemakeBreedWidget(this.title, this.info);
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Align(
+          alignment: Alignment.bottomCenter,
+          child: Text('Изменение породы питомца',
+              style: GoogleFonts.comfortaa(
+                  color: Colors.black,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 16))),
+      actions: [
+        Align(
+            alignment: Alignment.bottomLeft,
+            child: Text('Введите породу:',
+                style: GoogleFonts.comfortaa(
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14))),
+      ],
+    );
+  }
+}
+
+//Диалоговое окно для изменения даты рождения питомца
+class RemakeDateBirthWidget extends StatelessWidget {
+  final String title;
+  final String info;
+  RemakeDateBirthWidget(this.title, this.info);
+  @override
+  final DateTime today = DateTime.now();
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Align(
+          alignment: Alignment.bottomCenter,
+          child: Text('Изминение даты рождения питомца',
+              style: GoogleFonts.comfortaa(
+                  color: Colors.black,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 16))),
+      actions: [
+        Align(
+            alignment: Alignment.bottomLeft,
+            child: Text('Введите дату рождения:',
                 style: GoogleFonts.comfortaa(
                     color: Colors.black,
                     fontStyle: FontStyle.normal,
@@ -136,7 +223,7 @@ class RemakeInfoWidget extends StatelessWidget {
           initialDate: today,
           firstDate: DateTime.utc(1980, 01, 01),
           lastDate: DateTime.utc(2082, 01, 01),
-          helpText: 'Введите дату события:',
+          helpText: 'Введите дату рождения:',
         ),
       ],
     );
