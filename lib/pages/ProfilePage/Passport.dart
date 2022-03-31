@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/ProfilePage/Vaccinations.dart';
 import 'package:pet_care/pages/Registration/util/widgets.dart';
-
 import 'Disease.dart';
 
 class Passport extends StatelessWidget {
@@ -63,7 +62,7 @@ class Passport extends StatelessWidget {
 
 class InfoWidget extends StatelessWidget {
   final String title;
-  final String info;
+  String info;
   InfoWidget(this.title, this.info);
   @override
   Widget build(BuildContext context) {
@@ -176,24 +175,24 @@ class RemakeNameWidget extends StatelessWidget {
 //        longButtons(
 //          "Принять", doRename(info,name, surname)
 //       )
-         RaisedButton(
-                    color: Color.fromRGBO(255, 223, 142, 10),
-                    splashColor: Color.fromARGB(199, 240, 240, 240),
-                    onPressed: () => (doRename(info,name,surname)) =>
-                   (Navigator.pop(context, true)),
-                    child: Text('Принять',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 11)))
+        RaisedButton(
+            color: Color.fromRGBO(255, 223, 142, 10),
+            splashColor: Color.fromARGB(199, 240, 240, 240),
+            onPressed: () => (doRename(info, name, surname)) =>
+                (Navigator.pop(context, true)),
+            child: Text('Принять',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 11)))
       ],
     );
   }
 }
 
 var doRename = (info, name, surname) {
-   info = name + " " + surname;
+  info = name + " " + surname;
 };
 
 //Диалоговое окно для изменения породы питомца
@@ -222,24 +221,23 @@ class RemakeBreedWidget extends StatelessWidget {
                     fontWeight: FontWeight.w800,
                     fontSize: 14))),
         TextFormField(
-        autofocus: false,
-        onSaved: (value) => info = value,
+          autofocus: false,
+          onSaved: (value) => info = value,
         ),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
 //        longButtons(
-//          "Принять", 
+//          "Принять",
 //       )
-         RaisedButton(
-                    color: Color.fromRGBO(255, 223, 142, 10),
-                    splashColor: Color.fromARGB(199, 240, 240, 240),
-                    onPressed: () => 
-                    (Navigator.pop(context, true)),
-                    child: Text('Принять',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 11))),
+        RaisedButton(
+            color: Color.fromRGBO(255, 223, 142, 10),
+            splashColor: Color.fromARGB(199, 240, 240, 240),
+            onPressed: () => (Navigator.pop(context, true)),
+            child: Text('Принять',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 11))),
       ],
     );
   }
@@ -271,30 +269,26 @@ class RemakeDateBirthWidget extends StatelessWidget {
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
                     fontSize: 14))),
-        TextFormField(
-        autofocus: false,
-        onSaved: (value) => info = value,
-        ),
+        TextFormField(autofocus: false, onSaved: (value) => info = value),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
 //        longButtons(
-//          "Принять", 
+//          "Принять",
 //       )
-         RaisedButton(
-                    color: Color.fromRGBO(255, 223, 142, 10),
-                    splashColor: Color.fromARGB(199, 240, 240, 240),
-                    onPressed: () => 
-                    (Navigator.pop(context, true)),
-                    child: Text('Принять',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 11))),
+        RaisedButton(
+            color: Color.fromRGBO(255, 223, 142, 10),
+            splashColor: Color.fromARGB(199, 240, 240, 240),
+            onPressed: () => (Navigator.pop(context, true)),
+            child: Text('Принять',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 11))),
       ],
     );
   }
 }
- /*FloatingActionButton.extended(
+/*FloatingActionButton.extended(
         backgroundColor: Colors.orange,
         elevation: 1,
         onPressed: () => Navigator.push(context,
@@ -315,11 +309,10 @@ class RemakeDateBirthWidget extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => VaccinationsPage())),
             child: const Text('Прививки'),
           ),*/
-        //InfoWidget("Прививки:", vac),
-        //InfoWidget("Болезни: ", ill),
+//InfoWidget("Прививки:", vac),
+//InfoWidget("Болезни: ", ill),
 
-
-         /*  Card(
+/*  Card(
           
           child: Row(
             children: [
