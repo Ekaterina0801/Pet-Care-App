@@ -29,7 +29,6 @@ class AuthProvider with ChangeNotifier {
   Status get loggedInStatus => _loggedInStatus;
   Status get registeredInStatus => _registeredInStatus;
 
-
   Future<Map<String, dynamic>> login(String email, String password) async {
     var result;
     //var jsonString = '[{"email": $email,"username": $password}]';
@@ -64,7 +63,7 @@ class AuthProvider with ChangeNotifier {
       Uri.parse(AppUrl.login),
       body: json.encode(user.toMap()),
       //print(body);
-      headers: {'Content-Type': 'application/json'},
+      //headers: {'Content-Type': 'application/json'},
     );
     print(response.body);
     if (response.statusCode == 200||response.statusCode==201) {
@@ -94,22 +93,59 @@ class AuthProvider with ChangeNotifier {
     return result;
   }
 
-  Future<Map<String, dynamic>> register(String email, String password, String passwordConfirmation) async {
+  Future<Map<String, dynamic>> register(String email, String firstname, String lastname,String password) async {
 
     final Map<String, dynamic> registrationData = {
-      'user': {
-        'email': email,
-        'password': password,
-        'password_confirmation': passwordConfirmation
-      }
+        'District':"-",
+        'Email': email,
+        'FirstName':firstname,
+        'LastName':lastname,
+        'Password': password,
+        'ReadyForOverposure':false,
+        'UserID':1000,
     };
-    return await post(Uri.parse(AppUrl.register),
-        body: json.encode(registrationData),
-        headers: {'Content-Type': 'application/json'})
-        .then(onValue)
-        .catchError(onError);
+   var response =  await post(Uri.parse(AppUrl.register),
+        body: json.encode(registrationData));
+        //headers: {'content-type': 'text/plain'})
+        //headers: {'Content-Type': 'application/json'})
+  MyUser authUser = MyUser(
+  userid: registrationData['UserID'], 
+  firstname: registrationData['FirstName'],
+  lastname:registrationData['LastName'],
+  password: registrationData['Password'],
+  readyforoverposure: registrationData['ReadyForOverposure'],
+  email: registrationData['Email'],
+  district: registrationData['District']
+  );
+  UserPreferences().saveUser(authUser);
+  var result;
+  if (response.request!=null)
+    result = {
+        'status': true,
+        'message': 'Successfully registered',
+        'data': authUser
+      };
+    else{
+      result = {
+        'status': false,
+        'message': 'Registration failed',
+        'data': null
+      };
+    }
+    return result;
   }
 
+ _reviver(String key, value)
+ {
+   if(key!=null&&value is Map)
+   {
+     return new MyUser.fromJson(value);
+   }
+   return value;
+ }
+
+//const jsonCodec = const JsonCodec(reviver: _reviver);
+ 
   static Future<FutureOr> onValue(Response response) async {
     var result;
     final Map<String, dynamic> responseData = json.decode(response.body);
@@ -117,10 +153,10 @@ class AuthProvider with ChangeNotifier {
     print(response.statusCode);
     if (response.statusCode == 200) {
 
-      var userData = responseData['data'];
+     var userData = responseData['data'];
 
       MyUser authUser = MyUser.fromJson(userData);
-
+      //MyUser authUser = user;
       UserPreferences().saveUser(authUser);
       result = {
         'status': true,

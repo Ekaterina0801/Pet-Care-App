@@ -55,7 +55,6 @@ class MyApp extends StatelessWidget {
           routes: {
             '/login': (context) => Login(),
             '/register': (context) => Register(),
-            
            '/home': (BuildContext context) => HomePage(),
           },
         title: 'PetCare',
