@@ -79,15 +79,15 @@ class InfoWidget extends StatelessWidget {
                   title,
                   style: GoogleFonts.comfortaa(
                       fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 17),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20),
                 ),
                 subtitle: Text(
                   info,
                   style: GoogleFonts.comfortaa(
                       color: Colors.black,
                       fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w600,
                       fontSize: 15),
                 ),
                 leading: FlatButton(

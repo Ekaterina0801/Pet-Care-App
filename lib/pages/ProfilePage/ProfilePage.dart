@@ -111,7 +111,7 @@ MyUser user;
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 MainInfoBlock("Возраст", "1 год \n10 месяцев",
-                    Color.fromRGBO(131, 184, 107, 80)),
+                    Color.fromARGB(137, 95, 199, 109)),
                 MainInfoBlock(
                   "Вес",
                   "15 кг",
@@ -130,7 +130,7 @@ MyUser user;
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800,
-                  fontSize: 20),
+                  fontSize: 18),
             ),
           ),
           Container(
