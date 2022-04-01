@@ -52,10 +52,10 @@ class _LoginState extends State<Login> {
       children: <Widget>[
         TextButton(
           child: Text("Забыли пароль?",
-              style: GoogleFonts.comfortaa(color: Color.fromARGB(255, 0, 0, 0),
+              style: GoogleFonts.comfortaa(color: Color.fromARGB(255, 54, 28, 0),
                                fontWeight: FontWeight.w300, 
                                fontStyle: FontStyle.italic,
-                               fontSize: 20)),
+                               fontSize: 16)),
           onPressed: () {
 //            Navigator.pushReplacementNamed(context, '/reset-password');
           },
@@ -63,10 +63,10 @@ class _LoginState extends State<Login> {
         TextButton(
           //padding: EdgeInsets.only(left: 0.0),
           child: Text("Регистрация", 
-          style: GoogleFonts.comfortaa(color: Color.fromARGB(255, 0, 0, 0),
+          style: GoogleFonts.comfortaa(color: Color.fromARGB(255, 54, 28, 0),
                            fontWeight: FontWeight.w300,
                            fontStyle: FontStyle.italic,
-                           fontSize: 20)),
+                           fontSize: 16)),
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/register');
           },
@@ -112,33 +112,35 @@ class _LoginState extends State<Login> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
+                  //child: Align(
+                    //alignment: Alignment.topCenter,
                   child: Row(
                     children: [
                        Text("Авторизация",           
                             style:  GoogleFonts.comfortaa(
+                            color: Color.fromARGB(255, 39, 29, 0),
                             fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800, 
+                            //fontWeight: FontWeight.w800, 
                             fontSize: 28                  
                             )
                           ),
-
-                
                     ],
+                    //),
                   ),
                 ),
-                SizedBox(height: 15.0),
+                SizedBox(height: 12.0), // отступ (высота) между "Авторизация" и "почта"
                 label("Электронная почта"),
-                SizedBox(height: 5.0),
+                SizedBox(height: 5.0), // отступ (высота) между "почта" и белым контейнером "почта"
                 emailField,
-                SizedBox(height: 20.0),
-                SizedBox(height: 5.0),
+                SizedBox(height: 20.0), // отступ (высота) между желтым контейнером "почта" и белым контейнером "почта"
                 label("Пароль"),
+                SizedBox(height: 5.0), // отступ (высота) между "пароль" и белым контейнером "пароль"
                 passwordField,
-                SizedBox(height: 20.0),
+                SizedBox(height: 20.0), // отступ (высота) между желтым контейнером "вход" и белым контейнером "пароль"
                 auth.loggedInStatus == Status.Authenticating
                     ? loading
                     : longButtons("Вход", doLogin),
-                SizedBox(height: 5.0),
+                SizedBox(height: 5.0), // отступ (высота) между желтым контейнером "вход" и контейнерами "ЗП?" и "Регистрация"
                 forgotLabel
               ],
             ),
