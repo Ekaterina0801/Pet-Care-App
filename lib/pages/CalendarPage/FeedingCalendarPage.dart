@@ -97,7 +97,7 @@ class _CalendarPageState extends State<CalendarPage> {
             ),
             height: 700),
         FlatButton(
-            height: 50,
+            height: 51,
             color: Colors.grey.shade100,
             onPressed: () {
               Navigator.push(
