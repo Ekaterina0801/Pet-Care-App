@@ -178,8 +178,7 @@ class RemakeNameWidget extends StatelessWidget {
         RaisedButton(
             color: Color.fromRGBO(255, 223, 142, 10),
             splashColor: Color.fromARGB(199, 240, 240, 240),
-            onPressed: () => (doRename(info, name, surname)) =>
-                (Navigator.pop(context, true)),
+            onPressed: () => {doRename(info, name, surname), (Navigator.pop(context, true)) },
             child: Text('Принять',
                 textAlign: TextAlign.left,
                 style: GoogleFonts.comfortaa(
