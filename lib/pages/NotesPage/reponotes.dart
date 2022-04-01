@@ -16,6 +16,7 @@ class RepositoryNotes {
       for(var t in ll.keys)
       {
         Note a = Note.fromJson(ll[t]);
+        //if(a.userID==)
         list.add(a);
       }
       return list;

@@ -101,6 +101,7 @@ class _AdvicePageState extends StateMVC {
           scrollDirection: Axis.horizontal,
         ),
       ),
+      /*
       Container(
         padding: EdgeInsets.all(10),
         child: Row(
@@ -139,7 +140,7 @@ class _AdvicePageState extends StateMVC {
           padding: const EdgeInsets.all(8),
           scrollDirection: Axis.horizontal,
         ),
-      ),
+      ),*/
     ]);
   }
 }
