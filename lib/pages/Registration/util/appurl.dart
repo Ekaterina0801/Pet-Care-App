@@ -6,5 +6,6 @@ class AppUrl {
   static  String baseURL = liveBaseURL;
   static String login = baseURL;
   static  String register = baseURL;
+  static String addnote = baseURL+"/Notes";
   static  String forgotPassword = baseURL + "/forgot-password";
 }

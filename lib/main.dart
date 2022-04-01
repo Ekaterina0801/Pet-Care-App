@@ -4,6 +4,7 @@ import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/AdviceScreen/AdviceList.dart';
 
 import 'package:pet_care/pages/AdviceScreen/ArticlePage.dart';
+import 'package:pet_care/pages/NotesPage/NotesPage.dart';
 import 'package:pet_care/pages/Registration/pages/login.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:pet_care/pages/providers/auth.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
             '/login': (context) => Login(),
             '/register': (context) => Register(),
            '/home': (BuildContext context) => HomePage(),
+           '/notes':(context) => NotesPage()
           },
         title: 'PetCare',
         //initialRoute: '/login',

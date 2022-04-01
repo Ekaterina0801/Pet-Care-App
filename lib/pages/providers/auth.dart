@@ -135,14 +135,6 @@ class AuthProvider with ChangeNotifier {
     return result;
   }
 
- _reviver(String key, value)
- {
-   if(key!=null&&value is Map)
-   {
-     return new MyUser.fromJson(value);
-   }
-   return value;
- }
 
 //const jsonCodec = const JsonCodec(reviver: _reviver);
  
