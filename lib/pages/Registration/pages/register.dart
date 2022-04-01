@@ -15,40 +15,53 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final formKey = new GlobalKey<FormState>();
 
-  String _username, _password, _confirmPassword;
+  String _email, _password, _firstname,_lastname;
 
   @override
   Widget build(BuildContext context) {
     AuthProvider auth = Provider.of<AuthProvider>(context);
 
-    final usernameField = TextFormField(
+    final emailField = TextFormField(
       autofocus: false,
       validator: validateEmail,
-      onSaved: (value) => _username = value,
-      decoration: buildInputDecoration("Confirm password", Icons.email),
+      onSaved: (value) => _email = value,
+      decoration: buildInputDecoration("Введите email", Icons.email),
     );
 
     final passwordField = TextFormField(
       autofocus: false,
       obscureText: true,
-      validator: (value) => value.isEmpty ? "Please enter password" : null,
+      validator: (value) => value.isEmpty ? "Введите пароль" : null,
       onSaved: (value) => _password = value,
-      decoration: buildInputDecoration("Confirm password", Icons.lock),
+      decoration: buildInputDecoration("Подтвердите пароль", Icons.lock),
     );
 
     final confirmPassword = TextFormField(
       autofocus: false,
-      validator: (value) => value.isEmpty ? "Your password is required" : null,
-      onSaved: (value) => _confirmPassword = value,
+      validator: (value) => value==_password ? "Ваш пароль не совпадает" : null,
+      onSaved: (value) => _password = value,
       obscureText: true,
-      decoration: buildInputDecoration("Confirm password", Icons.lock),
+      decoration: buildInputDecoration("Введите пароль еще раз", Icons.lock),
     );
 
+    final firstnameField = TextFormField(
+      autofocus: false,
+      validator: (value)=>value.isEmpty?"Имя пустое":null,
+      onSaved: (value) => _firstname = value,
+      decoration: buildInputDecoration("Введите имя", Icons.email),
+    );
+
+    final lastnameField = TextFormField(
+      autofocus: false,
+      validator: (value)=>value.isEmpty?"Фамилия пустая":null,
+      onSaved: (value) => _lastname = value,
+      decoration: buildInputDecoration("Введите фамилию", Icons.email),
+    );
     var loading = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         CircularProgressIndicator(),
-        Text(" Registering ... Please wait")
+        Text("Регистрация, пожалуйста, подождите")
       ],
     );
 
@@ -56,14 +69,15 @@ class _RegisterState extends State<Register> {
       final form = formKey.currentState;
       if (form.validate()) {
         form.save();
-        auth.register(_username, _password, _confirmPassword).then((response) {
+        auth.register(_email, _firstname,_lastname,_password).
+         then((response) {
           if (response['status']) {
             MyUser user = response['data'];
             Provider.of<UserProvider>(context, listen: false).setUser(user);
-            Navigator.pushReplacementNamed(context, '/dashboard');
+            Navigator.pushReplacementNamed(context, '/home');
           } else {
             Flushbar(
-              title: "Registration Failed",
+              title: "Регистрация не удалась",
               message: response.toString(),
               duration: Duration(seconds: 10),
             ).show(context);
@@ -71,7 +85,7 @@ class _RegisterState extends State<Register> {
         });
       } else {
         Flushbar(
-          title: "Invalid form",
+          title: "Некорректная форма",
           message: "Please Complete the form properly",
           duration: Duration(seconds: 10),
         ).show(context);
@@ -89,21 +103,29 @@ class _RegisterState extends State<Register> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 15.0),
-                label("Email"),
+                label("Электронная почта"),
                 SizedBox(height: 5.0),
-                usernameField,
+                emailField,
                 SizedBox(height: 15.0),
-                label("Password"),
+                label("Имя"),
+                SizedBox(height: 5.0),
+                firstnameField,
+                SizedBox(height: 15.0),
+                label("Фамилия"),
+                SizedBox(height: 5.0),
+                lastnameField,
+                SizedBox(height: 15.0),
+                label("Пароль"),
                 SizedBox(height: 10.0),
                 passwordField,
                 SizedBox(height: 15.0),
-                label("Confirm Password"),
+                label("Подтвердите пароль"),
                 SizedBox(height: 10.0),
                 confirmPassword,
                 SizedBox(height: 20.0),
                 auth.loggedInStatus == Status.Authenticating
                     ? loading
-                    : longButtons("Login", doRegister),
+                    : longButtons("Регистрация", doRegister),
               ],
             ),
           ),

@@ -7,10 +7,13 @@ class UserPreferences {
   Future<bool> saveUser(MyUser user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    prefs.setInt('userId', user.id);
-    prefs.setString('name', user.name);
+    prefs.setInt('userId', user.userid);
+    prefs.setString('firstname', user.firstname);
+    prefs.setString('lastname', user.lastname);
     prefs.setString('email', user.email);
     prefs.setString('password',user.password);
+    prefs.setString('district',user.district);
+    prefs.setBool('readyforoverposure',user.readyforoverposure);
 
 
     print("object prefere");
@@ -23,32 +26,40 @@ class UserPreferences {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     int userId = prefs.getInt('userId');
-    String name = prefs.getString('name');
+    String firstname = prefs.getString('firstname');
     String email = prefs.getString('email');
     String password = prefs.getString('password');
+    String lastname = prefs.getString('lastname');
+    String district = prefs.getString('district');
+    bool readuforoverposure = prefs.getBool('readyforoverposure');
     print(email);
-    print(name);
+    print(lastname);
     print(password);
     print("OK");
     return MyUser(
-        id: userId,
-        name: name,
+        userid: userId,
+        firstname: firstname,
+        lastname: lastname,
         email: email,
-        password: password
+        password: password,
+        district: district,
+        readyforoverposure: readuforoverposure
        );
   }
 
   void removeUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove("name");
+    prefs.remove("fisrtname");
+    prefs.remove('userid');
+    prefs.remove('lastname');
     prefs.remove("email");
-    prefs.remove("phone");
-    prefs.remove("type");
-    prefs.remove("token");
+    prefs.remove("district");
+    prefs.remove("password");
+    prefs.remove("readyforoverposure");
   }
-  Future<String> getToken(args) async {
+  Future<String> getId(args) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString("token");
-    return token;
+    String id = prefs.getString("userid");
+    return id;
   }
 }

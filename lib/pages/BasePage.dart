@@ -11,6 +11,7 @@ import 'AdviceScreen/AdvicePage.dart';
 
 
 
+
 //базовая страница
 class BasePage extends StatelessWidget {
   final String title;

@@ -4,6 +4,7 @@ import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/AdviceScreen/AdviceList.dart';
 
 import 'package:pet_care/pages/AdviceScreen/ArticlePage.dart';
+import 'package:pet_care/pages/NotesPage/NotesPage.dart';
 import 'package:pet_care/pages/Registration/pages/login.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:pet_care/pages/providers/auth.dart';
@@ -55,23 +56,8 @@ class MyApp extends StatelessWidget {
           routes: {
             '/login': (context) => Login(),
             '/register': (context) => Register(),
-            '0': (BuildContext context) => ArticlePage(articless[0]),
-          '1': (BuildContext context) => ArticlePage(articless[1]),
-          '2': (BuildContext context) => ArticlePage(articless[2]),
-          '3': (BuildContext context) => ArticlePage(articless[3]),
-          '4': (BuildContext context) => ArticlePage(articless[4]),
-          '5': (BuildContext context) => ArticlePage(articless[5]),
-          '6': (BuildContext context) => ArticlePage(articless[6]),
-          '7': (BuildContext context) => ArticlePage(articless[7]),
-          '8': (BuildContext context) => ArticlePage(articless[8]),
-          '9': (BuildContext context) => ArticlePage(articless[9]),
-          '10': (BuildContext context) => ArticlePage(articless[10]),
-          '11': (BuildContext context) => ArticlePage(articless[11]),
-          '12': (BuildContext context) => ArticlePage(articless[12]),
-          '13': (BuildContext context) => ArticlePage(articless[13]),
-          '14': (BuildContext context) => ArticlePage(articless[14]),
-          '15': (BuildContext context) => ArticlePage(articless[15]),
            '/home': (BuildContext context) => HomePage(),
+           '/notes':(context) => NotesPage()
           },
         title: 'PetCare',
         //initialRoute: '/login',

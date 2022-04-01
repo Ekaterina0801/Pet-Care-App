@@ -1,14 +1,25 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:pet_care/pages/NotesPage/Note.dart';
+import 'package:pet_care/pages/Registration/util/appurl.dart';
 
-class NotesWidget extends StatelessWidget {
+class NotesWidget extends StatefulWidget {
   final Note note;
   NotesWidget(this.note);
 
   @override
+  State<NotesWidget> createState() => _NotesWidgetState();
+}
+
+class _NotesWidgetState extends State<NotesWidget> {
+
+  @override
   Widget build(BuildContext context) {
+  
     return Container(
       //height: 100,
       decoration: BoxDecoration(
@@ -30,7 +41,8 @@ class NotesWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(10),
             child: Text(
-              note.text,
+           
+              widget.note.body,
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
               style: GoogleFonts.comfortaa(
@@ -48,7 +60,8 @@ class NotesWidget extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(),
                   child: Text(
-                    note.date,
+                    widget.note.date,
+         
                     style: GoogleFonts.comfortaa(
                         color: Colors.black,
                         fontStyle: FontStyle.normal,
@@ -57,9 +70,7 @@ class NotesWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Align(
-                  alignment: Alignment.centerRight,
-                  child: Icon(CupertinoIcons.pen))
+             
             ],
           ),
         ],

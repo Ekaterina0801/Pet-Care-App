@@ -1,27 +1,26 @@
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:pet_care/pages/AdviceScreen/requests/data/repoarticles.dart';
-import 'package:pet_care/pages/AdviceScreen/requests/models/ArticleJ.dart';
+import 'package:pet_care/pages/NotesPage/Note.dart';
+import 'package:pet_care/pages/NotesPage/reponotes.dart';
 
-
-class ArticleController extends ControllerMVC {
+class NoteController extends ControllerMVC {
   // создаем наш репозиторий
-  final Repository repo = new Repository();
+  final RepositoryNotes repo = new RepositoryNotes();
 
   // конструктор нашего контроллера
-  ArticleController();
+  NoteController();
   
   // первоначальное состояние - загрузка данных
-  ArticleResult currentState = ArticleResultLoading();
+  NoteResult currentState = NoteResultLoading();
 
   void init() async {
     try {
       // получаем данные из репозитория
-      final articleList = await repo.getArticles();
+      final notesList = await repo.getNotes();
       // если все ок то обновляем состояние на успешное
-      setState(() => currentState = ArticleResultSuccess(articleList));
+      setState(() => currentState = NoteResultSuccess(notesList));
     } catch (error) {
       // в противном случае произошла ошибка
-      setState(() => currentState = ArticleResultFailure("Нет интернета"));
+      setState(() => currentState = NoteResultFailure("Нет интернета"));
     }
   }
 

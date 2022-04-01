@@ -85,7 +85,7 @@ class _LoginState extends State<Login> {
 
         successfulMessage.then((response) {
           if (response['status']) {
-            MyUser user = response['user'];
+            MyUser user = response['data'];
             //['user'];
             Provider.of<UserProvider>(context, listen: false).setUser(user);
             Navigator.pushReplacementNamed(context, '/home');

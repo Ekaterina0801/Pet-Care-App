@@ -84,7 +84,7 @@ MyUser user;
               )
             ]),
           ),
-          Container(
+          Row(children: [Container(
             padding: EdgeInsets.all(10),
             child: Text(
               "Основные данные",
@@ -95,6 +95,13 @@ MyUser user;
                   fontSize: 20),
             ),
           ),
+          FloatingActionButton(
+  child: Icon(
+    Icons.edit,
+    color: Colors.grey),
+  backgroundColor: Colors.white,
+  onPressed: () {},
+), ]),
           Container(
             margin: EdgeInsets.all(8),
             decoration:
@@ -131,7 +138,7 @@ MyUser user;
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Passport(user.name, "30.01.2020", "Корги", "Рыжий",
+                Passport(user.firstname+" "+user.lastname, "30.01.2020", "Корги", "Рыжий",
                     "Прививка от бешенства", "Нет"),
               ],
             ),
