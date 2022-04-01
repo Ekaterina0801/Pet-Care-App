@@ -67,7 +67,13 @@ class _NotesPageState extends StateMVC {
           //_displayNoteAdd(context, _body, _date);
            final formKey = new GlobalKey<FormState>();
       AlertDialog alert = AlertDialog(
-      title: Text('Добавление заметки'),
+      title: Text('Добавление заметки', 
+      style:  GoogleFonts.comfortaa(
+              color: Color.fromARGB(255, 0, 0, 0),
+              fontStyle: FontStyle.normal,
+              //fontWeight: FontWeight.w800, 
+              fontSize: 18)
+              ),
       actions: [
         FlatButton(
           child: Text(
@@ -111,7 +117,17 @@ class _NotesPageState extends StateMVC {
         });
 });
         });},
-        child: Text("Добавить заметку")),
+        child: Container(
+          padding: EdgeInsets.all(15.0),
+          child: Text("Добавить заметку",
+          style:  GoogleFonts.comfortaa(
+                color: Color.fromARGB(255, 0, 0, 0),
+                fontStyle: FontStyle.normal,
+                //fontWeight: FontWeight.w800, 
+                fontSize: 18)
+            ),
+        )
+        ),
       GridView.builder(
         shrinkWrap: true,
           physics: ScrollPhysics(),
