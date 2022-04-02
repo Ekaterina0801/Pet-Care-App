@@ -126,7 +126,38 @@ class _SettingsServiceState extends State<SettingsService> {
                 children: [
                   Container(
                     padding: EdgeInsets.all(10),
-                    child: Text("Стоимость: $price руб./день",
+                    child: Text(
+                        "Стоимость передержки (кошка): $price руб./день",
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 14)),
+                  ),
+                  IconButton(
+                      icon: Icon(Icons.edit, size: 16),
+                      onPressed: () => _displayDialogPrice(context)),
+                ],
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(242, 242, 242, 1),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 5,
+                      offset: const Offset(1.0, 1.0),
+                      spreadRadius: 0.0,
+                    )
+                  ]),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                        "Стоимость передержки (собака): $price руб./день",
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.comfortaa(
                             fontStyle: FontStyle.normal,
