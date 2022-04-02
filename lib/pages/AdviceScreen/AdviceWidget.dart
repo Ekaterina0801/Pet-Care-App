@@ -29,17 +29,19 @@ class AdviceBlock extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            
             Container(
               height: 110,
               width: 200,
               child: Container(
+                /*
                 padding: EdgeInsets.all(5),
                 child: Align(
                   child: index == 0 || index == 1
                       ? FavouriteWidgetNotActive()
                       : FavouriteWidget(),
                   alignment: Alignment.topRight,
-                ),
+                ),*/
               ),
               decoration: BoxDecoration(
                   image: DecorationImage(

@@ -59,9 +59,9 @@ class AuthProvider with ChangeNotifier {
     _loggedInStatus = Status.Authenticating;
     notifyListeners();
 
-    Response response = await post(
+    Response response = await get(
       Uri.parse(AppUrl.login),
-      body: json.encode(user.toMap()),
+      //body: json.encode(user.toMap()),
       //print(body);
       //headers: {'Content-Type': 'application/json'},
     );
