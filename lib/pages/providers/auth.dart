@@ -87,6 +87,9 @@ class AuthProvider with ChangeNotifier {
 
   Future<Map<String, dynamic>> register(String email, String firstname, String lastname,String password) async {
 
+    var jsonString = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
+    var l = jsonDecode(jsonString.body);
+    int id = l.length+1;
     final Map<String, dynamic> registrationData = {
         'District':"-",
         'Email': email,
@@ -94,7 +97,7 @@ class AuthProvider with ChangeNotifier {
         'LastName':lastname,
         'Password': password,
         'ReadyForOverposure':false,
-        'UserID':1000,
+        'UserID': id,
     };
    var response =  await post(Uri.parse(AppUrl.register),
         body: json.encode(registrationData));
