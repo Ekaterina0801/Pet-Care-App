@@ -5,17 +5,19 @@ class Passport extends StatelessWidget {
   final String nameowner;
   final String dateb;
   final String breed;
+  final String type;
   final String color;
   final String vac;
   final String ill;
-  Passport(
-      this.nameowner, this.dateb, this.breed, this.color, this.vac, this.ill);
+  Passport(this.nameowner, this.dateb, this.type, this.breed, this.color,
+      this.vac, this.ill);
 
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         InfoWidget("Владелец: ", nameowner),
+        InfoWidget("Вид: ", type),
         InfoWidget("Порода:", breed),
         InfoWidget("Дата рождения питомца: ", dateb),
         InfoWidget("Прививки:", vac),

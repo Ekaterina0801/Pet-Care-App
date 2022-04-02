@@ -22,7 +22,7 @@ class ProfilePage extends StatelessWidget {
         ]),
         padding: EdgeInsets.all(10),
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AvatarBlock(profilespets[1].name, profilespets[1].breed,
+          AvatarBlock(profilespets[1].name, profilespets[1].type,
               profilespets[1].photo),
           Column(
             children: [
@@ -97,7 +97,7 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Passport("Екатерина", "30.01.2020", "Корги", "Рыжий",
+            Passport("Екатерина", "30.01.2020", "Собака", "Корги", "Рыжий",
                 "Прививка от бешенства", "Нет"),
           ],
         ),
