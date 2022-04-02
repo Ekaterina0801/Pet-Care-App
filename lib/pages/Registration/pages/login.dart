@@ -100,29 +100,33 @@ class _LoginState extends State<Login> {
 
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          padding: EdgeInsets.all(40.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //SizedBox(height: 15.0),
-                //label("Электронная почта"),
-                //SizedBox(height: 5.0),
-                emailField,
-                //SizedBox(height: 20.0),
-                //SizedBox(height: 5.0),
-                passwordField,
-                //SizedBox(height: 20.0),
-                auth.loggedInStatus == Status.Authenticating
-                    ? loading
-                    : longButtons("Вход", doLogin),
-                SizedBox(height: 5.0),
-                forgotLabel
-              ],
+        body: ListView(
+          children: [
+            Container(
+              padding: EdgeInsets.all(40.0),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //SizedBox(height: 15.0),
+                    //label("Электронная почта"),
+                    //SizedBox(height: 5.0),
+                    emailField,
+                    //SizedBox(height: 20.0),
+                    //SizedBox(height: 5.0),
+                    passwordField,
+                    //SizedBox(height: 20.0),
+                    auth.loggedInStatus == Status.Authenticating
+                        ? loading
+                        : longButtons("Вход", doLogin),
+                    SizedBox(height: 5.0),
+                    forgotLabel
+                  ],
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

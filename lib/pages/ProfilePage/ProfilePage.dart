@@ -129,6 +129,7 @@ class _ProfilePageState extends StateMVC{
             padding: EdgeInsets.all(10),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               AvatarBlock(pet.name, profilespets[1].photo),
+              /*
               Column(
                 children: [
                   Container(
@@ -155,7 +156,7 @@ class _ProfilePageState extends StateMVC{
                     ),
                   )
                 ],
-              )
+              )*/
             ]),
           ),
           Row(children: [Container(

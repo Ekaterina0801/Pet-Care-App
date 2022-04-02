@@ -95,40 +95,44 @@ class _RegisterState extends State<Register> {
 
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          padding: EdgeInsets.all(40.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 15.0),
-                label("Электронная почта"),
-                SizedBox(height: 5.0),
-                emailField,
-                SizedBox(height: 15.0),
-                label("Имя"),
-                SizedBox(height: 5.0),
-                firstnameField,
-                SizedBox(height: 15.0),
-                label("Фамилия"),
-                SizedBox(height: 5.0),
-                lastnameField,
-                SizedBox(height: 15.0),
-                label("Пароль"),
-                SizedBox(height: 10.0),
-                passwordField,
-                SizedBox(height: 15.0),
-                label("Подтвердите пароль"),
-                SizedBox(height: 10.0),
-                confirmPassword,
-                SizedBox(height: 20.0),
-                auth.loggedInStatus == Status.Authenticating
-                    ? loading
-                    : longButtons("Регистрация", doRegister),
-              ],
+        body: ListView(
+          children: [
+            Container(
+              padding: EdgeInsets.all(40.0),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 15.0),
+                    label("Электронная почта"),
+                    SizedBox(height: 5.0),
+                    emailField,
+                    SizedBox(height: 15.0),
+                    label("Имя"),
+                    SizedBox(height: 5.0),
+                    firstnameField,
+                    SizedBox(height: 15.0),
+                    label("Фамилия"),
+                    SizedBox(height: 5.0),
+                    lastnameField,
+                    SizedBox(height: 15.0),
+                    label("Пароль"),
+                    SizedBox(height: 10.0),
+                    passwordField,
+                    SizedBox(height: 15.0),
+                    label("Подтвердите пароль"),
+                    SizedBox(height: 10.0),
+                    confirmPassword,
+                    SizedBox(height: 20.0),
+                    auth.loggedInStatus == Status.Authenticating
+                        ? loading
+                        : longButtons("Регистрация", doRegister),
+                  ],
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
