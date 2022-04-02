@@ -17,41 +17,43 @@ import 'AppBuilder.dart';
 import 'Note.dart';
 import 'NoteController.dart';
 
-
-class NotesPage extends StatefulWidget{
-  
+class NotesPage extends StatefulWidget {
   @override
   _NotesPageState createState() => _NotesPageState();
 }
 
 class _NotesPageState extends StateMVC {
   NoteController _controller;
-  _NotesPageState():super(NoteController()){
+  _NotesPageState() : super(NoteController()) {
     _controller = controller as NoteController;
-     //notifyListeners();
+    //notifyListeners();
   }
   @override
   void initState() {
     super.initState();
     _controller.init();
   }
+
   final formKey = new GlobalKey<FormState>();
   String _body, _date;
   MyUser user;
   @override
   Widget build(BuildContext context) {
     Future<MyUser> getUserData() => UserPreferences().getUser();
-     final state = _controller.currentState;
-     final noteField = TextField(
+    final state = _controller.currentState;
+    final noteField = TextField(
       maxLines: 10,
-      onChanged: (value) {_body = value;_date = DateTime.now().toString();}, 
+      onChanged: (value) {
+        _body = value;
+        _date = DateTime.now().toString();
+      },
       decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Введите текст',
-          hintStyle: TextStyle(color: Colors.white60),
-        ),
+        border: InputBorder.none,
+        hintText: 'Введите текст',
+        hintStyle: TextStyle(color: Colors.white60),
+      ),
     );
-     if (state is NoteResultLoading) {
+    if (state is NoteResultLoading) {
       // загрузка
       return Center(
         child: CircularProgressIndicator(),
@@ -59,134 +61,144 @@ class _NotesPageState extends StateMVC {
     } else if (state is NoteResultFailure) {
       // ошибка
       return Center(
-        child: Text(
-          state.error,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline4.copyWith(color: Colors.red)
-        ),
+        child: Text(state.error,
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .headline4
+                .copyWith(color: Colors.red)),
       );
-    } else {   
+    } else {
       final l = (state as NoteResultSuccess).notesList;
-    return AppBuilder(builder: (context){return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => UserProvider()),
-      ],
-      child: FutureBuilder(
-        future: getUserData(),
-        builder: (context,snapshot) {
-        
-        switch (snapshot.connectionState) {
+      return AppBuilder(builder: (context) {
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => AuthProvider()),
+            ChangeNotifierProvider(create: (_) => UserProvider()),
+          ],
+          child: FutureBuilder(
+              future: getUserData(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
                     return CircularProgressIndicator();
                   default:
                     if (snapshot.hasError)
                       return Text('Error: ${snapshot.error}');
-                    else user=snapshot.data;
+                    else
+                      user = snapshot.data;
 
-                      //UserPreferences().removeUser();
-                    
+                  //UserPreferences().removeUser();
+
                 }
-      List<Note> notes =[];
-      for(var i in l)
-      {
-        if(i.userID==user.userid)
-        notes.add(i);
-      }
-        return ListView(
-          shrinkWrap: true,
-          children: [
-           FlatButton(
-            height: 50,
-            color: Colors.grey.shade100,
-             onPressed:(){ setState(() {
-              //_displayNoteAdd(context, _body, _date);
-               final formKey = new GlobalKey<FormState>();
-          AlertDialog alert = AlertDialog(
-          title: Text('Добавление заметки'),
-          actions: [
-            FlatButton( 
-              child: Text(
-                'Добавить',
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14),
-              ),
-              
-              onPressed: () {
-                setState((){addNote(_body, _date,user.userid);
-                //notifyListeners();
-                
-                //AppBuilder.of(context).rebuild();
-                //Navigator.popAndPushNamed(context,'/notes');
-              });Navigator.of(context).pop();
-                Navigator.pushNamed(context, "/notes");
-              }),
-          
-          ],
-          content: Container(
-            padding: EdgeInsets.all(10),
-            child: Form(
-              key: formKey,
-              child: TextField(
-          maxLines: 10,
-          onChanged: (value) {_body = value;_date = DateTime.now().toString();}, 
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: 'Введите текст',
-              hintStyle: TextStyle(color: Colors.white60),
-            ),
-        )
-            )
-          ),
-        );
+                List<Note> notes = [];
+                for (var i in l) {
+                  if (i.userID == user.userid) notes.add(i);
+                }
+                return ListView(shrinkWrap: true, children: [
+                  FlatButton(
+                      height: 50,
+                      color: Colors.grey.shade200,
+                      onPressed: () {
+                        setState(() {
+                          //_displayNoteAdd(context, _body, _date);
+                          final formKey = new GlobalKey<FormState>();
+                          AlertDialog alert = AlertDialog(
+                            title: Text('Добавление заметки'),
+                            actions: [
+                              FlatButton(
+                                  child: Text(
+                                    'Добавить',
+                                    style: GoogleFonts.comfortaa(
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w800,
+                                        fontSize: 14),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      addNote(_body, _date, user.userid);
+                                      //notifyListeners();
 
-        Future.delayed(Duration.zero, () async {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return alert;
-            });
-});
-            });},
-             child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Text('+ Добавить заметку',
-                    style: GoogleFonts.comfortaa(
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16)))),
-         notes.length==0?Align(alignment:Alignment.center,child: Text("Заметок пока нет",style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16),),):GridView.builder(
-            shrinkWrap: true,
-              physics: ScrollPhysics(),
-            padding: EdgeInsets.all(15),
-            itemCount: 
-            notes.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1.2,
-            ),
-            itemBuilder: (BuildContext context, int index) => Container(
-                child: NotesWidget(notes[index])))
-                    ]
+                                      //AppBuilder.of(context).rebuild();
+                                      //Navigator.popAndPushNamed(context,'/notes');
+                                    });
+                                    Navigator.of(context).pop();
+                                    Navigator.pushNamed(context, "/notes");
+                                  }),
+                            ],
+                            content: Container(
+                                padding: EdgeInsets.all(10),
+                                child: Form(
+                                    key: formKey,
+                                    child: TextField(
+                                      maxLines: 10,
+                                      onChanged: (value) {
+                                        _body = value;
+                                        _date = DateTime.now().toString();
+                                      },
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        hintText: 'Введите текст',
+                                        hintStyle:
+                                            TextStyle(color: Colors.white60),
+                                      ),
+                                    ))),
+                          );
+
+                          Future.delayed(Duration.zero, () async {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                });
+                          });
+                        });
+                      },
+                      child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Text('+ Добавить заметку',
+                              style: GoogleFonts.comfortaa(
+                                  color: Colors.black,
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 16)))),
+                  notes.length == 0
+                      ? Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            "Заметок пока нет",
+                            style: GoogleFonts.comfortaa(
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 16),
+                          ),
+                        )
+                      : GridView.builder(
+                          shrinkWrap: true,
+                          physics: ScrollPhysics(),
+                          padding: EdgeInsets.all(15),
+                          itemCount: notes.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 1.2,
+                          ),
+                          itemBuilder: (BuildContext context, int index) =>
+                              Container(child: NotesWidget(notes[index])))
+                ]);
+              }),
         );
-        }),
-    );
-  });
-}
-}
-_displayNoteAdd(BuildContext context,String _body, String _date,int userID)
-{
-      final formKey = new GlobalKey<FormState>();
-      AlertDialog alert = AlertDialog(
+      });
+    }
+  }
+
+  _displayNoteAdd(
+      BuildContext context, String _body, String _date, int userID) {
+    final formKey = new GlobalKey<FormState>();
+    AlertDialog alert = AlertDialog(
       title: Text('Добавление заметки'),
       actions: [
         FlatButton(
@@ -197,74 +209,64 @@ _displayNoteAdd(BuildContext context,String _body, String _date,int userID)
                 fontWeight: FontWeight.w800,
                 fontSize: 14),
           ),
-          
           onPressed: () {
-            addNote(_body, _date,userID);
+            addNote(_body, _date, userID);
             //notifyListeners();
             Navigator.of(context).pop();
           },
         ),
-      
       ],
       content: Container(
-        padding: EdgeInsets.all(10),
-        child: Form(
-          key: formKey,
-          child: TextField(
-      maxLines: 10,
-      onChanged: (value) {_body = value;_date = DateTime.now().toString();}, 
-      decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Введите текст',
-          hintStyle: TextStyle(color: Colors.white60),
-        ),
-    )
-        )
-      ),
+          padding: EdgeInsets.all(10),
+          child: Form(
+              key: formKey,
+              child: TextField(
+                maxLines: 10,
+                onChanged: (value) {
+                  _body = value;
+                  _date = DateTime.now().toString();
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Введите текст',
+                  hintStyle: TextStyle(color: Colors.white60),
+                ),
+              ))),
     );
 
     Future.delayed(Duration.zero, () async {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alert;
-        });
-});
-    
-}
-Future<Map<String,dynamic>> addNote(String text, String date,int userID) async{
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          });
+    });
+  }
+
+  Future<Map<String, dynamic>> addNote(
+      String text, String date, int userID) async {
 //Future<MyUser> getUserData() => UserPreferences().getUser();
 
-  final Map<String,dynamic> noteData = 
-  {
-    'Text':text,
-    'Date':date,
-    'Id':1,
-    'UserID':userID
-  };
+    final Map<String, dynamic> noteData = {
+      'Text': text,
+      'Date': date,
+      'Id': 1,
+      'UserID': userID
+    };
 
-  var response = await post(Uri.parse('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Notes.json'),
-  body: json.encode(noteData));
-  Note note = Note(
-    body: noteData['Text'],
-    id:noteData['Id'],
-    date: noteData['Date']
-  );
+    var response = await post(
+        Uri.parse(
+            'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Notes.json'),
+        body: json.encode(noteData));
+    Note note = Note(
+        body: noteData['Text'], id: noteData['Id'], date: noteData['Date']);
 
-  var result;
-  if (response.request!=null)
-    result = {
-        'status': true,
-        'message': 'Successfully add',
-        'data': note
-      };
-    else{
-      result = {
-        'status': false,
-        'message': 'Adding failed',
-        'data': null
-      };
+    var result;
+    if (response.request != null)
+      result = {'status': true, 'message': 'Successfully add', 'data': note};
+    else {
+      result = {'status': false, 'message': 'Adding failed', 'data': null};
     }
     return result;
-}
+  }
 }

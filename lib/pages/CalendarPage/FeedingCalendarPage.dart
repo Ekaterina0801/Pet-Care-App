@@ -14,6 +14,25 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
+        FlatButton(
+            height: 50,
+            color: Colors.grey.shade200,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                      opaque: false,
+                      pageBuilder: (BuildContext context, _, __) =>
+                          AddEventWidget()));
+            },
+            child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Text('+ Добавить событие',
+                    style: GoogleFonts.comfortaa(
+                        color: Colors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16)))),
         Container(
             child: SfCalendar(
               firstDayOfWeek: 1,
@@ -94,25 +113,6 @@ class _CalendarPageState extends State<CalendarPage> {
               showDatePickerButton: true,
             ),
             height: 700),
-        FlatButton(
-            height: 50,
-            color: Colors.grey.shade100,
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      opaque: false,
-                      pageBuilder: (BuildContext context, _, __) =>
-                          AddEventWidget()));
-            },
-            child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Text('+ Добавить событие',
-                    style: GoogleFonts.comfortaa(
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16))))
       ],
     );
   }
