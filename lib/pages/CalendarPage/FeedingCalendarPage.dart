@@ -14,7 +14,7 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        FlatButton(
+          /*FlatButton(
             height: 50,
             color: Colors.grey.shade200,
             onPressed: () {
@@ -32,7 +32,7 @@ class _CalendarPageState extends State<CalendarPage> {
                         color: Colors.black,
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w800,
-                        fontSize: 16)))),
+                        fontSize: 16)))),*/
         Container(
             child: SfCalendar(
               firstDayOfWeek: 1,
