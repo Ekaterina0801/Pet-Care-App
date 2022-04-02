@@ -234,7 +234,13 @@ class _AddAnimalState extends State<AddAnimal> {
 
                   //longButtons("Добавить", addPet()),
                   Container(
-                    child: ElevatedButton(child: Text("Добавить"),
+                    child: ElevatedButton(
+                    child: Text('Добавить',
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 15)),
+                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color.fromRGBO(255, 223, 142, 1))),
                     onPressed: () => { if(formKey.currentState.validate()){
       formKey.currentState.save(), 
 
