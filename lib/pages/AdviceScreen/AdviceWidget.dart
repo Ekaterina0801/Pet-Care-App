@@ -31,7 +31,7 @@ class AdviceBlock extends StatelessWidget {
           children: <Widget>[
             
             Container(
-              height: 100,
+              height: 110,
               width: 200,
               child: Container(
                 /*
@@ -64,7 +64,7 @@ class AdviceBlock extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: Container(
-                    height: 70,
+                    height: 60,
                     width: 200,
                     padding: EdgeInsets.all(5),
                     child: Center(
@@ -74,8 +74,8 @@ class AdviceBlock extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: GoogleFonts.comfortaa(
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 14)),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16)),
                     ),
                   ),
                 )),
@@ -147,8 +147,8 @@ class AdviceMainBlock extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: GoogleFonts.comfortaa(
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 14)),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16)),
                     ),
                   ),
                 )),

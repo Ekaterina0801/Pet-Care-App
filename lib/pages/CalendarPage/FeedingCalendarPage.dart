@@ -112,7 +112,7 @@ class _CalendarPageState extends State<CalendarPage> {
                         color: Colors.black,
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w800,
-                        fontSize: 14))))
+                        fontSize: 16))))
       ],
     );
   }

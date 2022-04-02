@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
@@ -110,36 +111,127 @@ class _AddAnimalState extends State<AddAnimal> {
           children: [
             
                  SizedBox(height: 15.0),
-                  label("Вид питомца"),
+
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    //margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child:Text("Вид питомца",
+                    style: GoogleFonts.comfortaa(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400, 
+                    fontSize: 14),
+                    ),
+                  ),
+
                   SizedBox(height: 5.0),
                   Container(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     child: animalField),
                   SizedBox(height: 20.0),
-                  label("Имя питомца"),
+
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child:Text("Имя питомца",
+                    style: GoogleFonts.comfortaa(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400, 
+                    fontSize: 14),
+                    ),
+                  ),
+
                   SizedBox(height: 5.0),
-                  nameField,
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child: nameField),
                   SizedBox(height: 20.0),
-                  label("Порода питомца"),
+
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child:Text("Порода питомца",
+                    style: GoogleFonts.comfortaa(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400, 
+                    fontSize: 14),
+                    ),
+                  ),
+
                   SizedBox(height: 5.0),
-                  breedField,
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child: breedField),
                   SizedBox(height: 20.0),
-                  label("Дата рождения питомца"),
+
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child:Text("Дата рождения питомца",
+                    style: GoogleFonts.comfortaa(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400, 
+                    fontSize: 14),
+                    ),
+                  ),
+
                   SizedBox(height: 5.0),
-                  datebirthdayField,
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child: datebirthdayField),
                   SizedBox(height: 20.0),
-                  label("Пол питомца"),
+                  
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child:Text("Пол питомца",
+                    style: GoogleFonts.comfortaa(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400, 
+                    fontSize: 14),
+                    ),
+                  ),
+
                   SizedBox(height: 5.0),
-                  genderField,
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child: genderField),
                   SizedBox(height: 20.0),
-                  label("Окрас питомца"),
+                  
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child:Text("Окрас питомца",
+                    style: GoogleFonts.comfortaa(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400, 
+                    fontSize: 14),
+                    ),
+                  ),
+
                   SizedBox(height: 5.0),
-                  colorField,
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child: colorField),
                   SizedBox(height: 20.0),
-                  label("Вес питомца"),
+
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child:Text("Вес питомца",
+                    style: GoogleFonts.comfortaa(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w400, 
+                    fontSize: 14),
+                    ),
+                  ),
+
                   SizedBox(height: 5.0),
-                  weightField,
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    child: weightField),
                   SizedBox(height: 20.0),
+
                   //longButtons("Добавить", addPet()),
                   Container(
                     child: ElevatedButton(child: Text("Добавить"),

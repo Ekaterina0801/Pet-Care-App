@@ -13,6 +13,7 @@ import 'package:pet_care/pages/providers/userprovider.dart';
 import 'package:pet_care/repository/notesrepo.dart';
 import 'package:provider/provider.dart';
 
+import 'AppBuilder.dart';
 import 'Note.dart';
 import 'NoteController.dart';
 
@@ -66,7 +67,7 @@ class _NotesPageState extends StateMVC {
       );
     } else {   
       final l = (state as NoteResultSuccess).notesList;
-    return MultiProvider(
+    return AppBuilder(builder: (context){return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
@@ -117,8 +118,11 @@ class _NotesPageState extends StateMVC {
               onPressed: () {
                 setState((){addNote(_body, _date,user.userid);
                 //notifyListeners();
-                Navigator.of(context).pop();
-              });
+                
+                //AppBuilder.of(context).rebuild();
+                //Navigator.popAndPushNamed(context,'/notes');
+              });Navigator.of(context).pop();
+                Navigator.pushNamed(context, "/notes");
               }),
           
           ],
@@ -154,7 +158,7 @@ class _NotesPageState extends StateMVC {
                         color: Colors.black,
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w800,
-                        fontSize: 14)))),
+                        fontSize: 16)))),
          notes.length==0?Align(alignment:Alignment.center,child: Text("Заметок пока нет",style: GoogleFonts.comfortaa(
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
@@ -176,7 +180,7 @@ class _NotesPageState extends StateMVC {
         );
         }),
     );
-  }
+  });
 }
 }
 _displayNoteAdd(BuildContext context,String _body, String _date,int userID)
@@ -262,4 +266,5 @@ Future<Map<String,dynamic>> addNote(String text, String date,int userID) async{
       };
     }
     return result;
+}
 }
