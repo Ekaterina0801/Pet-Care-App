@@ -114,6 +114,7 @@ class _AddAnimalState extends State<AddAnimal> {
 
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    //margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     child:Text("Вид питомца",
                     style: GoogleFonts.comfortaa(
                     color: Color.fromARGB(255, 0, 0, 0),
