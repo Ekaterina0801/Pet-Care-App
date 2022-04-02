@@ -20,6 +20,7 @@ void main() {
   runApp(MyApp());
 }
 
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,6 @@ class MyApp extends StatelessWidget {
     child: MaterialApp(
       home: FutureBuilder(
               future: getUserData(),
-              
               builder: (context, snapshot) {
                // print(snapshot.data.name);
                 switch (snapshot.connectionState) {

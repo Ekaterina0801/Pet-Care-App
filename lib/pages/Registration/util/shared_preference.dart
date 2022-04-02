@@ -1,8 +1,8 @@
 
 import 'package:pet_care/dommain/myuser.dart';
+import 'package:pet_care/pages/ProfilePage/Pet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
-
 class UserPreferences {
   Future<bool> saveUser(MyUser user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -36,6 +36,7 @@ class UserPreferences {
     print(lastname);
     print(password);
     print("OK");
+   
     return MyUser(
         userid: userId,
         firstname: firstname,
@@ -46,10 +47,10 @@ class UserPreferences {
         readyforoverposure: readuforoverposure
        );
   }
-
+  
   void removeUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove("fisrtname");
+    prefs.remove("firstname");
     prefs.remove('userid');
     prefs.remove('lastname');
     prefs.remove("email");
@@ -62,4 +63,9 @@ class UserPreferences {
     String id = prefs.getString("userid");
     return id;
   }
+}
+
+Future<Pet> getUserID() async{
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  int userId = prefs.getInt('userId');
 }

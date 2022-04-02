@@ -87,7 +87,7 @@ class _NotesPageState extends StateMVC {
                       //UserPreferences().removeUser();
                     
                 }
-                 List<Note> notes =[];
+      List<Note> notes =[];
       for(var i in l)
       {
         if(i.userID==user.userid)
