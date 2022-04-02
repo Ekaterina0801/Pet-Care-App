@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/ProfilePage/AvatarBlock.dart';
@@ -84,8 +85,12 @@ MyUser user;
               )
             ]),
           ),
-          Row(children: [Container(
+          Container(
+            alignment: Alignment.topRight,
+            child: Row(children: [
+            Container(
             padding: EdgeInsets.all(10),
+            alignment: Alignment.topRight,
             child: Text(
               "Основные данные",
               textAlign: TextAlign.center,
@@ -95,13 +100,18 @@ MyUser user;
                   fontSize: 20),
             ),
           ),
-          FloatingActionButton(
+          Container(
+            alignment: Alignment.topRight,
+            width: 30,
+            child:  FloatingActionButton(
   child: Icon(
     Icons.edit,
-    color: Colors.grey),
+    color: Colors.grey,
+    size: 20),
   backgroundColor: Colors.white,
   onPressed: () {},
-), ]),
+          )), 
+          ])),
           Container(
             margin: EdgeInsets.all(8),
             decoration:
