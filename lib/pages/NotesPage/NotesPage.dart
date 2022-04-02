@@ -96,14 +96,16 @@ class _NotesPageState extends StateMVC {
         return ListView(
           shrinkWrap: true,
           children: [
-          TextButton(
+           FlatButton(
+            height: 50,
+            color: Colors.grey.shade100,
              onPressed:(){ setState(() {
               //_displayNoteAdd(context, _body, _date);
                final formKey = new GlobalKey<FormState>();
           AlertDialog alert = AlertDialog(
           title: Text('Добавление заметки'),
           actions: [
-            FlatButton(
+            FlatButton( 
               child: Text(
                 'Добавить',
                 style: GoogleFonts.comfortaa(
@@ -145,7 +147,14 @@ class _NotesPageState extends StateMVC {
             });
 });
             });},
-            child: Text("Добавить заметку")),
+             child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Text('+ Добавить заметку',
+                    style: GoogleFonts.comfortaa(
+                        color: Colors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14)))),
          notes.length==0?Align(alignment:Alignment.center,child: Text("Заметок пока нет",style: GoogleFonts.comfortaa(
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w800,
