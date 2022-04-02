@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -164,7 +164,11 @@ class _NotesPageState extends StateMVC {
                                   fontWeight: FontWeight.w800,
                                   fontSize: 16)))),
                   notes.length == 0
-                      ? Align(
+                      ? ListBody(
+                        children: [
+                       Container(
+                        height: window.physicalSize.height / 2 - 32),
+                         Align(
                           alignment: Alignment.center,
                           child: Text(
                             "Заметок пока нет",
@@ -174,6 +178,8 @@ class _NotesPageState extends StateMVC {
                                 fontSize: 16),
                           ),
                         )
+
+                        ])
                       : GridView.builder(
                           shrinkWrap: true,
                           physics: ScrollPhysics(),
