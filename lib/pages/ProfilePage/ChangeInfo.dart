@@ -6,10 +6,7 @@ class ChangeInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      title: "Прививки",
-      body: Container(
-        child: Text("Привет")
-      )
-    );
+        title: "Изменить основные данные",
+        body: Container(child: Text("Привет")));
   }
 }
