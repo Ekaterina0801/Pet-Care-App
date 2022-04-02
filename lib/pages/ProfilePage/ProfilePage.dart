@@ -6,6 +6,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/BasePage.dart';
 import 'package:pet_care/pages/ProfilePage/AvatarBlock.dart';
+import 'package:pet_care/pages/ProfilePage/ChangeInfo.dart';
 import 'package:pet_care/pages/ProfilePage/MainInfoBlock.dart';
 import 'package:pet_care/pages/ProfilePage/Passport.dart';
 import 'package:pet_care/pages/ProfilePage/Pet.dart';
@@ -140,7 +141,6 @@ class _ProfilePageState extends StateMVC{
                       ),
                       decoration: BoxDecoration(
                           color: Color.fromRGBO(240, 240, 240, 1),
-                          //color: Color.fromRGBO(255, 223, 142, 10),
                           border: Border.all(color: Colors.black),
                           borderRadius: BorderRadius.all(Radius.circular(50))),
                       height: 70,
@@ -183,7 +183,8 @@ class _ProfilePageState extends StateMVC{
     color: Colors.grey,
     size: 20),
   backgroundColor: Colors.white,
-  onPressed: () {},
+  onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => ChangeInfoPage())),
           )), 
           ])),
           Container(
@@ -201,7 +202,6 @@ class _ProfilePageState extends StateMVC{
                   pet.weight.toString(),
                   Color.fromRGBO(255, 223, 142, 10),
                 ),
-                // MainInfoBlock("Порода", "Корги", Color.fromRGBO(131, 184, 107, 60)),
                 MainInfoBlock("Пол", pet.gender, Color.fromRGBO(129, 181, 217, 90)),
               ],
             ),
