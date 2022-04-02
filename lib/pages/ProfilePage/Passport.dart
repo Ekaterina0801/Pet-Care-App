@@ -112,7 +112,7 @@ class InfoWidget extends StatelessWidget {
 //Функция, выбирающая нужное диалоговое окно
 class ChooseRemakeWidget extends StatelessWidget {
   final String title;
-  final String info;
+  String info;
   ChooseRemakeWidget(this.title, this.info);
   @override
   Widget build(BuildContext context) {
@@ -195,11 +195,21 @@ var doRename = (info, name, surname) {
 };
 
 //Диалоговое окно для изменения породы питомца
-class RemakeBreedWidget extends StatelessWidget {
+class RemakeBreedWidget extends StatefulWidget {
   final String title;
   String info;
   RemakeBreedWidget(this.title, this.info);
+
   @override
+  State<RemakeBreedWidget> createState() => _RemakeBreedWidgetState();
+}
+
+class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
+  @override
+     _changeBreed(String value) {
+    setState(() => widget.info = value);
+  }
+
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Align(
@@ -221,7 +231,7 @@ class RemakeBreedWidget extends StatelessWidget {
                     fontSize: 14))),
         TextFormField(
           autofocus: false,
-          onSaved: (value) => info = value,
+          onChanged:  _changeBreed,
         ),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
 //        longButtons(

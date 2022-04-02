@@ -245,10 +245,19 @@ class _ProfilePageState extends StateMVC{
 }
 
 }
-//Диалоговое окно для изменения имени владельца
-class ChangeInfo extends StatelessWidget {
+//Диалоговое окно для изменения основных данных питомца
+class ChangeInfo extends StatefulWidget {
  Pet pet;
   ChangeInfo(this.pet);
+
+  @override
+  State<ChangeInfo> createState() => _ChangeInfoState();
+}
+
+class _ChangeInfoState extends State<ChangeInfo> {
+   _changeName(String value) {
+    setState(() => widget.pet.name = value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -272,7 +281,7 @@ class ChangeInfo extends StatelessWidget {
                     fontSize: 14))),
         TextFormField(
           autofocus: false,
-          onSaved: (value) => pet.name = value,
+          onChanged: (value) => _changeName(value),
         ),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
         Align(
@@ -285,7 +294,7 @@ class ChangeInfo extends StatelessWidget {
                     fontSize: 14))),
         TextFormField(
           autofocus: false,
-          onSaved: (value) => pet.weight = int.parse(value),
+          onChanged: (value) => widget.pet.weight = int.parse(value),
         ),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
         RaisedButton(
