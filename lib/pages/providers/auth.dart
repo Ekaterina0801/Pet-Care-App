@@ -8,7 +8,7 @@ import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/Registration/util/appurl.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 
-
+MyUser myuser;
 
 
 enum Status {
@@ -36,6 +36,7 @@ class AuthProvider with ChangeNotifier {
     var l = jsonDecode(jsonString.body);
     var m = null;
     MyUser user = null;
+  
     for(var i in l.values)
     {
       if(i['Email']==email)
@@ -47,15 +48,6 @@ class AuthProvider with ChangeNotifier {
       }
     }
   
-
-    /*
-    final Map<String, dynamic> loginData = {
-      : {
-        'email': email,
-        'password': password
-      }
-    };
-*/
     _loggedInStatus = Status.Authenticating;
     notifyListeners();
 
@@ -95,6 +87,9 @@ class AuthProvider with ChangeNotifier {
 
   Future<Map<String, dynamic>> register(String email, String firstname, String lastname,String password) async {
 
+    var jsonString = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
+    var l = jsonDecode(jsonString.body);
+    int id = l.length+1;
     final Map<String, dynamic> registrationData = {
         'District':"-",
         'Email': email,
@@ -102,7 +97,7 @@ class AuthProvider with ChangeNotifier {
         'LastName':lastname,
         'Password': password,
         'ReadyForOverposure':false,
-        'UserID':1000,
+        'UserID': id,
     };
    var response =  await post(Uri.parse(AppUrl.register),
         body: json.encode(registrationData));
@@ -136,8 +131,6 @@ class AuthProvider with ChangeNotifier {
   }
 
 
-//const jsonCodec = const JsonCodec(reviver: _reviver);
- 
   static Future<FutureOr> onValue(Response response) async {
     var result;
     final Map<String, dynamic> responseData = json.decode(response.body);
@@ -148,7 +141,6 @@ class AuthProvider with ChangeNotifier {
      var userData = responseData['data'];
 
       MyUser authUser = MyUser.fromJson(userData);
-      //MyUser authUser = user;
       UserPreferences().saveUser(authUser);
       result = {
         'status': true,
@@ -156,7 +148,6 @@ class AuthProvider with ChangeNotifier {
         'data': authUser
       };
     } else {
-//      if (response.statusCode == 401) Get.toNamed("/login");
       result = {
         'status': false,
         'message': 'Registration failed',

@@ -1,23 +1,63 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
+import 'package:pet_care/pages/BasePage.dart';
 import 'package:pet_care/pages/ProfilePage/AvatarBlock.dart';
 import 'package:pet_care/pages/ProfilePage/MainInfoBlock.dart';
 import 'package:pet_care/pages/ProfilePage/Passport.dart';
+import 'package:pet_care/pages/ProfilePage/Pet.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
 import 'package:pet_care/repository/profilespetsrepo.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
-MyUser user;
+import 'AddAnimal.dart';
+
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends StateMVC{
+  PetController _controller;
+  _ProfilePageState():super(PetController()){
+    _controller = controller as PetController;
+  }
+  @override
+  void initState() {
+    super.initState();
+    _controller.init();
+  }
+  final formKey = new GlobalKey<FormState>();
+  MyUser user;
+  Pet pet;
 
   @override
   
   Widget build(BuildContext context) {
-  Future<MyUser> getUserData() => UserPreferences().getUser();
+    Future<MyUser> getUserData() => UserPreferences().getUser();
+  final state = _controller.currentState;
+  if (state is PetResultLoading) {
+      // загрузка
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else if (state is PetResultFailure) {
+      // ошибка
+      return Center(
+        child: Text(
+          state.error,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headline4.copyWith(color: Colors.red)
+        ),
+      );
+    } else {   
+      final pets = (state as PetResultSuccess).petsList;
+  //UserPreferences().getUser().then((value) => user=value)
+  //Future<MyUser> getUserData() => UserPreferences().getUser();
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
@@ -25,9 +65,9 @@ MyUser user;
       ],
       child: 
     FutureBuilder(
+      
       future: getUserData(),
       builder: (context,snapshot) {
-        
         switch (snapshot.connectionState) {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
@@ -37,10 +77,44 @@ MyUser user;
                       return Text('Error: ${snapshot.error}');
                     else user=snapshot.data;
 
-                      //UserPreferences().removeUser();
-                    
-                }
-        return ListView(children: [
+        //final pets = (state as PetResultSuccess).petsList;
+        pet = Pet(
+        petID: 1,
+        userID: user.userid,
+        animal:"-",
+        name:"-",
+        breed:"-",
+        dateofbirthday: "-",
+        gender: "-",
+        weight: 0,
+        color:"-"
+      );
+        for(var i in pets)
+        {
+        if(i.userID==user.userid)
+        {
+          pet = i;
+          break;
+        }
+        }
+        return 
+        pet.weight==0?Column(
+          children: [
+            Container(
+              child: TextButton(
+                onPressed: () => 
+                Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => AddAnimal(
+                           
+                          ),
+                        ),
+                      ),
+                child: Text("Добавить данные о питомце"),
+              ),
+            )
+          ],
+        ):ListView(children: [
           
           Container(
             decoration:
@@ -54,7 +128,7 @@ MyUser user;
             ]),
             padding: EdgeInsets.all(10),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              AvatarBlock(profilespets[1].name, profilespets[1].photo),
+              AvatarBlock(pet.name, profilespets[1].photo),
               Column(
                 children: [
                   Container(
@@ -110,15 +184,15 @@ MyUser user;
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                MainInfoBlock("Возраст", "1 год \n10 месяцев",
-                    Color.fromARGB(137, 95, 199, 109)),
+                MainInfoBlock("Возраст", pet.dateofbirthday,
+                    Color.fromRGBO(131, 184, 107, 80)),
                 MainInfoBlock(
                   "Вес",
-                  "15 кг",
+                  pet.weight.toString(),
                   Color.fromRGBO(255, 223, 142, 10),
                 ),
                 // MainInfoBlock("Порода", "Корги", Color.fromRGBO(131, 184, 107, 60)),
-                MainInfoBlock("Пол", "Мужской", Color.fromRGBO(129, 181, 217, 90)),
+                MainInfoBlock("Пол", pet.gender, Color.fromRGBO(129, 181, 217, 90)),
               ],
             ),
           ),
@@ -138,13 +212,18 @@ MyUser user;
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Passport(user.firstname+" "+user.lastname, "30.01.2020", "Корги", "Рыжий",
+                Passport(user.firstname+" "+user.lastname, pet.dateofbirthday, pet.breed, pet.color,
                     "Прививка от бешенства", "Нет"),
               ],
             ),
           ),
         ]);
       }
-    ));
-  }
+      }
+      )
+    );
+   
+}
+}
+
 }
