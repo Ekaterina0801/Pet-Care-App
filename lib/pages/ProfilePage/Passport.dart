@@ -89,17 +89,17 @@ class InfoWidget extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                       fontSize: 15),
                 ),
-                leading: FlatButton(
-                  child: Icon(Icons.edit),
-                  color: Colors.grey.shade100,
+                leading: IconButton(
+                  icon: Icon(Icons.edit),
+ //                 color: Colors.grey.shade100,
+                  color: Colors.black,
                   onPressed: () {
                     Navigator.push(
                         context,
                         PageRouteBuilder(
                             opaque: false,
                             pageBuilder: (BuildContext context, _, __) =>
-                                ChooseRemakeWidget(title, info)));
-                  },
+                                ChooseRemakeWidget(title, info))); },
                 ),
                 isThreeLine: true,
               )),
