@@ -14,9 +14,6 @@ class AdviceBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: tap,
-      //onTap: () {
-        //Navigator.pushNamed(context, '$index');
-      //},
       child: Container(
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -29,26 +26,28 @@ class AdviceBlock extends StatelessWidget {
                 spreadRadius: 0.0,
               )
             ]),
-        //padding: EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            
             Container(
               height: 100,
               width: 200,
               child: Container(
+                /*
                 padding: EdgeInsets.all(5),
                 child: Align(
                   child: index == 0 || index == 1
                       ? FavouriteWidgetNotActive()
                       : FavouriteWidget(),
                   alignment: Alignment.topRight,
-                ),
+                ),*/
               ),
               decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: Image.asset(
-                      image,
+                    image: FadeInImage.assetNetwork(
+                      image: image,
+                      placeholder: 'assets/article_1.1.jpg',
                     ).image,
                     fit: BoxFit.cover,
                   ),
@@ -119,8 +118,9 @@ class AdviceMainBlock extends StatelessWidget {
               height: 180,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: Image.asset(
-                      image,
+                    image: FadeInImage.assetNetwork(
+                      image: image,
+                      placeholder: 'assets/article_1.1.jpg',
                     ).image,
                     fit: BoxFit.cover,
                   ),

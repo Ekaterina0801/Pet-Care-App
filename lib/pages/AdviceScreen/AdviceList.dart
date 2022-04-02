@@ -31,7 +31,7 @@ class ArticleListPage extends StatelessWidget {
           ),
               children: articles
                   .map(
-                    (Article article) => AdviceBlock(article.title, articless[0].image,article.id, () => Navigator.of(context).push(
+                    (Article article) => AdviceBlock(article.title, article.image,article.id, () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ArticlePage(
                             article

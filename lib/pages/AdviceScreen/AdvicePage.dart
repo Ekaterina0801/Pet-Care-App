@@ -51,7 +51,7 @@ class _AdvicePageState extends StateMVC {
       
       final articles = (state as ArticleResultSuccess).articleList;
     return ListView(children: [
-      AdviceMainBlock(articles[0].title, articless[0].image,() => Navigator.of(context).push(
+      AdviceMainBlock(articles[0].title, articles[0].image,() => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ArticlePage(
                             articles[0]
@@ -64,7 +64,6 @@ class _AdvicePageState extends StateMVC {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text("Статьи",
-            
                 textAlign: TextAlign.left,
                 style: GoogleFonts.comfortaa(
                     fontStyle: FontStyle.normal,
@@ -88,9 +87,9 @@ class _AdvicePageState extends StateMVC {
         height: 209.0,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: 4,
+          itemCount: 2,
           itemBuilder: (context, i) {
-            return AdviceBlock(articles[i].title, articless[i].image, i,() => Navigator.of(context).push(
+            return AdviceBlock(articles[i].title, articles[i].image, articles[i].id,() => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ArticlePage(
                             articles[i]
@@ -102,6 +101,7 @@ class _AdvicePageState extends StateMVC {
           scrollDirection: Axis.horizontal,
         ),
       ),
+      /*
       Container(
         padding: EdgeInsets.all(10),
         child: Row(
@@ -135,12 +135,12 @@ class _AdvicePageState extends StateMVC {
           shrinkWrap: true,
           itemCount: 2,
           itemBuilder: (context, i) {
-            return AdviceBlock(articles[i].title, articless[i].image, i,(){});
+            return AdviceBlock(articles[i].title, articles[i].image, articles[i].id,(){});
           },
           padding: const EdgeInsets.all(8),
           scrollDirection: Axis.horizontal,
         ),
-      ),
+      ),*/
     ]);
   }
 }

@@ -3,27 +3,28 @@ import 'dart:core';
 class Article
 {
   //все поля приватные
-  final int _articleId;
-  final int _id;
-  final String _title;
-  final String _body;
+  int id;
+  String title;
+  String body;
+  String image;
   //final String _image;
 
-  //getters для полей (для чтения)
-  int get articleId=>_articleId;
-  int get id => _id;
-  String get title =>_title;
-  String get body=>_body;
+
+  
   //String get image =>_image;
 
+  Article({this.id, this.body,this.image,this.title});
   // Dart позволяет создавать конструкторы с разными именами
   // В данном случае Article.fromJson(json) - это конструктор
   // здесь мы принимаем JSON объект поста и извлекаем его поля
-  Article.fromJson(Map<String, dynamic> json) :
-    this._articleId = json["userId"],
-    this._id = json["id"],
-    this._title = json["title"],
-    this._body = json["body"];
+  factory Article.fromJson(Map<String, dynamic> json){
+    return Article(
+    id: json["ArticleID"],
+    image: json["Image"],
+    title:json["Title"],
+    body:json["Text"])
+    ;
+    }
     //this._image = json["image"];
 }
 
