@@ -22,7 +22,8 @@ class ProfilePage extends StatelessWidget {
         ]),
         padding: EdgeInsets.all(10),
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AvatarBlock(profilespets[1].name, profilespets[1].photo),
+          AvatarBlock(profilespets[1].name, profilespets[1].breed,
+              profilespets[1].photo),
           Column(
             children: [
               Container(
@@ -73,13 +74,10 @@ class ProfilePage extends StatelessWidget {
           children: [
             MainInfoBlock("Возраст", "1 год \n10 месяцев",
                 Color.fromRGBO(131, 184, 107, 80)),
-            MainInfoBlock(
-              "Вес",
-              "15 кг",
-              Color.fromRGBO(255, 223, 142, 10),
-            ),
+            MainInfoBlock("Вес", "15 кг", Color.fromRGBO(255, 223, 142, 10)),
             // MainInfoBlock("Порода", "Корги", Color.fromRGBO(131, 184, 107, 60)),
             MainInfoBlock("Пол", "Мужской", Color.fromRGBO(129, 181, 217, 90)),
+            //MainInfoBlock("Вид", "Собака", Color.fromRGBO(49, 121, 40, 100))
           ],
         ),
       ),

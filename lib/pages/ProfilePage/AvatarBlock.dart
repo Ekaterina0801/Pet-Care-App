@@ -3,8 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AvatarBlock extends StatelessWidget {
   final String name;
+  final String breed;
   final String photo;
-  AvatarBlock(this.name, this.photo);
+  AvatarBlock(this.name, this.breed, this.photo);
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,13 @@ class AvatarBlock extends StatelessWidget {
           ),
           Text(
             name,
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
+          ),
+          Text(
+            breed,
             style: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w800,
