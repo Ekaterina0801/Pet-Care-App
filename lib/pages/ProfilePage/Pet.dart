@@ -16,20 +16,10 @@ class Pet
   String breed;
   String dateofbirthday;
   String gender;
-  String weight;
+  int weight;
   String color;
   Pet({this.petID,this.userID,this.animal,this.name,this.breed,this.dateofbirthday,this.gender,this.weight,this.color});
 
-/*
-  Map<String,dynamic> toMap()
-  {
-    return({
-      "id":id,
-      "UserID":userID,
-      "body":body,
-      "date":date
-    });
-  }*/
 factory Pet.fromJson(Map<String, Object> json) => Pet(
        petID: json['PetID'],
        userID: json['UserID'],
@@ -65,7 +55,7 @@ Future<Pet> getPet(int userID) async {
         breed:"-",
         dateofbirthday: "-",
         gender: "-",
-        weight: "0",
+        weight: 0,
         color:"-"
       );
     if (res.statusCode == 200) {
@@ -94,7 +84,7 @@ Future<Pet> getPet(int userID) async {
         breed:"-",
         dateofbirthday: "-",
         gender: "-",
-        weight: "0",
+        weight: 0,
         color:"-"
       );
     List<Pet> pets = [];

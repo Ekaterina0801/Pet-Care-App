@@ -15,7 +15,7 @@ class AddAnimal extends StatefulWidget {
 }
 
 class _AddAnimalState extends State<AddAnimal> {
-  String _animal,_name,_breed,_dateofbirthday,_gender, _color,_weight;
+  String _animal,_name,_breed,_dateofbirthday,_gender, _color; int _weight;
   int userID;
   final formKey = new GlobalKey<FormState>();
   @override
@@ -61,7 +61,7 @@ class _AddAnimalState extends State<AddAnimal> {
     final genderField = 
     TextFormField(
       autofocus: false,
-      obscureText: true,
+      //obscureText: true,
       validator: (value) => value.isEmpty ? "Введите пол питомца" : null,
       onSaved: (value) => _gender = value,
       decoration: buildInputDecoration("Пол питомца", Icons.pets,
@@ -70,7 +70,7 @@ class _AddAnimalState extends State<AddAnimal> {
     final colorField = 
     TextFormField(
       autofocus: false,
-      obscureText: true,
+      //obscureText: true,
       //validator: (value) => value.isEmpty ? "Введите окрас питомца" : null,
       onSaved: (value) => _color = value,
       decoration: buildInputDecoration("Окрас питомца", Icons.pets,
@@ -79,9 +79,9 @@ class _AddAnimalState extends State<AddAnimal> {
     final weightField = 
     TextFormField(
       autofocus: false,
-      obscureText: true,
+      //obscureText: true,
       //validator: (value) => value.isEmpty ? "Введите вес питомца" : null,
-      onSaved: (value) => _weight = value,
+      onSaved: (value) => _weight = int.parse(value),
       decoration: buildInputDecoration("Вес питомца", Icons.pets,
     ));
      final form = formKey.currentState;
@@ -143,9 +143,9 @@ class _AddAnimalState extends State<AddAnimal> {
                   //longButtons("Добавить", addPet()),
                   Container(
                     child: ElevatedButton(child: Text("Добавить"),
-                    onPressed: () => {
-      formKey.currentState.validate()?formKey.currentState.save():print("error validate"),
-     
+                    onPressed: () => { if(formKey.currentState.validate()){
+      formKey.currentState.save(), 
+
                       addPet(userID, _animal, _name, _breed, _dateofbirthday, _gender, _color, _weight),Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => HomePage(
@@ -153,7 +153,7 @@ class _AddAnimalState extends State<AddAnimal> {
                             ),
                           ),
                         ),
-                    }
+                     } else print("error validate"),}
                   )
           )]),
           
@@ -166,7 +166,7 @@ class _AddAnimalState extends State<AddAnimal> {
 }
 
 Future<Map<String,dynamic>> addPet(int userID,String animal,String name,String breed,String dateofbirthday,String gender, String color,
-  String weight) async{
+  int weight) async{
   final Map<String,dynamic> petData = 
   {
     'UserID':userID,

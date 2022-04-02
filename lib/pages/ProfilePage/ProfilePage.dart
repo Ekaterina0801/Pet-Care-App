@@ -86,7 +86,7 @@ class _ProfilePageState extends StateMVC{
         breed:"-",
         dateofbirthday: "-",
         gender: "-",
-        weight: "0",
+        weight: 0,
         color:"-"
       );
         for(var i in pets)
