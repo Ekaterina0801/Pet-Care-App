@@ -129,7 +129,12 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 20.0),
                     auth.loggedInStatus == Status.Authenticating
                         ? loading
-                        : longButtons("Регистрация", doRegister),
+                        : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            longButtons("Создать профиль", doRegister),
+                          ],
+                        ),
                   ],
                 ),
               ),

@@ -205,7 +205,7 @@ class _ProfilePageState extends StateMVC{
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800,
-                  fontSize: 20),
+                  fontSize: 18),
             ),
           ),
           Container(

@@ -1,5 +1,4 @@
 import 'package:another_flushbar/flushbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/dommain/myuser.dart';
@@ -25,7 +24,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     AuthProvider auth = Provider.of<AuthProvider>(context);
 
-    final emailField =
+    final emailField = 
 
     TextFormField(
       autofocus: false,
@@ -50,21 +49,28 @@ class _LoginState extends State<Login> {
         Text(" Авторизация...Подождите")
       ],
     );
-
     final forgotLabel = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
+      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        FlatButton(
-          padding: EdgeInsets.all(0.0),
+        /*
+        TextButton(
           child: Text("Забыли пароль?",
-              style: TextStyle(fontWeight: FontWeight.w300)),
+              style: GoogleFonts.comfortaa(color: Color.fromARGB(255, 54, 28, 0),
+                               fontWeight: FontWeight.w300, 
+                               fontStyle: FontStyle.italic,
+                               fontSize: 16)),
           onPressed: () {
 //            Navigator.pushReplacementNamed(context, '/reset-password');
           },
-        ),
-        FlatButton(
-          padding: EdgeInsets.only(left: 0.0),
-          child: Text("Регистрация", style: TextStyle(fontWeight: FontWeight.w300)),
+        ),*/
+        TextButton(
+          //padding: EdgeInsets.only(left: 0.0),
+          child: Text("Регистрация", 
+          style: GoogleFonts.comfortaa(color: Color.fromARGB(255, 54, 28, 0),
+                           fontWeight: FontWeight.w300,
+                           fontStyle: FontStyle.italic,
+                           fontSize: 18)),
           onPressed: () {
             //Navigator.pushNamed(context, '/register');
             Navigator.push(context, MaterialPageRoute(
@@ -104,37 +110,48 @@ class _LoginState extends State<Login> {
     };
 
     return BasePage(
-      title: "Вход",
+      title: "Авторизация",
       body: Scaffold(
-        body: ListView(
-          children: [
-            Container(
-              padding: EdgeInsets.all(40.0),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //SizedBox(height: 15.0),
-                    //label("Электронная почта"),
-                    //SizedBox(height: 5.0),
-                    emailField,
-                    //SizedBox(height: 20.0),
-                    //SizedBox(height: 5.0),
-                    passwordField,
-                    //SizedBox(height: 20.0),
-                    auth.loggedInStatus == Status.Authenticating
-                        ? loading
-                        : longButtons("Вход", doLogin),
-                    SizedBox(height: 5.0),
-                    forgotLabel
-                  ],
+        body: Container(
+         padding: EdgeInsets.all(30.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  //child: Align(
+                    //alignment: Alignment.topCenter,
+                  child: Row(
+                    children: [
+                    ],
+                    //),
+                  ),
                 ),
-              ),
+                SizedBox(height: 12.0), // отступ (высота) между "Авторизация" и "почта"
+                label("Электронная почта"),
+                SizedBox(height: 5.0), // отступ (высота) между "почта" и белым контейнером "почта"
+                emailField,
+                SizedBox(height: 20.0), // отступ (высота) между желтым контейнером "почта" и белым контейнером "почта"
+                label("Пароль"),
+                SizedBox(height: 5.0), // отступ (высота) между "пароль" и белым контейнером "пароль"
+                passwordField,
+                SizedBox(height: 20.0), // отступ (высота) между желтым контейнером "вход" и белым контейнером "пароль"
+                auth.loggedInStatus == Status.Authenticating
+                    ? loading
+                    : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        longButtons("Вход", doLogin),
+                      ],
+                    ),
+                SizedBox(height: 5.0), // отступ (высота) между желтым контейнером "вход" и контейнерами "ЗП?" и "Регистрация"
+                forgotLabel
+              ],
             ),
-          ],
+          
         ),
       ),
-    );
+    ));
   }
 }
