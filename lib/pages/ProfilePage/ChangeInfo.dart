@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:pet_care/pages/ProfilePage/Pet.dart';
 import '../BasePage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ChangeInfoPage extends StatelessWidget {
+  Pet pet;
+
   @override
   Widget build(BuildContext context) {
     return BasePage(
@@ -14,7 +16,7 @@ class ChangeInfoPage extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.symmetric(vertical: 10),
               children: [
-                Text('Введите фамилию:',
+                Text('Введите имя питомца:',
                     style: GoogleFonts.comfortaa(
                         color: Colors.black,
                         fontStyle: FontStyle.normal,
@@ -22,7 +24,37 @@ class ChangeInfoPage extends StatelessWidget {
                         fontSize: 16)),
                 TextFormField(
                   autofocus: false,
-                  //  onSaved: (value) => surname = value,
+                  onSaved: (value) => pet.name = value,
+                ),
+               /*  Text('Введите возраст питомца:',
+                    style: GoogleFonts.comfortaa(
+                        color: Colors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16)),
+                TextFormField(
+                  autofocus: false,
+               //   onSaved: (value) => pet. = value, !!1!!1!!!1!!1!!1!!!1!!!
+                ), */
+                 Text('Введите вес питомца:',
+                    style: GoogleFonts.comfortaa(
+                        color: Colors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16)),
+                TextFormField(
+                  autofocus: false,
+                  onSaved: (value) => pet.weight = int.parse(value), //////////////////////////////////////
+                ),
+                 Text('Введите пол питомца:',
+                    style: GoogleFonts.comfortaa(
+                        color: Colors.black,
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16)),
+                TextFormField(
+                  autofocus: false,
+                  onSaved: (value) => pet.gender = value, //////////////////////////////////////
                 ),
               ],
             )));
