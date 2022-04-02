@@ -18,7 +18,7 @@ class SettingsService extends StatefulWidget {
 
 class _SettingsServiceState extends State<SettingsService> {
   String district = "Советский";
-  String price = "1000";
+  String price = "500";
   String contacts = "ekaterina_dots@mail.ru";
   var _selected_dist = "";
   var _selected_price = "";
