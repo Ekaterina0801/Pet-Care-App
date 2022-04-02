@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_care/dommain/myuser.dart';
+import 'package:pet_care/pages/BasePage.dart';
 import 'package:pet_care/pages/Registration/util/validators.dart';
 import 'package:pet_care/pages/Registration/util/widgets.dart';
 import 'package:pet_care/pages/providers/auth.dart';
@@ -93,8 +94,9 @@ class _RegisterState extends State<Register> {
 
     };
 
-    return SafeArea(
-      child: Scaffold(
+    return BasePage(
+      title: "Регистрация",
+      body: Scaffold(
         body: ListView(
           children: [
             Container(

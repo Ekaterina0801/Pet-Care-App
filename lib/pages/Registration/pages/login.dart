@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/dommain/myuser.dart';
+import 'package:pet_care/pages/BasePage.dart';
+import 'package:pet_care/pages/Registration/pages/register.dart';
 import 'package:pet_care/pages/Registration/util/validators.dart';
 import 'package:pet_care/pages/Registration/util/widgets.dart';
 import 'package:pet_care/pages/providers/auth.dart';
@@ -64,7 +66,10 @@ class _LoginState extends State<Login> {
           padding: EdgeInsets.only(left: 0.0),
           child: Text("Регистрация", style: TextStyle(fontWeight: FontWeight.w300)),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/register');
+            //Navigator.pushNamed(context, '/register');
+            Navigator.push(context, MaterialPageRoute(
+  	builder: (context) => Register()
+  ));
           },
         ),
       ],
@@ -98,8 +103,9 @@ class _LoginState extends State<Login> {
       }
     };
 
-    return SafeArea(
-      child: Scaffold(
+    return BasePage(
+      title: "Вход",
+      body: Scaffold(
         body: ListView(
           children: [
             Container(
