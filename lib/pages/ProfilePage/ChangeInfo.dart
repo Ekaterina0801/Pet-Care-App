@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ChangeInfoPage extends StatelessWidget {
   Pet pet;
+  ChangeInfoPage(this.pet);
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +27,6 @@ class ChangeInfoPage extends StatelessWidget {
                   autofocus: false,
                   onSaved: (value) => pet.name = value,
                 ),
-               /*  Text('Введите возраст питомца:',
-                    style: GoogleFonts.comfortaa(
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16)),
-                TextFormField(
-                  autofocus: false,
-               //   onSaved: (value) => pet. = value, !!1!!1!!!1!!1!!1!!!1!!!
-                ), */
                  Text('Введите вес питомца:',
                     style: GoogleFonts.comfortaa(
                         color: Colors.black,
@@ -44,17 +35,7 @@ class ChangeInfoPage extends StatelessWidget {
                         fontSize: 16)),
                 TextFormField(
                   autofocus: false,
-                  onSaved: (value) => pet.weight = int.parse(value), //////////////////////////////////////
-                ),
-                 Text('Введите пол питомца:',
-                    style: GoogleFonts.comfortaa(
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16)),
-                TextFormField(
-                  autofocus: false,
-                  onSaved: (value) => pet.gender = value, //////////////////////////////////////
+                  onSaved: (value) => pet.weight = int.parse(value), 
                 ),
               ],
             )));

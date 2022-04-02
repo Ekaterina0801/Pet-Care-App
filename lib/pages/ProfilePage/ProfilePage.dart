@@ -183,8 +183,16 @@ class _ProfilePageState extends StateMVC{
     color: Colors.grey,
     size: 20),
   backgroundColor: Colors.white,
-  onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ChangeInfoPage())),
+ // onPressed: () => Navigator.push(context,
+  //                      MaterialPageRoute(builder: (context) => ChangeInfo(pet))),
+    onPressed: () {
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                            opaque: false,
+                            pageBuilder: (BuildContext context, _, __) =>
+                               ChangeInfo(pet)));
+                  },
           )), 
           ])),
           Container(
@@ -236,4 +244,62 @@ class _ProfilePageState extends StateMVC{
 }
 }
 
+}
+//Диалоговое окно для изменения имени владельца
+class ChangeInfo extends StatelessWidget {
+ Pet pet;
+  ChangeInfo(this.pet);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+          title: Align(
+          alignment: Alignment.bottomCenter,
+          child: Text('Изменить основные данные',
+              style: GoogleFonts.comfortaa(
+                  color: Colors.black,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 16))),
+         actions: [
+        Align(
+            alignment: Alignment.bottomLeft,
+            child: Text('Введите имя питомца:',
+                style: GoogleFonts.comfortaa(
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14))),
+        TextFormField(
+          autofocus: false,
+          onSaved: (value) => pet.name = value,
+        ),
+        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+        Align(
+            alignment: Alignment.bottomLeft,
+            child: Text('Введите вес питомца:',
+                style: GoogleFonts.comfortaa(
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14))),
+        TextFormField(
+          autofocus: false,
+          onSaved: (value) => pet.weight = int.parse(value),
+        ),
+        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+        RaisedButton(
+            color: Color.fromRGBO(255, 223, 142, 10),
+            splashColor: Color.fromARGB(199, 240, 240, 240),
+            onPressed: () =>{
+               (Navigator.pop(context, true)) },
+            child: Text('Принять',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 11)))
+      ],
+            );
+  }
 }
