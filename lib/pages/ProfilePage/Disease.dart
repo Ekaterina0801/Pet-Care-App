@@ -12,7 +12,7 @@ class DiseasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      title: "Болезни",
+      title: 'Болезни',
       body: ListView.builder(
         itemCount: disease.length,
   itemBuilder: (context, index) {

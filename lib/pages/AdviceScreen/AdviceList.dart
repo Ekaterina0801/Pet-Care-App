@@ -16,7 +16,7 @@ class ArticleListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-     title: "Советы",
+     title: 'Статьи',
       body: FutureBuilder(
         future: httpService.getArticles(),
         builder: (BuildContext context, AsyncSnapshot<List<Article>> snapshot) {

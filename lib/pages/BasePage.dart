@@ -30,7 +30,7 @@ class BasePage extends StatelessWidget {
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800,
-                  fontSize: 24)), automaticallyImplyLeading: (title != 'Статья') ?  false : true,
+                  fontSize: 24)), automaticallyImplyLeading: ((title == 'Статья') || (title == 'Болезни') || (title == 'Прививки') || (title == 'Статьи'))?  true : false,
         ),
         body: body,
         bottomNavigationBar: navigationbar,

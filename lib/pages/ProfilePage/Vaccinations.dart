@@ -21,7 +21,7 @@ class VaccinationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      title: "Прививки",
+      title: 'Прививки',
       body: ListView.builder(
         itemCount: photos.length,
         itemBuilder: (context, index) {
