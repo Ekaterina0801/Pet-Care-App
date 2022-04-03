@@ -105,7 +105,14 @@ if (state is DiseaseResultLoading) {
                             //_displayNoteAdd(context, _body, _date);
                             final formKey = new GlobalKey<FormState>();
                             AlertDialog alert = AlertDialog(
-                              title: Text('Добавление болезни'),
+                              title:  Align(
+          alignment: Alignment.bottomCenter,
+          child:Text(
+                                      'Добавление болезни',
+                                      style: GoogleFonts.comfortaa(
+                                          fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 18))),
                               actions: [
                                 FlatButton(
                                     child: Text(
@@ -121,9 +128,23 @@ if (state is DiseaseResultLoading) {
                                         //notifyListeners();
 
                                         //AppBuilder.of(context).rebuild();
-                                        Navigator.popAndPushNamed(context,'/home');
+                                    //    Navigator.popAndPushNamed(context,'/home');
                                       });
-                                      Navigator.of(context).pop();
+                                       Navigator.of(context).pop(true);
+                                    // Navigator.pushNamed(context, "/notes");
+                                     Navigator.of(context).push(
+                                      MaterialPageRoute(
+ builder: (context) => HomeProfile(),
+                                      ),
+                                    );
+                                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => DiseasesPage())
+
+                                    );
+                                     Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => DiseasesPage())
+
+                                    );
                                       //Navigator.pushNamed(context, "/notes");
                                     }),
                               ],
@@ -137,7 +158,12 @@ if (state is DiseaseResultLoading) {
                   key: formKey,
                   child: Column(
                     children: [
-                      Text("Введите описание болезни"),
+                     Text(
+                                      'Введите описание болезни:',
+                                      style: GoogleFonts.comfortaa(
+                                          fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 14)),
                       TextField(
                         maxLines: 10,
                         
@@ -150,7 +176,12 @@ if (state is DiseaseResultLoading) {
                           hintStyle: TextStyle(color: Colors.white60),
                         ),
                       ),
-                      Text("Введите дату начала болезни"),
+                      Text(
+                                      'Введите дату начала болезни:',
+                                      style: GoogleFonts.comfortaa(
+                                          fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 14)),
                       TextField(
                     maxLines: 2,
                     onChanged: (value) {
@@ -162,7 +193,12 @@ if (state is DiseaseResultLoading) {
                       hintStyle: TextStyle(color: Colors.white60),
                     ),
                   ),
-                  Text("Введите дату окончания болезни"),
+                 Text(
+                                      'Введите дату окончания болезни:',
+                                      style: GoogleFonts.comfortaa(
+                                          fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 14)),
                   TextField(
                     maxLines: 2,
                     onChanged: (value) {
@@ -200,9 +236,12 @@ if (state is DiseaseResultLoading) {
                                     fontSize: 16)))),
                   diseases.length==0?ListBody(
                           children: [
-                        // Container(
-                          //height: window.physicalSize.height / 2 - 32),
                            Align(
+                            alignment: Alignment.center,
+                            child: ListBody(children: [
+                          Container(
+                              height: window.physicalSize.height / 2 - 48),
+                          Align(
                             alignment: Alignment.center,
                             child: Text(
                               "Отмеченных болезней пока нет",
@@ -211,6 +250,8 @@ if (state is DiseaseResultLoading) {
                                   fontWeight: FontWeight.w800,
                                   fontSize: 16),
                             ),
+                          )
+                        ])
                           )
                           ]):ListView.builder(
                             shrinkWrap: true,

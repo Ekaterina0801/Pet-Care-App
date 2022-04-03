@@ -180,7 +180,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 15.0),
                     label("Готовы брать на передержку?"),
                     SizedBox(height: 10.0),
-                    //readyField,
+                    readyField,
                     SizedBox(height: 15.0),
                     auth.loggedInStatus == Status.Authenticating
                         ? loading

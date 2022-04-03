@@ -112,9 +112,9 @@ class _PetBoardingPageState extends StateMVC {
                               fontSize: 18)),
                     ),
                     Container(
-                        child: TextButton(
-                      onPressed: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SettingsService())),
+                       // child: TextButton(
+                      //onPressed: () => Navigator.push(context,
+                      //    MaterialPageRoute(builder: (context) => SettingsService())),
                       child: Text("Перейти к настройкам моего профиля для сервиса",
                           style: GoogleFonts.comfortaa(
                               decoration: TextDecoration.underline,
@@ -122,7 +122,8 @@ class _PetBoardingPageState extends StateMVC {
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.w800,
                               fontSize: 14)),
-                    )),
+                   // )
+                    ),
                   ])),
               Row(
                 children: [
