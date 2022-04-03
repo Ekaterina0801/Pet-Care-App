@@ -107,7 +107,7 @@ class AuthProvider with ChangeNotifier {
         'Password': password,
         'ReadyForOverposure':ready,
         'UserID': id,
-        'TypePets':typeofpets,
+        'TypeOfPets':typeofpets,
         'Price':price,
         
     };
