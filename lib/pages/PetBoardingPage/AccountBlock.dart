@@ -82,7 +82,7 @@ class _AccountBlockState extends State<AccountBlock> {
                                 fontWeight: FontWeight.w800,
                                 fontSize: 15)),
                         TextButton(
-                            onPressed: () => _displayDialogInfo(context),
+                            onPressed: () => _displayDialogInfo(context,widget.account),
                             child: Text('Подробнее',
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.center,
@@ -101,8 +101,8 @@ class _AccountBlockState extends State<AccountBlock> {
       ),
     );
   }
-
-  _displayDialogInfo(BuildContext context) {
+  //accounts = k;
+  _displayDialogInfo(BuildContext context,MyUser user) {
     AlertDialog alert = AlertDialog(
       title: Text('Информация: '),
       actions: [
@@ -123,18 +123,18 @@ class _AccountBlockState extends State<AccountBlock> {
         padding: EdgeInsets.all(10),
         child: Text(
           "Имя: " +
-              accounts[index].name +
+              user.firstname+" " +user.lastname+
               "\n" +
               "Кого готовы взять на передержку: " +
-              accounts[index].kinfofpet +
+             user.typePets +
               "\n" +
               "Контакты: " +
-              accounts[index].email +
+              user.email +
               "\n" +
               "Стоимость передержки: " +
-              accounts[index].price +
+              user.price +
               "\nРайон: " +
-              accounts[index].district,
+              user.district,
           style: GoogleFonts.comfortaa(
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.w800,

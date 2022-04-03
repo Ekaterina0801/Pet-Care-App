@@ -57,6 +57,12 @@ class _PetBoardingPageState extends StateMVC {
       );
     } else {
       final l = (state as MyUserResultSuccess).usersList;
+      final k = [];
+      for(var t in l)
+      {
+        if(t.readyforoverposure=="Да")
+          k.add(t);
+      }
     return MultiProvider(
       providers: [
             ChangeNotifierProvider(create: (_) => AuthProvider()),
@@ -149,9 +155,9 @@ class _PetBoardingPageState extends StateMVC {
                   shrinkWrap: true,
                   physics: ScrollPhysics(),
                   scrollDirection: Axis.vertical,
-                  itemCount: l.length,
+                  itemCount: k.length,
                   itemBuilder: (BuildContext context, int index) =>
-                      Container(child: AccountBlock(l[index], index))),
+                      Container(child: AccountBlock(k[index], index))),
             ],
           );
         }
