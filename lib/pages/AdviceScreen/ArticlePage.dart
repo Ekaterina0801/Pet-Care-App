@@ -17,7 +17,7 @@ class ArticlePage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return BasePage(
-        title: 'Советы',
+        title: 'Статья',
         body: ListView(children: [
           ArticleBlock(article.title,article.image),
           Container(
