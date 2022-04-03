@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -53,8 +54,10 @@ class _NotesPageState extends StateMVC {
     );
      if (state is NoteResultLoading) {
       // загрузка
-      return Center(
-        child: CircularProgressIndicator(),
+      return 
+         Center(
+          child: CircularProgressIndicator(),
+       
       );
     } else if (state is NoteResultFailure) {
       // ошибка
@@ -67,109 +70,117 @@ class _NotesPageState extends StateMVC {
       );
     } else {   
       final l = (state as NoteResultSuccess).notesList;
-    return AppBuilder(builder: (context){return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => UserProvider()),
-      ],
-      child: FutureBuilder(
-        future: getUserData(),
-        builder: (context,snapshot) {
+    return AppBuilder(builder: (context){return 
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => AuthProvider()),
+          ChangeNotifierProvider(create: (_) => UserProvider()),
+        ],
+        child: FutureBuilder(
+          future: getUserData(),
+          builder: (context,snapshot) {
+          switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.waiting:
+                      return CircularProgressIndicator();
+                    default:
+                      if (snapshot.hasError)
+                        return Text('Error: ${snapshot.error}');
+                      else user=snapshot.data;
+
+                        //UserPreferences().removeUser();
+                      
+                  }
+        List<Note> notes =[];
+        for(var i in l)
+        {
+          if(i.userID==user.userid)
+          notes.add(i);
+        }
         
-        switch (snapshot.connectionState) {
-                  case ConnectionState.none:
-                  case ConnectionState.waiting:
-                    return CircularProgressIndicator();
-                  default:
-                    if (snapshot.hasError)
-                      return Text('Error: ${snapshot.error}');
-                    else user=snapshot.data;
-
-                      //UserPreferences().removeUser();
+          return  
+            ListView(
+                shrinkWrap: true,
+                children: [
+                TextButton(
+                   onPressed:(){ setState(() {
+                    //_displayNoteAdd(context, _body, _date);
+                     final formKey = new GlobalKey<FormState>();
+                AlertDialog alert = AlertDialog(
+                title: Text('Добавление заметки'),
+                actions: [
+                  FlatButton(
+                    child: Text(
+                      'Добавить',
+                      style: GoogleFonts.comfortaa(
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14),
+                    ),
+                    onPressed: () {
+                      setState(() { addNote(_body, _date,user.userid);
+                      Navigator.of(context).pop();
+                      Navigator.pushNamed(context, "/home");
+                      Navigator.of(context).pop();});
+                      
+                      
+                     //Navigator.of(context).didUpdateWidget(Navigator.of(context).pop());
                     
-                }
-      List<Note> notes =[];
-      for(var i in l)
-      {
-        if(i.userID==user.userid)
-        notes.add(i);
-      }
-        return ListView(
-          shrinkWrap: true,
-          children: [
-          TextButton(
-             onPressed:(){ setState(() {
-              //_displayNoteAdd(context, _body, _date);
-               final formKey = new GlobalKey<FormState>();
-          AlertDialog alert = AlertDialog(
-          title: Text('Добавление заметки'),
-          actions: [
-            FlatButton(
-              child: Text(
-                'Добавить',
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14),
-              ),
-              
-              onPressed: () {
-                setState((){addNote(_body, _date,user.userid);
-                //notifyListeners();
+                    //setState(() {});
+                  })
+                    
+                    
                 
-                //AppBuilder.of(context).rebuild();
-                //Navigator.popAndPushNamed(context,'/notes');
-              });Navigator.of(context).pop();
-                Navigator.pushNamed(context, "/notes");
-              }),
-          
-          ],
-          content: Container(
-            padding: EdgeInsets.all(10),
-            child: Form(
-              key: formKey,
-              child: TextField(
-          maxLines: 10,
-          onChanged: (value) {_body = value;_date = DateTime.now().toString();}, 
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: 'Введите текст',
-              hintStyle: TextStyle(color: Colors.white60),
-            ),
-        )
-            )
-          ),
-        );
+                ],
+                content: Container(
+                  padding: EdgeInsets.all(10),
+                  child: Form(
+                    key: formKey,
+                    child: TextField(
+                maxLines: 10,
+                onChanged: (value) {_body = value;_date = DateTime.now().toString();}, 
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Введите текст',
+                    hintStyle: TextStyle(color: Colors.white60),
+                  ),
+              )
+                  )
+                ),
+              );
 
-        Future.delayed(Duration.zero, () async {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return alert;
-            });
+              Future.delayed(Duration.zero, () async {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return alert;
+                  });
 });
-            });},
-            child: Text("Добавить заметку")),
-         notes.length==0?Align(alignment:Alignment.center,child: Text("Заметок пока нет",style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16),),):GridView.builder(
-            shrinkWrap: true,
-              physics: ScrollPhysics(),
-            padding: EdgeInsets.all(15),
-            itemCount: 
-            notes.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1.2,
-            ),
-            itemBuilder: (BuildContext context, int index) => Container(
-                child: NotesWidget(notes[index])))
-                    ]
-        );
-        }),
+                  });},
+                  child: Text("Добавить заметку")),
+               notes.length==0?Align(alignment:Alignment.center,child: Text("Заметок пока нет",style: GoogleFonts.comfortaa(
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16),),):GridView.builder(
+                  shrinkWrap: true,
+                    physics: ScrollPhysics(),
+                  padding: EdgeInsets.all(15),
+                  itemCount: 
+                  notes.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 1.2,
+                  ),
+                  itemBuilder: (BuildContext context, int index) => Container(
+                      child: NotesWidget(notes[index])))
+                          ]
+              
+          
+          );
+          }),
+     
     );
   });
 }
@@ -190,6 +201,7 @@ _displayNoteAdd(BuildContext context,String _body, String _date,int userID)
           ),
           
           onPressed: () {
+            formKey.currentState.save(); 
             addNote(_body, _date,userID);
             //notifyListeners();
             Navigator.of(context).pop();
