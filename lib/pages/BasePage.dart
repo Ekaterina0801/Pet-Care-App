@@ -22,6 +22,7 @@ class BasePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+
           actions: [],
           shadowColor: Colors.grey,
           backgroundColor: Color.fromRGBO(255, 223, 142, 10),
@@ -30,7 +31,7 @@ class BasePage extends StatelessWidget {
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800,
-                  fontSize: 24)), automaticallyImplyLeading: ((title == 'Статья')  || (title == 'Прививки') || (title == 'Статьи'))?  true : false,
+                  fontSize: 24)), automaticallyImplyLeading: ((title == 'Статья')  || (title == 'Прививки') || (title == 'Статьи')||(title=='Регистрация'))?  true : false,
         ),
         body: body,
         bottomNavigationBar: navigationbar,

@@ -161,7 +161,7 @@ if (state is DiseaseResultLoading) {
                                           fontWeight: FontWeight.w800,
                                           fontSize: 14)),
                       TextField(
-                        maxLines: 10,
+                        maxLines: 5,
                         
                         onChanged: (value) {
                           type = value;
@@ -179,7 +179,7 @@ if (state is DiseaseResultLoading) {
                                           fontWeight: FontWeight.w800,
                                           fontSize: 14)),
                       TextField(
-                    maxLines: 2,
+                    maxLines: 1,
                     onChanged: (value) {
                       datebeg = value;
                     },
@@ -196,7 +196,7 @@ if (state is DiseaseResultLoading) {
                                           fontWeight: FontWeight.w800,
                                           fontSize: 14)),
                   TextField(
-                    maxLines: 2,
+                    maxLines: 1,
                     onChanged: (value) {
                       dateend = value;
                       

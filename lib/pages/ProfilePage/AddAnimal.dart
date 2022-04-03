@@ -9,6 +9,18 @@ import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:pet_care/pages/Registration/util/widgets.dart';
 
 import '../BasePage.dart';
+
+String validateDate(String value) {
+  String _msg;
+  RegExp regex = new RegExp(
+      r'^\d{2}[.|-|\|/]\d{2}[.|-|\|/]\d{4}');
+  if (value.isEmpty) {
+    _msg = "Дата пустая";
+  } else if (!regex.hasMatch(value)) {
+    _msg = "Введите дату в формате ДД.ММ.ГГГГ";
+  }
+  return _msg;
+}
 String CommaValid(String str) {
   RegExp exp = new RegExp(r',');
   String res = str.replaceAll(exp, '.');
@@ -20,7 +32,7 @@ class AddAnimal extends StatefulWidget {
 }
 
 class _AddAnimalState extends State<AddAnimal> {
-  String _animal,_name,_breed,_dateofbirthday,_gender, _color; double _weight;
+  String _animal,_name,_breed,_dateofbirthday,_gender, _color, _weight;
   int userID;
   final formKey = new GlobalKey<FormState>();
   @override
@@ -58,7 +70,7 @@ class _AddAnimalState extends State<AddAnimal> {
     TextFormField(
       autofocus: false,
       //obscureText: true,
-      validator: (value) => value.isEmpty ? "Введите дату рождения питомца (формат день.месяц.год)" : null,
+      validator: validateDate,
       onSaved: (value) => _dateofbirthday = value,
       decoration: buildInputDecoration("Дата рождения питомца", Icons.pets,
     ));
@@ -86,7 +98,7 @@ class _AddAnimalState extends State<AddAnimal> {
       autofocus: false,
       //obscureText: true,
       //validator: (value) => value.isEmpty ? "Введите вес питомца" : null,
-      onSaved: (value) => _weight = double.parse(CommaValid(value)),
+      onSaved: (value) => _weight = value,
       decoration: buildInputDecoration("Вес питомца", Icons.pets,
     ));
      final form = formKey.currentState;
@@ -248,10 +260,12 @@ class _AddAnimalState extends State<AddAnimal> {
                     onPressed: () => { if(formKey.currentState.validate()){
       formKey.currentState.save(), 
 
-                      addPet(userID, _animal, _name, _breed, _dateofbirthday, _gender, _color, _weight),Navigator.of(context).push(
+                      addPet(userID, _animal, _name, _breed, _dateofbirthday, _gender, _color, _weight),
+                      Navigator.of(context).pop(),
+                      
+                      Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => HomePage(
-                             
                             ),
                           ),
                         ),
@@ -268,7 +282,7 @@ class _AddAnimalState extends State<AddAnimal> {
 }
 
 Future<Map<String,dynamic>> addPet(int userID,String animal,String name,String breed,String dateofbirthday,String gender, String color,
-  double weight) async{
+  String weight) async{
   final Map<String,dynamic> petData = 
   {
     'UserID':userID,

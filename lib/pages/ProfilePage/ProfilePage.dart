@@ -18,6 +18,7 @@ import 'package:provider/provider.dart';
 import 'dart:ui';
 import 'AddAnimal.dart';
 
+/*
 var h = window.physicalSize.height;
 double FindCenterForPlus(double h) {
   double n;
@@ -27,7 +28,7 @@ double FindCenterForPlus(double h) {
     n = h - 125;
   return n;
 }
-
+*/
 DateTime dateToday =
     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 String AgeToString(String date) {
@@ -130,7 +131,7 @@ class _ProfilePageState extends StateMVC {
                         breed: "-",
                         dateofbirthday: "-",
                         gender: "-",
-                        weight: 0.0,
+                        weight: "0",
                         color: "-");
                     for (var i in pets) {
                       if (i.userID == user.userid) {
@@ -138,71 +139,60 @@ class _ProfilePageState extends StateMVC {
                         break;
                       }
                     }
-                    return pet.weight == 0.0
-                        ? Center(
-                            child: Column(
-                            children: [
-                              //Container(
-                                //  height: FindCenterForPlus(h)),
-                              Container(
-                                padding: EdgeInsets.all(10),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                        height: 70,
-                                        width: 70,
-                                        child: FloatingActionButton(
-                                          onPressed: () =>
-                                              Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) => AddAnimal(),
-                                            ),
-                                          ),
-                                          child: Container(
-                                              child: Icon(
-                                                CupertinoIcons.add,
-                                                size: 55,
-                                                color: Colors.black,
+                    return pet.weight == "0"
+                        ? Container(
+                          padding: EdgeInsets.all(20),
+                          child: Center(
+                              child: Column(
+                              children: [
+                                //Container(
+                                  //  height: FindCenterForPlus(h)),
+                                Container(
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                          height: 70,
+                                          width: 70,
+                                          child: FloatingActionButton(
+                                            onPressed: () =>
+                                                Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) => AddAnimal(),
                                               ),
-                                              decoration: BoxDecoration(
-                                                  color: Color.fromRGBO(
-                                                      240, 240, 240, 1),
-                                                  border: Border.all(
-                                                      color: Colors.black),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(50))),
-                                              height: 70,
-                                              width: 70),
-                                        )),
-                                    Container(
-                                      margin: EdgeInsets.all(10),
-                                      child: Text(
-                                        "Добавить нового питомца",
-                                        style: GoogleFonts.comfortaa(
-                                            fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.w800,
-                                            fontSize: 18),
+                                            ),
+                                            child: Container(
+                                                child: Icon(
+                                                  CupertinoIcons.add,
+                                                  size: 55,
+                                                  color: Colors.black,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                    color: Color.fromRGBO(
+                                                        240, 240, 240, 1),
+                                                    border: Border.all(
+                                                        color: Colors.black),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(50))),
+                                                height: 70,
+                                                width: 70),
+                                          )),
+                                      Container(
+                                        margin: EdgeInsets.all(10),
+                                        child: Text(
+                                          "Добавить нового питомца",
+                                          style: GoogleFonts.comfortaa(
+                                              fontStyle: FontStyle.normal,
+                                              fontWeight: FontWeight.w800,
+                                              fontSize: 18),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                              /*   Container(
-              child: TextButton(
-                onPressed: () => 
-                Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => AddAnimal(
-                           
-                          ),
-                        ),
-                      ),
-                child: Text("Добавить данные о питомце"),
-              ),
-            )*/
-                            ],
-                          ))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            )),
+                        )
                         : ListView(children: [
                             Container(
                               decoration: BoxDecoration(
@@ -302,7 +292,7 @@ class _ProfilePageState extends StateMVC {
                                       Color.fromRGBO(131, 184, 107, 80)),
                                   MainInfoBlock(
                                     "Вес",
-                                    pet.weight.toString() + " кг",
+                                    pet.weight + " кг",
                                     Color.fromRGBO(255, 223, 142, 10),
                                   ),
                                   MainInfoBlock("Пол", pet.gender,
@@ -393,7 +383,7 @@ class _ChangeInfoState extends State<ChangeInfo> {
                     fontSize: 14))),
         TextFormField(
           autofocus: false,
-          onChanged: (value) => widget.pet.weight = double.parse(value),
+          onChanged: (value) => widget.pet.weight = value,
         ),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
         RaisedButton(
