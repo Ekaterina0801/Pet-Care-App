@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
   final titles = [
     'Советы',
     'Сервис',
-    'Календарь',
+    'Календарь (в разработке)',
     'Записки',
     'Профиль',
   ];

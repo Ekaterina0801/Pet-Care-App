@@ -142,9 +142,10 @@ class _ProfilePageState extends StateMVC {
                         ? Center(
                             child: Column(
                             children: [
+                              //Container(
+                                //  height: FindCenterForPlus(h)),
                               Container(
-                                  height: FindCenterForPlus(h)),
-                              Container(
+                                padding: EdgeInsets.all(10),
                                 child: Column(
                                   children: [
                                     Container(
@@ -219,7 +220,7 @@ class _ProfilePageState extends StateMVC {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     AvatarBlock(
-                                        pet.name, profilespets[1].photo),
+                                        pet.name, 'assets/images/article_1.2.jpg'),
                                     /*
               Column(
                 children: [
