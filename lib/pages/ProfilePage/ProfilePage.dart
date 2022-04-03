@@ -113,14 +113,14 @@ class _ProfilePageState extends StateMVC {
                         ? Center(
                             child: Column(
                             children: [
-                              Container(
-                                  height: window.physicalSize.height / 2 - 168),
+                             // Container(
+                                  //height: window.physicalSize.height / 2 - 168),
                               Container(
                                 child: Column(
                                   children: [
                                     Container(
-                                        height: 130,
-                                        width: 130,
+                                        //height: 130,
+                                        //width: 130,
                                         child: FloatingActionButton(
                                           onPressed: () =>
                                               Navigator.of(context).push(

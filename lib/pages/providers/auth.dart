@@ -5,6 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:pet_care/dommain/myuser.dart';
+import 'package:pet_care/pages/ProfilePage/Pet.dart';
+import 'package:pet_care/pages/ProfilePage/Vaccinations.dart';
 import 'package:pet_care/pages/Registration/util/appurl.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 
@@ -98,6 +100,7 @@ class AuthProvider with ChangeNotifier {
         'Password': password,
         'ReadyForOverposure':false,
         'UserID': id,
+        
     };
    var response =  await post(Uri.parse(AppUrl.register),
         body: json.encode(registrationData));
@@ -110,7 +113,8 @@ class AuthProvider with ChangeNotifier {
   password: registrationData['Password'],
   readyforoverposure: registrationData['ReadyForOverposure'],
   email: registrationData['Email'],
-  district: registrationData['District']
+  district: registrationData['District'],
+  //pet: registrationData['Pet'],
   );
   UserPreferences().saveUser(authUser);
   var result;

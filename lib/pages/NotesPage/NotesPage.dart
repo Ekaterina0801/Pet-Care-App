@@ -41,18 +41,6 @@ class _NotesPageState extends StateMVC {
   Widget build(BuildContext context) {
     Future<MyUser> getUserData() => UserPreferences().getUser();
     final state = _controller.currentState;
-    final noteField = TextField(
-      maxLines: 10,
-      onChanged: (value) {
-        _body = value;
-        _date = DateTime.now().toString();
-      },
-      decoration: InputDecoration(
-        border: InputBorder.none,
-        hintText: 'Введите текст',
-        hintStyle: TextStyle(color: Colors.white60),
-      ),
-    );
     if (state is NoteResultLoading) {
       // загрузка
       return Center(
@@ -124,7 +112,7 @@ class _NotesPageState extends StateMVC {
                                       //Navigator.popAndPushNamed(context,'/notes');
                                     });
                                     Navigator.of(context).pop();
-                                    Navigator.pushNamed(context, "/notes");
+                                   // Navigator.pushNamed(context, "/notes");
                                   }),
                             ],
                             content: Container(

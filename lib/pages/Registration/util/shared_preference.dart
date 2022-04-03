@@ -14,8 +14,8 @@ class UserPreferences {
     prefs.setString('password',user.password);
     prefs.setString('district',user.district);
     prefs.setBool('readyforoverposure',user.readyforoverposure);
-
-
+    //prefs.set
+    //prefs.setStringList('vaccinations');
     print("object prefere");
 
     // ignore: deprecated_member_use

@@ -1,3 +1,5 @@
+import 'package:pet_care/pages/ProfilePage/Pet.dart';
+
 class MyUser {
   int userid;
   String firstname;
@@ -6,7 +8,7 @@ class MyUser {
   String password;
   String district;
   bool readyforoverposure;
-  
+  //Pet pet;
 
   MyUser({this.userid,this.email,this.password,this.firstname,this.lastname,this.district,this.readyforoverposure});
 
@@ -18,7 +20,8 @@ class MyUser {
         email: responseData['Email'],
         password: responseData['Password'],
         district: responseData['District'],
-        readyforoverposure: responseData['ReadyForOverposure']      
+        readyforoverposure: responseData['ReadyForOverposure'], 
+        //pet: responseData['Pet'],
     );
   }
 
@@ -29,7 +32,8 @@ class MyUser {
         'Password':password,
         'Email':email,
         'District':district,
-        'ReadyForOverposure':readyforoverposure
+        'ReadyForOverposure':readyforoverposure,
+        //'Pet':pet
       };
 
   Map toMap() => {"UserID":userid, "FirstName":firstname, "LastName":lastname,"Password": password,"Email":email,"District":district};

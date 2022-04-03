@@ -7,6 +7,10 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 // импортируем http пакет
 import 'package:http/http.dart' as http;
 
+import 'Disease.dart';
+
+import 'Vaccinations.dart';
+
 class Pet
 {
   int petID;
@@ -18,6 +22,8 @@ class Pet
   String gender;
   int weight;
   String color;
+  //List<Vaccination> vaccinations;
+  //List<Disease> diseases;
   Pet({this.petID,this.userID,this.animal,this.name,this.breed,this.dateofbirthday,this.gender,this.weight,this.color});
 
 factory Pet.fromJson(Map<String, Object> json) => Pet(
@@ -29,7 +35,8 @@ factory Pet.fromJson(Map<String, Object> json) => Pet(
        dateofbirthday: json['DateOfBirthday'],
        gender:json['Gender'],
        weight: json['Weight'],
-       color: json['Color']
+       color: json['Color'],
+       
       );
 
   Map<String, dynamic> toJson() => {
@@ -41,12 +48,23 @@ factory Pet.fromJson(Map<String, Object> json) => Pet(
         'DateOfBirthday':dateofbirthday,
         'Gender':gender,
         'Weight':weight,
-        'Color':color
+        'Color':color,
+        
       };
 }
 
 Future<Pet> getPet(int userID) async {
     Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets.json')));
+    List<Vaccination> v=[];
+    v.add(Vaccination(
+          date: "-",
+          vaccinationId: 0,
+          userID: userID,
+          petId: 0,
+          type: "-",
+          document: "-",
+          revactination: false
+        ));
     Pet pet = Pet(
         petID: 1,
         userID: userID,
@@ -56,7 +74,8 @@ Future<Pet> getPet(int userID) async {
         dateofbirthday: "-",
         gender: "-",
         weight: 0,
-        color:"-"
+        color:"-",
+       
       );
     if (res.statusCode == 200) {
       var ll = jsonDecode(res.body);
@@ -85,7 +104,8 @@ Future<Pet> getPet(int userID) async {
         dateofbirthday: "-",
         gender: "-",
         weight: 0,
-        color:"-"
+        color:"-",
+       
       );
     List<Pet> pets = [];
     if (res.statusCode == 200) {
