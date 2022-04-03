@@ -16,7 +16,8 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final formKey = new GlobalKey<FormState>();
 
-  String _email, _password, _firstname,_lastname;
+  String _email, _password, _firstname,_lastname,_price,_typepets,_district,_ready;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +59,34 @@ class _RegisterState extends State<Register> {
       onSaved: (value) => _lastname = value,
       decoration: buildInputDecoration("Введите фамилию", Icons.email),
     );
+
+    final districtField = TextFormField(
+      autofocus: false,
+      validator: (value)=>value.isEmpty?"Район пустой":null,
+      onSaved: (value) => _district = value,
+      decoration: buildInputDecoration("Введите район", Icons.email),
+    );
+
+    final priceField = TextFormField(
+      autofocus: false,
+      validator: (value)=>value.isEmpty?"Цена пустая":null,
+      onSaved: (value) => _price = value,
+      decoration: buildInputDecoration("Введите цену", Icons.email),
+    );
+
+    final readyField = TextFormField(
+      autofocus: false,
+      validator: (value)=>value.isEmpty?"Поле пустое":null,
+      onSaved: (value) => _ready= value,
+      decoration: buildInputDecoration("Готовы брать питомцев на передержку? (true/false)", Icons.email),
+    );
+
+    final typeField = TextFormField(
+      autofocus: false,
+      validator: (value)=>value.isEmpty?"Поле пустое":null,
+      onSaved: (value) => _typepets = value,
+      decoration: buildInputDecoration("Готовы брать питомцев на передержку? (true/false)", Icons.email),
+    );
     var loading = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -70,7 +99,7 @@ class _RegisterState extends State<Register> {
       final form = formKey.currentState;
       if (form.validate()) {
         form.save();
-        auth.register(_email, _firstname,_lastname,_password).
+        auth.register(_email, _firstname,_lastname,_password,_district,_typepets,_price,_ready).
          then((response) {
           if (response['status']) {
             MyUser user = response['data'];
@@ -127,6 +156,22 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 10.0),
                     confirmPassword,
                     SizedBox(height: 20.0),
+                    label("Район"),
+                    SizedBox(height: 10.0),
+                    districtField,
+                    label("Готовы брать на передержку?"),
+                    SizedBox(height: 10.0),
+                    readyField,
+                    SizedBox(height: 15.0),
+                    label("Стоимость передержки"),
+                    SizedBox(height: 10.0),
+                    priceField,
+                    SizedBox(height: 15.0),
+                    SizedBox(height: 15.0),
+                    label("Виды животных"),
+                    SizedBox(height: 10.0),
+                    typeField,
+                    SizedBox(height: 15.0),
                     auth.loggedInStatus == Status.Authenticating
                         ? loading
                         : Row(

@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
             '/login': (context) => Login(),
             'test':(context)=>DisplayAddNote(),
             '/register': (context) => Register(),
-           '/home': (BuildContext context) => NotesPage(),
+           '/home': (BuildContext context) => HomePage(),
            '/notes':(context) => NotesPage()
           },
         title: 'PetCare',

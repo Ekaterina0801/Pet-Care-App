@@ -13,7 +13,7 @@ class UserPreferences {
     prefs.setString('email', user.email);
     prefs.setString('password',user.password);
     prefs.setString('district',user.district);
-    prefs.setBool('readyforoverposure',user.readyforoverposure);
+    prefs.setString('readyforoverposure',user.readyforoverposure);
     //prefs.set
     //prefs.setStringList('vaccinations');
     print("object prefere");
@@ -31,7 +31,7 @@ class UserPreferences {
     String password = prefs.getString('password');
     String lastname = prefs.getString('lastname');
     String district = prefs.getString('district');
-    bool readuforoverposure = prefs.getBool('readyforoverposure');
+    String readyforoverposure = prefs.getString('readyforoverposure');
     print(email);
     print(lastname);
     print(password);
@@ -44,7 +44,7 @@ class UserPreferences {
         email: email,
         password: password,
         district: district,
-        readyforoverposure: readuforoverposure
+        readyforoverposure: readyforoverposure
        );
   }
   

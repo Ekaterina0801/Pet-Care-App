@@ -31,6 +31,13 @@ class AuthProvider with ChangeNotifier {
   Status get loggedInStatus => _loggedInStatus;
   Status get registeredInStatus => _registeredInStatus;
 
+  Future<List<MyUser>> allUsers()async {
+    //var result;
+    //var jsonString = '[{"email": $email,"username": $password}]';
+    var jsonString = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
+    var l = jsonDecode(jsonString.body);
+    return l.values;
+  }
   Future<Map<String, dynamic>> login(String email, String password) async {
     var result;
     //var jsonString = '[{"email": $email,"username": $password}]';
@@ -44,8 +51,8 @@ class AuthProvider with ChangeNotifier {
       if(i['Email']==email)
       {
          user = MyUser.fromJson(i); 
-         print(i['Email']);
-         print(i['UserID']);
+        // print(i['Email']);
+         //print(i['UserID']);
          break;
       }
     }
@@ -87,19 +94,21 @@ class AuthProvider with ChangeNotifier {
     return result;
   }
 
-  Future<Map<String, dynamic>> register(String email, String firstname, String lastname,String password) async {
+  Future<Map<String, dynamic>> register(String email, String firstname, String lastname,String password,String district,String typeofpets, String price,String ready) async {
 
     var jsonString = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
     var l = jsonDecode(jsonString.body);
     int id = l.length+1;
     final Map<String, dynamic> registrationData = {
-        'District':"-",
+        'District':district,
         'Email': email,
-        'FirstName':firstname,
+        'FirstName':firstname,          //Map<tttt,User>
         'LastName':lastname,
         'Password': password,
-        'ReadyForOverposure':false,
+        'ReadyForOverposure':ready,
         'UserID': id,
+        'TypePets':typeofpets,
+        'Price':price,
         
     };
    var response =  await post(Uri.parse(AppUrl.register),
@@ -114,6 +123,9 @@ class AuthProvider with ChangeNotifier {
   readyforoverposure: registrationData['ReadyForOverposure'],
   email: registrationData['Email'],
   district: registrationData['District'],
+  typePets: registrationData['TypePets'],
+  price: registrationData['Price'],
+  //stringID: registrationData['StringID']
   //pet: registrationData['Pet'],
   );
   UserPreferences().saveUser(authUser);

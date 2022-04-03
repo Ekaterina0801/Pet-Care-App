@@ -1,13 +1,14 @@
 import 'package:avatars/avatars.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/repository/accounts.dart';
 
 import 'Account.dart';
 
 //Виджет для блока-виджета аккаунта
 class AccountBlock extends StatefulWidget {
-  final Account account;
+  final MyUser account;
   final int index;
   AccountBlock(this.account, this.index);
 
@@ -49,7 +50,7 @@ class _AccountBlockState extends State<AccountBlock> {
                   child: Column(children: [
                     Avatar(
                       shape: AvatarShape.circle(50),
-                      name: widget.account.name,
+                      name: widget.account.firstname+ widget.account.lastname,
                     ),
                   ])),
               Container(
@@ -67,9 +68,9 @@ class _AccountBlockState extends State<AccountBlock> {
                       child: Center(
                           child: ListView(children: [
                         Text(
-                            widget.account.name +
+                            widget.account.firstname + " "+widget.account.lastname+
                                 '\n' +
-                                widget.account.kinfofpet +
+                                widget.account.typePets +
                                 '\n' +
                                 widget.account.price +
                                 ' руб/день',

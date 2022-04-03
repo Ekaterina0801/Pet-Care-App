@@ -1,112 +1,163 @@
+import 'dart:convert';
+
 import 'package:avatars/avatars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:pet_care/dommain/myuser.dart';
+import 'package:pet_care/pages/Registration/util/shared_preference.dart';
+import 'package:pet_care/pages/providers/auth.dart';
+import 'package:pet_care/pages/providers/userprovider.dart';
 import 'package:pet_care/repository/accounts.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'AccountBlock.dart';
 import 'SettingsService.dart';
 
 //страница сервиса передержки
 class PetBoardingPage extends StatefulWidget {
   @override
-  State<PetBoardingPage> createState() => _PetBoardingPageState();
+  _PetBoardingPageState createState() => _PetBoardingPageState();
 }
 
-class _PetBoardingPageState extends State<PetBoardingPage> {
+class _PetBoardingPageState extends StateMVC {
+  MyUserController _controller;
+  _PetBoardingPageState():super(MyUserController())
+  {
+    _controller = controller as MyUserController;
+  }
+   @override
+  void initState() {
+    super.initState();
+    _controller.init();
+  }
+
+  //final formKey = new GlobalKey<FormState>();
+  MyUser user;
   var _selected_info = "";
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      physics: ScrollPhysics(),
-      children: [
-        Container(
-            decoration: BoxDecoration(
-                color: Color.fromRGBO(255, 223, 142, 10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 4,
-                    offset: const Offset(0.0, 0.0),
-                    spreadRadius: 0.0,
-                  )
-                ]),
-            child: Column(children: [
-              Container(
-                child: Avatar(
-                  name: accounts[0].name,
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Text(accounts[0].name,
-                    maxLines: 12,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.comfortaa(
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 18)),
-              ),
-              Container(
-                  child: TextButton(
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SettingsService())),
-                child: Text("Перейти к настройкам моего профиля для сервиса",
-                    style: GoogleFonts.comfortaa(
-                        decoration: TextDecoration.underline,
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 14)),
-              )),
-            ])),
-        Row(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                  padding: EdgeInsets.all(10),
-                  //height: 30,
-                  child: IconButton(
-                    icon: Icon(Icons.sort),
-                    onPressed: () => _displayFilter(context),
-                  )),
-            ),
-            Flexible(
-              child: Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "Кто готов взять питомцев на передержку: ",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.comfortaa(
-                      color: Colors.black,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 16),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                ),
-              ),
-            )
+    Future<MyUser> getUserData() => UserPreferences().getUser();
+    final state = _controller.currentState;
+    if (state is MyUserResultLoading) {
+      // загрузка
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else if (state is MyUserResultFailure) {
+      // ошибка
+      return Center(
+        child: Text(state.error,
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .headline4
+                .copyWith(color: Colors.red)),
+      );
+    } else {
+      final l = (state as MyUserResultSuccess).usersList;
+    return MultiProvider(
+      providers: [
+            ChangeNotifierProvider(create: (_) => AuthProvider()),
+            ChangeNotifierProvider(create: (_) => UserProvider()),
           ],
-        ),
-        GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisExtent: 255,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
-            ),
-            shrinkWrap: true,
+      child: FutureBuilder(
+        future:getUserData(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                  case ConnectionState.waiting:
+                    return CircularProgressIndicator();
+                  default:
+                    if (snapshot.hasError)
+                      return Text('Error: ${snapshot.error}');
+                    else
+                      user = snapshot.data;
+          return ListView(
             physics: ScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            itemCount: accounts.length,
-            itemBuilder: (BuildContext context, int index) =>
-                Container(child: AccountBlock(accounts[index], index))),
-      ],
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromRGBO(255, 223, 142, 10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 4,
+                          offset: const Offset(0.0, 0.0),
+                          spreadRadius: 0.0,
+                        )
+                      ]),
+                  child: Column(children: [
+                    Container(
+                      child: Avatar(
+                        name: user.firstname+" "+user.lastname,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(user.firstname+" "+user.lastname,
+                          maxLines: 12,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.comfortaa(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 18)),
+                    ),
+                    Container(
+                        child: TextButton(
+                      onPressed: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SettingsService())),
+                      child: Text("Перейти к настройкам моего профиля для сервиса",
+                          style: GoogleFonts.comfortaa(
+                              decoration: TextDecoration.underline,
+                              color: Colors.black,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14)),
+                    )),
+                  ])),
+              Row(
+                children: [
+                
+                  Flexible(
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        "Кто готов взять питомцев на передержку: ",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.comfortaa(
+                            color: Colors.black,
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 16),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisExtent: 255,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
+                  ),
+                  shrinkWrap: true,
+                  physics: ScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  itemCount: l.length,
+                  itemBuilder: (BuildContext context, int index) =>
+                      Container(child: AccountBlock(l[index], index))),
+            ],
+          );
+        }
+        }),
     );
-  }
+        }}
 
   double _value = 20;
   _displayFilter(BuildContext context) {
