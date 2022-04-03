@@ -18,6 +18,19 @@ import 'package:provider/provider.dart';
 import 'dart:ui';
 import 'AddAnimal.dart';
 
+DateTime dateToday =
+    DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+String AgeToString(String date) {
+  int dateBirth_year = int.parse(date.substring(6,10));
+  int dateBirth_month = int.parse(date.substring(3,5));
+
+  String age_years = (dateToday.year - dateBirth_year).round().toString();
+  String age_month =
+      (dateToday.month - dateBirth_month).round().abs().toString();
+  String age_string = "${age_years} года \n${age_month} месяцев";
+  return age_string;
+}
+
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -128,7 +141,8 @@ class _ProfilePageState extends StateMVC {
                                                       color: Colors.black),
                                                   borderRadius:
                                                       BorderRadius.all(
-                                                          Radius.circular(100))),
+                                                          Radius.circular(
+                                                              100))),
                                               height: 135,
                                               width: 140),
                                         )),
@@ -253,7 +267,7 @@ class _ProfilePageState extends StateMVC {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  MainInfoBlock("Возраст", pet.dateofbirthday,
+                                  MainInfoBlock("Возраст", AgeToString(pet.dateofbirthday),
                                       Color.fromRGBO(131, 184, 107, 80)),
                                   MainInfoBlock(
                                     "Вес",
