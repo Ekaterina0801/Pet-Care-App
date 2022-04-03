@@ -12,7 +12,7 @@ import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
 import 'package:pet_care/repository/notesrepo.dart';
 import 'package:provider/provider.dart';
-
+import 'package:pet_care/pages/BasePage.dart';
 import 'AppBuilder.dart';
 import 'Note.dart';
 import 'NoteController.dart';
@@ -123,8 +123,18 @@ class _NotesPageState extends StateMVC {
                                       //AppBuilder.of(context).rebuild();
                                       //Navigator.popAndPushNamed(context,'/notes');
                                     });
-                                    Navigator.of(context).pop();
-                                    Navigator.pushNamed(context, "/notes");
+                                    Navigator.of(context).pop(true);
+                                    //  Navigator.pushNamed(context, "/notes");
+                                     Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => HomeNotes(),
+                                      ),
+                                    );
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => HomeNotes(),
+                                      ),
+                                    );
                                   }),
                             ],
                             content: Container(
@@ -164,21 +174,19 @@ class _NotesPageState extends StateMVC {
                                   fontWeight: FontWeight.w800,
                                   fontSize: 16)))),
                   notes.length == 0
-                      ? ListBody(
-                        children: [
-                       Container(
-                        height: window.physicalSize.height / 2 - 32),
-                         Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Заметок пока нет",
-                            style: GoogleFonts.comfortaa(
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 16),
-                          ),
-                        )
-
+                      ? ListBody(children: [
+                          Container(
+                              height: window.physicalSize.height / 2 - 32),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Заметок пока нет",
+                              style: GoogleFonts.comfortaa(
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 16),
+                            ),
+                          )
                         ])
                       : GridView.builder(
                           shrinkWrap: true,
@@ -218,7 +226,7 @@ class _NotesPageState extends StateMVC {
           onPressed: () {
             addNote(_body, _date, userID);
             //notifyListeners();
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(true);
           },
         ),
       ],

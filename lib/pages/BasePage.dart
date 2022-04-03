@@ -139,3 +139,105 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+//виджет навигационной панели
+class HomeNotes extends StatefulWidget {
+  @override
+  _HomeNotesState createState() => _HomeNotesState();
+}
+
+class _HomeNotesState extends State<HomeNotes> {
+  int currentindex = 3;
+  final titles = [
+    'Советы',
+    'Сервис',
+    'Календарь',
+    'Записки',
+    'Профиль',
+  ];
+  final children = [
+    AdvicePage(),
+    PetBoardingPage(),
+    CalendarPage(),
+    NotesPage(),
+    ProfilePage(),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return BasePage(
+      title: titles[currentindex],
+      body: children[currentindex],
+      navigationbar: SalomonBottomBar(
+        selectedItemColor: Colors.black,
+        currentIndex: currentindex,
+        onTap: (index) {
+          setState(() {
+            currentindex = index;
+          });
+        },
+        items: [
+          SalomonBottomBarItem(
+            icon: Icon(
+              CupertinoIcons.book,
+              size: 23,
+            ),
+            title: Text('Советы',
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(
+              CupertinoIcons.location,
+              size: 23,
+            ),
+            title: Text('Сервис',
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(
+              CupertinoIcons.calendar,
+              size: 23,
+            ),
+            title: Text('Календарь',
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(
+              CupertinoIcons.pen,
+              size: 23,
+            ),
+            title: Text('Записки',
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(
+              CupertinoIcons.person,
+              size: 23,
+            ),
+            title: Text('Профиль',
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
+          ),
+        ],
+      ),
+    );
+  }
+}
