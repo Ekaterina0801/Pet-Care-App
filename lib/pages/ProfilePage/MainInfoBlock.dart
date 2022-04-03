@@ -4,18 +4,27 @@ import 'package:google_fonts/google_fonts.dart';
 class MainInfoBlock extends StatelessWidget {
   final String title;
   final String info;
-  MainInfoBlock(this.title, this.info);
+  final Color myColor;
+  MainInfoBlock(this.title, this.info, this.myColor);
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
           //padding: EdgeInsets.all(10),
-          width: MediaQuery.of(context).size.width * 0.25 - 10,
+          width: MediaQuery.of(context).size.width * 0.3 - 6,
           height: 90,
           decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 2,
+                offset: const Offset(1.0, 1.0),
+                spreadRadius: 0.0,
+              )
+            ],
             borderRadius: BorderRadius.circular(10),
-            color: Color.fromRGBO(245, 201, 123, 1),
+            color: myColor,
           ),
           child: Container(
               padding: EdgeInsets.only(top: 35),
@@ -35,8 +44,9 @@ class MainInfoBlock extends StatelessWidget {
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800,
-                  fontSize: 14),
-            ))
+                  fontSize: 16),
+            )
+          )
       ],
     );
   }
