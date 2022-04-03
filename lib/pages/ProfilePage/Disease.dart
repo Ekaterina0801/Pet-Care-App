@@ -124,7 +124,9 @@ if (state is DiseaseResultLoading) {
                                     ),
                                     onPressed: () {
                                       setState(() {
-                                        addDisease(type, datebeg,dateend, user.userid);
+                                        if(formKey.currentState.validate()){
+      formKey.currentState.save();
+                                        addDisease(type, datebeg,dateend, user.userid);}
                                         //notifyListeners();
 
                                         //AppBuilder.of(context).rebuild();
@@ -160,9 +162,9 @@ if (state is DiseaseResultLoading) {
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.w800,
                                           fontSize: 14)),
-                      TextField(
+                      TextFormField(
                         maxLines: 5,
-                        
+                        validator: (value)=>value.isEmpty?"Введите текст":null,
                         onChanged: (value) {
                           type = value;
                         },
