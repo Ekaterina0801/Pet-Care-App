@@ -9,6 +9,7 @@ import 'package:pet_care/pages/providers/userprovider.dart';
 import 'package:provider/provider.dart';
 import 'package:select_form_field/select_form_field.dart';
 
+
 class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
@@ -178,7 +179,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 15.0),
                     label("Готовы брать на передержку?"),
                     SizedBox(height: 10.0),
-                    readyField,
+                    //readyField,
                     SizedBox(height: 15.0),
                     auth.loggedInStatus == Status.Authenticating
                         ? loading
