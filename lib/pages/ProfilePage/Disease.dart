@@ -132,11 +132,7 @@ if (state is DiseaseResultLoading) {
                                       });
                                        Navigator.of(context).pop(true);
                                     // Navigator.pushNamed(context, "/notes");
-                                     Navigator.of(context).push(
-                                      MaterialPageRoute(
- builder: (context) => HomeProfile(),
-                                      ),
-                                    );
+                                  
                                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => DiseasesPage())
 
@@ -250,7 +246,8 @@ if (state is DiseaseResultLoading) {
                                   fontWeight: FontWeight.w800,
                                   fontSize: 16),
                             ),
-                          )
+                          ),
+                          
                         ])
                           )
                           ]):ListView.builder(
@@ -260,7 +257,25 @@ if (state is DiseaseResultLoading) {
         itemBuilder: (context, index) {
               return DiseaseCard(diseases[index]);
         }),
-                ]),
+                Align(
+                            alignment: Alignment.bottomLeft,
+                            child: FloatingActionButton(
+                                        child: Icon(Icons.arrow_back,
+                                            color: Colors.grey, size: 50),
+                                        backgroundColor: Colors.white,
+                                        //onPressed: () => Navigator.push(context,
+                                        //                      MaterialPageRoute(builder: (context) => ChangeInfoPage(pet))),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  opaque: false,
+                                                  pageBuilder:
+                                                      (BuildContext context, _,
+                                                              __) =>
+                                                          HomePage()));
+                                        },
+                                      ))]),
           );
         }
       ),
