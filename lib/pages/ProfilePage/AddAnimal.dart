@@ -9,14 +9,18 @@ import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:pet_care/pages/Registration/util/widgets.dart';
 
 import '../BasePage.dart';
-
+String CommaValid(String str) {
+  RegExp exp = new RegExp(r',');
+  String res = str.replaceAll(exp, '.');
+  return res;
+}
 class AddAnimal extends StatefulWidget {
   @override
   State<AddAnimal> createState() => _AddAnimalState();
 }
 
 class _AddAnimalState extends State<AddAnimal> {
-  String _animal,_name,_breed,_dateofbirthday,_gender, _color; int _weight;
+  String _animal,_name,_breed,_dateofbirthday,_gender, _color; double _weight;
   int userID;
   final formKey = new GlobalKey<FormState>();
   @override
@@ -82,7 +86,7 @@ class _AddAnimalState extends State<AddAnimal> {
       autofocus: false,
       //obscureText: true,
       //validator: (value) => value.isEmpty ? "Введите вес питомца" : null,
-      onSaved: (value) => _weight = int.parse(value),
+      onSaved: (value) => _weight = double.parse(CommaValid(value)),
       decoration: buildInputDecoration("Вес питомца", Icons.pets,
     ));
      final form = formKey.currentState;
@@ -264,7 +268,7 @@ class _AddAnimalState extends State<AddAnimal> {
 }
 
 Future<Map<String,dynamic>> addPet(int userID,String animal,String name,String breed,String dateofbirthday,String gender, String color,
-  int weight) async{
+  double weight) async{
   final Map<String,dynamic> petData = 
   {
     'UserID':userID,

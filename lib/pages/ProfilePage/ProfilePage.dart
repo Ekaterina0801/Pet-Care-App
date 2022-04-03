@@ -18,16 +18,45 @@ import 'package:provider/provider.dart';
 import 'dart:ui';
 import 'AddAnimal.dart';
 
+var h = window.physicalSize.height;
+double FindCenterForPlus(double h) {
+  double n;
+  if (h / 2 > 125)
+    n = h / 2 - 125;
+  else
+    n = h - 125;
+  return n;
+}
+
 DateTime dateToday =
     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 String AgeToString(String date) {
-  int dateBirth_year = int.parse(date.substring(6,10));
-  int dateBirth_month = int.parse(date.substring(3,5));
+  int dateBirth_year = int.parse(date.substring(6, 10));
+  int dateBirth_month = int.parse(date.substring(3, 5));
 
-  String age_years = (dateToday.year - dateBirth_year).round().toString();
-  String age_month =
-      (dateToday.month - dateBirth_month).round().abs().toString();
-  String age_string = "${age_years} года \n${age_month} месяцев";
+  var age_years = (dateToday.year - dateBirth_year).round();
+  var age_month = (dateToday.month - dateBirth_month).round().abs();
+  String years = "";
+  String month = "";
+  if (age_years == 0)
+    years = "";
+  else if (age_years == 1)
+    years = "1 год";
+  else if ((age_years == 2) || (age_years == 3) || (age_years == 4))
+    years = "${age_years} года";
+  else
+    years = "${age_years} лет";
+
+  if (age_month == 0)
+    month = "0 месяцев";
+  else if (age_month == 1)
+    month = "1 месяц";
+  else if ((age_month == 2) || (age_month == 3) || (age_month == 4))
+    month = "${age_month} месяца";
+  else
+    month = "${age_month} месяцев";
+
+  String age_string = years + "\n" + month;
   return age_string;
 }
 
@@ -101,7 +130,7 @@ class _ProfilePageState extends StateMVC {
                         breed: "-",
                         dateofbirthday: "-",
                         gender: "-",
-                        weight: 0,
+                        weight: 0.0,
                         color: "-");
                     for (var i in pets) {
                       if (i.userID == user.userid) {
@@ -109,18 +138,19 @@ class _ProfilePageState extends StateMVC {
                         break;
                       }
                     }
-                    return pet.weight == 0
+                    return pet.weight == 0.0
                         ? Center(
                             child: Column(
                             children: [
-                             // Container(
-                                  //height: window.physicalSize.height / 2 - 168),
+                              //Container(
+                                //  height: FindCenterForPlus(h)),
                               Container(
+                                padding: EdgeInsets.all(10),
                                 child: Column(
                                   children: [
                                     Container(
-                                        //height: 130,
-                                        //width: 130,
+                                        height: 70,
+                                        width: 70,
                                         child: FloatingActionButton(
                                           onPressed: () =>
                                               Navigator.of(context).push(
@@ -131,7 +161,7 @@ class _ProfilePageState extends StateMVC {
                                           child: Container(
                                               child: Icon(
                                                 CupertinoIcons.add,
-                                                size: 110,
+                                                size: 55,
                                                 color: Colors.black,
                                               ),
                                               decoration: BoxDecoration(
@@ -141,10 +171,9 @@ class _ProfilePageState extends StateMVC {
                                                       color: Colors.black),
                                                   borderRadius:
                                                       BorderRadius.all(
-                                                          Radius.circular(
-                                                              100))),
-                                              height: 135,
-                                              width: 140),
+                                                          Radius.circular(50))),
+                                              height: 70,
+                                              width: 70),
                                         )),
                                     Container(
                                       margin: EdgeInsets.all(10),
@@ -152,7 +181,7 @@ class _ProfilePageState extends StateMVC {
                                         "Добавить нового питомца",
                                         style: GoogleFonts.comfortaa(
                                             fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.w900,
+                                            fontWeight: FontWeight.w800,
                                             fontSize: 18),
                                       ),
                                     ),
@@ -191,7 +220,7 @@ class _ProfilePageState extends StateMVC {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     AvatarBlock(
-                                        pet.name, profilespets[1].photo),
+                                        pet.name, 'assets/images/article_1.2.jpg'),
                                     /*
               Column(
                 children: [
@@ -243,8 +272,8 @@ class _ProfilePageState extends StateMVC {
                                         child: Icon(Icons.edit,
                                             color: Colors.grey, size: 20),
                                         backgroundColor: Colors.white,
-                                        // onPressed: () => Navigator.push(context,
-                                        //                      MaterialPageRoute(builder: (context) => ChangeInfo(pet))),
+                                        //onPressed: () => Navigator.push(context,
+                                        //                      MaterialPageRoute(builder: (context) => ChangeInfoPage(pet))),
                                         onPressed: () {
                                           Navigator.push(
                                               context,
@@ -267,11 +296,13 @@ class _ProfilePageState extends StateMVC {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  MainInfoBlock("Возраст", AgeToString(pet.dateofbirthday),
+                                  MainInfoBlock(
+                                      "Возраст",
+                                      AgeToString(pet.dateofbirthday),
                                       Color.fromRGBO(131, 184, 107, 80)),
                                   MainInfoBlock(
                                     "Вес",
-                                    pet.weight.toString(),
+                                    pet.weight.toString() + " кг",
                                     Color.fromRGBO(255, 223, 142, 10),
                                   ),
                                   MainInfoBlock("Пол", pet.gender,
@@ -362,7 +393,7 @@ class _ChangeInfoState extends State<ChangeInfo> {
                     fontSize: 14))),
         TextFormField(
           autofocus: false,
-          onChanged: (value) => widget.pet.weight = int.parse(value),
+          onChanged: (value) => widget.pet.weight = double.parse(value),
         ),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
         RaisedButton(

@@ -20,7 +20,7 @@ class Pet
   String breed;
   String dateofbirthday;
   String gender;
-  int weight;
+  double weight;
   String color;
   //List<Vaccination> vaccinations;
   //List<Disease> diseases;
@@ -73,9 +73,8 @@ Future<Pet> getPet(int userID) async {
         breed:"-",
         dateofbirthday: "-",
         gender: "-",
-        weight: 0,
-        color:"-",
-       
+        weight: 0.0,
+        color:"-"
       );
     if (res.statusCode == 200) {
       var ll = jsonDecode(res.body);
@@ -103,9 +102,8 @@ Future<Pet> getPet(int userID) async {
         breed:"-",
         dateofbirthday: "-",
         gender: "-",
-        weight: 0,
-        color:"-",
-       
+        weight: 0.0,
+        color:"-"
       );
     List<Pet> pets = [];
     if (res.statusCode == 200) {
