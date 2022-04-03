@@ -35,7 +35,7 @@ class ChangeInfoPage extends StatelessWidget {
                         fontSize: 16)),
                 TextFormField(
                   autofocus: false,
-                  onSaved: (value) => pet.weight = double.parse(value), 
+                  onSaved: (value) => pet.weight = value, 
                 ),
               ],
             )));

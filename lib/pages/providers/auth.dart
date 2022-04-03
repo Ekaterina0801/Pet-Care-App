@@ -50,10 +50,20 @@ class AuthProvider with ChangeNotifier {
     {
       if(i['Email']==email)
       {
-         user = MyUser.fromJson(i); 
+        while(true){
+        if(i['Password']==password)
+        {
+            user = MyUser.fromJson(i); break;}
+        else
+        {
+           _loggedInStatus = Status.NotLoggedIn;
+           notifyListeners();
+           //Login();
+        }
+      }
         // print(i['Email']);
          //print(i['UserID']);
-         break;
+        
       }
     }
   

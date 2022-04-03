@@ -124,7 +124,9 @@ if (state is DiseaseResultLoading) {
                                     ),
                                     onPressed: () {
                                       setState(() {
-                                        addDisease(type, datebeg,dateend, user.userid);
+                                        if(formKey.currentState.validate()){
+      formKey.currentState.save();
+                                        addDisease(type, datebeg,dateend, user.userid);}
                                         //notifyListeners();
 
                                         //AppBuilder.of(context).rebuild();
@@ -160,9 +162,9 @@ if (state is DiseaseResultLoading) {
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.w800,
                                           fontSize: 14)),
-                      TextField(
-                        maxLines: 10,
-                        
+                      TextFormField(
+                        maxLines: 5,
+                        validator: (value)=>value.isEmpty?"Введите текст":null,
                         onChanged: (value) {
                           type = value;
                         },
@@ -178,8 +180,9 @@ if (state is DiseaseResultLoading) {
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.w800,
                                           fontSize: 14)),
-                      TextField(
-                    maxLines: 2,
+                      TextFormField(
+                    maxLines: 1,
+                    validator: (value)=>value.isEmpty?"Введите текст":null,
                     onChanged: (value) {
                       datebeg = value;
                     },
@@ -195,8 +198,9 @@ if (state is DiseaseResultLoading) {
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.w800,
                                           fontSize: 14)),
-                  TextField(
-                    maxLines: 2,
+                  TextFormField(
+                    validator: (value)=>value.isEmpty?"Введите текст":null,
+                    maxLines: 1,
                     onChanged: (value) {
                       dateend = value;
                       

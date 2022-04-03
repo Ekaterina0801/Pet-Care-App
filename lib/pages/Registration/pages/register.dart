@@ -11,6 +11,8 @@ import 'package:select_form_field/select_form_field.dart';
 //import 'package:select_form_field/select_form_field.dart';
 
 
+
+//(\d+)[\.|\-](\d+)[\.|\-](\d+)\s(.*)
 class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
@@ -160,10 +162,6 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 10.0),
                     passwordField,
                     SizedBox(height: 15.0),
-                    label("Подтвердите пароль"),
-                    SizedBox(height: 10.0),
-                    confirmPassword,
-                    SizedBox(height: 20.0),
                     label("Район"),
                     SizedBox(height: 10.0),
                     districtField,

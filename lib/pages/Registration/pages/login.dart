@@ -117,7 +117,7 @@ class _LoginState extends State<Login> {
           child: Form(
             key: formKey,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   //child: Align(
@@ -137,6 +137,7 @@ class _LoginState extends State<Login> {
                 SizedBox(height: 5.0), // отступ (высота) между "пароль" и белым контейнером "пароль"
                 passwordField,
                 SizedBox(height: 20.0), // отступ (высота) между желтым контейнером "вход" и белым контейнером "пароль"
+                
                 auth.loggedInStatus == Status.Authenticating
                     ? loading
                     : Row(
@@ -145,8 +146,21 @@ class _LoginState extends State<Login> {
                         longButtons("Вход", doLogin),
                       ],
                     ),
+                    
                 SizedBox(height: 5.0), // отступ (высота) между желтым контейнером "вход" и контейнерами "ЗП?" и "Регистрация"
-                forgotLabel
+                forgotLabel,
+                SizedBox(height: 10,),
+                Container(
+                              child: Flexible(
+                                child: Text(
+                                  "Баг: при попытке ввести несуществующие в БД данные приложение ломается. Будет устранен", style:  GoogleFonts.comfortaa(
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w400, 
+              fontSize: 12                  
+              ),
+                                  softWrap: true,),
+                              ),
+                            ),
               ],
             ),
           

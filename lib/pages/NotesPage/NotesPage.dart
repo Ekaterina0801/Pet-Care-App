@@ -109,9 +109,11 @@ class _NotesPageState extends StateMVC {
                                   ),
  onPressed: () {
                                     setState(() {
+                                      if(formKey.currentState.validate()){
+      formKey.currentState.save();
                                       addNote(_body, _date, user.userid);
                                       //notifyListeners();
-
+                                      }
                                       //AppBuilder.of(context).rebuild();
                                       //Navigator.popAndPushNamed(context,'/notes');
                                     });
@@ -133,7 +135,8 @@ class _NotesPageState extends StateMVC {
                                 padding: EdgeInsets.all(10),
                                 child: Form(
                                     key: formKey,
-                                    child: TextField(
+                                    child: TextFormField(
+                                      validator: (value)=>value.isEmpty?"Введите заметку":null,
                                       maxLines: 10,
                                       onChanged: (value) {
                                         _body = value;
@@ -216,9 +219,10 @@ class _NotesPageState extends StateMVC {
                     fontWeight: FontWeight.w800,
                     fontSize: 14),
               ),
-              onPressed: () => {addNote(_body,_date,userid),Navigator.pop(context)}
+              onPressed: () => {if(formKey.currentState.validate()){
+      formKey.currentState.save(), addNote(_body,_date,userid),Navigator.pop(context)}
               //Navigator.pop(context)
-            )
+              })
               /*
               {
                 addNote(_body, _date, userid);
@@ -232,8 +236,10 @@ class _NotesPageState extends StateMVC {
               padding: EdgeInsets.all(10),
               child: Form(
                   key: formKey,
-                  child: TextField(
+                  
+                  child: TextFormField(
                     maxLines: 10,
+                    validator: (value)=>value.isEmpty?"Введите текст":value,
                     onChanged: (value) {
                       _body = value;
                       _date = DateTime.now().toString();
