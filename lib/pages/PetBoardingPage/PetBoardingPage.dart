@@ -111,6 +111,7 @@ class _PetBoardingPageState extends StateMVC {
                               fontWeight: FontWeight.w800,
                               fontSize: 18)),
                     ),
+                    /*
                     Container(
                         child: TextButton(
                       onPressed: () => Navigator.push(context,
@@ -122,7 +123,8 @@ class _PetBoardingPageState extends StateMVC {
                               fontStyle: FontStyle.normal,
                               fontWeight: FontWeight.w800,
                               fontSize: 14)),
-                    )),
+                    )
+                    ),*/
                   ])),
               Row(
                 children: [
