@@ -16,7 +16,7 @@ class Pet
   String breed;
   String dateofbirthday;
   String gender;
-  int weight;
+  double weight;
   String color;
   Pet({this.petID,this.userID,this.animal,this.name,this.breed,this.dateofbirthday,this.gender,this.weight,this.color});
 
@@ -55,7 +55,7 @@ Future<Pet> getPet(int userID) async {
         breed:"-",
         dateofbirthday: "-",
         gender: "-",
-        weight: 0,
+        weight: 0.0,
         color:"-"
       );
     if (res.statusCode == 200) {
@@ -84,7 +84,7 @@ Future<Pet> getPet(int userID) async {
         breed:"-",
         dateofbirthday: "-",
         gender: "-",
-        weight: 0,
+        weight: 0.0,
         color:"-"
       );
     List<Pet> pets = [];

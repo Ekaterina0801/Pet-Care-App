@@ -24,9 +24,9 @@ String AgeToString(String date) {
   int dateBirth_year = int.parse(date.substring(6, 10));
   int dateBirth_month = int.parse(date.substring(3, 5));
 
-  String age_years = (dateToday.year - dateBirth_year).round().toString();
-  String age_month =
-      (dateToday.month - dateBirth_month).round().abs().toString();
+ var age_years = (dateToday.year - dateBirth_year).round();
+  var age_month =
+      (dateToday.month - dateBirth_month).round().abs();
   String years = "";
   String month = "";
   if (age_years == 0) years = "";
@@ -37,11 +37,11 @@ String AgeToString(String date) {
   else years = "${age_years} лет";
 
   if (age_month == 0) month = "0 месяцев";
-  else if (age_month == 1) years = "1 месяц";
+  else if (age_month == 1) month = "1 месяц";
   else if ((age_month == 2) ||
         (age_month == 3) ||
-        (age_month == 4)) years =  "${age_month} месяца";
-  else years = "${age_month} месяцев";
+        (age_month == 4)) month =  "${age_month} месяца";
+  else month = "${age_month} месяцев";
        
   String age_string = years+"\n"+month;
   return age_string;
@@ -117,7 +117,7 @@ class _ProfilePageState extends StateMVC {
                         breed: "-",
                         dateofbirthday: "-",
                         gender: "-",
-                        weight: 0,
+                        weight: 0.0,
                         color: "-");
                     for (var i in pets) {
                       if (i.userID == user.userid) {
@@ -125,7 +125,7 @@ class _ProfilePageState extends StateMVC {
                         break;
                       }
                     }
-                    return pet.weight == 0
+                    return pet.weight == 0.0
                         ? Center(
                             child: Column(
                             children: [
@@ -259,8 +259,8 @@ class _ProfilePageState extends StateMVC {
                                         child: Icon(Icons.edit,
                                             color: Colors.grey, size: 20),
                                         backgroundColor: Colors.white,
-                                        // onPressed: () => Navigator.push(context,
-                                        //                      MaterialPageRoute(builder: (context) => ChangeInfo(pet))),
+                                        //onPressed: () => Navigator.push(context,
+                                        //                      MaterialPageRoute(builder: (context) => ChangeInfoPage(pet))),
                                         onPressed: () {
                                           Navigator.push(
                                               context,
@@ -289,7 +289,7 @@ class _ProfilePageState extends StateMVC {
                                       Color.fromRGBO(131, 184, 107, 80)),
                                   MainInfoBlock(
                                     "Вес",
-                                    pet.weight.toString(),
+                                    pet.weight.toString()+" кг",
                                     Color.fromRGBO(255, 223, 142, 10),
                                   ),
                                   MainInfoBlock("Пол", pet.gender,
@@ -380,7 +380,7 @@ class _ChangeInfoState extends State<ChangeInfo> {
                     fontSize: 14))),
         TextFormField(
           autofocus: false,
-          onChanged: (value) => widget.pet.weight = int.parse(value),
+          onChanged: (value) => widget.pet.weight = double.parse(value),
         ),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
         RaisedButton(
