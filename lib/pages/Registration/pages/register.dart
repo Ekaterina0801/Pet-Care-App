@@ -7,6 +7,7 @@ import 'package:pet_care/pages/Registration/util/widgets.dart';
 import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
 import 'package:provider/provider.dart';
+import 'package:select_form_field/select_form_field.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -74,9 +75,14 @@ class _RegisterState extends State<Register> {
       decoration: buildInputDecoration("Введите цену", Icons.email),
     );
 
-    final readyField = TextFormField(
+    final readyField = SelectFormField(
       autofocus: false,
+      items: [
+        {'value':'Да','label':'Да'},
+        {'value':'Нет','label':'Нет'}
+      ],
       validator: (value)=>value.isEmpty?"Поле пустое":null,
+      onChanged: (value) => _ready= value,
       onSaved: (value) => _ready= value,
       decoration: buildInputDecoration("Готовы брать питомцев на передержку? (true/false)", Icons.email),
     );
@@ -159,9 +165,7 @@ class _RegisterState extends State<Register> {
                     label("Район"),
                     SizedBox(height: 10.0),
                     districtField,
-                    label("Готовы брать на передержку?"),
-                    SizedBox(height: 10.0),
-                    readyField,
+                    
                     SizedBox(height: 15.0),
                     label("Стоимость передержки"),
                     SizedBox(height: 10.0),
@@ -171,6 +175,10 @@ class _RegisterState extends State<Register> {
                     label("Виды животных"),
                     SizedBox(height: 10.0),
                     typeField,
+                    SizedBox(height: 15.0),
+                    label("Готовы брать на передержку?"),
+                    SizedBox(height: 10.0),
+                    readyField,
                     SizedBox(height: 15.0),
                     auth.loggedInStatus == Status.Authenticating
                         ? loading
