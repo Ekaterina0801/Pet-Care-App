@@ -18,32 +18,45 @@ import 'package:provider/provider.dart';
 import 'dart:ui';
 import 'AddAnimal.dart';
 
+var h = window.physicalSize.height;
+double FindCenterForPlus(double h) {
+  double n;
+  if (h / 2 > 125)
+    n = h / 2 - 125;
+  else
+    n = h - 125;
+  return n;
+}
+
 DateTime dateToday =
     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 String AgeToString(String date) {
   int dateBirth_year = int.parse(date.substring(6, 10));
   int dateBirth_month = int.parse(date.substring(3, 5));
 
- var age_years = (dateToday.year - dateBirth_year).round();
-  var age_month =
-      (dateToday.month - dateBirth_month).round().abs();
+  var age_years = (dateToday.year - dateBirth_year).round();
+  var age_month = (dateToday.month - dateBirth_month).round().abs();
   String years = "";
   String month = "";
-  if (age_years == 0) years = "";
-  else if (age_years == 1) years = "1 год";
-  else if ((age_years == 2) ||
-        (age_years == 3) ||
-        (age_years == 4)) years = "${age_years} года";
-  else years = "${age_years} лет";
+  if (age_years == 0)
+    years = "";
+  else if (age_years == 1)
+    years = "1 год";
+  else if ((age_years == 2) || (age_years == 3) || (age_years == 4))
+    years = "${age_years} года";
+  else
+    years = "${age_years} лет";
 
-  if (age_month == 0) month = "0 месяцев";
-  else if (age_month == 1) month = "1 месяц";
-  else if ((age_month == 2) ||
-        (age_month == 3) ||
-        (age_month == 4)) month =  "${age_month} месяца";
-  else month = "${age_month} месяцев";
-       
-  String age_string = years+"\n"+month;
+  if (age_month == 0)
+    month = "0 месяцев";
+  else if (age_month == 1)
+    month = "1 месяц";
+  else if ((age_month == 2) || (age_month == 3) || (age_month == 4))
+    month = "${age_month} месяца";
+  else
+    month = "${age_month} месяцев";
+
+  String age_string = years + "\n" + month;
   return age_string;
 }
 
@@ -130,13 +143,13 @@ class _ProfilePageState extends StateMVC {
                             child: Column(
                             children: [
                               Container(
-                                  height: window.physicalSize.height / 2 - 168),
+                                  height: FindCenterForPlus(h)),
                               Container(
                                 child: Column(
                                   children: [
                                     Container(
-                                        height: 130,
-                                        width: 130,
+                                        height: 70,
+                                        width: 70,
                                         child: FloatingActionButton(
                                           onPressed: () =>
                                               Navigator.of(context).push(
@@ -147,7 +160,7 @@ class _ProfilePageState extends StateMVC {
                                           child: Container(
                                               child: Icon(
                                                 CupertinoIcons.add,
-                                                size: 110,
+                                                size: 55,
                                                 color: Colors.black,
                                               ),
                                               decoration: BoxDecoration(
@@ -157,10 +170,9 @@ class _ProfilePageState extends StateMVC {
                                                       color: Colors.black),
                                                   borderRadius:
                                                       BorderRadius.all(
-                                                          Radius.circular(
-                                                              100))),
-                                              height: 135,
-                                              width: 140),
+                                                          Radius.circular(50))),
+                                              height: 70,
+                                              width: 70),
                                         )),
                                     Container(
                                       margin: EdgeInsets.all(10),
@@ -168,7 +180,7 @@ class _ProfilePageState extends StateMVC {
                                         "Добавить нового питомца",
                                         style: GoogleFonts.comfortaa(
                                             fontStyle: FontStyle.normal,
-                                            fontWeight: FontWeight.w900,
+                                            fontWeight: FontWeight.w800,
                                             fontSize: 18),
                                       ),
                                     ),
@@ -289,7 +301,7 @@ class _ProfilePageState extends StateMVC {
                                       Color.fromRGBO(131, 184, 107, 80)),
                                   MainInfoBlock(
                                     "Вес",
-                                    pet.weight.toString()+" кг",
+                                    pet.weight.toString() + " кг",
                                     Color.fromRGBO(255, 223, 142, 10),
                                   ),
                                   MainInfoBlock("Пол", pet.gender,
