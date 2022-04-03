@@ -21,13 +21,29 @@ import 'AddAnimal.dart';
 DateTime dateToday =
     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 String AgeToString(String date) {
-  int dateBirth_year = int.parse(date.substring(6,10));
-  int dateBirth_month = int.parse(date.substring(3,5));
+  int dateBirth_year = int.parse(date.substring(6, 10));
+  int dateBirth_month = int.parse(date.substring(3, 5));
 
   String age_years = (dateToday.year - dateBirth_year).round().toString();
   String age_month =
       (dateToday.month - dateBirth_month).round().abs().toString();
-  String age_string = "${age_years} года \n${age_month} месяцев";
+  String years = "";
+  String month = "";
+  if (age_years == 0) years = "";
+  else if (age_years == 1) years = "1 год";
+  else if ((age_years == 2) ||
+        (age_years == 3) ||
+        (age_years == 4)) years = "${age_years} года";
+  else years = "${age_years} лет";
+
+  if (age_month == 0) month = "0 месяцев";
+  else if (age_month == 1) years = "1 месяц";
+  else if ((age_month == 2) ||
+        (age_month == 3) ||
+        (age_month == 4)) years =  "${age_month} месяца";
+  else years = "${age_month} месяцев";
+       
+  String age_string = years+"\n"+month;
   return age_string;
 }
 
@@ -267,7 +283,9 @@ class _ProfilePageState extends StateMVC {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  MainInfoBlock("Возраст", AgeToString(pet.dateofbirthday),
+                                  MainInfoBlock(
+                                      "Возраст",
+                                      AgeToString(pet.dateofbirthday),
                                       Color.fromRGBO(131, 184, 107, 80)),
                                   MainInfoBlock(
                                     "Вес",
