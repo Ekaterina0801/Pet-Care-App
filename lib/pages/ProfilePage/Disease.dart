@@ -180,8 +180,9 @@ if (state is DiseaseResultLoading) {
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.w800,
                                           fontSize: 14)),
-                      TextField(
+                      TextFormField(
                     maxLines: 1,
+                    validator: (value)=>value.isEmpty?"Введите текст":null,
                     onChanged: (value) {
                       datebeg = value;
                     },
@@ -197,7 +198,8 @@ if (state is DiseaseResultLoading) {
                                           fontStyle: FontStyle.normal,
                                           fontWeight: FontWeight.w800,
                                           fontSize: 14)),
-                  TextField(
+                  TextFormField(
+                    validator: (value)=>value.isEmpty?"Введите текст":null,
                     maxLines: 1,
                     onChanged: (value) {
                       dateend = value;
