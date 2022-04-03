@@ -8,6 +8,7 @@ import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
 import 'package:provider/provider.dart';
 import 'package:select_form_field/select_form_field.dart';
+//import 'package:select_form_field/select_form_field.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -75,7 +76,7 @@ class _RegisterState extends State<Register> {
       decoration: buildInputDecoration("Введите цену", Icons.email),
     );
 
-    final readyField = SelectFormField(
+   final readyField = SelectFormField(
       autofocus: false,
       items: [
         {'value':'Да','label':'Да'},

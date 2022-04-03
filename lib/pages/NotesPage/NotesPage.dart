@@ -16,8 +16,7 @@ import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
 import 'package:pet_care/repository/notesrepo.dart';
 import 'package:provider/provider.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-
+import 'package:pet_care/pages/BasePage.dart';
 import 'AppBuilder.dart';
 import 'Note.dart';
 import 'NoteController.dart';
@@ -91,34 +90,85 @@ class _NotesPageState extends StateMVC {
                 }
                 return  ListView(shrinkWrap: true, children: [
                     FlatButton(
-                        height: 50,
-                        color: Colors.grey.shade200,
-                        onPressed: () async
-                           {await
-                            openDialog(user.userid, _body, _date);
-                            setState(() { });
-                            //_displayNoteAdd(context, _body, _date,user.userid);
-                            //Navigator.pushNamed(context, 'test').then((_) => setState(() {}));
-                            //final formKey = new GlobalKey<FormState>();
+ height: 50,
+ color: Colors.grey.shade200,
+ onPressed: () {
+                        setState(() {
+                          //_displayNoteAdd(context, _body, _date);
+                          final formKey = new GlobalKey<FormState>();
+                          AlertDialog alert = AlertDialog(
+ title: Text('Добавление заметки'),
+ actions: [
+                              FlatButton(
+ child: Text(
+                                    'Добавить',
+ style: GoogleFonts.comfortaa(
+ fontStyle: FontStyle.normal,
+ fontWeight: FontWeight.w800,
+ fontSize: 14),
+                                  ),
+ onPressed: () {
+                                    setState(() {
+                                      addNote(_body, _date, user.userid);
+                                      //notifyListeners();
 
-                           
-                           },
-                        //},
-                        child: Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text('+ Добавить заметку',
-                                style: GoogleFonts.comfortaa(
-                                    color: Colors.black,
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 16)))
-                                    ),
-                    notes.length == 0
-                        ? ListBody(
-                          children: [
-                         Container(
-                          height: window.physicalSize.height / 2 - 32),
-                           Align(
+                                      //AppBuilder.of(context).rebuild();
+                                      //Navigator.popAndPushNamed(context,'/notes');
+                                    });
+                                    Navigator.of(context).pop(true);
+                                    // Navigator.pushNamed(context, "/notes");
+                                     Navigator.of(context).push(
+                                      MaterialPageRoute(
+ builder: (context) => HomeNotes(),
+                                      ),
+                                    );
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+ builder: (context) => HomeNotes(),
+                                      ),
+                                    );
+                                  }),
+                            ],
+                            content: Container(
+                                padding: EdgeInsets.all(10),
+                                child: Form(
+                                    key: formKey,
+                                    child: TextField(
+                                      maxLines: 10,
+                                      onChanged: (value) {
+                                        _body = value;
+                                        _date = DateTime.now().toString();
+                                      },
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        hintText: 'Введите текст',
+                                        hintStyle:
+                                            TextStyle(color: Colors.white60),
+                                      ),
+                                    ))),
+                          );
+
+                          Future.delayed(Duration.zero, () async {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                });
+                          });
+                        });
+                      },
+                      child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Text('+ Добавить заметку',
+                              style: GoogleFonts.comfortaa(
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 16)))),
+                  notes.length == 0
+                      ? ListBody(children: [
+                          Container(
+                              height: window.physicalSize.height / 2 - 32),
+                          Align(
                             alignment: Alignment.center,
                             child: Text(
                               "Заметок пока нет",
@@ -128,24 +178,22 @@ class _NotesPageState extends StateMVC {
                                   fontSize: 16),
                             ),
                           )
-
-                          ])
-                        : GridView.builder(
-                            shrinkWrap: true,
-                            physics: ScrollPhysics(),
-                            padding: EdgeInsets.all(15),
-                            itemCount: notes.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 10,
-                              childAspectRatio: 1.2,
-                            ),
-                            itemBuilder: (BuildContext context, int index) =>
-                                Container(child: NotesWidget(notes[index])))
-                  ],
-                );
+                        ])
+                      : GridView.builder(
+                          shrinkWrap: true,
+                          physics: ScrollPhysics(),
+                          padding: EdgeInsets.all(15),
+                          itemCount: notes.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 1.2,
+                          ),
+                          itemBuilder: (BuildContext context, int index) =>
+                              Container(child: NotesWidget(notes[index])))
+                ]);
               }),
         );
       });
@@ -219,7 +267,7 @@ class _NotesPageState extends StateMVC {
             addNote(_body, _date, userID);
             //Navigator.pushNamed(context, '/home').then((_) => setState(() {}));
             //notifyListeners();
-            Navigator.pop(context);
+            Navigator.of(context).pop(true);
           },
         ),
       ],
