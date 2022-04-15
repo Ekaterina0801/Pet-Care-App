@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
            '/welcome':(context) => WelcomeScreen()
           },
         title: 'PetCare',
-        initialRoute: '/welcome',
+        //initialRoute: '/welcome',
         /*
         routes: {
           '/test':(BuildContext context)=>ArticleListPage(),
