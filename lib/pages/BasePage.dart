@@ -13,11 +13,17 @@ import 'AdviceScreen/AdvicePage.dart';
 
 
 //базовая страница
-class BasePage extends StatelessWidget {
+class BasePage extends StatefulWidget {
   final String title;
   final Widget body;
   final Widget navigationbar;
   BasePage({this.body, this.title, this.navigationbar = null});
+
+  @override
+  State<BasePage> createState() => _BasePageState();
+}
+
+class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,15 +32,15 @@ class BasePage extends StatelessWidget {
           actions: [],
           shadowColor: Colors.grey,
           backgroundColor: Color.fromRGBO(255, 223, 142, 10),
-          elevation: (title == 'Профиль') || (title == 'Сервис') ? 0 : 2,
-          title: Text(title,
+          elevation: (widget.title == 'Профиль') || (widget.title == 'Сервис') ? 0 : 2,
+          title: Text(widget.title,
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800,
-                  fontSize: 24)), automaticallyImplyLeading: ((title == 'Статья')  || (title == 'Прививки') || (title == 'Статьи')||(title=='Регистрация'))?  true : false,
+                  fontSize: 24)), automaticallyImplyLeading: ((widget.title == 'Статья')  || (widget.title == 'Прививки') || (widget.title == 'Статьи')||(widget.title=='Регистрация'))?  true : false,
         ),
-        body: body,
-        bottomNavigationBar: navigationbar,
+        body: widget.body,
+        bottomNavigationBar: widget.navigationbar,
         backgroundColor: Colors.white);
   }
 }
@@ -141,6 +147,7 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+/*
 //виджет навигационной панели
 class HomeNotes extends StatefulWidget {
   @override
@@ -345,4 +352,4 @@ class _HomeProfileState extends State<HomeProfile> {
       ),
     );
   }
-}
+}*/

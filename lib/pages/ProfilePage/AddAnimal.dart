@@ -117,9 +117,6 @@ class _AddAnimalState extends State<AddAnimal> {
                     if (snapshot.hasError)
                       return Text('Error: ${snapshot.error}');
                     else userID=snapshot.data.userid;
-
-                      //UserPreferences().removeUser();
-                    
                 }
         return Form(
           key: formKey,

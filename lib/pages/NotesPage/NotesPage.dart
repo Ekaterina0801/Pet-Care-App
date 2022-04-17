@@ -1,22 +1,15 @@
 import 'dart:convert';
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
-import 'package:pet_care/pages/AdviceScreen/AdvicePage.dart';
-import 'package:pet_care/pages/CalendarPage/FeedingCalendarPage.dart';
 import 'package:pet_care/pages/NotesPage/NotesWidget.dart';
-import 'package:pet_care/pages/PetBoardingPage/PetBoardingPage.dart';
-import 'package:pet_care/pages/ProfilePage/ProfilePage.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
-import 'package:pet_care/repository/notesrepo.dart';
 import 'package:provider/provider.dart';
-import 'package:pet_care/pages/BasePage.dart';
 import 'AppBuilder.dart';
 import 'Note.dart';
 import 'NoteController.dart';
@@ -95,70 +88,55 @@ class _NotesPageState extends StateMVC {
  onPressed: () {
                         setState(() {
                           //_displayNoteAdd(context, _body, _date);
-                          final formKey = new GlobalKey<FormState>();
-                          AlertDialog alert = AlertDialog(
- title: Text('Добавление заметки'),
- actions: [
-                              FlatButton(
- child: Text(
-                                    'Добавить',
- style: GoogleFonts.comfortaa(
- fontStyle: FontStyle.normal,
- fontWeight: FontWeight.w800,
- fontSize: 14),
-                                  ),
- onPressed: () {
-                                    setState(() {
-                                      if(formKey.currentState.validate()){
-      formKey.currentState.save();
-                                      addNote(_body, _date, user.userid);
-                                      //notifyListeners();
-                                      }
-                                      //AppBuilder.of(context).rebuild();
-                                      //Navigator.popAndPushNamed(context,'/notes');
-                                    });
-                                    Navigator.of(context).pop(true);
-                                    // Navigator.pushNamed(context, "/notes");
-                                     Navigator.of(context).push(
-                                      MaterialPageRoute(
- builder: (context) => HomeNotes(),
-                                      ),
-                                    );
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
- builder: (context) => HomeNotes(),
-                                      ),
-                                    );
-                                  }),
-                            ],
-                            content: Container(
-                                padding: EdgeInsets.all(10),
-                                child: Form(
-                                    key: formKey,
-                                    child: TextFormField(
-                                      validator: (value)=>value.isEmpty?"Введите заметку":null,
-                                      maxLines: 10,
-                                      onChanged: (value) {
-                                        _body = value;
-                                        _date = DateTime.now().toString();
-                                      },
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: 'Введите текст',
-                                        hintStyle:
-                                            TextStyle(color: Colors.white60),
-                                      ),
-                                    ))),
-                          );
-
-                          Future.delayed(Duration.zero, () async {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return alert;
-                                });
-                          });
-                        });
+                          
+showDialog(
+  context: context,
+  builder: (context) {
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return AlertDialog(
+      title: Text('Добавление заметки'),
+      actions: [
+        FlatButton(
+          child: Text(
+            'Добавить',
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
+          ),
+          onPressed: () {
+            addNote(_body, _date, user.userid);
+            //Navigator.pushNamed(context, '/home').then((_) => setState(() {}));
+            //notifyListeners();
+            Navigator.of(context).pop(true);
+          },
+        ),
+      ],
+      content: Container(
+          padding: EdgeInsets.all(10),
+          child: Form(
+              key: formKey,
+              child: TextField(
+                maxLines: 10,
+                onChanged: (value) {
+                  _body = value;
+                  _date = DateTime.now().toString();
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Введите текст',
+                  hintStyle: TextStyle(color: Colors.white60),
+                ),
+              ))),
+    );
+      },
+    );
+  },
+);
+                         // _displayNoteAdd(context, _body, _date, user.userid);
+                        }//
+                        );
                       },
                       child: Align(
                           alignment: Alignment.bottomLeft,
@@ -201,63 +179,15 @@ class _NotesPageState extends StateMVC {
         );
       });
     }
+
   }
 
-  Future openDialog(int userid,String _body, String _date,)=>showDialog(
-    context: context,
-    builder: (context)=>StatefulBuilder(
-      
-      builder: (context, setState) {
-        return AlertDialog(
-           title: Text('Добавление заметки'),
-          actions: [
-            FlatButton(
-              child: Text(
-                'Добавить',
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14),
-              ),
-              onPressed: () => {if(formKey.currentState.validate()){
-      formKey.currentState.save(), addNote(_body,_date,userid),Navigator.pop(context)}
-              //Navigator.pop(context)
-              })
-              /*
-              {
-                addNote(_body, _date, userid);
-                //Navigator.pushNamed(context, '/home').then((_) => setState(() {}));
-                //notifyListeners();
-                Navigator.pop(context);
-              },*/
-            //),
-          ],
-          content: Container(
-              padding: EdgeInsets.all(10),
-              child: Form(
-                  key: formKey,
-                  
-                  child: TextFormField(
-                    maxLines: 10,
-                    validator: (value)=>value.isEmpty?"Введите текст":value,
-                    onChanged: (value) {
-                      _body = value;
-                      _date = DateTime.now().toString();
-                    },
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Введите текст',
-                      hintStyle: TextStyle(color: Colors.white60),
-                    ),
-                  ))),
-        
-        );
-      }
-    )
-  );
+
+  
   _displayNoteAdd(
       BuildContext context, String _body, String _date, int userID) {
     final formKey = new GlobalKey<FormState>();
+    
     AlertDialog alert = AlertDialog(
       title: Text('Добавление заметки'),
       actions: [

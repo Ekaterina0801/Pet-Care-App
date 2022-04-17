@@ -10,8 +10,8 @@ class ChangeInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasePage(
-        title: "Изменить основные данные",
+    return Scaffold(
+        //title: "Изменить основные данные",
         body: Container(
             margin: EdgeInsets.all(25),
             child: ListView(

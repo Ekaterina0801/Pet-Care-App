@@ -32,15 +32,12 @@ class AuthProvider with ChangeNotifier {
   Status get registeredInStatus => _registeredInStatus;
 
   Future<List<MyUser>> allUsers()async {
-    //var result;
-    //var jsonString = '[{"email": $email,"username": $password}]';
     var jsonString = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
     var l = jsonDecode(jsonString.body);
     return l.values;
   }
   Future<Map<String, dynamic>> login(String email, String password) async {
     var result;
-    //var jsonString = '[{"email": $email,"username": $password}]';
     var jsonString = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
     var l = jsonDecode(jsonString.body);
     var m = null;
@@ -48,12 +45,11 @@ class AuthProvider with ChangeNotifier {
   
     for(var i in l.values)
     {
-      if(i['Email']==email)
+      if(i['Email']==email&&i['Password']==password)
       {
-        while(true){
-        if(i['Password']==password)
-        {
-            user = MyUser.fromJson(i); break;}
+        
+            user = MyUser.fromJson(i);
+      }
         else
         {
            _loggedInStatus = Status.NotLoggedIn;
@@ -64,8 +60,8 @@ class AuthProvider with ChangeNotifier {
         // print(i['Email']);
          //print(i['UserID']);
         
-      }
-    }
+    
+   
   
     _loggedInStatus = Status.Authenticating;
     notifyListeners();

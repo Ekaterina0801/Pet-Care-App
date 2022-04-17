@@ -1,21 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
-import 'package:pet_care/pages/BasePage.dart';
 import 'package:pet_care/pages/ProfilePage/AvatarBlock.dart';
-import 'package:pet_care/pages/ProfilePage/ChangeInfo.dart';
 import 'package:pet_care/pages/ProfilePage/MainInfoBlock.dart';
 import 'package:pet_care/pages/ProfilePage/Passport.dart';
 import 'package:pet_care/pages/ProfilePage/Pet.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
-import 'package:pet_care/pages/providers/auth.dart';
-import 'package:pet_care/pages/providers/userprovider.dart';
-import 'package:pet_care/repository/profilespetsrepo.dart';
-import 'package:provider/provider.dart';
-import 'dart:ui';
 import 'AddAnimal.dart';
 
 /*
@@ -102,14 +94,7 @@ class _ProfilePageState extends StateMVC {
       );
     } else {
       final pets = (state as PetResultSuccess).petsList;
-      //UserPreferences().getUser().then((value) => user=value)
-      //Future<MyUser> getUserData() => UserPreferences().getUser();
-      return MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => AuthProvider()),
-            ChangeNotifierProvider(create: (_) => UserProvider()),
-          ],
-          child: FutureBuilder(
+      return  FutureBuilder(
               future: getUserData(),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
@@ -121,32 +106,19 @@ class _ProfilePageState extends StateMVC {
                       return Text('Error: ${snapshot.error}');
                     else
                       user = snapshot.data;
-
-                    //final pets = (state as PetResultSuccess).petsList;
-                    pet = Pet(
-                        petID: 1,
-                        userID: user.userid,
-                        animal: "-",
-                        name: "-",
-                        breed: "-",
-                        dateofbirthday: "-",
-                        gender: "-",
-                        weight: "0",
-                        color: "-");
+                    pet = new Pet();
                     for (var i in pets) {
                       if (i.userID == user.userid) {
                         pet = i;
                         break;
                       }
                     }
-                    return pet.weight == "0"
+                    return pet.animal==null
                         ? Container(
                           padding: EdgeInsets.all(20),
                           child: Center(
                               child: Column(
                               children: [
-                                //Container(
-                                  //  height: FindCenterForPlus(h)),
                                 Container(
                                   child: Column(
                                     children: [
@@ -211,33 +183,6 @@ class _ProfilePageState extends StateMVC {
                                   children: [
                                     AvatarBlock(
                                         pet.name, 'assets/images/article_1.2.jpg'),
-                                    /*
-              Column(
-                children: [
-                  Container(
-                      child: Icon(
-                        CupertinoIcons.add,
-                        size: 55,
-                        color: Colors.black,
-                      ),
-                      decoration: BoxDecoration(
-                          color: Color.fromRGBO(240, 240, 240, 1),
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
-                      height: 70,
-                      width: 70),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      "Добавить",
-                      style: GoogleFonts.comfortaa(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 12),
-                    ),
-                  )
-                ],
-              )*/
                                   ]),
                             ),
                             Container(
@@ -329,7 +274,7 @@ class _ProfilePageState extends StateMVC {
                             ),
                           ]);
                 }
-              }));
+              });
     }
   }
 }
@@ -360,27 +305,13 @@ class _ChangeInfoState extends State<ChangeInfo> {
                   fontWeight: FontWeight.w800,
                   fontSize: 16))),
       actions: [
-        Align(
-            alignment: Alignment.bottomLeft,
-            child: Text('Введите имя питомца:',
-                style: GoogleFonts.comfortaa(
-                    color: Colors.black,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14))),
+       addInfo('Введите имя питомца'),
         TextFormField(
           autofocus: false,
           onChanged: (value) => _changeName(value),
         ),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-        Align(
-            alignment: Alignment.bottomLeft,
-            child: Text('Введите вес питомца:',
-                style: GoogleFonts.comfortaa(
-                    color: Colors.black,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14))),
+        addInfo('Введите вес питомца'),
         TextFormField(
           autofocus: false,
           onChanged: (value) => widget.pet.weight = value,
@@ -399,4 +330,16 @@ class _ChangeInfoState extends State<ChangeInfo> {
       ],
     );
   }
+}
+
+Widget addInfo(String text)
+{
+  return Align(
+            alignment: Alignment.bottomLeft,
+            child: Text(text,
+                style: GoogleFonts.comfortaa(
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14)));
 }

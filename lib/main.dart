@@ -62,15 +62,6 @@ class MyApp extends StatelessWidget {
           },
         title: 'PetCare',
         //initialRoute: '/login',
-        /*
-        routes: {
-          '/test':(BuildContext context)=>ArticleListPage(),
-          '/start': (BuildContext context) => ProfilePage(),
-          '/home': (BuildContext context) => HomePage(),
-          '/login': (BuildContext context) => LoginRegestrationPage(),
-          
-          //'7': (BuildContext context) => ArticlePage(articles[7]),
-        },*/
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           SfGlobalLocalizations.delegate
