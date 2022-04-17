@@ -34,7 +34,11 @@ class DiseasesPage extends StatefulWidget {
 
 class _DiseasesPageState extends StateMVC {
   DiseaseController _controller;
+
+  var alignment;
   _DiseasesPageState():super(DiseaseController()){_controller = controller as DiseaseController;}
+
+  get borderRadius => null;
   @override
   void initState() {
     super.initState();
@@ -102,30 +106,38 @@ if (state is DiseaseResultLoading) {
                         color: Colors.grey.shade200,
                         onPressed: () {
                           setState(() {
+
                             //_displayNoteAdd(context, _body, _date);
                             final formKey = new GlobalKey<FormState>();
-                            AlertDialog alert = AlertDialog(
-                              title:  Align(
-          alignment: Alignment.bottomCenter,
-          child:Text(
-                                      'Добавление болезни',
-                                      style: GoogleFonts.comfortaa(
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 18))),
+                            AlertDialog alert = AlertDialog( 
+                              title:  Container(
+                                child: Align(
+                                alignment: Alignment.bottomCenter, 
+                                child:Text('Добавление болезни',
+                                        style: GoogleFonts.comfortaa(
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 18)),
+                                      ),
+                                    ),
+                                      
                               actions: [
                                 FlatButton(
-                                    child: Text(
-                                      'Добавить',
-                                      style: GoogleFonts.comfortaa(
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 14),
+                                    child: Text('Добавить',
+                                    style: GoogleFonts.comfortaa(
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 14),
                                     ),
+                                    color: Color.fromRGBO(255, 223, 142, 1),
+                                    shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(10))
+                                    ),
+                                    height: 45,
                                     onPressed: () {
                                       setState(() {
                                         if(formKey.currentState.validate()){
-      formKey.currentState.save();
+                                          formKey.currentState.save();
                                         addDisease(type, datebeg,dateend, user.userid);}
                                         //notifyListeners();
 
@@ -149,73 +161,124 @@ if (state is DiseaseResultLoading) {
                               content: //_displayDiseaseAdd(context, type, datebeg, dateend, user.userid)
                               
                               Container(
-                                  padding: EdgeInsets.all(10),
+                                //alignment: Alignment.topLeft,
+                                margin: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
                                   child: Column(
-            children: [
-              Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                     Text(
-                                      'Введите описание болезни:',
-                                      style: GoogleFonts.comfortaa(
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 14)),
-                      TextFormField(
-                        maxLines: 5,
-                        validator: (value)=>value.isEmpty?"Введите текст":null,
-                        onChanged: (value) {
-                          type = value;
-                        },
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Введите информацию о болезни',
-                          hintStyle: TextStyle(color: Colors.white60),
-                        ),
-                      ),
-                      Text(
-                                      'Введите дату начала болезни:',
-                                      style: GoogleFonts.comfortaa(
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 14)),
-                      TextFormField(
-                    maxLines: 1,
-                    validator: (value)=>value.isEmpty?"Введите текст":null,
-                    onChanged: (value) {
-                      datebeg = value;
-                    },
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Введите дату начала болезни',
-                      hintStyle: TextStyle(color: Colors.white60),
-                    ),
-                  ),
-                 Text(
-                                      'Введите дату окончания болезни:',
-                                      style: GoogleFonts.comfortaa(
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 14)),
-                  TextFormField(
-                    validator: (value)=>value.isEmpty?"Введите текст":null,
-                    maxLines: 1,
-                    onChanged: (value) {
-                      dateend = value;
-                      
-                    },
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Введите дату окончания болезни',
-                      hintStyle: TextStyle(color: Colors.white60),
-                    ),
-                  )
-                    ],
-                  )),
-                  
-            ],
-          )),
+                                    children: [
+                                      Form(
+                                          key: formKey,
+                                          child: Column(
+                                            children: [
+
+                                                Container(
+                                                 padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),                                                                                          
+                                                  child: Column(                                                  
+                                                  children: [ 
+                                                  Container(
+                                                    child: Align(
+                                                    alignment: Alignment.bottomLeft,
+                                                    child: Text('Введите описание болезни:',
+                                                        //textAlign: TextAlign.left,
+                                                        style: GoogleFonts.comfortaa(
+                                                        fontStyle: FontStyle.normal,
+                                                        fontWeight: FontWeight.w800,
+                                                        fontSize: 14)),
+                                                  ),),
+                                                   TextFormField(
+                                                    maxLines: 3,
+                                                    validator: (value)=>value.isEmpty?"Введите текст":null,
+                                                    onChanged: (value) {
+                                                    type = value;
+                                                  },
+                                                  decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  hintText: 'Введите информацию о болезни',
+                                                  hintStyle: TextStyle(color: Color.fromARGB(153, 69, 69, 69)),
+                                                    ),
+                                                  ),
+                                                  ], 
+                                                ),
+                                                color: Color.fromARGB(153, 229, 229, 229),
+                                                //decoration: BoxDecoration(
+                                                //border: Border.all(),
+                                                //borderRadius: BorderRadius.circular(20),),
+                                              ),
+
+                                              SizedBox(height: 10),
+
+                                              Container(
+                                                 padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
+                                                 //margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                                                  child: Column(
+                                                    children: [
+                                              Container(
+                                                child: Align(
+                                                    alignment: Alignment.bottomLeft,
+                                                child: Text('Введите дату начала болезни:',
+                                                      //textAlign: TextAlign.left,
+                                                      style: GoogleFonts.comfortaa(
+                                                      fontStyle: FontStyle.normal,
+                                                      fontWeight: FontWeight.w800,
+                                                      fontSize: 14)),
+                                              ),),
+                                              TextFormField(
+                                                maxLines: 3,
+                                                validator: (value)=>value.isEmpty?"Введите текст":null,
+                                                onChanged: (value) {
+                                                datebeg = value;
+                                                },
+                                              decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              hintText: 'Введите дату начала болезни',
+                                             hintStyle: TextStyle(color: Color.fromARGB(153, 69, 69, 69)),
+                                            ),
+                                          ),
+                                            ], 
+                                          ),
+                                            color: Color.fromARGB(153, 229, 229, 229),
+                                                //borderRadius: borderRadius.all(Radius.circular(10)),
+                                            ),
+
+                                            SizedBox(height: 10),
+
+                                              Container(
+                                                 padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
+                                                 //margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                                                  child: Column(
+                                                    children: [
+                                            Container(
+                                              child: Align(
+                                                    alignment: Alignment.bottomLeft,
+                                              child: Text('Введите дату окончания болезни:',
+                                                  //textAlign: TextAlign.left,
+                                                  style: GoogleFonts.comfortaa(
+                                                  fontStyle: FontStyle.normal,
+                                                  fontWeight: FontWeight.w800,
+                                                  fontSize: 14)),
+                                            ),),
+                                          TextFormField(
+                                            validator: (value)=>value.isEmpty?"Введите текст":null,
+                                            maxLines: 3,
+                                            onChanged: (value) {
+                                              dateend = value; 
+                                            },
+                                            decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              hintText: 'Введите дату окончания болезни',
+                                             hintStyle: TextStyle(color: Color.fromARGB(153, 69, 69, 69)),
+                                            ),
+                                          ),
+                                            ], 
+                                          ),
+                                            color: Color.fromARGB(153, 229, 229, 229),
+                                                //borderRadius: borderRadius.all(Radius.circular(10)),
+                                            ),
+
+                                            ],
+                                          )),   
+                                        ],
+                                      )),
+
                             );
                             Future.delayed(Duration.zero, () async {
                               showDialog(
