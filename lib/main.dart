@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
               }),
           routes: {
             '/login': (context) => Login(),
-            'test':(context)=>DisplayAddNote(),
+            //'test':(context)=>DisplayAddNote(),
             '/register': (context) => Register(),
            '/home': (BuildContext context) => HomePage(),
            '/notes':(context) => NotesPage()
