@@ -32,13 +32,23 @@ class _NotesPageState extends StateMVC {
     user = result;
   });
 });
+
+RepositoryNotes().getNotes().then((result) {
+   setState(() {
+    //user = result;
+    notes = result;
+  });
+});
   }
 
   final formKey = new GlobalKey<FormState>();
   String _body, _date;
   MyUser user;
   List<Note> notes=[];
+  List<Note> mynotes=[];
+  
   @override
+
   Widget build(BuildContext context) {
       return AppBuilder(builder: (context) {
         return FutureBuilder(
@@ -79,6 +89,7 @@ showDialog(
           ),
           onPressed: () {
             addNote(_body, _date, user.userid);
+            this.setState(() { });
             Navigator.of(context).pop(true);
           },
         ),
@@ -146,11 +157,8 @@ showDialog(
                 ]
              
         );
-              }
+        }
         );
-  
-    
-
       }
       );
   }
