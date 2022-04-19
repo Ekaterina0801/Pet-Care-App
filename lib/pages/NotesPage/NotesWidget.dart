@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:pet_care/pages/NotesPage/Note.dart';
+import 'package:pet_care/pages/NotesPage/reponotes.dart';
 import 'package:pet_care/pages/Registration/util/appurl.dart';
+
+import 'NotesPage.dart';
 
 class NotesWidget extends StatefulWidget {
   final Note note;
@@ -62,6 +65,7 @@ class _NotesWidgetState extends State<NotesWidget> {
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(),
                     child: Text(
+                      
                       widget.note.date.toString().substring(0,10),
                       style: GoogleFonts.comfortaa(
                           color: Colors.black,
@@ -71,7 +75,7 @@ class _NotesWidgetState extends State<NotesWidget> {
                     ),
                   ),
                 ),
-               
+               IconButton(onPressed: ()=> _displayNoteUpdate(context,widget.note.body,widget.note),icon: Icon(Icons.edit))
               ],
             ),
           ],
@@ -80,7 +84,55 @@ class _NotesWidgetState extends State<NotesWidget> {
     );
   }
 }
-
+ _displayNoteUpdate(
+      BuildContext context, String oldbody, Note note) {
+    final formKey = new GlobalKey<FormState>();
+    var newbody=oldbody;
+    AlertDialog alert = AlertDialog(
+      title: Text('Добавление заметки'),
+      actions: [
+        FlatButton(
+          child: Text(
+            'Добавить',
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
+          ),
+          onPressed: () {
+            RepositoryNotes().update(newbody,note);
+            //Navigator.pushNamed(context, '/home').then((_) => setState(() {}));
+            //notifyListeners();
+            Navigator.of(context).pop(true);
+          },
+        ),
+      ],
+      content: Container(
+          padding: EdgeInsets.all(10),
+          child: Form(
+              key: formKey,
+              child: TextFormField(
+              initialValue: oldbody,
+                maxLines: 10,
+                onChanged: (value) {
+                  newbody = value;
+                  //_date = DateTime.now().toString();
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Введите текст',
+                  hintStyle: TextStyle(color: Colors.white60),
+                ),
+              ))),
+    );
+    Future.delayed(Duration.zero, () async {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          });
+    });
+  }
 _displayNote(BuildContext context,String text) {
     AlertDialog alert = AlertDialog(
       title: Text('Заметка', style: GoogleFonts.comfortaa(

@@ -9,7 +9,8 @@ class Note
   int userID;
   String body;
   String date;
-  Note({this.id,this.body,this.date,this.userID});
+  String noteid;
+  Note({this.id,this.body,this.date,this.userID,this.noteid});
 
   Map<String,dynamic> toMap()
   {
@@ -17,7 +18,8 @@ class Note
       "id":id,
       "UserID":userID,
       "body":body,
-      "date":date
+      "date":date,
+      "nodeid":noteid
     });
   }
 factory Note.fromJson(Map<String, Object> json) => Note(
@@ -25,6 +27,7 @@ factory Note.fromJson(Map<String, Object> json) => Note(
         userID: json['UserID'],
         body: json['Text'] as String,
         date: json['Date'],
+        noteid: json['NoteID']
       );
 
   Map<String, dynamic> toJson() => {
@@ -32,6 +35,7 @@ factory Note.fromJson(Map<String, Object> json) => Note(
         'UserID':userID,
         'Text': body,
         'Date': date,
+        'NoteID':"0",
       };
 }
 
