@@ -4,6 +4,7 @@ import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/AdviceScreen/AdviceList.dart';
 
 import 'package:pet_care/pages/AdviceScreen/ArticlePage.dart';
+import 'package:pet_care/pages/AdviceScreen/requests/models/NotesModel.dart';
 import 'package:pet_care/pages/NotesPage/NotesPage.dart';
 import 'package:pet_care/pages/Registration/pages/login.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => NotesModel()),
       ],
     child: MaterialApp(
       home: FutureBuilder(

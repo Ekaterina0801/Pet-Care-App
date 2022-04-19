@@ -4,6 +4,7 @@ import 'package:pet_care/pages/ProfilePage/Pet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 class UserPreferences {
+  MyUser userr;
   Future<bool> saveUser(MyUser user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -37,6 +38,15 @@ class UserPreferences {
     print(password);
     print("OK");
    
+   userr = MyUser(
+        userid: userId,
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
+        district: district,
+        readyforoverposure: readyforoverposure
+       );
     return MyUser(
         userid: userId,
         firstname: firstname,

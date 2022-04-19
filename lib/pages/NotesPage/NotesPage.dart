@@ -6,10 +6,8 @@ import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/NotesPage/NotesWidget.dart';
+import 'package:pet_care/pages/NotesPage/reponotes.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
-import 'package:pet_care/pages/providers/auth.dart';
-import 'package:pet_care/pages/providers/userprovider.dart';
-import 'package:provider/provider.dart';
 import 'AppBuilder.dart';
 import 'Note.dart';
 import 'NoteController.dart';
@@ -29,40 +27,22 @@ class _NotesPageState extends StateMVC {
   void initState() {
     super.initState();
     _controller.init();
+    UserPreferences().getUser().then((result) {
+   setState(() {
+    user = result;
+  });
+});
   }
 
   final formKey = new GlobalKey<FormState>();
   String _body, _date;
   MyUser user;
+  List<Note> notes=[];
   @override
   Widget build(BuildContext context) {
-    Future<MyUser> getUserData() => UserPreferences().getUser();
-    final state = _controller.currentState;
-    if (state is NoteResultLoading) {
-      // загрузка
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    } else if (state is NoteResultFailure) {
-      // ошибка
-      return Center(
-        child: Text(state.error,
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headline4
-                .copyWith(color: Colors.red)),
-      );
-    } else {
-      final l = (state as NoteResultSuccess).notesList;
       return AppBuilder(builder: (context) {
-        return MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => AuthProvider()),
-            ChangeNotifierProvider(create: (_) => UserProvider()),
-          ],
-          child: FutureBuilder(
-              future: getUserData(),
+        return FutureBuilder(
+              future: RepositoryNotes().getNotesByID(user.userid),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
@@ -72,14 +52,8 @@ class _NotesPageState extends StateMVC {
                     if (snapshot.hasError)
                       return Text('Error: ${snapshot.error}');
                     else
-                      user = snapshot.data;
+                      notes = snapshot.data;
 
-                  //UserPreferences().removeUser();
-
-                }
-                List<Note> notes = [];
-                for (var i in l) {
-                  if (i.userID == user.userid) notes.add(i);
                 }
                 return  ListView(shrinkWrap: true, children: [
                     FlatButton(
@@ -87,8 +61,6 @@ class _NotesPageState extends StateMVC {
  color: Colors.grey.shade200,
  onPressed: () {
                         setState(() {
-                          //_displayNoteAdd(context, _body, _date);
-                          
 showDialog(
   context: context,
   builder: (context) {
@@ -107,8 +79,6 @@ showDialog(
           ),
           onPressed: () {
             addNote(_body, _date, user.userid);
-            //Navigator.pushNamed(context, '/home').then((_) => setState(() {}));
-            //notifyListeners();
             Navigator.of(context).pop(true);
           },
         ),
@@ -133,9 +103,8 @@ showDialog(
       },
     );
   },
-);
-                         // _displayNoteAdd(context, _body, _date, user.userid);
-                        }//
+);                      
+                        }
                         );
                       },
                       child: Align(
@@ -174,13 +143,19 @@ showDialog(
                           ),
                           itemBuilder: (BuildContext context, int index) =>
                               Container(child: NotesWidget(notes[index])))
-                ]);
-              }),
+                ]
+             
         );
-      });
-    }
+              }
+        );
+  
+    
 
+      }
+      );
   }
+}
+
 
 
   
@@ -260,7 +235,7 @@ showDialog(
     }
     return result;
   }
-}
+
 
 class DisplayAddNote extends StatelessWidget {
   int userid;
