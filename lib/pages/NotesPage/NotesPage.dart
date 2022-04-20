@@ -3,17 +3,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/NotesPage/NotesWidget.dart';
 import 'package:pet_care/pages/NotesPage/reponotes.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
-import 'package:provider/provider.dart';
 import 'AppBuilder.dart';
 import 'Note.dart';
 import 'NoteController.dart';
-// импортируем http пакет
-import 'package:http/http.dart' as http;
 
 class NotesPage extends StatefulWidget {
   @override
@@ -23,7 +21,6 @@ class _NotesPageState extends StateMVC {
   NoteController _controller;
   _NotesPageState() : super(NoteController()) {
     _controller = controller as NoteController;
-    //notifyListeners();
   }
   @override
   void initState() {
@@ -44,7 +41,7 @@ class _NotesPageState extends StateMVC {
    String _body, _date;
    MyUser user;
    List<Note> notes=[];
-   List<Note> nnotes=[];
+   List<Note> allnotes=[];
 
    @override
 
@@ -61,10 +58,10 @@ class _NotesPageState extends StateMVC {
                     if (snapshot.hasError)
                       return Text('Error: ${snapshot.error}');
                     else
-                      nnotes = snapshot.data;
+                      allnotes = snapshot.data;
                 }
                 notes=[];
-                for(var n in nnotes)
+                for(var n in allnotes)
                 {
                     if(n.userID==user.userid)
                     notes.add(n);
@@ -142,8 +139,6 @@ class _NotesPageState extends StateMVC {
           onPressed: () {
             addNote(_body, _date, userID);
             update();
-            //Navigator.pushNamed(context, '/home').then((_) => setState(() {}));
-            //notifyListeners();
             Navigator.of(context).pop(true);
           },
         ),
@@ -156,7 +151,10 @@ class _NotesPageState extends StateMVC {
                 maxLines: 10,
                 onChanged: (value) {
                   _body = value;
-                  _date = DateTime.now().toString();
+                  var now = DateTime.now();
+                  //String convertedDateTime = "${now.year.toString()}-${now.month.toString().padLeft(2,'0')}-${now.day.toString().padLeft(2,'0')} ${now.hour.toString().padLeft(2,'0')}-${now.minute.toString().padLeft(2,'0')}";
+                  String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
+                  _date = formattedDate;
                 },
                 decoration: InputDecoration(
                   border: InputBorder.none,
