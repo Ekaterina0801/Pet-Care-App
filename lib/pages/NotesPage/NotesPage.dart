@@ -165,11 +165,19 @@ class _NotesPageState extends StateMVC {
                                       ),
                                     )),
                                     decoration: BoxDecoration(
-                                    color: Color.fromARGB(153, 229, 229, 229),
-                                    border: Border.all(color:Color.fromARGB(153, 229, 229, 229)),
+                                    boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(43, 0, 0, 0),
+                                      blurRadius: 5,
+                                      offset: const Offset(0.0, 0.0),
+                                      spreadRadius: 2.0,
+                                    )
+                                  ],  
+                                    color: Color.fromARGB(202, 242, 242, 242),
+                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
                                     borderRadius: BorderRadius.circular(10),
                                     ),), 
-                            );
+                                );
 
                           Future.delayed(Duration.zero, () async {
                             showDialog(
