@@ -10,8 +10,10 @@ return Scaffold(
   
 body: Column(children: [
 
-  SizedBox(height: 50),
+  SizedBox(height: 130),
+
   Container(
+    //padding: EdgeInsets.symmetric(horizontal: 150, vertical: 0),
     child: Image(
       image: AssetImage('assets/images/PetCare.png'),
       alignment: Alignment.bottomCenter
@@ -20,9 +22,10 @@ body: Column(children: [
     height: 80,
   ),
 
-SizedBox(height: 100),
+  SizedBox(height: 30),
 
   Container(
+  //padding: EdgeInsets.symmetric(horizontal: 70, vertical: 0),
   child: Text('Добро пожаловать!', 
   textAlign: TextAlign.center, 
   style: GoogleFonts.comfortaa(
@@ -33,7 +36,10 @@ SizedBox(height: 100),
          ),
         ),
 
+       SizedBox(height: 100),
+
        Container( 
+        //padding: EdgeInsets.symmetric(horizontal: 70, vertical: 0),
         child: FlatButton(onPressed: () {}, 
           child: Text('Создать аккаунт',
           textAlign: TextAlign.center, 
@@ -51,9 +57,10 @@ SizedBox(height: 100),
         ),
        ),
 
-       SizedBox(height: 5),
+       SizedBox(height: 10),
 
        Container( 
+        padding: EdgeInsets.symmetric(horizontal: 170, vertical: 0),
         child: FlatButton(onPressed: () {}, 
           child: Text('У меня уже есть аккаунт',
           textAlign: TextAlign.center, 
@@ -70,26 +77,6 @@ SizedBox(height: 100),
           height: 45,
         ),
        )
-        /*child: Container(
-                decoration: BoxDecoration(
-                color: Color.fromRGBO(255, 223, 142, 1),
-                borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20))),
-                )*/
-                
-                /*child: Align(
-                  alignment: Alignment.center,
-                  child: Container(*/
-                    
-          /*child: FlatButton(onPressed: () {}, 
-          child: Text('Создать аккаунт',
-          textAlign: TextAlign.center, 
-          style: GoogleFonts.comfortaa(
-          color: Colors.black,
-          fontStyle: FontStyle.normal,
-          fontWeight: FontWeight.w800,
-          fontSize: 18),)*/
 
       ]),
     );
