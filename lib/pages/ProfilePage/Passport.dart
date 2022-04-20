@@ -49,7 +49,7 @@ class Passport extends StatelessWidget {
                     color: Color.fromRGBO(255, 223, 142, 10),
                     splashColor: Color.fromRGBO(240, 240, 240, 10),
                     onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => DiseasesPage())),
+                        MaterialPageRoute(builder: (context) => DiseasePage())),
                     child: Text('Болезни',
                         textAlign: TextAlign.left,
                         style: GoogleFonts.comfortaa(

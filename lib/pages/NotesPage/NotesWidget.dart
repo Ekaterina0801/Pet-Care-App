@@ -26,7 +26,6 @@ class _NotesWidgetState extends State<NotesWidget> {
     return InkWell(
       onTap: () => _displayNoteUpdate(context, widget.note.body,widget.note,update),
       child: Container(
-        //height: 100,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             shape: BoxShape.rectangle,

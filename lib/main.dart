@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'pages/BasePage.dart';
 import 'pages/ProfilePage/ProfilePage.dart';
+import 'pages/welcomescreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -60,7 +61,8 @@ class MyApp extends StatelessWidget {
             //'test':(context)=>DisplayAddNote(),
             '/register': (context) => Register(),
            '/home': (BuildContext context) => HomePage(),
-           '/notes':(context) => NotesPage()
+           '/notes':(context) => NotesPage(),
+           '/welcome':(context) => WelcomeScreen()
           },
         title: 'PetCare',
         //initialRoute: '/login',

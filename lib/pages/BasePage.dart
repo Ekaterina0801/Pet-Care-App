@@ -37,7 +37,7 @@ class _BasePageState extends State<BasePage> {
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800,
-                  fontSize: 24)), automaticallyImplyLeading: ((widget.title == 'Статья')  || (widget.title == 'Прививки') || (widget.title == 'Статьи')||(widget.title=='Регистрация'))?  true : false,
+                  fontSize: 24)), automaticallyImplyLeading: ((widget.title == 'Статья')  || (widget.title == 'Болезни') || (widget.title == 'Статьи')||(widget.title=='Регистрация'))?  true : false,
         ),
         body: widget.body,
         bottomNavigationBar: widget.navigationbar,

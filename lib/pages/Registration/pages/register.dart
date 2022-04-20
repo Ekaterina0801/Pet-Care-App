@@ -55,28 +55,28 @@ class _RegisterState extends State<Register> {
       autofocus: false,
       validator: (value)=>value.isEmpty?"Имя пустое":null,
       onSaved: (value) => _firstname = value,
-      decoration: buildInputDecoration("Введите имя", Icons.email),
+      decoration: buildInputDecoration("Введите имя", Icons.person_rounded),
     );
 
     final lastnameField = TextFormField(
       autofocus: false,
       validator: (value)=>value.isEmpty?"Фамилия пустая":null,
       onSaved: (value) => _lastname = value,
-      decoration: buildInputDecoration("Введите фамилию", Icons.email),
+      decoration: buildInputDecoration("Введите фамилию", Icons.person_rounded),
     );
 
     final districtField = TextFormField(
       autofocus: false,
       validator: (value)=>value.isEmpty?"Район пустой":null,
       onSaved: (value) => _district = value,
-      decoration: buildInputDecoration("Введите район", Icons.email),
+      decoration: buildInputDecoration("Введите район", Icons.place),
     );
 
     final priceField = TextFormField(
       autofocus: false,
       validator: (value)=>value.isEmpty?"Цена пустая":null,
       onSaved: (value) => _price = value,
-      decoration: buildInputDecoration("Введите цену", Icons.email),
+      decoration: buildInputDecoration("Введите цену", Icons.monetization_on_rounded),
     );
 
    final readyField = SelectFormField(
@@ -88,14 +88,14 @@ class _RegisterState extends State<Register> {
       validator: (value)=>value.isEmpty?"Поле пустое":null,
       onChanged: (value) => _ready= value,
       onSaved: (value) => _ready= value,
-      decoration: buildInputDecoration("Готовы брать питомцев на передержку? (true/false)", Icons.email),
+      decoration: buildInputDecoration("Готовы брать питомцев на передержку? (true/false)", Icons.home),
     );
 
     final typeField = TextFormField(
       autofocus: false,
       validator: (value)=>value.isEmpty?"Поле пустое":null,
       onSaved: (value) => _typepets = value,
-      decoration: buildInputDecoration("Готовы брать питомцев на передержку? (true/false)", Icons.email),
+      decoration: buildInputDecoration("Готовы брать питомцев на передержку? (true/false)", Icons.pets_outlined),
     );
     var loading = Row(
       mainAxisAlignment: MainAxisAlignment.center,
