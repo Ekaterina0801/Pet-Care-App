@@ -10,8 +10,8 @@ return Scaffold(
   
 body: Column(children: [
 
+  SizedBox(height: 50),
   Container(
-    padding: EdgeInsets.all(50),
     child: Image(
       image: AssetImage('assets/images/PetCare.png'),
       alignment: Alignment.bottomCenter
@@ -20,8 +20,9 @@ body: Column(children: [
     height: 80,
   ),
 
+SizedBox(height: 100),
+
   Container(
-  padding: EdgeInsets.all(100), 
   child: Text('Добро пожаловать!', 
   textAlign: TextAlign.center, 
   style: GoogleFonts.comfortaa(
