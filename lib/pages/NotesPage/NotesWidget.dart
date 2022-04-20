@@ -1,9 +1,5 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
 import 'package:pet_care/pages/NotesPage/Note.dart';
 import 'package:pet_care/pages/NotesPage/reponotes.dart';
 
@@ -27,7 +23,7 @@ class _NotesWidgetState extends State<NotesWidget> {
   Widget build(BuildContext context) {
   
     return InkWell(
-      onTap: () => _displayNote(context, widget.note.body),
+      onTap: () => _displayNoteUpdate(context, widget.note.body,widget.note,update),
       child: Container(
         //height: 100,
         decoration: BoxDecoration(
@@ -67,8 +63,7 @@ class _NotesWidgetState extends State<NotesWidget> {
                   child: Container(
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(),
-                    child: Text(
-                      
+                    child: Text(    
                       widget.note.date.toString().substring(0,10),
                       style: GoogleFonts.comfortaa(
                           color: Colors.black,
@@ -78,7 +73,6 @@ class _NotesWidgetState extends State<NotesWidget> {
                     ),
                   ),
                 ),
-               IconButton(onPressed: ()=> _displayNoteUpdate(context,widget.note.body,widget.note,update),icon: Icon(Icons.edit))
               ],
             ),
           ],
@@ -92,11 +86,12 @@ class _NotesWidgetState extends State<NotesWidget> {
     final formKey = new GlobalKey<FormState>();
     var newbody=oldbody;
     AlertDialog alert = AlertDialog(
-      title: Text('Добавление заметки'),
+      title: Text('Редактирование'),
       actions: [
+        
         FlatButton(
           child: Text(
-            'Добавить',
+            'Применить',
             style: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w800,
@@ -105,8 +100,6 @@ class _NotesWidgetState extends State<NotesWidget> {
           onPressed: () {
             RepositoryNotes().update(newbody,note);
             update();
-            //Navigator.pushNamed(context, '/home').then((_) => setState(() {}));
-            //notifyListeners();
             Navigator.of(context).pop(true);
           },
         ),
@@ -136,37 +129,4 @@ class _NotesWidgetState extends State<NotesWidget> {
             return alert;
           });
     });
-  }
-_displayNote(BuildContext context,String text) {
-    AlertDialog alert = AlertDialog(
-      title: Text('Заметка', style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w900,
-                fontSize: 16),),
-      actions: [
-        FlatButton(
-          child: Text(
-            'Ок',
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 16),
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        )
-      ],
-      content: Text(
-         text,style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 16),
-      ),
-    );
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alert;
-        });
   }
