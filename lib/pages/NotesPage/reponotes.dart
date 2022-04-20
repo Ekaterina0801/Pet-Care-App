@@ -36,6 +36,12 @@ class RepositoryNotes {
     
   }
 
+  Future<http.Response> delete(Note note) async {
+    return http.delete(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Notes/'+note.noteid+'.json')),
+    body: jsonEncode(note
+    ),);
+  }
+
   Future<List<Note>> getNotesByID(int userid) async {
     Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Notes.json')));
     if (res.statusCode == 200) {

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/pages/NotesPage/Note.dart';
 import 'package:pet_care/pages/NotesPage/reponotes.dart';
 
 
 class NotesWidget extends StatefulWidget {
   final Note note;
+  //Function refresh;
   NotesWidget(this.note);
 
   @override
@@ -73,6 +75,8 @@ class _NotesWidgetState extends State<NotesWidget> {
                     ),
                   ),
                 ),
+
+                IconButton(onPressed: ()=>deleteNote(widget.note,update), icon: Icon(Icons.delete))
               ],
             ),
           ],
@@ -81,11 +85,20 @@ class _NotesWidgetState extends State<NotesWidget> {
     );
   }
 }
+void deleteNote(Note note,void update())
+{
+  RepositoryNotes().delete(note);
+  update();
+}
+
  _displayNoteUpdate(
       BuildContext context, String oldbody, Note note, void update()) {
     final formKey = new GlobalKey<FormState>();
     var newbody=oldbody;
     AlertDialog alert = AlertDialog(
+      shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(20.0))
+),
       //backgroundColor: Color.fromRGBO(251, 236, 192, 10),
       title: Text('Редактирование'),
       actions: [
@@ -109,7 +122,12 @@ class _NotesWidgetState extends State<NotesWidget> {
         ),
       ],
       content: Container(
-        
+        decoration: new BoxDecoration(
+        shape: BoxShape.rectangle,
+        //color: const Color(0xFFFFFF),
+        borderRadius:
+            new BorderRadius.all(new Radius.circular(50)),
+        ),
           padding: EdgeInsets.all(10),
           child: Form(
               key: formKey,

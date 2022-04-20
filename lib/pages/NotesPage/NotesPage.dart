@@ -176,7 +176,6 @@ class _NotesPageState extends StateMVC {
 
   Future<Map<String, dynamic>> addNote(
       String text, String date, int userID) async {
-//Future<MyUser> getUserData() => UserPreferences().getUser();
     final Map<String, dynamic> noteData = {
       'Text': text,
       'Date': date,
