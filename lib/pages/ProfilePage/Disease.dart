@@ -199,10 +199,11 @@ if (state is DiseaseResultLoading) {
                                                   ),
                                                   ], 
                                                 ),
+                                                decoration: BoxDecoration(
                                                 color: Color.fromARGB(153, 229, 229, 229),
-                                                //decoration: BoxDecoration(
-                                                //border: Border.all(),
-                                                //borderRadius: BorderRadius.circular(20),),
+                                                border: Border.all(color:Color.fromARGB(153, 229, 229, 229)),
+                                                borderRadius: BorderRadius.circular(10),
+                                                ),
                                               ),
 
                                               SizedBox(height: 10),
@@ -237,8 +238,11 @@ if (state is DiseaseResultLoading) {
                                           ),
                                             ], 
                                           ),
-                                            color: Color.fromARGB(153, 229, 229, 229),
-                                                //borderRadius: borderRadius.all(Radius.circular(10)),
+                                                decoration: BoxDecoration(
+                                                color: Color.fromARGB(153, 229, 229, 229),
+                                                border: Border.all(color:Color.fromARGB(153, 229, 229, 229)),
+                                                borderRadius: BorderRadius.circular(10),
+                                                ),
                                             ),
 
                                             SizedBox(height: 10),
@@ -273,8 +277,11 @@ if (state is DiseaseResultLoading) {
                                           ),
                                             ], 
                                           ),
-                                            color: Color.fromARGB(153, 229, 229, 229),
-                                                //borderRadius: borderRadius.all(Radius.circular(10)),
+                                              decoration: BoxDecoration(
+                                              color: Color.fromARGB(153, 229, 229, 229),
+                                              border: Border.all(color:Color.fromARGB(153, 229, 229, 229)),
+                                              borderRadius: BorderRadius.circular(10),
+                                              ),
                                             ),
 
                                             ],
