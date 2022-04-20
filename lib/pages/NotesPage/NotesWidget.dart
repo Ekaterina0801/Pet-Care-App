@@ -16,7 +16,6 @@ class _NotesWidgetState extends State<NotesWidget> {
   void update()
   {
     this.setState(() {
-      
     });
   }
   @override
@@ -29,7 +28,7 @@ class _NotesWidgetState extends State<NotesWidget> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             shape: BoxShape.rectangle,
-            color: Color.fromRGBO(251, 236, 192, 10),
+             color: Color.fromRGBO(251, 236, 192, 10),
             boxShadow: [
               BoxShadow(
                 color: Color.fromRGBO(198, 191, 172, 1),
@@ -87,10 +86,14 @@ class _NotesWidgetState extends State<NotesWidget> {
     final formKey = new GlobalKey<FormState>();
     var newbody=oldbody;
     AlertDialog alert = AlertDialog(
+      //backgroundColor: Color.fromRGBO(251, 236, 192, 10),
       title: Text('Редактирование'),
       actions: [
         
-        FlatButton(
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor:MaterialStateProperty.all(Color.fromRGBO(251, 236, 192, 10))
+          ),
           child: Text(
             'Применить',
             style: GoogleFonts.comfortaa(
@@ -106,6 +109,7 @@ class _NotesWidgetState extends State<NotesWidget> {
         ),
       ],
       content: Container(
+        
           padding: EdgeInsets.all(10),
           child: Form(
               key: formKey,

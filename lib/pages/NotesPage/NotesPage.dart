@@ -144,6 +144,9 @@ class _NotesPageState extends StateMVC {
         ),
       ],
       content: Container(
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(251, 236, 192, 10),
+          ),
           padding: EdgeInsets.all(10),
           child: Form(
               key: formKey,
@@ -152,7 +155,6 @@ class _NotesPageState extends StateMVC {
                 onChanged: (value) {
                   _body = value;
                   var now = DateTime.now();
-                  //String convertedDateTime = "${now.year.toString()}-${now.month.toString().padLeft(2,'0')}-${now.day.toString().padLeft(2,'0')} ${now.hour.toString().padLeft(2,'0')}-${now.minute.toString().padLeft(2,'0')}";
                   String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
                   _date = formattedDate;
                 },

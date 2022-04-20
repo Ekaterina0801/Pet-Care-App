@@ -31,10 +31,6 @@ class RepositoryNotes {
     note.body=newtext;
     return http.put(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Notes/'+note.noteid+'.json')),
     body: jsonEncode(note
-      //'Date':note.date,
-      //'NoteID':note.noteid,
-      //'Id':note.id,
-
     ),);
     
     
