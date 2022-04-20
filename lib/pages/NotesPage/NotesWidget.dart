@@ -6,9 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:pet_care/pages/NotesPage/Note.dart';
 import 'package:pet_care/pages/NotesPage/reponotes.dart';
-import 'package:pet_care/pages/Registration/util/appurl.dart';
 
-import 'NotesPage.dart';
 
 class NotesWidget extends StatefulWidget {
   final Note note;
@@ -19,7 +17,12 @@ class NotesWidget extends StatefulWidget {
 }
 
 class _NotesWidgetState extends State<NotesWidget> {
-
+  void update()
+  {
+    this.setState(() {
+      
+    });
+  }
   @override
   Widget build(BuildContext context) {
   
@@ -75,7 +78,7 @@ class _NotesWidgetState extends State<NotesWidget> {
                     ),
                   ),
                 ),
-               IconButton(onPressed: ()=> _displayNoteUpdate(context,widget.note.body,widget.note),icon: Icon(Icons.edit))
+               IconButton(onPressed: ()=> _displayNoteUpdate(context,widget.note.body,widget.note,update),icon: Icon(Icons.edit))
               ],
             ),
           ],
@@ -85,7 +88,7 @@ class _NotesWidgetState extends State<NotesWidget> {
   }
 }
  _displayNoteUpdate(
-      BuildContext context, String oldbody, Note note) {
+      BuildContext context, String oldbody, Note note, void update()) {
     final formKey = new GlobalKey<FormState>();
     var newbody=oldbody;
     AlertDialog alert = AlertDialog(
@@ -101,6 +104,7 @@ class _NotesWidgetState extends State<NotesWidget> {
           ),
           onPressed: () {
             RepositoryNotes().update(newbody,note);
+            update();
             //Navigator.pushNamed(context, '/home').then((_) => setState(() {}));
             //notifyListeners();
             Navigator.of(context).pop(true);
