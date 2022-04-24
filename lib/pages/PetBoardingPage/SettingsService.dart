@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/PetBoardingPage/MyAccountWidget.dart';
-import 'package:pet_care/repository/accounts.dart';
+
 
 //Страница для настроек аккаунта для сервиса передержки
 class SettingsService extends StatefulWidget {
@@ -50,7 +49,7 @@ class _SettingsServiceState extends State<SettingsService> {
         ),
         body: ListView(
           children: [
-            MyAccountWidget(accounts[0]),
+            //MyAccountWidget(accounts[0]),
             Container(
               decoration: BoxDecoration(
                   color: Color.fromRGBO(242, 242, 242, 1),

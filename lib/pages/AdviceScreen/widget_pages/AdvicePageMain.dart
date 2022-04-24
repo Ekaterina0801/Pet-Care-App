@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:pet_care/pages/AdviceScreen/ArticlePage.dart';
-import 'package:pet_care/pages/AdviceScreen/requests/data/repoarticles.dart';
-
-import 'package:pet_care/repository/advicerepo.dart';
-import 'package:http/http.dart' as http;
-
-import 'AdviceList.dart';
-import 'AdviceWidget.dart';
-import 'requests/controllers/ArticleController.dart';
-import 'requests/models/ArticleJ.dart';
+import 'package:pet_care/pages/AdviceScreen/widget_pages/ArticlePage.dart';
+import '../widgets/Advice_List_Page.dart';
+import '../widgets/Advice_Block.dart';
+import '../widgets/Main_Advice_Block.dart';
+import '../requests/controllers/ArticleController.dart';
+import '../requests/models/Article.dart';
+import 'ArticlePage.dart';
 
 
 //главная страница советов
-class AdvicePage extends StatefulWidget {
+class AdvicePageMain extends StatefulWidget {
   
   @override
   _AdvicePageState createState() => _AdvicePageState();

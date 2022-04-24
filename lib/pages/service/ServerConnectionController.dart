@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart' as http;
+
 class ServerController {
   static const BASE_URL = '';
 
@@ -12,18 +12,20 @@ class ServerController {
     http.Response response;
     try {
       final result = await Connectivity().checkConnectivity();
-      if (result != ConnectivityResult.none){
-        response = await http.get(Uri.parse(BASE_URL + url)).timeout(Duration(seconds: 5));
-      }else{
+      if (result != ConnectivityResult.none) {
+        response = await http
+            .get(Uri.parse(BASE_URL + url))
+            .timeout(Duration(seconds: 5));
+      } else {
         throw ConnectionError();
-      } 
+      }
     } on SocketException catch (_) {
       throw ServerConnectionError();
     } on TimeoutException catch (_) {
       throw ServerConnectionError();
-    } on ConnectionError catch (e){
+    } on ConnectionError catch (e) {
       throw e;
-    } 
+    }
     if (response.statusCode == 200) {
       return response;
     } else {
@@ -65,8 +67,7 @@ class ServerController {
 }
 
 class ConnectionError extends TextException {
-
-  ConnectionError():super(text: "Соединение с сетью отсутствует.");
+  ConnectionError() : super(text: "Соединение с сетью отсутствует.");
 }
 
 class TextException implements Exception {
@@ -75,12 +76,14 @@ class TextException implements Exception {
 }
 
 class ServerConnectionError extends TextException {
-
-  ServerConnectionError():super(text: "Соединение с сервером отсутствует, проверьте соединение с сетью, или попробйте подсоедениться позднее.");
+  ServerConnectionError()
+      : super(
+            text:
+                "Соединение с сервером отсутствует, проверьте соединение с сетью, или попробйте подсоедениться позднее.");
 }
 
 class ServerError extends TextException {
   final int status;
 
-  ServerError(this.status,text):super(text: text);
+  ServerError(this.status, text) : super(text: text);
 }

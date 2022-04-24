@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -14,6 +12,7 @@ import 'package:provider/provider.dart';
 
 import '../BasePage.dart';
 import 'package:http/http.dart' as http;
+
 List<String> photos = [
   "./assets/images/article_2.6.jpg",
   "./assets/images/article_1.2.jpg",
@@ -33,63 +32,62 @@ class VaccinationsPage extends StatefulWidget {
 
 class _VaccinationsPageState extends StateMVC {
   VaccinationController _controller;
-  _VaccinationsPageState():super(VaccinationController()){_controller = controller as VaccinationController;}
+  _VaccinationsPageState() : super(VaccinationController()) {
+    _controller = controller as VaccinationController;
+  }
   @override
   void initState() {
     super.initState();
     _controller.init();
   }
+
   final formKey = new GlobalKey<FormState>();
   MyUser user;
   @override
   Widget build(BuildContext context) {
     Future<MyUser> getUserData() => UserPreferences().getUser();
     final state = _controller.currentState;
-if (state is VaccinationResultLoading) {
+    if (state is VaccinationResultLoading) {
       // загрузка
-      return 
-         Center(
-          child: CircularProgressIndicator(),
-       
+      return Center(
+        child: CircularProgressIndicator(),
       );
     } else if (state is VaccinationResultFailure) {
       // ошибка
       return Center(
-        child: Text(
-          state.error,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline4.copyWith(color: Colors.red)
-        ),
+        child: Text(state.error,
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .headline4
+                .copyWith(color: Colors.red)),
       );
-    } else {  
-      final l = (state as VaccinationResultSuccess).vaccList; 
-    return MultiProvider(
-      providers: [
+    } else {
+      final l = (state as VaccinationResultSuccess).vaccList;
+      return MultiProvider(
+        providers: [
           ChangeNotifierProvider(create: (_) => AuthProvider()),
           ChangeNotifierProvider(create: (_) => UserProvider()),
         ],
-      child: FutureBuilder(
-       
-        builder: (context, snapshot) {
+        child: FutureBuilder(builder: (context, snapshot) {
           switch (snapshot.connectionState) {
-                    case ConnectionState.none:
-                    case ConnectionState.waiting:
-                      return CircularProgressIndicator();
-                    default:
-                      if (snapshot.hasError)
-                        return Text('Error: ${snapshot.error}');
-                      else user=snapshot.data;
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+              return CircularProgressIndicator();
+            default:
+              if (snapshot.hasError)
+                return Text('Error: ${snapshot.error}');
+              else
+                user = snapshot.data;
 
-                        //UserPreferences().removeUser();
-                      
-                  }
-        List<Vaccination> vacc =[];
-        //vacc = user.pet.
-        for(var i in l)
-        {
-          if(i.userID==user.userid)
-          vacc.add(i);
-        }
+            //UserPreferences().removeUser();
+
+          }
+          List<Vaccination> vacc = [];
+          //vacc = user.pet.
+          for (var i in l) {
+            if (i.userID == user.userid) vacc.add(i);
+          }
           return BasePage(
             title: "Прививки",
             body: ListView.builder(
@@ -103,17 +101,16 @@ if (state is VaccinationResultLoading) {
               padding: EdgeInsets.all(10),
             ),
           );
-        }
-      ),
-    );
+        }),
+      );
+    }
   }
-}
 }
 
 class VaccinationsCard extends StatelessWidget {
   Vaccination vac;
   VaccinationsCard(Vaccination vac) {
-   this.vac = vac;
+    this.vac = vac;
   }
   int vaccinationId;
   int userID;
@@ -165,8 +162,7 @@ class VaccinationsCard extends StatelessWidget {
   }
 }
 
-class Vaccination
-{
+class Vaccination {
   int vaccinationId;
   int userID;
   int petId;
@@ -175,61 +171,65 @@ class Vaccination
   String document;
   bool revactination;
 
-Vaccination({this.vaccinationId,this.userID,this.petId,this.date,this.type,this.document,this.revactination});
-factory Vaccination.fromJson(Map<String, Object> json) => Vaccination(
-       userID: json['UserID'],
-       vaccinationId: json['VaccinationID'],
-       petId: json['PetID'],
-       date: json['Date'],
-       type: json['Type'],
-       document: json['Document'],
-       revactination: json['Revactination']
-      );
+  Vaccination(
+      {this.vaccinationId,
+      this.userID,
+      this.petId,
+      this.date,
+      this.type,
+      this.document,
+      this.revactination});
+  factory Vaccination.fromJson(Map<String, Object> json) => Vaccination(
+      userID: json['UserID'],
+      vaccinationId: json['VaccinationID'],
+      petId: json['PetID'],
+      date: json['Date'],
+      type: json['Type'],
+      document: json['Document'],
+      revactination: json['Revactination']);
 
   Map<String, dynamic> toJson() => {
-        'UserID':userID,
-        'VaccinationID':vaccinationId,
-        'PetID':petId,
-        'Date':date,
-        'Type':type,
-        'Document':document,
-        'Revactination':revactination
+        'UserID': userID,
+        'VaccinationID': vaccinationId,
+        'PetID': petId,
+        'Date': date,
+        'Type': type,
+        'Document': document,
+        'Revactination': revactination
       };
 }
 
 Future<List<Vaccination>> getVaccinnations(int userID) async {
-    Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users/Pets/Vaccinations.json')));
-    Vaccination(
-       userID: userID,
-       vaccinationId: 0,
-       petId: 0,
-       date: "-",
-       type: "-",
-       document: "-",
-       revactination: false,
-      );
-    List<Vaccination> vacc=[];
-    if (res.statusCode == 200) {
-      
-      var ll = jsonDecode(res.body);
-      for(var t in ll.keys)
-      {
-        vacc.add(ll[t]);
-      }
-    } else {
-      throw "Unable to retrieve vaccinations.";
-    }return vacc;
+  Response res = await http.get(Uri.parse(Uri.encodeFull(
+      'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users/Pets/Vaccinations.json')));
+  Vaccination(
+    userID: userID,
+    vaccinationId: 0,
+    petId: 0,
+    date: "-",
+    type: "-",
+    document: "-",
+    revactination: false,
+  );
+  List<Vaccination> vacc = [];
+  if (res.statusCode == 200) {
+    var ll = jsonDecode(res.body);
+    for (var t in ll.keys) {
+      vacc.add(ll[t]);
+    }
+  } else {
+    throw "Unable to retrieve vaccinations.";
   }
+  return vacc;
+}
 
-  
-
-  class VaccinationController extends ControllerMVC {
+class VaccinationController extends ControllerMVC {
   // создаем наш репозиторий
   final RepositoryVaccinations repo = new RepositoryVaccinations();
 
   // конструктор нашего контроллера
- VaccinationController();
-  
+  VaccinationController();
+
   // первоначальное состояние - загрузка данных
   VaccinationResult currentState = VaccinationResultLoading();
 
@@ -244,19 +244,18 @@ Future<List<Vaccination>> getVaccinnations(int userID) async {
       setState(() => currentState = VaccinationResultFailure("Нет интернета"));
     }
   }
-
 }
 
-class RepositoryVaccinations{
+class RepositoryVaccinations {
   Future<List<Vaccination>> getvacc() async {
-    Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users/Pets/Vaccinations.json')));
-    
+    Response res = await http.get(Uri.parse(Uri.encodeFull(
+        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users/Pets/Vaccinations.json')));
+
     if (res.statusCode == 200) {
       //var rb = res.body;
-      List<Vaccination> list=[];
+      List<Vaccination> list = [];
       var ll = jsonDecode(res.body);
-      for(var t in ll.keys)
-      {
+      for (var t in ll.keys) {
         Vaccination a = Vaccination.fromJson(ll[t]);
         //if(a.userID==)
         list.add(a);
@@ -266,9 +265,9 @@ class RepositoryVaccinations{
       throw "Unable to retrieve pets.";
     }
   }
-  }
+}
 
-  abstract class VaccinationResult{}
+abstract class VaccinationResult {}
 
 //указатель на успешный запрос
 class VaccinationResultSuccess extends VaccinationResult {
@@ -284,5 +283,5 @@ class VaccinationResultFailure extends VaccinationResult {
 
 // загрузка данных
 class VaccinationResultLoading extends VaccinationResult {
- VaccinationResultLoading();
+  VaccinationResultLoading();
 }

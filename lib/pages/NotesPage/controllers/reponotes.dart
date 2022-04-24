@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/NotesPage/Note.dart';
 // импортируем http пакет
 import 'package:http/http.dart' as http;

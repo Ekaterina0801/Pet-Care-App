@@ -3,7 +3,7 @@ import 'dart:convert';
 // импортируем http пакет
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:pet_care/pages/AdviceScreen/requests/models/ArticleJ.dart';
+import 'package:pet_care/pages/AdviceScreen/requests/models/Article.dart';
 
 
 

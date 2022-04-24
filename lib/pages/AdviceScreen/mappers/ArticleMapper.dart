@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-import 'package:pet_care/pages/AdviceScreen/requests/models/ArticleJ.dart';
+import 'package:pet_care/pages/AdviceScreen/requests/models/Article.dart';
+
+import '../requests/models/Article.dart';
 
 class ArticleMapper
 {

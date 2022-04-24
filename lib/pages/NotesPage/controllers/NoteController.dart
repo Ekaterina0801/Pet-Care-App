@@ -1,6 +1,6 @@
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/pages/NotesPage/Note.dart';
-import 'package:pet_care/pages/NotesPage/reponotes.dart';
+import 'package:pet_care/pages/NotesPage/controllers/reponotes.dart';
 
 class NoteController extends ControllerMVC {
   // создаем наш репозиторий

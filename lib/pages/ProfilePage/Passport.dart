@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pet_care/pages/ProfilePage/Vaccinations.dart';
-import 'ChangeInfo.dart';
 import 'Disease.dart';
 
 class Passport extends StatelessWidget {
@@ -126,6 +124,7 @@ class ChooseRemakeWidget extends StatelessWidget {
   }
 }
 
+
 //Диалоговое окно для изменения имени владельца
 class RemakeNameWidget extends StatelessWidget {
   final String title;
@@ -156,6 +155,7 @@ class RemakeNameWidget extends StatelessWidget {
                     fontWeight: FontWeight.w800,
                     fontSize: 14))),
         TextFormField(
+          
           autofocus: false,
           onSaved: (value) => name = value,
         ),

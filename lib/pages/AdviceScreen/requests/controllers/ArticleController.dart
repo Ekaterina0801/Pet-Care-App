@@ -1,6 +1,6 @@
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/pages/AdviceScreen/requests/data/repoarticles.dart';
-import 'package:pet_care/pages/AdviceScreen/requests/models/ArticleJ.dart';
+import 'package:pet_care/pages/AdviceScreen/requests/models/Article.dart';
 
 
 class ArticleController extends ControllerMVC {

@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/CalendarPage/FeedingCalendarPage.dart';
-import 'package:pet_care/pages/NotesPage/NotesPage.dart';
+import 'package:pet_care/pages/NotesPage/widgets/NotesPage.dart';
 import 'package:pet_care/pages/PetBoardingPage/PetBoardingPage.dart';
 import 'package:pet_care/pages/ProfilePage/ProfilePage.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import 'AdviceScreen/AdvicePage.dart';
+import 'AdviceScreen/widget_pages/AdvicePageMain.dart';
 
 
 
@@ -17,7 +17,7 @@ class BasePage extends StatefulWidget {
   final String title;
   final Widget body;
   final Widget navigationbar;
-  BasePage({this.body, this.title, this.navigationbar = null});
+  BasePage({this.body, this.title, this.navigationbar});
 
   @override
   State<BasePage> createState() => _BasePageState();
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
     'Профиль',
   ];
   final children = [
-    AdvicePage(),
+    AdvicePageMain(),
     PetBoardingPage(),
     CalendarPage(),
     NotesPage(),

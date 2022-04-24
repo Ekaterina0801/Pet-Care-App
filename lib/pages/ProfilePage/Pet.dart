@@ -2,12 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:pet_care/pages/Registration/util/shared_preference.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 // импортируем http пакет
 import 'package:http/http.dart' as http;
-
-import 'Disease.dart';
 
 import 'Vaccinations.dart';
 
@@ -22,9 +18,10 @@ class Pet
   String gender;
   String weight;
   String color;
+  String petidString;
   //List<Vaccination> vaccinations;
   //List<Disease> diseases;
-  Pet({this.petID,this.userID,this.animal,this.name,this.breed,this.dateofbirthday,this.gender,this.weight,this.color});
+  Pet({this.petID,this.userID,this.animal,this.name,this.breed,this.dateofbirthday,this.gender,this.weight,this.color,this.petidString});
 
 factory Pet.fromJson(Map<String, Object> json) => Pet(
        petID: json['PetID'],
@@ -36,7 +33,7 @@ factory Pet.fromJson(Map<String, Object> json) => Pet(
        gender:json['Gender'],
        weight: json['Weight'],
        color: json['Color'],
-       
+       petidString:json['PetIDString']
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,7 +46,7 @@ factory Pet.fromJson(Map<String, Object> json) => Pet(
         'Gender':gender,
         'Weight':weight,
         'Color':color,
-        
+        'PetIDString':"-"
       };
 }
 
@@ -94,17 +91,6 @@ Future<Pet> getPet(int userID) async {
 
   Future<List<Pet>> getPets() async {
     Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets.json')));
-    Pet pet = Pet(
-        petID: 1,
-        userID: -1,
-        animal:"-",
-        name:"-",
-        breed:"-",
-        dateofbirthday: "-",
-        gender: "-",
-        weight: "0",
-        color:"-"
-      );
     List<Pet> pets = [];
     if (res.statusCode == 200) {
 
@@ -112,7 +98,10 @@ Future<Pet> getPet(int userID) async {
       
       for(var t in ll.keys)
       {
-        pets.add(ll[t]); 
+        var a = Pet.fromJson(ll[t]);
+        a.petidString=t;
+        //ll[t].petidString=t;
+        pets.add(a); 
       }
       
     } else {
@@ -155,6 +144,7 @@ class RepositoryPets{
       for(var t in ll.keys)
       {
         Pet a = Pet.fromJson(ll[t]);
+        a.petidString=t;
         //if(a.userID==)
         list.add(a);
       }

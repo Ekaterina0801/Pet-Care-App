@@ -5,7 +5,6 @@ class WelcomeScreen extends StatelessWidget {
 
 @override
 Widget build(BuildContext context) {
-var child;
 return Scaffold(
   
 body: Column(children: [

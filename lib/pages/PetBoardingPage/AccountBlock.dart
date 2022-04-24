@@ -2,9 +2,7 @@ import 'package:avatars/avatars.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/dommain/myuser.dart';
-import 'package:pet_care/repository/accounts.dart';
 
-import 'Account.dart';
 
 //Виджет для блока-виджета аккаунта
 class AccountBlock extends StatefulWidget {

@@ -1,17 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:pet_care/dommain/myuser.dart';
-import 'package:pet_care/pages/ProfilePage/Pet.dart';
-import 'package:pet_care/pages/ProfilePage/Vaccinations.dart';
 import 'package:pet_care/pages/Registration/util/appurl.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 
 MyUser myuser;
-
 
 enum Status {
   NotLoggedIn,
@@ -24,45 +20,38 @@ enum Status {
 }
 
 class AuthProvider with ChangeNotifier {
-
   Status _loggedInStatus = Status.NotLoggedIn;
   Status _registeredInStatus = Status.NotRegistered;
 
   Status get loggedInStatus => _loggedInStatus;
   Status get registeredInStatus => _registeredInStatus;
 
-  Future<List<MyUser>> allUsers()async {
-    var jsonString = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
+  Future<List<MyUser>> allUsers() async {
+    var jsonString = await http.get(Uri.parse(Uri.encodeFull(
+        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
     var l = jsonDecode(jsonString.body);
     return l.values;
   }
+
   Future<Map<String, dynamic>> login(String email, String password) async {
     var result;
-    var jsonString = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
+    var jsonString = await http.get(Uri.parse(Uri.encodeFull(
+        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
     var l = jsonDecode(jsonString.body);
-    var m = null;
-    MyUser user = null;
-  
-    for(var i in l.values)
-    {
-      if(i['Email']==email&&i['Password']==password)
-      {
-        
-            user = MyUser.fromJson(i);
+    MyUser user;
+
+    for (var i in l.values) {
+      if (i['Email'] == email && i['Password'] == password) {
+        user = MyUser.fromJson(i);
+      } else {
+        _loggedInStatus = Status.NotLoggedIn;
+        notifyListeners();
+        //Login();
       }
-        else
-        {
-           _loggedInStatus = Status.NotLoggedIn;
-           notifyListeners();
-           //Login();
-        }
-      }
-        // print(i['Email']);
-         //print(i['UserID']);
-        
-    
-   
-  
+    }
+    // print(i['Email']);
+    //print(i['UserID']);
+
     _loggedInStatus = Status.Authenticating;
     notifyListeners();
 
@@ -73,7 +62,7 @@ class AuthProvider with ChangeNotifier {
       //headers: {'Content-Type': 'application/json'},
     );
     print(response.body);
-    if (response.statusCode == 200||response.statusCode==201) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       final Map<String, dynamic> responseData = json.decode(response.body);
 
       //var userData = responseData['data'];
@@ -100,49 +89,56 @@ class AuthProvider with ChangeNotifier {
     return result;
   }
 
-  Future<Map<String, dynamic>> register(String email, String firstname, String lastname,String password,String district,String typeofpets, String price,String ready) async {
-
-    var jsonString = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
+  Future<Map<String, dynamic>> register(
+      String email,
+      String firstname,
+      String lastname,
+      String password,
+      String district,
+      String typeofpets,
+      String price,
+      String ready) async {
+    var jsonString = await http.get(Uri.parse(Uri.encodeFull(
+        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
     var l = jsonDecode(jsonString.body);
-    int id = l.length+1;
+    int id = l.length + 1;
     final Map<String, dynamic> registrationData = {
-        'District':district,
-        'Email': email,
-        'FirstName':firstname,          //Map<tttt,User>
-        'LastName':lastname,
-        'Password': password,
-        'ReadyForOverposure':ready,
-        'UserID': id,
-        'TypeOfPets':typeofpets,
-        'Price':price,
-        
+      'District': district,
+      'Email': email,
+      'FirstName': firstname, //Map<tttt,User>
+      'LastName': lastname,
+      'Password': password,
+      'ReadyForOverposure': ready,
+      'UserID': id,
+      'TypeOfPets': typeofpets,
+      'Price': price,
     };
-   var response =  await post(Uri.parse(AppUrl.register),
+    var response = await post(Uri.parse(AppUrl.register),
         body: json.encode(registrationData));
-        //headers: {'content-type': 'text/plain'})
-        //headers: {'Content-Type': 'application/json'})
-  MyUser authUser = MyUser(
-  userid: registrationData['UserID'], 
-  firstname: registrationData['FirstName'],
-  lastname:registrationData['LastName'],
-  password: registrationData['Password'],
-  readyforoverposure: registrationData['ReadyForOverposure'],
-  email: registrationData['Email'],
-  district: registrationData['District'],
-  typePets: registrationData['TypePets'],
-  price: registrationData['Price'],
-  //stringID: registrationData['StringID']
-  //pet: registrationData['Pet'],
-  );
-  UserPreferences().saveUser(authUser);
-  var result;
-  if (response.request!=null)
-    result = {
+    //headers: {'content-type': 'text/plain'})
+    //headers: {'Content-Type': 'application/json'})
+    MyUser authUser = MyUser(
+      userid: registrationData['UserID'],
+      firstname: registrationData['FirstName'],
+      lastname: registrationData['LastName'],
+      password: registrationData['Password'],
+      readyforoverposure: registrationData['ReadyForOverposure'],
+      email: registrationData['Email'],
+      district: registrationData['District'],
+      typePets: registrationData['TypePets'],
+      price: registrationData['Price'],
+      //stringID: registrationData['StringID']
+      //pet: registrationData['Pet'],
+    );
+    UserPreferences().saveUser(authUser);
+    var result;
+    if (response.request != null)
+      result = {
         'status': true,
         'message': 'Successfully registered',
         'data': authUser
       };
-    else{
+    else {
       result = {
         'status': false,
         'message': 'Registration failed',
@@ -152,15 +148,13 @@ class AuthProvider with ChangeNotifier {
     return result;
   }
 
-
   static Future<FutureOr> onValue(Response response) async {
     var result;
     final Map<String, dynamic> responseData = json.decode(response.body);
 
     print(response.statusCode);
     if (response.statusCode == 200) {
-
-     var userData = responseData['data'];
+      var userData = responseData['data'];
 
       MyUser authUser = MyUser.fromJson(userData);
       UserPreferences().saveUser(authUser);
@@ -184,5 +178,4 @@ class AuthProvider with ChangeNotifier {
     print("the error is $error.detail");
     return {'status': false, 'message': 'Unsuccessful Request', 'data': error};
   }
-
 }

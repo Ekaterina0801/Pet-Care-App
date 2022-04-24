@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_care/pages/ProfilePage/Pet.dart';
-import '../BasePage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ChangeInfoPage extends StatelessWidget {

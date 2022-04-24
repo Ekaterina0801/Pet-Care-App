@@ -1,5 +1,4 @@
 //Класс для заметки
-import 'dart:convert';
 
 import 'dart:core';
 

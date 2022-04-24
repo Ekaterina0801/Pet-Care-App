@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +11,8 @@ import 'package:pet_care/pages/ProfilePage/Passport.dart';
 import 'package:pet_care/pages/ProfilePage/Pet.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'AddAnimal.dart';
-
+// импортируем http пакет
+import 'package:http/http.dart' as http;
 /*
 var h = window.physicalSize.height;
 double FindCenterForPlus(double h) {
@@ -23,34 +26,34 @@ double FindCenterForPlus(double h) {
 */
 DateTime dateToday =
     DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-String AgeToString(String date) {
-  int dateBirth_year = int.parse(date.substring(6, 10));
-  int dateBirth_month = int.parse(date.substring(3, 5));
+String ageToString(String date) {
+  int dateBirthYear = int.parse(date.substring(6, 10));
+  int dateBirthMonth = int.parse(date.substring(3, 5));
 
-  var age_years = (dateToday.year - dateBirth_year).round();
-  var age_month = (dateToday.month - dateBirth_month).round().abs();
+  var ageYears = (dateToday.year - dateBirthYear).round();
+  var ageMonth = (dateToday.month - dateBirthMonth).round().abs();
   String years = "";
   String month = "";
-  if (age_years == 0)
+  if (ageYears == 0)
     years = "";
-  else if (age_years == 1)
+  else if (ageYears == 1)
     years = "1 год";
-  else if ((age_years == 2) || (age_years == 3) || (age_years == 4))
-    years = "${age_years} года";
+  else if ((ageYears == 2) || (ageYears == 3) || (ageYears == 4))
+    years = "$ageYears года";
   else
-    years = "${age_years} лет";
+    years = "$ageYears лет";
 
-  if (age_month == 0)
+  if (ageMonth == 0)
     month = "0 месяцев";
-  else if (age_month == 1)
+  else if (ageMonth == 1)
     month = "1 месяц";
-  else if ((age_month == 2) || (age_month == 3) || (age_month == 4))
-    month = "${age_month} месяца";
+  else if ((ageMonth == 2) || (ageMonth == 3) || (ageMonth == 4))
+    month = "$ageMonth месяца";
   else
-    month = "${age_month} месяцев";
+    month = "$ageMonth месяцев";
 
-  String age_string = years + "\n" + month;
-  return age_string;
+  String ageString = years + "\n" + month;
+  return ageString;
 }
 
 class ProfilePage extends StatefulWidget {
@@ -67,15 +70,25 @@ class _ProfilePageState extends StateMVC {
   void initState() {
     super.initState();
     _controller.init();
+    UserPreferences().getUser().then((result) {
+    setState(() {
+    user = result;
+   });
+ });
   }
-
+  void update()
+  {
+    this.setState(() {
+    });
+  }
   final formKey = new GlobalKey<FormState>();
   MyUser user;
   Pet pet;
+  List<Pet> allpets=[];
 
   @override
   Widget build(BuildContext context) {
-    Future<MyUser> getUserData() => UserPreferences().getUser();
+    //Future<MyUser> getUserData() => UserPreferences().getUser();
     final state = _controller.currentState;
     if (state is PetResultLoading) {
       // загрузка
@@ -93,9 +106,9 @@ class _ProfilePageState extends StateMVC {
                 .copyWith(color: Colors.red)),
       );
     } else {
-      final pets = (state as PetResultSuccess).petsList;
+      //final pets = (state as PetResultSuccess).petsList;
       return  FutureBuilder(
-              future: getUserData(),
+              future: getPets(),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
@@ -105,9 +118,9 @@ class _ProfilePageState extends StateMVC {
                     if (snapshot.hasError)
                       return Text('Error: ${snapshot.error}');
                     else
-                      user = snapshot.data;
+                      allpets = snapshot.data;
                     pet = new Pet();
-                    for (var i in pets) {
+                    for (var i in allpets) {
                       if (i.userID == user.userid) {
                         pet = i;
                         break;
@@ -209,16 +222,9 @@ class _ProfilePageState extends StateMVC {
                                         backgroundColor: Colors.white,
                                         //onPressed: () => Navigator.push(context,
                                         //                      MaterialPageRoute(builder: (context) => ChangeInfoPage(pet))),
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  opaque: false,
-                                                  pageBuilder:
-                                                      (BuildContext context, _,
-                                                              __) =>
-                                                          ChangeInfo(pet)));
-                                        },
+                                        onPressed: () 
+                                        {setState(() { _displayInfoPet(context, pet, update);});
+                                          }
                                       )),
                                 ])),
                             Container(
@@ -233,7 +239,7 @@ class _ProfilePageState extends StateMVC {
                                 children: [
                                   MainInfoBlock(
                                       "Возраст",
-                                      AgeToString(pet.dateofbirthday),
+                                      ageToString(pet.dateofbirthday),
                                       Color.fromRGBO(131, 184, 107, 80)),
                                   MainInfoBlock(
                                     "Вес",
@@ -279,9 +285,76 @@ class _ProfilePageState extends StateMVC {
   }
 }
 
+_displayInfoPet(
+  BuildContext context,Pet pet, void update())
+  {
+    final formKey = new GlobalKey<FormState>();
+    var newname = pet.name;
+    var newweight = pet.weight;
+    AlertDialog alert = AlertDialog(
+      title: Align(
+          alignment: Alignment.bottomCenter,
+          child: Text('Изменить основные данные',
+              style: GoogleFonts.comfortaa(
+                  color: Colors.black,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 16))),
+      actions: [
+        Form(
+          key: formKey,
+          child: Column(
+            children: [
+          
+       addInfo('Введите имя питомца'),
+          TextFormField(
+            initialValue: pet.name,
+            autofocus: false,
+            onChanged: (value) => newname=value,
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+          addInfo('Введите вес питомца'),
+          TextFormField(
+            autofocus: false,
+            initialValue: pet.weight,
+            onChanged: (value) => newweight = value,
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+          RaisedButton(
+              color: Color.fromRGBO(255, 223, 142, 10),
+              splashColor: Color.fromARGB(199, 240, 240, 240),
+              onPressed: (){
+                updateName(newname, pet);
+                updateWeight(newweight, pet);
+                update();
+                Navigator.pop(context, true);
+                },
+              child: Text('Принять',
+                  textAlign: TextAlign.left,
+                  style: GoogleFonts.comfortaa(
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 11)))
+      ],
+          ),
+        )
+        ]
+      );
+      Future.delayed(Duration.zero, () async {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          });
+    });
+  }
+
+
+/*
 //Диалоговое окно для изменения основных данных питомца
 class ChangeInfo extends StatefulWidget {
   Pet pet;
+  //void update;
   ChangeInfo(this.pet);
 
   @override
@@ -289,11 +362,10 @@ class ChangeInfo extends StatefulWidget {
 }
 
 class _ChangeInfoState extends State<ChangeInfo> {
-  _changeName(String value) {
-    setState(() => widget.pet.name = value);
-  }
+  
 
   @override
+  var newname= pet.name;
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Align(
@@ -307,6 +379,7 @@ class _ChangeInfoState extends State<ChangeInfo> {
       actions: [
        addInfo('Введите имя питомца'),
         TextFormField(
+          initialValue: widget.pet.name,
           autofocus: false,
           onChanged: (value) => _changeName(value),
         ),
@@ -314,13 +387,18 @@ class _ChangeInfoState extends State<ChangeInfo> {
         addInfo('Введите вес питомца'),
         TextFormField(
           autofocus: false,
-          onChanged: (value) => widget.pet.weight = value,
+          initialValue: widget.pet.weight,
+          onChanged: (value) => newweight = value,
         ),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
         RaisedButton(
             color: Color.fromRGBO(255, 223, 142, 10),
             splashColor: Color.fromARGB(199, 240, 240, 240),
-            onPressed: () => {(Navigator.pop(context, true))},
+            onPressed: () => {
+              updateName(, pet)
+              this.setState(() {
+              }),
+            Navigator.pop(context, true)},
             child: Text('Принять',
                 textAlign: TextAlign.left,
                 style: GoogleFonts.comfortaa(
@@ -331,7 +409,20 @@ class _ChangeInfoState extends State<ChangeInfo> {
     );
   }
 }
+*/
+Future<http.Response> updateName(String newtext,Pet pet) async {
+    pet.name=newtext;
+    return http.put(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets/'+pet.petidString+'.json')),
+    body: jsonEncode(pet
+    ),);
+}
 
+Future<http.Response> updateWeight(String newtext,Pet pet) async {
+    pet.weight=newtext;
+    return http.put(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets/'+pet.petidString+'.json')),
+    body: jsonEncode(pet
+    ),);
+}
 Widget addInfo(String text)
 {
   return Align(

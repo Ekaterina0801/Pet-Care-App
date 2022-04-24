@@ -1,6 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+
+import '../../dommain/myuser.dart';
+import '../Registration/util/shared_preference.dart';
+import 'Meeting.dart';
+import 'repoMeetings.dart';
 
 //Страница для отображения календаря
 class CalendarPage extends StatefulWidget {
@@ -9,148 +18,178 @@ class CalendarPage extends StatefulWidget {
 }
 
 //Отображение календаря и кнопка добавления события
-class _CalendarPageState extends State<CalendarPage> {
+class _CalendarPageState extends StateMVC {
+  MeetingController _controller;
+  _CalendarPageState() : super(MeetingController()) {
+    _controller = controller as MeetingController;
+  }
+  @override
+  void initState() {
+    super.initState();
+    _controller.init();
+    UserPreferences().getUser().then((result) {
+      setState(() {
+        user = result;
+      });
+    });
+  }
+
+  void update() {
+    this.setState(() {});
+  }
+
+  final formKey = new GlobalKey<FormState>();
+  String _eventname,_datefrom,_dateto;
+  MyUser user;
+  List<Meeting> allmeetings = [];
+  List<Meeting> meetings = [];
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-          /*FlatButton(
-            height: 50,
-            color: Colors.grey.shade200,
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                      opaque: false,
-                      pageBuilder: (BuildContext context, _, __) =>
-                          AddEventWidget()));
-            },
-            child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Text('+ Добавить событие',
-                    style: GoogleFonts.comfortaa(
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16)))),*/
-        Container(
-            child: SfCalendar(
-              firstDayOfWeek: 1,
-              todayHighlightColor: Color.fromRGBO(208, 76, 49, 80),
-              todayTextStyle: GoogleFonts.comfortaa(
-                  color: Colors.black,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14),
-              allowAppointmentResize: true,
-              blackoutDatesTextStyle: GoogleFonts.comfortaa(
-                  color: Colors.black,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 14),
-              appointmentTimeTextFormat: 'HH:mm',
-              appointmentTextStyle: GoogleFonts.comfortaa(
-                  color: Colors.black,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 16),
-              monthViewSettings: MonthViewSettings(
-                  showAgenda: true,
-                  agendaItemHeight: 70,
-                  appointmentDisplayMode:
-                      MonthAppointmentDisplayMode.appointment,
-                  agendaStyle: AgendaStyle(
-                    dayTextStyle: GoogleFonts.comfortaa(
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 14),
-                    dateTextStyle: GoogleFonts.comfortaa(
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 14),
-                    appointmentTextStyle: GoogleFonts.comfortaa(
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 14),
-                  )),
-              scheduleViewMonthHeaderBuilder: (BuildContext buildContext,
-                  ScheduleViewMonthHeaderDetails details) {
-                final String monthName = _getMonthName(details.date.month);
-                return Stack(
-                  children: [
-                    Image(
-                        image: ExactAssetImage('assets/images/pets1.jpg'),
-                        fit: BoxFit.cover,
-                        width: details.bounds.width,
-                        height: 180),
-                    Positioned(
-                      left: 55,
-                      right: 0,
-                      top: 20,
-                      bottom: 0,
-                      child: Text(
-                        monthName + ' ' + details.date.year.toString(),
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 18),
-                      ),
-                    )
-                  ],
-                );
+    return FutureBuilder(
+      future: RepositoryMeetings().getMeetings(),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return CircularProgressIndicator();
+          default:
+            if (snapshot.hasError)
+              return Text('Error: ${snapshot.error}');
+            else
+              allmeetings = snapshot.data;
+        }
+        for (var n in allmeetings) {
+          if (n.userId == user.userid) meetings.add(n);
+        }
+        return ListView(
+          children: [
+            FlatButton(
+              height: 50,
+              color: Colors.grey.shade200,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                        opaque: false,
+                        pageBuilder: (BuildContext context, _, __) =>
+                            _displayEventAdd(context, _eventname, _datefrom, _dateto, user.userid, update)));
               },
-              showNavigationArrow: true,
-              allowedViews: [
-                CalendarView.day,
-                CalendarView.month,
-                CalendarView.schedule
-              ],
-              view: CalendarView.month,
-              dataSource: MeetingDataSource(_getDataSource()),
-              showDatePickerButton: true,
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  '+ Добавить событие',
+                  style: GoogleFonts.comfortaa(
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16),
+                ),
+              ),
             ),
-            height: 700),
-      ],
+            Container(
+                child: SfCalendar(
+                  firstDayOfWeek: 1,
+                  todayHighlightColor: Color.fromRGBO(208, 76, 49, 80),
+                  todayTextStyle: GoogleFonts.comfortaa(
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14),
+                  allowAppointmentResize: true,
+                  blackoutDatesTextStyle: GoogleFonts.comfortaa(
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 14),
+                  appointmentTimeTextFormat: 'HH:mm',
+                  appointmentTextStyle: GoogleFonts.comfortaa(
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16),
+                  monthViewSettings: MonthViewSettings(
+                    showAgenda: true,
+                    agendaItemHeight: 70,
+                    appointmentDisplayMode:
+                        MonthAppointmentDisplayMode.appointment,
+                    agendaStyle: AgendaStyle(
+                      dayTextStyle: GoogleFonts.comfortaa(
+                          color: Colors.black,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14),
+                      dateTextStyle: GoogleFonts.comfortaa(
+                          color: Colors.black,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14),
+                      appointmentTextStyle: GoogleFonts.comfortaa(
+                          color: Colors.black,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14),
+                    ),
+                  ),
+                  scheduleViewMonthHeaderBuilder: (BuildContext buildContext,
+                      ScheduleViewMonthHeaderDetails details) {
+                    final String monthName = _getMonthName(details.date.month);
+                    return Stack(
+                      children: [
+                        Image(
+                            image: ExactAssetImage('assets/images/pets1.jpg'),
+                            fit: BoxFit.cover,
+                            width: details.bounds.width,
+                            height: 180),
+                        Positioned(
+                          left: 55,
+                          right: 0,
+                          top: 20,
+                          bottom: 0,
+                          child: Text(
+                            monthName + ' ' + details.date.year.toString(),
+                            style: GoogleFonts.comfortaa(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 18),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                  showNavigationArrow: true,
+                  allowedViews: [
+                    CalendarView.day,
+                    CalendarView.month,
+                    CalendarView.schedule
+                  ],
+                  view: CalendarView.month,
+                  dataSource: MeetingDataSource(allmeetings),
+                  showDatePickerButton: true,
+                ),
+                height: 700),
+          ],
+        );
+      },
     );
   }
 }
 
+/*
 //Диалоговое окно для добавления события
 class AddEventWidget extends StatelessWidget {
   @override
   final DateTime today = DateTime.now();
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Align(
-          alignment: Alignment.bottomCenter,
-          child: Text('Добавить событие',
-              style: GoogleFonts.comfortaa(
-                  color: Colors.black,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 16))),
-      actions: [
-        Align(
-            alignment: Alignment.bottomLeft,
-            child: Text('Введите дату события:',
-                style: GoogleFonts.comfortaa(
-                    color: Colors.black,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14))),
-        DatePickerDialog(
-          initialDate: today,
-          firstDate: DateTime.utc(1980, 01, 01),
-          lastDate: DateTime.utc(2082, 01, 01),
-          helpText: 'Введите дату события:',
-        ),
-      ],
-    );
+    return _displayEventAdd(context, _eventname, _datefrom, _dateto, userID, update())
+    /*
+    DatePickerDialog(
+      initialDate: today,
+      firstDate: DateTime.utc(1980, 01, 01),
+      lastDate: DateTime.utc(2082, 01, 01),
+      helpText: 'Введите дату события:',
+    );*/
   }
-}
+}*/
 
 List<Meeting> _getDataSource() {
   final List<Meeting> meetings = <Meeting>[];
@@ -158,33 +197,6 @@ List<Meeting> _getDataSource() {
   final DateTime startTime =
       DateTime(today.year, today.month, today.day, 9, 0, 0);
   final DateTime endTime = startTime.add(const Duration(hours: 1));
-  meetings.add(
-    Meeting('Покормить Гарри завтраком', startTime, endTime,
-        Color.fromRGBO(255, 223, 142, 10), false),
-  );
-  meetings.add(
-    Meeting(
-        'Покормить Гарри ужином',
-        DateTime(today.year, today.month, today.day, 19, 0, 0),
-        DateTime(today.year, today.month, today.day, 21, 0, 0),
-        Color.fromRGBO(255, 223, 142, 10),
-        false),
-  );
-  meetings.add(Meeting(
-      'Забрать интернет-заказ с новой игрушкой для Гарри',
-      DateTime.utc(2021, 12, 21),
-      DateTime.utc(2021, 12, 21),
-      Color.fromRGBO(208, 76, 49, 100),
-      false));
-
-  meetings.add(Meeting(
-      'Защита проекта',
-      DateTime.utc(2021, 12, 14, 18, 0),
-      DateTime.utc(2021, 12, 14, 21, 0),
-      Color.fromRGBO(131, 184, 107, 60),
-      false));
-  meetings.add(Meeting('Дать таблетку', DateTime.utc(2021, 12, 15),
-      DateTime.utc(2021, 12, 15), Color.fromRGBO(129, 181, 217, 10), false));
   return meetings;
 }
 
@@ -195,12 +207,12 @@ class MeetingDataSource extends CalendarDataSource {
 
   @override
   DateTime getStartTime(int index) {
-    return appointments[index].from;
+    return DateTime.parse(appointments[index].from);
   }
 
   @override
   DateTime getEndTime(int index) {
-    return appointments[index].to;
+    return DateTime.parse(appointments[index].to);
   }
 
   @override
@@ -210,23 +222,13 @@ class MeetingDataSource extends CalendarDataSource {
 
   @override
   Color getColor(int index) {
-    return appointments[index].background;
+    return Colors.red;
   }
 
   @override
   bool isAllDay(int index) {
     return appointments[index].isAllDay;
   }
-}
-
-class Meeting {
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
-
-  String eventName;
-  DateTime from;
-  DateTime to;
-  Color background;
-  bool isAllDay;
 }
 
 String _getMonthName(int month) {
@@ -255,4 +257,134 @@ String _getMonthName(int month) {
   } else {
     return 'Декабрь';
   }
+}
+_displayEventAdd(BuildContext context, String _eventname, String _datefrom,String _dateto, int userID,
+    void update()) {
+  final formKey = new GlobalKey<FormState>();
+
+  AlertDialog alert = AlertDialog(
+    title: Text('Добавление заметки'),
+    actions: [
+      FlatButton(
+        child: Text(
+          'Добавить',
+          style: GoogleFonts.comfortaa(
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w800,
+              fontSize: 14),
+        ),
+        onPressed: () {
+          addEvent(_eventname,_datefrom,_dateto, userID);
+          update();
+          Navigator.of(context).pop(true);
+        },
+      ),
+    ],
+    content: Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(251, 236, 192, 10),
+          ),
+          padding: EdgeInsets.all(10),
+          child: Form(
+            key: formKey,
+            child: TextField(
+              maxLines: 10,
+              onChanged: (value) {
+                _eventname = value;
+                var now = DateTime.now();
+                //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
+              },
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Введите событие',
+                hintStyle: TextStyle(color: Colors.white60),
+              ),
+            ),
+          ),
+        ),
+
+        Container(
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(251, 236, 192, 10),
+          ),
+          padding: EdgeInsets.all(10),
+          child: Form(
+            key: formKey,
+            child: TextField(
+              maxLines: 10,
+              onChanged: (value) {
+                _datefrom = value;
+                //var now = DateTime.now();
+                //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
+              },
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Введите дату начала события',
+                hintStyle: TextStyle(color: Colors.white60),
+              ),
+            ),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(251, 236, 192, 10),
+          ),
+          padding: EdgeInsets.all(10),
+          child: Form(
+            key: formKey,
+            child: TextField(
+              maxLines: 10,
+              onChanged: (value) {
+                _dateto = value;
+                var now = DateTime.now();
+                //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
+              },
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Введите дату окончания события',
+                hintStyle: TextStyle(color: Colors.white60),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+  Future.delayed(
+    Duration.zero,
+    () async {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
+    },
+  );
+}
+
+Future<Map<String, dynamic>> addEvent(
+    String text, String datefrom, String dateto, int userID) async {
+  final Map<String, dynamic> noteData = {
+    'EventName': text,
+    'From': datefrom,
+    'To':dateto,
+    'Id': 1,
+    'UserID': userID
+  };
+  var response = await post(
+      Uri.parse(
+          'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Meetings.json'),
+      body: json.encode(noteData));
+  //Meeting m =
+   //   Meeting(eventName: noteData['EventName'], id: noteData['Id'], date: noteData['Date']);
+  var result;
+  if (response.request != null)
+    result = {'status': true, 'message': 'Successfully add', 'data': null};
+  else {
+    result = {'status': false, 'message': 'Adding failed', 'data': null};
+  }
+  return result;
 }
