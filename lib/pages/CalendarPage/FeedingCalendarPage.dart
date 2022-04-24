@@ -39,7 +39,7 @@ class _CalendarPageState extends StateMVC {
   }
 
   final formKey = new GlobalKey<FormState>();
-  String _eventname,_datefrom,_dateto;
+  String _eventname, _datefrom, _dateto;
   MyUser user;
   List<Meeting> allmeetings = [];
   List<Meeting> meetings = [];
@@ -67,12 +67,8 @@ class _CalendarPageState extends StateMVC {
               height: 50,
               color: Colors.grey.shade200,
               onPressed: () {
-                Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                        opaque: false,
-                        pageBuilder: (BuildContext context, _, __) =>
-                            _displayEventAdd(context, _eventname, _datefrom, _dateto, user.userid, update)));
+                _displayEventAdd(context, _eventname, _datefrom, _dateto,
+                    user.userid, update);
               },
               child: Align(
                 alignment: Alignment.bottomLeft,
@@ -258,12 +254,15 @@ String _getMonthName(int month) {
     return 'Декабрь';
   }
 }
-_displayEventAdd(BuildContext context, String _eventname, String _datefrom,String _dateto, int userID,
-    void update()) {
-  final formKey = new GlobalKey<FormState>();
+
+_displayEventAdd(BuildContext context, String _eventname, String _datefrom,
+    String _dateto, int userID, void update()) {
+  final formKey1 = new GlobalKey<FormState>();
+  final formKey2 = new GlobalKey<FormState>();
+  final formKey3 = new GlobalKey<FormState>();
 
   AlertDialog alert = AlertDialog(
-    title: Text('Добавление заметки'),
+    title: Text('Добавление события'),
     actions: [
       FlatButton(
         child: Text(
@@ -274,83 +273,152 @@ _displayEventAdd(BuildContext context, String _eventname, String _datefrom,Strin
               fontSize: 14),
         ),
         onPressed: () {
-          addEvent(_eventname,_datefrom,_dateto, userID);
+          addEvent(_eventname, _datefrom, _dateto, userID);
           update();
           Navigator.of(context).pop(true);
         },
       ),
     ],
     content: Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Color.fromRGBO(251, 236, 192, 10),
-          ),
-          padding: EdgeInsets.all(10),
-          child: Form(
-            key: formKey,
-            child: TextField(
-              maxLines: 10,
-              onChanged: (value) {
-                _eventname = value;
-                var now = DateTime.now();
-                //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
-              },
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Введите событие',
-                hintStyle: TextStyle(color: Colors.white60),
+        children: [
+          addInfo('Событие'),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Form(
+              key: formKey1,
+              child: TextField(
+                maxLines: 3,
+                onChanged: (value) {
+                  _eventname = value;
+                  var now = DateTime.now();
+                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Введите событие',
+                  //hintStyle: TextStyle(color: Colors.white60),
+                ),
               ),
             ),
           ),
-        ),
-
-        Container(
-          decoration: BoxDecoration(
-            color: Color.fromRGBO(251, 236, 192, 10),
-          ),
-          padding: EdgeInsets.all(10),
-          child: Form(
-            key: formKey,
-            child: TextField(
-              maxLines: 10,
-              onChanged: (value) {
-                _datefrom = value;
-                //var now = DateTime.now();
-                //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
-              },
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Введите дату начала события',
-                hintStyle: TextStyle(color: Colors.white60),
+          addInfo('начало'),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Form(
+              key: formKey2,
+              child: TextField(
+                maxLines: 1,
+                onChanged: (value) {
+                  _datefrom = value;
+                  var now = DateTime.now();
+                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Введите событие',
+                  //hintStyle: TextStyle(color: Colors.white60),
+                ),
               ),
             ),
           ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Color.fromRGBO(251, 236, 192, 10),
-          ),
-          padding: EdgeInsets.all(10),
-          child: Form(
-            key: formKey,
-            child: TextField(
-              maxLines: 10,
-              onChanged: (value) {
-                _dateto = value;
-                var now = DateTime.now();
-                //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
-              },
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: 'Введите дату окончания события',
-                hintStyle: TextStyle(color: Colors.white60),
+          addInfo('Дата окончания'),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Form(
+              key: formKey3,
+              child: TextField(
+                maxLines: 1,
+                onChanged: (value) {
+                  _dateto = value;
+                  var now = DateTime.now();
+                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Введите дату окончания события',
+                  //hintStyle: TextStyle(color: Colors.white60),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      
     ),
+/*
+    Container(
+      child: ListView(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(251, 236, 192, 10),
+            ),
+            padding: EdgeInsets.all(10),
+            child: Form(
+              key: formKey,
+              child: TextField(
+                maxLines: 10,
+                onChanged: (value) {
+                  _eventname = value;
+                  var now = DateTime.now();
+                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Введите событие',
+                  hintStyle: TextStyle(color: Colors.white60),
+                ),
+              ),
+            ),
+          ),
+/*
+          Container(
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(251, 236, 192, 10),
+            ),
+            padding: EdgeInsets.all(10),
+            child: Form(
+              key: formKey,
+              child: TextField(
+                maxLines: 10,
+                onChanged: (value) {
+                  _datefrom = value;
+                  //var now = DateTime.now();
+                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Введите дату начала события',
+                  hintStyle: TextStyle(color: Colors.white60),
+                ),
+              ),
+            ),
+          ),*/
+          /*
+          Container(
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(251, 236, 192, 10),
+            ),
+            padding: EdgeInsets.all(10),
+            child: Form(
+              key: formKey,
+              child: TextField(
+                maxLines: 10,
+                onChanged: (value) {
+                  _dateto = value;
+                  var now = DateTime.now();
+                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Введите дату окончания события',
+                  hintStyle: TextStyle(color: Colors.white60),
+                ),
+              ),
+            ),
+          ),*/
+        ],
+      ),
+    */
   );
   Future.delayed(
     Duration.zero,
@@ -369,8 +437,9 @@ Future<Map<String, dynamic>> addEvent(
     String text, String datefrom, String dateto, int userID) async {
   final Map<String, dynamic> noteData = {
     'EventName': text,
+    'IsAllDay':true,
     'From': datefrom,
-    'To':dateto,
+    'To': dateto,
     'Id': 1,
     'UserID': userID
   };
@@ -378,13 +447,25 @@ Future<Map<String, dynamic>> addEvent(
       Uri.parse(
           'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Meetings.json'),
       body: json.encode(noteData));
-  //Meeting m =
-   //   Meeting(eventName: noteData['EventName'], id: noteData['Id'], date: noteData['Date']);
+  Meeting m =
+    Meeting(eventName: noteData['EventName'], id: noteData['Id'], from: noteData['From'],to:noteData['To'],isAllDay: noteData['IsAllDay'],userId: noteData['UserID']);
   var result;
   if (response.request != null)
-    result = {'status': true, 'message': 'Successfully add', 'data': null};
+    result = {'status': true, 'message': 'Successfully add', 'data': m};
   else {
     result = {'status': false, 'message': 'Adding failed', 'data': null};
   }
   return result;
+}
+
+Widget addInfo(String text)
+{
+  return Align(
+            alignment: Alignment.bottomLeft,
+            child: Text(text,
+                style: GoogleFonts.comfortaa(
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 14)));
 }

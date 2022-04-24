@@ -14,7 +14,7 @@ class Meeting {
   int userId;
   String id;
 
-  Meeting({this.eventName, this.from, this.to, this.isAllDay,this.userId,this.id});
+  Meeting({this.eventName, this.from, this.to,this.isAllDay,this.userId,this.id});
   
   
   factory Meeting.fromJson(Map<String, dynamic> json) {
@@ -35,7 +35,7 @@ class Meeting {
     'EventName':eventName,
     'From':from,
     'To':to,
-    'IsAllDay':isAllDay,
+    'IsAllDay':true,
     'UserID':userId,
     'ID':"0",
   };
