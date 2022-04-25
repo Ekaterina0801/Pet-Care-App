@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care/pages/Registration/pages/register.dart';
+
+import 'Registration/pages/login.dart';
 
 class WelcomeScreen extends StatelessWidget {
 
@@ -24,7 +27,7 @@ body: Column(children: [
   SizedBox(height: 30),
 
   Container(
-  //padding: EdgeInsets.symmetric(horizontal: 70, vertical: 0),
+  padding: EdgeInsets.symmetric(horizontal: 70, vertical: 0),
   child: Text('Добро пожаловать!', 
   textAlign: TextAlign.center, 
   style: GoogleFonts.comfortaa(
@@ -38,8 +41,13 @@ body: Column(children: [
        SizedBox(height: 100),
 
        Container( 
-        //padding: EdgeInsets.symmetric(horizontal: 70, vertical: 0),
-        child: FlatButton(onPressed: () {}, 
+        child: FlatButton(onPressed: () {
+          Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => Register()
+                        ),
+                      );
+          }, 
           child: Text('Создать аккаунт',
           textAlign: TextAlign.center, 
           style: GoogleFonts.comfortaa(
@@ -59,8 +67,16 @@ body: Column(children: [
        SizedBox(height: 10),
 
        Container( 
-        padding: EdgeInsets.symmetric(horizontal: 170, vertical: 0),
-        child: FlatButton(onPressed: () {}, 
+        //padding: EdgeInsets.symmetric(horizontal: 170, vertical: 0),
+        child: FlatButton(onPressed: () {
+         // Navigator.push()
+         // Login();
+         Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => Login()
+                        ),
+                      );
+          }, 
           child: Text('У меня уже есть аккаунт',
           textAlign: TextAlign.center, 
           style: GoogleFonts.comfortaa(
