@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-
 import '../../dommain/myuser.dart';
 import '../Registration/util/shared_preference.dart';
 import 'Meeting.dart';
@@ -42,7 +40,6 @@ class _CalendarPageState extends StateMVC {
   _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
       String _dateto, int userID, void update()) {
     final formKey1 = new GlobalKey<FormState>();
-
     AlertDialog alert = AlertDialog(
       title: Text('Добавление события'),
       actions: [
@@ -73,18 +70,15 @@ class _CalendarPageState extends StateMVC {
                 maxLines: 3,
                 onChanged: (value) {
                   _eventname = value;
-                  //var now = DateTime.now();
-                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
                 },
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Введите событие',
-                  //hintStyle: TextStyle(color: Colors.white60),
                 ),
               ),
             ),
           ),
-          addInfo('начало'),
+          addInfo('Начало события'),
           DateTimePicker(
             initialValue: '',
             firstDate: DateTime(2000),
@@ -95,9 +89,9 @@ class _CalendarPageState extends StateMVC {
               print(val);
               return null;
             },
-            onSaved: (val) => print(val),
+            onSaved: (val) => _datefrom=val,
           ),
-          addInfo('Дата окончания'),
+          addInfo('Окончание события'),
           DateTimePicker(
             initialValue: '',
             firstDate: DateTime(2000),
@@ -108,7 +102,7 @@ class _CalendarPageState extends StateMVC {
               print(val);
               return null;
             },
-            onSaved: (val) => print(val),
+            onSaved: (val) => _dateto=val,
           )
         ],
       ),
@@ -154,7 +148,8 @@ class _CalendarPageState extends StateMVC {
           children: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Colors.grey.shade200,),
+                primary: Colors.grey.shade200,
+              ),
               onPressed: () {
                 _displayEventAdd(context, _eventname, _datefrom, _dateto,
                     user.userid, update);
@@ -196,7 +191,7 @@ class _CalendarPageState extends StateMVC {
                     showAgenda: true,
                     agendaItemHeight: 70,
                     appointmentDisplayMode:
-                        MonthAppointmentDisplayMode.appointment,
+                        MonthAppointmentDisplayMode.indicator,
                     agendaStyle: AgendaStyle(
                       dayTextStyle: GoogleFonts.comfortaa(
                           color: Colors.black,

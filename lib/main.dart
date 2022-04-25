@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pet_care/dommain/myuser.dart';
-import 'package:pet_care/pages/AdviceScreen/widgets/Advice_List_Page.dart';
-
-import 'package:pet_care/pages/AdviceScreen/widget_pages/ArticlePage.dart';
 import 'package:pet_care/pages/AdviceScreen/requests/models/NotesModel.dart';
 import 'package:pet_care/pages/NotesPage/widgets/NotesPage.dart';
 import 'package:pet_care/pages/Registration/pages/login.dart';
@@ -14,7 +11,6 @@ import 'package:pet_care/pages/Registration/pages/register.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'pages/BasePage.dart';
-import 'pages/ProfilePage/ProfilePage.dart';
 import 'pages/welcomescreen.dart';
 
 void main() {

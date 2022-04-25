@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pet_care/pages/PetBoardingPage/MyAccountWidget.dart';
-
 
 //Страница для настроек аккаунта для сервиса передержки
 class SettingsService extends StatefulWidget {
@@ -19,9 +17,6 @@ class _SettingsServiceState extends State<SettingsService> {
   String district = "Советский";
   String price = "1000";
   String contacts = "ekaterina_dots@mail.ru";
-  var _selected_dist = "";
-  var _selected_price = "";
-  var _selected_contacts = "";
   _changeDistrict(String text) {
     setState(() => district = text);
   }
@@ -176,7 +171,7 @@ class _SettingsServiceState extends State<SettingsService> {
     AlertDialog alert = AlertDialog(
       title: Text('Редактировать район'),
       actions: [
-        FlatButton(
+        ElevatedButton(
           child: Text(
             'Принять',
             style: GoogleFonts.comfortaa(
@@ -219,7 +214,7 @@ class _SettingsServiceState extends State<SettingsService> {
     AlertDialog alert = AlertDialog(
         title: Text('Редактировать стоимость'),
         actions: [
-          FlatButton(
+          ElevatedButton(
             child: Text(
               'Принять',
               style: GoogleFonts.comfortaa(
@@ -261,7 +256,7 @@ class _SettingsServiceState extends State<SettingsService> {
     AlertDialog alert = AlertDialog(
         title: Text('Редактировать контакты'),
         actions: [
-          FlatButton(
+          ElevatedButton(
             child: Text(
               'Принять',
               style: GoogleFonts.comfortaa(

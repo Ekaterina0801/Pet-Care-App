@@ -68,9 +68,11 @@ class _NotesPageState extends StateMVC {
             return ListView(
               shrinkWrap: true,
               children: [
-                FlatButton(
-                  height: 50,
-                  color: Colors.grey.shade200,
+                ElevatedButton(
+                  //height: 50,
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.grey.shade200,
+                  ),
                   onPressed: () {
                     setState(() {
                       _displayNoteAdd(
@@ -131,7 +133,7 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
   AlertDialog alert = AlertDialog(
     title: Text('Добавление заметки'),
     actions: [
-      FlatButton(
+      ElevatedButton(
         child: Text(
           'Добавить',
           style: GoogleFonts.comfortaa(

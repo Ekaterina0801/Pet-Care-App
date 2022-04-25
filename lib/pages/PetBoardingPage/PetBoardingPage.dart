@@ -10,7 +10,6 @@ import 'package:pet_care/pages/providers/userprovider.dart';
 
 import 'package:provider/provider.dart';
 import 'AccountBlock.dart';
-import 'SettingsService.dart';
 
 //страница сервиса передержки
 class PetBoardingPage extends StatefulWidget {
@@ -31,7 +30,6 @@ class _PetBoardingPageState extends StateMVC {
 
   //final formKey = new GlobalKey<FormState>();
   MyUser user;
-  var _selected_info = "";
   @override
   Widget build(BuildContext context) {
     Future<MyUser> getUserData() => UserPreferences().getUser();

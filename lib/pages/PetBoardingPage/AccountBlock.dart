@@ -17,7 +17,6 @@ class AccountBlock extends StatefulWidget {
 class _AccountBlockState extends State<AccountBlock> {
   final int index;
   _AccountBlockState(this.index);
-  var _selected_info = "";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -104,7 +103,7 @@ class _AccountBlockState extends State<AccountBlock> {
     AlertDialog alert = AlertDialog(
       title: Text('Информация: '),
       actions: [
-        FlatButton(
+        ElevatedButton(
           child: Text(
             'Ок',
             style: GoogleFonts.comfortaa(

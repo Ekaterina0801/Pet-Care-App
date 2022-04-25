@@ -1,9 +1,5 @@
-import 'dart:ui';
-
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/pages/CalendarPage/repoMeetings.dart';
-
-import '../NotesPage/controllers/reponotes.dart';
 
 class Meeting {
   

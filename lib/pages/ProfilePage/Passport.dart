@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care/pages/welcomescreen.dart';
 import 'Disease.dart';
 
 class Passport extends StatelessWidget {
@@ -49,6 +50,23 @@ class Passport extends StatelessWidget {
                     onPressed: () => Navigator.push(context,
                         MaterialPageRoute(builder: (context) => DiseasePage())),
                     child: Text('Болезни',
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 17))))),
+                            Padding(
+            padding: EdgeInsets.all(7),
+            child: Container(
+                height: 55,
+                width: 400,
+                child: RaisedButton(
+                    color: Color.fromRGBO(255, 223, 142, 10),
+                    splashColor: Color.fromRGBO(240, 240, 240, 10),
+                    onPressed: () {Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => WelcomeScreen()));
+                        },
+                    child: Text('Выйти из профиля',
                         textAlign: TextAlign.left,
                         style: GoogleFonts.comfortaa(
                             fontStyle: FontStyle.normal,

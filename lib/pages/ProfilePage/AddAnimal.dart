@@ -19,7 +19,7 @@ String validateDate(String value) {
   }
   return _msg;
 }
-String CommaValid(String str) {
+String commaValid(String str) {
   RegExp exp = new RegExp(r',');
   String res = str.replaceAll(exp, '.');
   return res;
@@ -98,9 +98,7 @@ class _AddAnimalState extends State<AddAnimal> {
       //validator: (value) => value.isEmpty ? "Введите вес питомца" : null,
       onSaved: (value) => _weight = value,
       decoration: buildInputDecoration("Вес питомца", Icons.pets,
-    ));
-     final form = formKey.currentState;
-     
+    ));     
     return BasePage(
       title: "Добавление питомца",
       body: FutureBuilder( 
