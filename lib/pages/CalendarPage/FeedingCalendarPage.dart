@@ -10,6 +10,7 @@ import '../../dommain/myuser.dart';
 import '../Registration/util/shared_preference.dart';
 import 'Meeting.dart';
 import 'repoMeetings.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 
 //Страница для отображения календаря
 class CalendarPage extends StatefulWidget {
@@ -38,8 +39,96 @@ class _CalendarPageState extends StateMVC {
     this.setState(() {});
   }
 
+  _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
+      String _dateto, int userID, void update()) {
+    final formKey1 = new GlobalKey<FormState>();
+
+    AlertDialog alert = AlertDialog(
+      title: Text('Добавление события'),
+      actions: [
+        ElevatedButton(
+          child: Text(
+            'Добавить',
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
+          ),
+          onPressed: () {
+            addEvent(
+                _eventname, _datefrom.toString(), _dateto.toString(), userID);
+            update();
+            Navigator.of(context).pop(true);
+          },
+        ),
+      ],
+      content: Column(
+        children: [
+          addInfo('Событие'),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Form(
+              key: formKey1,
+              child: TextField(
+                maxLines: 3,
+                onChanged: (value) {
+                  _eventname = value;
+                  //var now = DateTime.now();
+                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Введите событие',
+                  //hintStyle: TextStyle(color: Colors.white60),
+                ),
+              ),
+            ),
+          ),
+          addInfo('начало'),
+          DateTimePicker(
+            initialValue: '',
+            firstDate: DateTime(2000),
+            lastDate: DateTime(2100),
+            dateLabelText: 'Date',
+            onChanged: (val) => _datefrom = val,
+            validator: (val) {
+              print(val);
+              return null;
+            },
+            onSaved: (val) => print(val),
+          ),
+          addInfo('Дата окончания'),
+          DateTimePicker(
+            initialValue: '',
+            firstDate: DateTime(2000),
+            lastDate: DateTime(2100),
+            dateLabelText: 'Date',
+            onChanged: (val) => _dateto = val,
+            validator: (val) {
+              print(val);
+              return null;
+            },
+            onSaved: (val) => print(val),
+          )
+        ],
+      ),
+    );
+    Future.delayed(
+      Duration.zero,
+      () async {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          },
+        );
+      },
+    );
+  }
+
   final formKey = new GlobalKey<FormState>();
-  String _eventname, _datefrom, _dateto;
+  String _eventname;
+  String _datefrom, _dateto;
   MyUser user;
   List<Meeting> allmeetings = [];
   List<Meeting> meetings = [];
@@ -63,9 +152,9 @@ class _CalendarPageState extends StateMVC {
         }
         return ListView(
           children: [
-            FlatButton(
-              height: 50,
-              color: Colors.grey.shade200,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.grey.shade200,),
               onPressed: () {
                 _displayEventAdd(context, _eventname, _datefrom, _dateto,
                     user.userid, update);
@@ -170,32 +259,6 @@ class _CalendarPageState extends StateMVC {
   }
 }
 
-/*
-//Диалоговое окно для добавления события
-class AddEventWidget extends StatelessWidget {
-  @override
-  final DateTime today = DateTime.now();
-  Widget build(BuildContext context) {
-    return _displayEventAdd(context, _eventname, _datefrom, _dateto, userID, update())
-    /*
-    DatePickerDialog(
-      initialDate: today,
-      firstDate: DateTime.utc(1980, 01, 01),
-      lastDate: DateTime.utc(2082, 01, 01),
-      helpText: 'Введите дату события:',
-    );*/
-  }
-}*/
-
-List<Meeting> _getDataSource() {
-  final List<Meeting> meetings = <Meeting>[];
-  final DateTime today = DateTime.now();
-  final DateTime startTime =
-      DateTime(today.year, today.month, today.day, 9, 0, 0);
-  final DateTime endTime = startTime.add(const Duration(hours: 1));
-  return meetings;
-}
-
 class MeetingDataSource extends CalendarDataSource {
   MeetingDataSource(List<Meeting> source) {
     appointments = source;
@@ -255,200 +318,27 @@ String _getMonthName(int month) {
   }
 }
 
-_displayEventAdd(BuildContext context, String _eventname, String _datefrom,
-    String _dateto, int userID, void update()) {
-  final formKey1 = new GlobalKey<FormState>();
-  final formKey2 = new GlobalKey<FormState>();
-  final formKey3 = new GlobalKey<FormState>();
-
-  AlertDialog alert = AlertDialog(
-    title: Text('Добавление события'),
-    actions: [
-      FlatButton(
-        child: Text(
-          'Добавить',
-          style: GoogleFonts.comfortaa(
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w800,
-              fontSize: 14),
-        ),
-        onPressed: () {
-          addEvent(_eventname, _datefrom, _dateto, userID);
-          update();
-          Navigator.of(context).pop(true);
-        },
-      ),
-    ],
-    content: Column(
-        children: [
-          addInfo('Событие'),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Form(
-              key: formKey1,
-              child: TextField(
-                maxLines: 3,
-                onChanged: (value) {
-                  _eventname = value;
-                  var now = DateTime.now();
-                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Введите событие',
-                  //hintStyle: TextStyle(color: Colors.white60),
-                ),
-              ),
-            ),
-          ),
-          addInfo('начало'),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Form(
-              key: formKey2,
-              child: TextField(
-                maxLines: 1,
-                onChanged: (value) {
-                  _datefrom = value;
-                  var now = DateTime.now();
-                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Введите событие',
-                  //hintStyle: TextStyle(color: Colors.white60),
-                ),
-              ),
-            ),
-          ),
-          addInfo('Дата окончания'),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Form(
-              key: formKey3,
-              child: TextField(
-                maxLines: 1,
-                onChanged: (value) {
-                  _dateto = value;
-                  var now = DateTime.now();
-                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Введите дату окончания события',
-                  //hintStyle: TextStyle(color: Colors.white60),
-                ),
-              ),
-            ),
-          ),
-        ],
-      
-    ),
-/*
-    Container(
-      child: ListView(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(251, 236, 192, 10),
-            ),
-            padding: EdgeInsets.all(10),
-            child: Form(
-              key: formKey,
-              child: TextField(
-                maxLines: 10,
-                onChanged: (value) {
-                  _eventname = value;
-                  var now = DateTime.now();
-                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Введите событие',
-                  hintStyle: TextStyle(color: Colors.white60),
-                ),
-              ),
-            ),
-          ),
-/*
-          Container(
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(251, 236, 192, 10),
-            ),
-            padding: EdgeInsets.all(10),
-            child: Form(
-              key: formKey,
-              child: TextField(
-                maxLines: 10,
-                onChanged: (value) {
-                  _datefrom = value;
-                  //var now = DateTime.now();
-                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Введите дату начала события',
-                  hintStyle: TextStyle(color: Colors.white60),
-                ),
-              ),
-            ),
-          ),*/
-          /*
-          Container(
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(251, 236, 192, 10),
-            ),
-            padding: EdgeInsets.all(10),
-            child: Form(
-              key: formKey,
-              child: TextField(
-                maxLines: 10,
-                onChanged: (value) {
-                  _dateto = value;
-                  var now = DateTime.now();
-                  //String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Введите дату окончания события',
-                  hintStyle: TextStyle(color: Colors.white60),
-                ),
-              ),
-            ),
-          ),*/
-        ],
-      ),
-    */
-  );
-  Future.delayed(
-    Duration.zero,
-    () async {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alert;
-        },
-      );
-    },
-  );
-}
-
 Future<Map<String, dynamic>> addEvent(
     String text, String datefrom, String dateto, int userID) async {
   final Map<String, dynamic> noteData = {
     'EventName': text,
-    'IsAllDay':true,
+    'IsAllDay': true,
     'From': datefrom,
     'To': dateto,
-    'Id': 1,
+    'Id': "1",
     'UserID': userID
   };
   var response = await post(
       Uri.parse(
           'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Meetings.json'),
       body: json.encode(noteData));
-  Meeting m =
-    Meeting(eventName: noteData['EventName'], id: noteData['Id'], from: noteData['From'],to:noteData['To'],isAllDay: noteData['IsAllDay'],userId: noteData['UserID']);
+  Meeting m = Meeting(
+      eventName: noteData['EventName'],
+      id: noteData['Id'],
+      from: noteData['From'],
+      to: noteData['To'],
+      isAllDay: noteData['IsAllDay'],
+      userId: noteData['UserID']);
   var result;
   if (response.request != null)
     result = {'status': true, 'message': 'Successfully add', 'data': m};
@@ -458,14 +348,13 @@ Future<Map<String, dynamic>> addEvent(
   return result;
 }
 
-Widget addInfo(String text)
-{
+Widget addInfo(String text) {
   return Align(
-            alignment: Alignment.bottomLeft,
-            child: Text(text,
-                style: GoogleFonts.comfortaa(
-                    color: Colors.black,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14)));
+      alignment: Alignment.bottomLeft,
+      child: Text(text,
+          style: GoogleFonts.comfortaa(
+              color: Colors.black,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w800,
+              fontSize: 14)));
 }

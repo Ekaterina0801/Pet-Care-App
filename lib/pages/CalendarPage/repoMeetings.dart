@@ -18,7 +18,7 @@ class RepositoryMeetings {
       for(var t in ll.keys)
       {
        Meeting a = Meeting.fromJson(ll[t]);
-        //a.to = "2022-04-25";
+
         a.id=t;
         list.add(a);
       }
