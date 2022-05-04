@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/welcomescreen.dart';
 import 'Disease.dart';
-import 'Vaccinations.dart';
+import 'VaccinationPage.dart';
 
 class Passport extends StatelessWidget {
   String nameowner;

@@ -70,9 +70,9 @@ class _DiseasePageState extends StateMVC {
               return ListView(
                 shrinkWrap: true,
                 children: [
-                  FlatButton(
-                    height: 50,
-                    color: Colors.grey.shade200,
+                  ElevatedButton(
+                    //height: 50,
+                    //color: Colors.grey.shade200,
                     onPressed: () {
                       setState(
                         () {
@@ -89,7 +89,7 @@ class _DiseasePageState extends StateMVC {
                               ),
                             ),
                             actions: [
-                              FlatButton(
+                              ElevatedButton(
                                   child: Text(
                                     'Добавить',
                                     style: GoogleFonts.comfortaa(
@@ -97,11 +97,11 @@ class _DiseasePageState extends StateMVC {
                                         fontWeight: FontWeight.w800,
                                         fontSize: 14),
                                   ),
-                                  color: Color.fromRGBO(255, 223, 142, 1),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10))),
-                                  height: 45,
+                                  //color: Color.fromRGBO(255, 223, 142, 1),
+                                  //shape: RoundedRectangleBorder(
+                                     // borderRadius: BorderRadius.all(
+                                      //    Radius.circular(10))),
+                                  //height: 45,
                                   onPressed: () {
                                     setState(() {
                                       if (formKey.currentState.validate()) {

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart';
 import 'package:pet_care/pages/NotesPage/Note.dart';
 // импортируем http пакет
@@ -17,7 +16,6 @@ class RepositoryNotes {
       {
         Note a = Note.fromJson(ll[t]);
         a.noteid=t;
-        //if(a.userID==)
         list.add(a);
       }
       return list;
