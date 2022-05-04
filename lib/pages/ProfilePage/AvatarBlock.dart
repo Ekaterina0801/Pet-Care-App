@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AvatarBlock extends StatelessWidget {
+class AvatarBlock extends StatefulWidget {
   final String name;
   final String photo;
   AvatarBlock(this.name, this.photo);
 
+  @override
+  State<AvatarBlock> createState() => _AvatarBlockState();
+}
+
+class _AvatarBlockState extends State<AvatarBlock> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,11 +20,11 @@ class AvatarBlock extends StatelessWidget {
             padding: EdgeInsets.all(10),
             child: CircleAvatar(
               radius: 80,
-              backgroundImage: Image.asset(photo).image,
+              backgroundImage: Image.asset(widget.photo).image,
             ),
           ),
           Text(
-            name,
+            widget.name,
             style: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w800,

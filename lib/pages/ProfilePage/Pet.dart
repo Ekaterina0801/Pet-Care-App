@@ -5,7 +5,6 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 // импортируем http пакет
 import 'package:http/http.dart' as http;
 
-import 'Vaccinations.dart';
 
 class Pet
 {
@@ -52,16 +51,7 @@ factory Pet.fromJson(Map<String, Object> json) => Pet(
 
 Future<Pet> getPet(int userID) async {
     Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets.json')));
-    List<Vaccination> v=[];
-    v.add(Vaccination(
-          date: "-",
-          vaccinationId: 0,
-          userID: userID,
-          petId: 0,
-          type: "-",
-          document: "-",
-          revactination: false
-        ));
+    
     Pet pet = Pet(
         petID: 1,
         userID: userID,
