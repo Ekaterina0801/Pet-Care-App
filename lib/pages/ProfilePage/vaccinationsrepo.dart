@@ -26,8 +26,12 @@ class RepositoryVaccinations {
   }
 
   Future<http.Response> delete(Vaccination v) async {
-    return http.delete(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Vaccinations/'+v.vaccinationId+'.json')),
-    body: jsonEncode(v
-    ),);
+    return http.delete(
+      Uri.parse(Uri.encodeFull(
+          'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Vaccinations/' +
+              v.vaccinationId +
+              '.json')),
+      body: jsonEncode(v),
+    );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/welcomescreen.dart';
-import 'Disease.dart';
+import 'DiseasePage.dart';
 import 'VaccinationPage.dart';
 
 class Passport extends StatelessWidget {
