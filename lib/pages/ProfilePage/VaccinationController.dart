@@ -2,7 +2,6 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/pages/ProfilePage/vaccinationsrepo.dart';
 
 import 'Vaccination.dart';
-import 'VaccinationPage.dart';
 
 class VaccinationController extends ControllerMVC {
   // создаем наш репозиторий

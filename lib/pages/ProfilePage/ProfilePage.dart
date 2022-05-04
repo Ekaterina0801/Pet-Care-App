@@ -337,9 +337,9 @@ _displayInfoPet(BuildContext context, Pet pet, void update()) {
                   ),
                 ])),
             Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-            RaisedButton(
-                color: Color.fromRGBO(255, 223, 142, 10),
-                splashColor: Color.fromARGB(199, 240, 240, 240),
+            ElevatedButton(
+                //color: Color.fromRGBO(255, 223, 142, 10),
+                //splashColor: Color.fromARGB(199, 240, 240, 240),
                 onPressed: () {
                   updateName(newname, pet);
                   update();

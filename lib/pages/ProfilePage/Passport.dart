@@ -26,9 +26,9 @@ class Passport extends StatelessWidget {
           child: Container(
             height: 55,
             width: 400,
-            child: RaisedButton(
-              color: Color.fromRGBO(255, 223, 142, 10),
-              splashColor: Color.fromRGBO(240, 240, 240, 10),
+            child: ElevatedButton(
+              //color: Color.fromRGBO(255, 223, 142, 10),
+             // splashColor: Color.fromRGBO(240, 240, 240, 10),
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DiseasePage())),
               child: Text(
@@ -47,9 +47,9 @@ class Passport extends StatelessWidget {
           child: Container(
             height: 55,
             width: 400,
-            child: RaisedButton(
-              color: Color.fromRGBO(255, 223, 142, 10),
-              splashColor: Color.fromRGBO(240, 240, 240, 10),
+            child: ElevatedButton(
+              //color: Color.fromRGBO(255, 223, 142, 10),
+             // splashColor: Color.fromRGBO(240, 240, 240, 10),
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => VaccinationPage())),
               child: Text(
@@ -68,9 +68,9 @@ class Passport extends StatelessWidget {
             child: Container(
                 height: 55,
                 width: 400,
-                child: RaisedButton(
-                    color: Color.fromRGBO(255, 223, 142, 10),
-                    splashColor: Color.fromRGBO(240, 240, 240, 10),
+                child: ElevatedButton(
+                    //color: Color.fromRGBO(255, 223, 142, 10),
+                    //splashColor: Color.fromRGBO(240, 240, 240, 10),
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -206,9 +206,9 @@ class RemakeNameWidget extends StatelessWidget {
 //        longButtons(
 //          "Принять", doRename(info,name, surname)
 //       )
-        RaisedButton(
-            color: Color.fromRGBO(255, 223, 142, 10),
-            splashColor: Color.fromARGB(199, 240, 240, 240),
+        ElevatedButton(
+           // color: Color.fromRGBO(255, 223, 142, 10),
+            //splashColor: Color.fromARGB(199, 240, 240, 240),
             onPressed: () =>
                 {doRename(info, name, surname), (Navigator.pop(context, true))},
             child: Text('Принять',
@@ -269,9 +269,9 @@ class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
 //        longButtons(
 //          "Принять",
 //       )
-        RaisedButton(
-            color: Color.fromRGBO(255, 223, 142, 10),
-            splashColor: Color.fromARGB(199, 240, 240, 240),
+        ElevatedButton(
+            //color: Color.fromRGBO(255, 223, 142, 10),
+            //splashColor: Color.fromARGB(199, 240, 240, 240),
             onPressed: () => (Navigator.pop(context, true)),
             child: Text('Принять',
                 textAlign: TextAlign.left,
@@ -315,9 +315,9 @@ class RemakeDateBirthWidget extends StatelessWidget {
 //        longButtons(
 //          "Принять",
 //       )
-        RaisedButton(
-            color: Color.fromRGBO(255, 223, 142, 10),
-            splashColor: Color.fromARGB(199, 240, 240, 240),
+        ElevatedButton(
+           // color: Color.fromRGBO(255, 223, 142, 10),
+            //splashColor: Color.fromARGB(199, 240, 240, 240),
             onPressed: () => (Navigator.pop(context, true)),
             child: Text('Принять',
                 textAlign: TextAlign.left,

@@ -41,7 +41,7 @@ body: Column(children: [
        SizedBox(height: 100),
 
        Container( 
-        child: FlatButton(onPressed: () {
+        child: ElevatedButton(onPressed: () {
           Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => Register()
@@ -56,11 +56,11 @@ body: Column(children: [
           fontWeight: FontWeight.w800,
           fontSize: 18),
           ),
-          color: Color.fromRGBO(255, 223, 142, 1),
-          shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10))
-          ),
-          height: 45,
+          //color: Color.fromRGBO(255, 223, 142, 1),
+         // shape: RoundedRectangleBorder(
+         // borderRadius: BorderRadius.all(Radius.circular(10))
+         // ),
+         // height: 45,
         ),
        ),
 
@@ -68,7 +68,7 @@ body: Column(children: [
 
        Container( 
         //padding: EdgeInsets.symmetric(horizontal: 170, vertical: 0),
-        child: FlatButton(onPressed: () {
+        child: ElevatedButton(onPressed: () {
          // Navigator.push()
          // Login();
          Navigator.of(context).push(
@@ -85,13 +85,13 @@ body: Column(children: [
           fontWeight: FontWeight.w800,
           fontSize: 18),
           ),
-          color: Color.fromRGBO(255, 223, 142, 1), shape: 
-          RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10))
+         // color: Color.fromRGBO(255, 223, 142, 1), shape: 
+          //RoundedRectangleBorder(
+         // borderRadius: BorderRadius.all(Radius.circular(10))
           ),
           height: 45,
         ),
-       )
+      // )
 
       ]),
     );

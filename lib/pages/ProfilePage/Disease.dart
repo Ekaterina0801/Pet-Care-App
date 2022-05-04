@@ -77,6 +77,7 @@ class _DiseasePageState extends StateMVC {
                       setState(
                         () {
                           final formKey = new GlobalKey<FormState>();
+                          _displayDiseaseAdd(context, type, datebeg, dateend, user.userid);
                           AlertDialog alert = AlertDialog(
                             title: Container(
                               child: Align(
@@ -497,7 +498,7 @@ _displayDiseaseAdd(BuildContext context, String type, String datebeg,
   AlertDialog alert = AlertDialog(
     title: Text('Добавление информации'),
     actions: [
-      FlatButton(
+      ElevatedButton(
         child: Text(
           'Добавить',
           style: GoogleFonts.comfortaa(
