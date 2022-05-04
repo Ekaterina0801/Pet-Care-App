@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care/pages/ProfilePage/Pet.dart';
 
+//ignore: must_be_immutable
 class ChangeInfoPage extends StatelessWidget {
   Pet pet;
   ChangeInfoPage(this.pet);

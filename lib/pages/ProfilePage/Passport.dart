@@ -4,6 +4,7 @@ import 'package:pet_care/pages/welcomescreen.dart';
 import 'DiseasePage.dart';
 import 'VaccinationPage.dart';
 
+//ignore: must_be_immutable
 class Passport extends StatelessWidget {
   String nameowner;
   String dateb;
@@ -97,6 +98,7 @@ class Passport extends StatelessWidget {
   }
 }
 
+//ignore: must_be_immutable
 class InfoWidget extends StatelessWidget {
   final String title;
   String info;
@@ -147,7 +149,9 @@ class InfoWidget extends StatelessWidget {
   }
 }
 
+
 //Функция, выбирающая нужное диалоговое окно
+//ignore: must_be_immutable
 class ChooseRemakeWidget extends StatelessWidget {
   final String title;
   String info;
@@ -164,6 +168,7 @@ class ChooseRemakeWidget extends StatelessWidget {
 }
 
 //Диалоговое окно для изменения имени владельца
+//ignore: must_be_immutable
 class RemakeNameWidget extends StatelessWidget {
   final String title;
   String info;
@@ -234,6 +239,7 @@ var doRename = (info, name, surname) {
 };
 
 //Диалоговое окно для изменения породы питомца
+//ignore: must_be_immutable
 class RemakeBreedWidget extends StatefulWidget {
   final String title;
   String info;
@@ -293,6 +299,7 @@ class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
 }
 
 //Диалоговое окно для изменения даты рождения питомца
+//ignore: must_be_immutable
 class RemakeDateBirthWidget extends StatelessWidget {
   final String title;
   String info;

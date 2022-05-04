@@ -5,6 +5,7 @@ import 'package:pet_care/pages/ProfilePage/vaccinationsrepo.dart';
 import 'Vaccination.dart';
 import 'VaccinationPage.dart';
 
+//ignore: must_be_immutable
 class VaccinationsCard extends StatefulWidget {
   Vaccination vac;
   VaccinationsCard(Vaccination vac) {

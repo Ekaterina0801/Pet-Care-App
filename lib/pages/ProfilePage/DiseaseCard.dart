@@ -3,6 +3,7 @@ import 'package:pet_care/pages/ProfilePage/diseaserepo.dart';
 
 import 'Disease.dart';
 
+//ignore: must_be_immutable
 class DiseaseCard extends StatefulWidget {
   Disease disease;
 
@@ -31,25 +32,23 @@ class _DiseaseCardState extends State<DiseaseCard> {
               title: Text(widget.disease.type,
                   textAlign: TextAlign.left,
                   style: Theme.of(context).copyWith().textTheme.bodyText1),
-              subtitle: Text(
-                  "Начало: " +
-                      widget.disease.dateofbeggining +
-                      "\n" +
-                      "Конец: " +
-                      widget.disease.dateofending,
-                  style: Theme.of(context).copyWith().textTheme.bodyText1),
+              subtitle: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                      "Начало: " +
+                          widget.disease.dateofbeggining +
+                          "\n" +
+                          "Конец: " +
+                          widget.disease.dateofending,
+                      style: Theme.of(context).copyWith().textTheme.bodyText1),
+                      Container(child: IconButton(onPressed: ()=>deleteDisease(widget.disease,update), icon: Icon(Icons.delete)))
+                ],
+              ),
             ),
           ),
         ),
-        Container(
-          child: TextButton(
-            onPressed: ()=>deleteDisease(widget.disease,update),
-            child: Text(
-              'Удалить',
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          )
-        )
+      
       ],
     );
   }
