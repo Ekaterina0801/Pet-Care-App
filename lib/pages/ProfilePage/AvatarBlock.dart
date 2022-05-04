@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AvatarBlock extends StatefulWidget {
   final String name;
@@ -23,13 +22,8 @@ class _AvatarBlockState extends State<AvatarBlock> {
               backgroundImage: Image.asset(widget.photo).image,
             ),
           ),
-          Text(
-            widget.name,
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14),
-          ),
+          Text(widget.name,
+              style: Theme.of(context).copyWith().textTheme.bodyText1),
         ],
       ),
     );

@@ -83,10 +83,7 @@ class _NotesPageState extends StateMVC {
                     alignment: Alignment.bottomLeft,
                     child: Text(
                       '+ Добавить заметку',
-                      style: GoogleFonts.comfortaa(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 16),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
                 ),
@@ -97,10 +94,7 @@ class _NotesPageState extends StateMVC {
                           alignment: Alignment.center,
                           child: Text(
                             "Заметок пока нет",
-                            style: GoogleFonts.comfortaa(
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 16),
+                            style: Theme.of(context).textTheme.bodyText1,
                           ),
                         )
                       ])
@@ -136,10 +130,7 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
       ElevatedButton(
         child: Text(
           'Добавить',
-          style: GoogleFonts.comfortaa(
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w800,
-              fontSize: 14),
+          style: Theme.of(context).textTheme.bodyText1,
         ),
         onPressed: () {
           addNote(_body, _date, userID);

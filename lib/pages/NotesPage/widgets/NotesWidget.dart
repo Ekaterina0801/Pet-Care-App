@@ -48,11 +48,7 @@ class _NotesWidgetState extends State<NotesWidget> {
                 maxLines: 4,
                 overflow: TextOverflow.ellipsis,
                 softWrap: true,
-                style: GoogleFonts.comfortaa(
-                    color: Colors.black,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16),
+                style: Theme.of(context).copyWith().textTheme.bodyText1
               ),
             ),
             Row(

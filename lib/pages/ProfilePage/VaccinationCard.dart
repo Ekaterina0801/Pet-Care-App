@@ -65,10 +65,7 @@ class _VaccinationsCardState extends State<VaccinationsCard> {
                   child: Text(
                     widget.vac.type,
                     textAlign: TextAlign.left,
-                    style: GoogleFonts.comfortaa(
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18),
+                    style:Theme.of(context).copyWith().textTheme.bodyText1,
                   ),
                 ),
               ],
@@ -81,10 +78,7 @@ class _VaccinationsCardState extends State<VaccinationsCard> {
                 child: Text(
                   'Нужна ли ревакцинация: ' +
                       _info,
-                  style: GoogleFonts.comfortaa(
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18),
+                  style: Theme.of(context).copyWith().textTheme.bodyText1,
                 )),
           )
         ],

@@ -11,11 +11,11 @@ class ArticlePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BasePage(
-        title: 'Статья',
-        body: ListView(children: [
-          ArticleBlock(article.title,article.image),
+      title: 'Статья',
+      body: ListView(
+        children: [
+          ArticleBlock(article.title, article.image),
           Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),
@@ -24,16 +24,16 @@ class ArticlePage extends StatelessWidget {
               alignment: Alignment.center,
               child: Container(
                 padding: EdgeInsets.all(5),
-                child: Text(article.body,
-                    textAlign: TextAlign.left,
-                    style: GoogleFonts.comfortaa(
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16)),
+                child: Text(
+                  article.body,
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context).copyWith().textTheme.bodyText1,
+                ),
               ),
             ),
           )
-        ]));
-  }}
-
-
+        ],
+      ),
+    );
+  }
+}

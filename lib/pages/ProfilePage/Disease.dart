@@ -83,20 +83,14 @@ class _DiseasePageState extends StateMVC {
                               child: Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Text('Добавление болезни',
-                                    style: GoogleFonts.comfortaa(
-                                        fontStyle: FontStyle.normal,
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 18)),
+                                    style: Theme.of(context).copyWith().textTheme.bodyText1),
                               ),
                             ),
                             actions: [
                               ElevatedButton(
                                   child: Text(
                                     'Добавить',
-                                    style: GoogleFonts.comfortaa(
-                                        fontStyle: FontStyle.normal,
-                                        fontWeight: FontWeight.w800,
-                                        fontSize: 14),
+                                    style: Theme.of(context).copyWith().textTheme.bodyText1,
                                   ),
                                   //color: Color.fromRGBO(255, 223, 142, 1),
                                   //shape: RoundedRectangleBorder(
@@ -139,14 +133,7 @@ class _DiseasePageState extends StateMVC {
                                                       'Введите описание болезни:',
                                                       //textAlign: TextAlign.left,
                                                       style:
-                                                          GoogleFonts.comfortaa(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w800,
-                                                              fontSize: 14)),
+                                                          Theme.of(context).copyWith().textTheme.bodyText1),
                                                 ),
                                               ),
                                               TextFormField(
@@ -187,14 +174,7 @@ class _DiseasePageState extends StateMVC {
                                                       'Введите дату начала болезни:',
                                                       //textAlign: TextAlign.left,
                                                       style:
-                                                          GoogleFonts.comfortaa(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w800,
-                                                              fontSize: 14)),
+                                                          Theme.of(context).copyWith().textTheme.bodyText1),
                                                 ),
                                               ),
                                               TextFormField(
@@ -232,14 +212,7 @@ class _DiseasePageState extends StateMVC {
                                                       'Введите дату окончания болезни:',
                                                       //textAlign: TextAlign.left,
                                                       style:
-                                                          GoogleFonts.comfortaa(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w800,
-                                                              fontSize: 14)),
+                                                          Theme.of(context).copyWith().textTheme.bodyText1),
                                                 ),
                                               ),
                                               TextFormField(
@@ -290,11 +263,7 @@ class _DiseasePageState extends StateMVC {
                       alignment: Alignment.bottomLeft,
                       child: Text(
                         '+ Добавить болезнь',
-                        style: GoogleFonts.comfortaa(
-                            color: Colors.black,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 16),
+                        style: Theme.of(context).copyWith().textTheme.bodyText1,
                       ),
                     ),
                   ),
@@ -312,10 +281,7 @@ class _DiseasePageState extends StateMVC {
                                     alignment: Alignment.center,
                                     child: Text(
                                       "Отмеченных болезней пока нет",
-                                      style: GoogleFonts.comfortaa(
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 16),
+                                      style: Theme.of(context).copyWith().textTheme.bodyText1,
                                     ),
                                   ),
                                 ],
@@ -358,15 +324,12 @@ class DiseaseCard extends StatelessWidget {
           child: ListTile(
             title: Text(disease.type,
                 textAlign: TextAlign.left,
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16)),
+                style: Theme.of(context).copyWith().textTheme.bodyText1),
             subtitle: Text("Начало: " +
                 disease.dateofbeggining +
                 "\n" +
                 "Конец: " +
-                disease.dateofending),
+                disease.dateofending, style: Theme.of(context).copyWith().textTheme.bodyText1),
           ),
         ));
   }
@@ -501,10 +464,7 @@ _displayDiseaseAdd(BuildContext context, String type, String datebeg,
       ElevatedButton(
         child: Text(
           'Добавить',
-          style: GoogleFonts.comfortaa(
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w800,
-              fontSize: 14),
+          style: Theme.of(context).copyWith().textTheme.bodyText1,
         ),
         onPressed: () {
           addDisease(type, datebeg, dateend, userID);

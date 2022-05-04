@@ -27,8 +27,9 @@ class Passport extends StatelessWidget {
             height: 55,
             width: 400,
             child: ElevatedButton(
+              style: Theme.of(context).elevatedButtonTheme.style,
               //color: Color.fromRGBO(255, 223, 142, 10),
-             // splashColor: Color.fromRGBO(240, 240, 240, 10),
+              // splashColor: Color.fromRGBO(240, 240, 240, 10),
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DiseasePage())),
               child: Text(
@@ -48,8 +49,9 @@ class Passport extends StatelessWidget {
             height: 55,
             width: 400,
             child: ElevatedButton(
+              style: Theme.of(context).elevatedButtonTheme.style,
               //color: Color.fromRGBO(255, 223, 142, 10),
-             // splashColor: Color.fromRGBO(240, 240, 240, 10),
+              // splashColor: Color.fromRGBO(240, 240, 240, 10),
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => VaccinationPage())),
               child: Text(
@@ -64,27 +66,32 @@ class Passport extends StatelessWidget {
           ),
         ),
         Padding(
-            padding: EdgeInsets.all(7),
-            child: Container(
-                height: 55,
-                width: 400,
-                child: ElevatedButton(
-                    //color: Color.fromRGBO(255, 223, 142, 10),
-                    //splashColor: Color.fromRGBO(240, 240, 240, 10),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => WelcomeScreen(),
-                        ),
-                      );
-                    },
-                    child: Text('Выйти из профиля',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 17))))),
+          padding: EdgeInsets.all(7),
+          child: Container(
+            height: 55,
+            width: 400,
+            child: ElevatedButton(
+              //color: Color.fromRGBO(255, 223, 142, 10),
+              //splashColor: Color.fromRGBO(240, 240, 240, 10),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WelcomeScreen(),
+                  ),
+                );
+              },
+              child: Text(
+                'Выйти из профиля',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 17),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -207,7 +214,7 @@ class RemakeNameWidget extends StatelessWidget {
 //          "Принять", doRename(info,name, surname)
 //       )
         ElevatedButton(
-           // color: Color.fromRGBO(255, 223, 142, 10),
+            // color: Color.fromRGBO(255, 223, 142, 10),
             //splashColor: Color.fromARGB(199, 240, 240, 240),
             onPressed: () =>
                 {doRename(info, name, surname), (Navigator.pop(context, true))},
@@ -272,6 +279,7 @@ class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
         ElevatedButton(
             //color: Color.fromRGBO(255, 223, 142, 10),
             //splashColor: Color.fromARGB(199, 240, 240, 240),
+            style: Theme.of(context).elevatedButtonTheme.style,
             onPressed: () => (Navigator.pop(context, true)),
             child: Text('Принять',
                 textAlign: TextAlign.left,
@@ -316,7 +324,7 @@ class RemakeDateBirthWidget extends StatelessWidget {
 //          "Принять",
 //       )
         ElevatedButton(
-           // color: Color.fromRGBO(255, 223, 142, 10),
+            // color: Color.fromRGBO(255, 223, 142, 10),
             //splashColor: Color.fromARGB(199, 240, 240, 240),
             onPressed: () => (Navigator.pop(context, true)),
             child: Text('Принять',
