@@ -21,7 +21,8 @@ List<String> photos = [
   "./assets/images/article_1.1.jpg"
 ];
 
-class VaccinationPage extends StatefulWidget {
+class VaccinationPage extends StatefulWidget 
+{
   @override
   _VaccinationPageState createState() => _VaccinationPageState();
 }
@@ -52,7 +53,7 @@ class _VaccinationPageState extends StateMVC {
   List<Vaccination> vacc = [];
   List<Vaccination> allvacc = [];
   final formKey = new GlobalKey<FormState>();
-
+  
   @override
   Widget build(BuildContext context) {
     return BasePage(
@@ -110,9 +111,9 @@ class _VaccinationPageState extends StateMVC {
                                 ),
                                 //color: Color.fromRGBO(255, 223, 142, 1),
                                 //shape: RoundedRectangleBorder(
-                                 //   borderRadius:
-                                  //      BorderRadius.all(Radius.circular(10))),
-                               // height: 45,
+                                //   borderRadius:
+                                //      BorderRadius.all(Radius.circular(10))),
+                                // height: 45,
                                 onPressed: () {
                                   setState(
                                     () {
@@ -197,17 +198,16 @@ class _VaccinationPageState extends StateMVC {
                                                   alignment:
                                                       Alignment.bottomLeft,
                                                   child: Text(
-                                                      'Введите дату прививки:',
-                                                      //textAlign: TextAlign.left,
-                                                      style:
-                                                          GoogleFonts.comfortaa(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w800,
-                                                              fontSize: 14)),
+                                                    'Введите дату прививки:',
+                                                    //textAlign: TextAlign.left,
+                                                    style:
+                                                        GoogleFonts.comfortaa(
+                                                            fontStyle: FontStyle
+                                                                .normal,
+                                                            fontWeight:
+                                                                FontWeight.w800,
+                                                            fontSize: 14),
+                                                  ),
                                                 ),
                                               ),
                                               TextFormField(
@@ -344,7 +344,7 @@ class _VaccinationPageState extends StateMVC {
                                   ),
                                 ],
                               ),
-                            )
+                            ),
                           ],
                         )
                       : ListView.builder(

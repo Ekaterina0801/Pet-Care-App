@@ -56,8 +56,6 @@ class _VaccinationsCardState extends State<VaccinationsCard> {
             ],
           ),
           Container(
-            //decoration:
-            //    BoxDecoration(color: Color.fromRGBO(255, 223, 142, 100)),
             child: Row(
               children: [
                 Container(
