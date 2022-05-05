@@ -87,6 +87,7 @@ void deleteNote(Note note,void update())
 {
   RepositoryNotes().delete(note);
   update();
+  
 }
 
  _displayNoteUpdate(
@@ -103,7 +104,7 @@ void deleteNote(Note note,void update())
         
         ElevatedButton(
           style: ButtonStyle(
-            backgroundColor:MaterialStateProperty.all(Color.fromRGBO(251, 236, 192, 10))
+            backgroundColor:MaterialStateProperty.all(Color.fromRGBO(255, 223, 142, 10))
           ),
           child: Text(
             'Применить',

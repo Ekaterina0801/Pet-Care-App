@@ -131,7 +131,13 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
   final formKey = new GlobalKey<FormState>();
 
   AlertDialog alert = AlertDialog(
-    title: Text('Добавление заметки'),
+    title: Text(
+      'Добавление заметки',
+      style: GoogleFonts.comfortaa(
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.w800,
+          fontSize: 17),
+    ),
     actions: [
       ElevatedButton(
         child: Text(
@@ -141,6 +147,9 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
               fontWeight: FontWeight.w800,
               fontSize: 14),
         ),
+        style: ButtonStyle(
+            backgroundColor:MaterialStateProperty.all(Color.fromRGBO(255, 223, 142, 10))
+          ),
         onPressed: () {
           addNote(_body, _date, userID);
           update();
@@ -166,7 +175,7 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: 'Введите текст',
-            hintStyle: TextStyle(color: Colors.white60),
+            hintStyle: TextStyle(color: Colors.grey),
           ),
         ),
       ),
