@@ -39,6 +39,8 @@ class _DiseasesPageState extends StateMVC {
   _DiseasesPageState():super(DiseaseController()){_controller = controller as DiseaseController;}
 
   get borderRadius => null;
+
+  get decoration => null;
   @override
   void initState() {
     super.initState();
@@ -160,8 +162,12 @@ if (state is DiseaseResultLoading) {
                               ],
                               content: //_displayDiseaseAdd(context, type, datebeg, dateend, user.userid)
                               
+                              
                               Container(
-                                //alignment: Alignment.topLeft,
+                                 //decoration: BoxDecoration(
+                                 //border: Border.all(),
+                                 //borderRadius: BorderRadius.all(Radius.circular(80)),
+                                 //borderRadius: BorderRadius.circular(20)),
                                 margin: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
                                   child: Column(
                                     children: [
@@ -170,7 +176,7 @@ if (state is DiseaseResultLoading) {
                                           child: Column(
                                             children: [
 
-                                                Container(
+                                                Container(                                             
                                                  padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),                                                                                          
                                                   child: Column(                                                  
                                                   children: [ 
@@ -178,7 +184,6 @@ if (state is DiseaseResultLoading) {
                                                     child: Align(
                                                     alignment: Alignment.bottomLeft,
                                                     child: Text('Введите описание болезни:',
-                                                        //textAlign: TextAlign.left,
                                                         style: GoogleFonts.comfortaa(
                                                         fontStyle: FontStyle.normal,
                                                         fontWeight: FontWeight.w800,
@@ -199,6 +204,7 @@ if (state is DiseaseResultLoading) {
                                                   ], 
                                                 ),
                                                 color: Color.fromARGB(153, 229, 229, 229),
+                                                //decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(80))),
                                                 //decoration: BoxDecoration(
                                                 //border: Border.all(),
                                                 //borderRadius: BorderRadius.circular(20),),
@@ -215,7 +221,6 @@ if (state is DiseaseResultLoading) {
                                                 child: Align(
                                                     alignment: Alignment.bottomLeft,
                                                 child: Text('Введите дату начала болезни:',
-                                                      //textAlign: TextAlign.left,
                                                       style: GoogleFonts.comfortaa(
                                                       fontStyle: FontStyle.normal,
                                                       fontWeight: FontWeight.w800,
@@ -250,7 +255,6 @@ if (state is DiseaseResultLoading) {
                                               child: Align(
                                                     alignment: Alignment.bottomLeft,
                                               child: Text('Введите дату окончания болезни:',
-                                                  //textAlign: TextAlign.left,
                                                   style: GoogleFonts.comfortaa(
                                                   fontStyle: FontStyle.normal,
                                                   fontWeight: FontWeight.w800,
@@ -272,11 +276,11 @@ if (state is DiseaseResultLoading) {
                                           ),
                                             color: Color.fromARGB(153, 229, 229, 229),
                                                 //borderRadius: borderRadius.all(Radius.circular(10)),
-                                            ),
-
-                                            ],
+                                            ),     
+                                                                                  
+                                            ], 
                                           )),   
-                                        ],
+                                        ], 
                                       )),
 
                             );
@@ -348,6 +352,9 @@ if (state is DiseaseResultLoading) {
       ),
     );
   }}
+}
+
+class Height {
 }
 
 class DiseaseCard extends StatelessWidget {
