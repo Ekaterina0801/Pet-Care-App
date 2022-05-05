@@ -188,7 +188,8 @@ if (state is DiseaseResultLoading) {
                                                         fontStyle: FontStyle.normal,
                                                         fontWeight: FontWeight.w800,
                                                         fontSize: 14)),
-                                                  ),),
+                                                      ),
+                                                    ),
                                                    TextFormField(
                                                     maxLines: 3,
                                                     validator: (value)=>value.isEmpty?"Введите текст":null,
@@ -203,14 +204,21 @@ if (state is DiseaseResultLoading) {
                                                   ),
                                                   ], 
                                                 ),
-                                                color: Color.fromARGB(153, 229, 229, 229),
-                                                //decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(80))),
-                                                //decoration: BoxDecoration(
-                                                //border: Border.all(),
-                                                //borderRadius: BorderRadius.circular(20),),
-                                              ),
+                                    decoration: BoxDecoration(
+                                    boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(43, 0, 0, 0),
+                                      blurRadius: 5,
+                                      offset: const Offset(0.0, 0.0),
+                                      spreadRadius: 2.0,
+                                    )
+                                  ],  
+                                    color: Color.fromARGB(202, 242, 242, 242),
+                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                                    borderRadius: BorderRadius.circular(10),
+                                    ),),
 
-                                              SizedBox(height: 10),
+                                              SizedBox(height: 15),
 
                                               Container(
                                                  padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
@@ -225,7 +233,8 @@ if (state is DiseaseResultLoading) {
                                                       fontStyle: FontStyle.normal,
                                                       fontWeight: FontWeight.w800,
                                                       fontSize: 14)),
-                                              ),),
+                                                    ),
+                                                  ),
                                               TextFormField(
                                                 maxLines: 3,
                                                 validator: (value)=>value.isEmpty?"Введите текст":null,
@@ -240,11 +249,21 @@ if (state is DiseaseResultLoading) {
                                           ),
                                             ], 
                                           ),
-                                            color: Color.fromARGB(153, 229, 229, 229),
-                                                //borderRadius: borderRadius.all(Radius.circular(10)),
-                                            ),
+                                    decoration: BoxDecoration(
+                                    boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(43, 0, 0, 0),
+                                      blurRadius: 5,
+                                      offset: const Offset(0.0, 0.0),
+                                      spreadRadius: 2.0,
+                                    )
+                                  ],  
+                                    color: Color.fromARGB(202, 242, 242, 242),
+                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                                    borderRadius: BorderRadius.circular(10),
+                                    ),),
 
-                                            SizedBox(height: 10),
+                                            SizedBox(height: 15),
 
                                               Container(
                                                  padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
@@ -259,7 +278,8 @@ if (state is DiseaseResultLoading) {
                                                   fontStyle: FontStyle.normal,
                                                   fontWeight: FontWeight.w800,
                                                   fontSize: 14)),
-                                            ),),
+                                                  ),
+                                                ),
                                           TextFormField(
                                             validator: (value)=>value.isEmpty?"Введите текст":null,
                                             maxLines: 3,
@@ -274,11 +294,21 @@ if (state is DiseaseResultLoading) {
                                           ),
                                             ], 
                                           ),
-                                            color: Color.fromARGB(153, 229, 229, 229),
-                                                //borderRadius: borderRadius.all(Radius.circular(10)),
-                                            ),     
-                                                                                  
-                                            ], 
+                                    decoration: BoxDecoration(
+                                    boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(43, 0, 0, 0),
+                                      blurRadius: 5,
+                                      offset: const Offset(0.0, 0.0),
+                                      spreadRadius: 2.0,
+                                    )
+                                  ],  
+                                    color: Color.fromARGB(202, 242, 242, 242),
+                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                                    borderRadius: BorderRadius.circular(10),
+                                    ),),
+
+                                            ],
                                           )),   
                                         ], 
                                       )),

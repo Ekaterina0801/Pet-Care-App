@@ -97,20 +97,33 @@ class _NotesPageState extends StateMVC {
                           //_displayNoteAdd(context, _body, _date);
                           final formKey = new GlobalKey<FormState>();
                           AlertDialog alert = AlertDialog(
- title: Text('Добавление заметки'),
- actions: [
-                              FlatButton(
- child: Text(
-                                    'Добавить',
- style: GoogleFonts.comfortaa(
- fontStyle: FontStyle.normal,
- fontWeight: FontWeight.w800,
- fontSize: 14),
-                                  ),
- onPressed: () {
+                          title: Container(
+                                child: Align(
+                                alignment: Alignment.bottomCenter, 
+                                child: Text('Добавление заметки',
+                        style: GoogleFonts.comfortaa(
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 18)),
+                          ),
+                        ),
+                        actions: [
+                          FlatButton(
+                            child: Text('Добавить',
+                            style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 14),
+                            ),
+                            color: Color.fromRGBO(255, 223, 142, 1),
+                            shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10))
+                            ),
+                            height: 40,
+                             onPressed: () {
                                     setState(() {
                                       if(formKey.currentState.validate()){
-      formKey.currentState.save();
+                                      formKey.currentState.save();
                                       addNote(_body, _date, user.userid);
                                       //notifyListeners();
                                       }
@@ -121,22 +134,25 @@ class _NotesPageState extends StateMVC {
                                     // Navigator.pushNamed(context, "/notes");
                                      Navigator.of(context).push(
                                       MaterialPageRoute(
- builder: (context) => HomeNotes(),
+                                builder: (context) => HomeNotes(),
                                       ),
                                     );
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
- builder: (context) => HomeNotes(),
+                                builder: (context) => HomeNotes(),
                                       ),
                                     );
                                   }),
                             ],
                             content: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 1, vertical: 12),
                                 padding: EdgeInsets.all(10),
+
                                 child: Form(
                                     key: formKey,
+                                    
                                     child: TextFormField(
-                                      validator: (value)=>value.isEmpty?"Введите заметку":null,
+                                      validator: (value)=>value.isEmpty?"Введите текст":null,
                                       maxLines: 10,
                                       onChanged: (value) {
                                         _body = value;
@@ -144,12 +160,24 @@ class _NotesPageState extends StateMVC {
                                       },
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
-                                        hintText: 'Введите текст',
-                                        hintStyle:
-                                            TextStyle(color: Colors.white60),
+                                        hintText: 'Введите заметку',
+                                        hintStyle: TextStyle(color: Color.fromARGB(153, 69, 69, 69)),
                                       ),
-                                    ))),
-                          );
+                                    )),
+                                    decoration: BoxDecoration(
+                                    boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(43, 0, 0, 0),
+                                      blurRadius: 5,
+                                      offset: const Offset(0.0, 0.0),
+                                      spreadRadius: 2.0,
+                                    )
+                                  ],  
+                                    color: Color.fromARGB(202, 242, 242, 242),
+                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                                    borderRadius: BorderRadius.circular(10),
+                                    ),), 
+                                );
 
                           Future.delayed(Duration.zero, () async {
                             showDialog(
