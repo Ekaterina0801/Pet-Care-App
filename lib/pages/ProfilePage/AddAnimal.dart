@@ -29,7 +29,7 @@ String validateDate(String value) {
     _msg = "Эта дата ещё не наступила";
   else if (int.parse(match.group(3)) <= 1995 &&
       int.parse(match.group(2)) <= 1 &&
-      int.parse(match.group(1)) <= 1) _msg = "Введите дату больше 01.01.1975";
+      int.parse(match.group(1)) <= 1) _msg = "Введите дату больше 01.01.1995";
   return _msg;
 }
 

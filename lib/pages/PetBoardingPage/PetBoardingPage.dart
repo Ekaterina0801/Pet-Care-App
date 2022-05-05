@@ -104,20 +104,22 @@ class _PetBoardingPageState extends StateMVC {
                                       fontWeight: FontWeight.w800,
                                       fontSize: 18)),
                             ),
-                          ])),     
-                    Container(
-                        child: TextButton(
-                      onPressed: () => Navigator.push(context,
-                         MaterialPageRoute(builder: (context) => SettingsService())),
-                      child: Text("Перейти к настройкам моего профиля для сервиса",
-                          style: GoogleFonts.comfortaa(
-                              decoration: TextDecoration.underline,
-                              color: Colors.black,
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 14)),
-                    )
-                    ),
+                          ])),
+                      Container(
+                          child: TextButton(
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SettingsService())),
+                        child: Text(
+                            "Перейти к настройкам моего профиля для сервиса",
+                            style: GoogleFonts.comfortaa(
+                                decoration: TextDecoration.underline,
+                                color: Colors.black,
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 14)),
+                      )),
                       Row(
                         children: [
                           Flexible(
@@ -136,12 +138,11 @@ class _PetBoardingPageState extends StateMVC {
                               ),
                             ),
                           ),
-                     /*     IconButton(onPressed: _displayFilter(context), icon: Icon(
-                                              Icons.settings,
-                                              size: 10,
-                                              color: Colors.grey))
-                          
-                       */ ],
+                          IconButton(
+                              onPressed: (() => _displayFilter(context)),
+                              icon: Icon(Icons.sort,
+                                  size: 25, color: Colors.grey))
+                        ],
                       ),
                       GridView.builder(
                           gridDelegate:
