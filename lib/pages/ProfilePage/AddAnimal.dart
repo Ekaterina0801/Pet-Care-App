@@ -27,7 +27,7 @@ String validateDate(String value) {
           int.parse(match.group(2)) == DateTime.now().month &&
           int.parse(match.group(1)) > DateTime.now().day))
     _msg = "Эта дата ещё не наступила";
-  else if (int.parse(match.group(3)) <= 1975 &&
+  else if (int.parse(match.group(3)) <= 1995 &&
       int.parse(match.group(2)) <= 1 &&
       int.parse(match.group(1)) <= 1) _msg = "Введите дату больше 01.01.1975";
   return _msg;

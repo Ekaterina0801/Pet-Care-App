@@ -84,7 +84,6 @@ class _AdvicePageState extends StateMVC {
         height: 209.0,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: 2,
           itemBuilder: (context, i) {
             return AdviceBlock(articles[i].title, articles[i].image, articles[i].id,() => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -96,6 +95,7 @@ class _AdvicePageState extends StateMVC {
           },
           padding: const EdgeInsets.all(8),
           scrollDirection: Axis.horizontal,
+         
         ),
       ),
       /*

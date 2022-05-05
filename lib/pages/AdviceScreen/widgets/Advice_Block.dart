@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'Favourite_Widget.dart';
+
 //Виджет - блок совета
 class AdviceBlock extends StatelessWidget {
   final String title;
@@ -33,14 +35,14 @@ class AdviceBlock extends StatelessWidget {
               height: 110,
               width: 200,
               child: Container(
-                  /*
+                  
                 padding: EdgeInsets.all(5),
                 child: Align(
                   child: index == 0 || index == 1
                       ? FavouriteWidgetNotActive()
                       : FavouriteWidget(),
                   alignment: Alignment.topRight,
-                ),*/
+                ),
                   ),
               decoration: BoxDecoration(
                   image: DecorationImage(

@@ -10,6 +10,7 @@ import 'package:pet_care/pages/providers/userprovider.dart';
 
 import 'package:provider/provider.dart';
 import 'AccountBlock.dart';
+import 'SettingsService.dart';
 
 //страница сервиса передержки
 class PetBoardingPage extends StatefulWidget {
@@ -103,11 +104,11 @@ class _PetBoardingPageState extends StateMVC {
                                       fontWeight: FontWeight.w800,
                                       fontSize: 18)),
                             ),
-                            /*
+                          ])),     
                     Container(
-                       // child: TextButton(
-                      //onPressed: () => Navigator.push(context,
-                      //    MaterialPageRoute(builder: (context) => SettingsService())),
+                        child: TextButton(
+                      onPressed: () => Navigator.push(context,
+                         MaterialPageRoute(builder: (context) => SettingsService())),
                       child: Text("Перейти к настройкам моего профиля для сервиса",
                           style: GoogleFonts.comfortaa(
                               decoration: TextDecoration.underline,
@@ -116,8 +117,7 @@ class _PetBoardingPageState extends StateMVC {
                               fontWeight: FontWeight.w800,
                               fontSize: 14)),
                     )
-                    ),*/
-                          ])),
+                    ),
                       Row(
                         children: [
                           Flexible(
@@ -135,8 +135,13 @@ class _PetBoardingPageState extends StateMVC {
                                 maxLines: 2,
                               ),
                             ),
-                          )
-                        ],
+                          ),
+                     /*     IconButton(onPressed: _displayFilter(context), icon: Icon(
+                                              Icons.settings,
+                                              size: 10,
+                                              color: Colors.grey))
+                          
+                       */ ],
                       ),
                       GridView.builder(
                           gridDelegate:
