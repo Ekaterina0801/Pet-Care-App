@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:pet_care/pages/AdviceScreen/requests/models/Article.dart';
 // импортируем http пакет
 import 'package:http/http.dart' as http;
+import 'package:pet_care/pages/AdviceScreen/widget_pages/AdvicePageMain.dart';
+
+import '../../BasePage.dart';
 
 // ignore: must_be_immutable
 class FavouriteWidget extends StatefulWidget {
@@ -39,6 +42,10 @@ class _FavouriteWidgetState extends State<FavouriteWidget> {
         } else {
           updateFav(widget.article);
         }
+        Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) => HomePage()));
       },
     );
   }

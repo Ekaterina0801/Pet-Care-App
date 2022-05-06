@@ -51,7 +51,6 @@ class _AdvicePageState extends StateMVC {
       for(var a in articles)
         if(a.isFav)
         fav.add(a);
-
     return ListView(children: [
       AdviceMainBlock(articles[0].title, articles[0].image,() => Navigator.of(context).push(
                         MaterialPageRoute(
