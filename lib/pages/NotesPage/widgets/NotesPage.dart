@@ -137,23 +137,31 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
   final formKey = new GlobalKey<FormState>();
 
   AlertDialog alert = AlertDialog(
+     shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(20.0),
+      ),
+    ),
     title: Text('Добавление заметки'),
     actions: [
-      ElevatedButton(
-        child: Text(
-          'Добавить',
-          style: Theme.of(context).textTheme.bodyText1,
+      Align(
+        alignment: Alignment.center,
+        child: ElevatedButton(
+          child: Text(
+            'Добавить',
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          onPressed: () {
+            addNote(_body, _date, userID);
+            update();
+            Navigator.of(context).pop(true);
+          },
         ),
-        onPressed: () {
-          addNote(_body, _date, userID);
-          update();
-          Navigator.of(context).pop(true);
-        },
       ),
     ],
     content: Container(
       decoration: BoxDecoration(
-        color: Color.fromRGBO(251, 236, 192, 10),
+        //color: Color.fromRGBO(251, 236, 192, 10),
       ),
       padding: EdgeInsets.all(10),
       child: Form(

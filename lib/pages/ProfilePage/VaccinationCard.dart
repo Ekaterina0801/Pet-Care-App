@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/ProfilePage/vaccinationsrepo.dart';
 
+import '../BasePage.dart';
 import 'Vaccination.dart';
 import 'VaccinationPage.dart';
 
@@ -20,14 +21,15 @@ class _VaccinationsCardState extends State<VaccinationsCard> {
   void update() {
     this.setState(() {});
   }
+
   String _info;
-  
+
   @override
-  
   Widget build(BuildContext context) {
-    if(widget.vac.revaccination)
-    _info="Да";
-    else _info="Нет";
+    if (widget.vac.revaccination)
+      _info = "Да";
+    else
+      _info = "Нет";
     return Container(
       decoration: BoxDecoration(color: Color.fromRGBO(255, 223, 142, 100)),
       child: Column(
@@ -51,7 +53,15 @@ class _VaccinationsCardState extends State<VaccinationsCard> {
                 ),
               ),
               IconButton(
-                  onPressed: () => deleteVacc(widget.vac, update),
+                  onPressed: () {
+                    deleteVacc(widget.vac, update);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => HomePage(4),
+                      ),
+                    );
+                  },
                   icon: Icon(Icons.delete))
             ],
           ),
@@ -64,7 +74,7 @@ class _VaccinationsCardState extends State<VaccinationsCard> {
                   child: Text(
                     widget.vac.type,
                     textAlign: TextAlign.left,
-                    style:Theme.of(context).copyWith().textTheme.bodyText1,
+                    style: Theme.of(context).copyWith().textTheme.bodyText1,
                   ),
                 ),
               ],
@@ -75,8 +85,7 @@ class _VaccinationsCardState extends State<VaccinationsCard> {
             child: Container(
                 padding: EdgeInsets.all(18),
                 child: Text(
-                  'Нужна ли ревакцинация: ' +
-                      _info,
+                  'Нужна ли ревакцинация: ' + _info,
                   style: Theme.of(context).copyWith().textTheme.bodyText1,
                 )),
           )

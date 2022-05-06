@@ -7,7 +7,6 @@ import '../../BasePage.dart';
 
 class NotesWidget extends StatefulWidget {
   final Note note;
-  //Function refresh;
   NotesWidget(this.note);
 
   @override
@@ -24,8 +23,6 @@ class _NotesWidgetState extends State<NotesWidget> {
     return InkWell(
       onTap: () {
         _displayNoteUpdate(context, widget.note.body, widget.note, update);
-
-        //update();
       },
       child: Container(
         decoration: BoxDecoration(
@@ -54,12 +51,11 @@ class _NotesWidgetState extends State<NotesWidget> {
                   style: Theme.of(context).copyWith().textTheme.bodyText1),
             ),
             Row(
-             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Align(
-                  //alignment: Alignment.centerLeft,
                   child: Container(
-                    padding: EdgeInsets.only(left:8),
+                    padding: EdgeInsets.only(left: 8),
                     decoration: BoxDecoration(),
                     child: Text(
                       widget.note.date,
@@ -73,19 +69,18 @@ class _NotesWidgetState extends State<NotesWidget> {
                 ),
                 Container(
                   child: IconButton(
-                      onPressed: () {
-                        deleteNote(widget.note, update);
-                        update();
-                        //Navigator.of(context).pop();
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => HomePage(3),
-                          ),
-                        );
-                    
-                      },
-                      icon: Icon(Icons.delete,size:16),),
+                    onPressed: () {
+                      deleteNote(widget.note, update);
+                      update();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => HomePage(3),
+                        ),
+                      );
+                    },
+                    icon: Icon(Icons.delete, size: 16),
+                  ),
                 )
               ],
             ),
@@ -111,54 +106,33 @@ _displayNoteUpdate(
         Radius.circular(20.0),
       ),
     ),
-    //backgroundColor: Color.fromRGBO(251, 236, 192, 10),
     title: Text('Редактирование'),
     actions: [
-      ElevatedButton(
-        onPressed: () {
-          deleteNote(note, update);
-          update();
-          Navigator.of(context).pop();
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (BuildContext context) => HomePage(3),
-            ),
-          );
-        },
-        child: Text(
-          'Удалить',
-          style: GoogleFonts.comfortaa(
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w800,
-              fontSize: 14),
-        ),
-      ),
-      ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
-            Color.fromRGBO(251, 236, 192, 10),
+      Align(
+        alignment: Alignment.center,
+        child: ElevatedButton(
+          
+          child: Text(
+            'Применить',
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
           ),
+          onPressed: () {
+            RepositoryNotes().update(newbody, note);
+            update();
+            Navigator.of(context).pop(true);
+          },
         ),
-        child: Text(
-          'Применить',
-          style: GoogleFonts.comfortaa(
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w800,
-              fontSize: 14),
-        ),
-        onPressed: () {
-          RepositoryNotes().update(newbody, note);
-          update();
-          Navigator.of(context).pop(true);
-        },
       ),
     ],
     content: Container(
       decoration: new BoxDecoration(
         shape: BoxShape.rectangle,
-        //color: const Color(0xFFFFFF),
-        borderRadius: new BorderRadius.all(new Radius.circular(50)),
+        borderRadius: new BorderRadius.all(
+          new Radius.circular(50),
+        ),
       ),
       padding: EdgeInsets.all(10),
       child: Form(
