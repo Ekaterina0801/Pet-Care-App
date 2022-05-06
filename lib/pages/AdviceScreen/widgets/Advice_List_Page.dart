@@ -28,9 +28,7 @@ class ArticleListPage extends StatelessWidget {
               children: articles
                   .map(
                     (Article article) => AdviceBlock(
-                      article.title,
-                      article.image,
-                      article.id,
+                      article,
                       () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ArticlePage(article),
@@ -41,7 +39,9 @@ class ArticleListPage extends StatelessWidget {
                   .toList(),
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }
         },
       ),

@@ -1,18 +1,25 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:pet_care/pages/AdviceScreen/requests/models/Article.dart';
+// импортируем http пакет
+import 'package:http/http.dart' as http;
+
+// ignore: must_be_immutable
 class FavouriteWidget extends StatefulWidget {
+  Article article;
+  FavouriteWidget(this.article);
   @override
   _FavouriteWidgetState createState() => _FavouriteWidgetState();
 }
 
 class _FavouriteWidgetState extends State<FavouriteWidget> {
-  bool _isFavorited = false;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
         IconButton(
-          icon: (_isFavorited
+          icon: (widget.article.isFav
               ? Icon(
                   Icons.star,
                 )
@@ -25,25 +32,30 @@ class _FavouriteWidgetState extends State<FavouriteWidget> {
   }
 
   void _tapFavorite() {
-    setState(() {
-      if (_isFavorited) {
-        _isFavorited = false;
-      } else {
-        _isFavorited = true;
-      }
-    });
+    setState(
+      () {
+        if (widget.article.isFav) {
+          updateFav(widget.article);
+        } else {
+          updateFav(widget.article);
+        }
+      },
+    );
   }
 }
 
-class FavouriteWidgetNotActive extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Icon(
-          Icons.star,
-        )
-      ],
-    );
-  }
+Future<http.Response> update(Article article) async {
+  article.isFav = !article.isFav;
+  return http.put(
+    Uri.parse(Uri.encodeFull(
+        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Articles/' +
+            article.id +
+            '.json')),
+    body: jsonEncode(article.toMap()),
+  );
+}
+
+void updateFav(Article article) {
+  update(article);
+  //
 }

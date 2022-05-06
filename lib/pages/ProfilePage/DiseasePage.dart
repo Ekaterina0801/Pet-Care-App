@@ -80,8 +80,8 @@ class _DiseasePageState extends StateMVC {
                       setState(
                         () {
                           final formKey = new GlobalKey<FormState>();
-                          _displayDiseaseAdd(
-                              context, type, datebeg, dateend, user.userid);
+                          //_displayDiseaseAdd(
+                           //   context, type, datebeg, dateend, user.userid);           
                           AlertDialog alert = AlertDialog(
                             title: Container(
                               child: Align(
@@ -261,6 +261,7 @@ class _DiseasePageState extends StateMVC {
                               ),
                             ),
                           );
+                          
                           Future.delayed(
                             Duration.zero,
                             () async {
@@ -268,7 +269,7 @@ class _DiseasePageState extends StateMVC {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return alert;
-                                },
+                                }
                               );
                             },
                           );
@@ -326,7 +327,7 @@ class _DiseasePageState extends StateMVC {
   }
 }
 
-_displayDiseaseAdd(BuildContext context, String type, String datebeg,
+Widget _displayDiseaseAdd(BuildContext context, String type, String datebeg,
     String dateend, int userID) {
   final formKey = new GlobalKey<FormState>();
   AlertDialog alert = AlertDialog(

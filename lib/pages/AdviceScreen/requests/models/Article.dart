@@ -3,17 +3,18 @@ import 'dart:core';
 class Article
 {
   //все поля приватные
-  int id;
+  String id;
   String title;
   String body;
   String image;
+  bool isFav;
   //final String _image;
 
 
   
   //String get image =>_image;
 
-  Article({this.id, this.body,this.image,this.title});
+  Article({this.id, this.body,this.image,this.title,this.isFav});
   // Dart позволяет создавать конструкторы с разными именами
   // В данном случае Article.fromJson(json) - это конструктор
   // здесь мы принимаем JSON объект поста и извлекаем его поля
@@ -22,9 +23,24 @@ class Article
     id: json["ArticleID"],
     image: json["Image"],
     title:json["Title"],
-    body:json["Text"])
+    body:json["Text"],
+    isFav: json['IsFav'])
+    
+    
     ;
     }
+
+    Map<String, dynamic> toMap() {
+    return (
+      {
+      "ArticleID": id,
+      "Image": image,
+      "Title": title,
+      "Text": body,
+      "IsFav": isFav
+    }
+    );
+  }
     //this._image = json["image"];
 }
 

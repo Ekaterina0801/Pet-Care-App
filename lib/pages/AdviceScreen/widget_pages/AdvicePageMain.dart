@@ -47,6 +47,11 @@ class _AdvicePageState extends StateMVC {
     } else {
       
       final articles = (state as ArticleResultSuccess).articleList;
+      List<Article> fav = [];
+      for(var a in articles)
+        if(a.isFav)
+        fav.add(a);
+
     return ListView(children: [
       AdviceMainBlock(articles[0].title, articles[0].image,() => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -68,7 +73,7 @@ class _AdvicePageState extends StateMVC {
                     fontSize: 24)),
             TextButton(
               onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ArticleListPage())),
+                  MaterialPageRoute(builder: (context) => ArticleListPage(),),),
               child: Text("Показать все",
                   style: GoogleFonts.comfortaa(
                       decoration: TextDecoration.underline,
@@ -86,7 +91,7 @@ class _AdvicePageState extends StateMVC {
           shrinkWrap: true,
           itemCount: 2,
           itemBuilder: (context, i) {
-            return AdviceBlock(articles[i].title, articles[i].image, articles[i].id,() => Navigator.of(context).push(
+            return AdviceBlock(articles[i],() => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ArticlePage(
                             articles[i]
@@ -98,7 +103,7 @@ class _AdvicePageState extends StateMVC {
           scrollDirection: Axis.horizontal,
         ),
       ),
-      /*
+      
       Container(
         padding: EdgeInsets.all(10),
         child: Row(
@@ -114,7 +119,7 @@ class _AdvicePageState extends StateMVC {
               onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ArticleListPage())),
+                      builder: (context) => ArticleListPage(),),),
               child: Text("Показать все",
                   style: GoogleFonts.comfortaa(
                       decoration: TextDecoration.underline,
@@ -132,12 +137,12 @@ class _AdvicePageState extends StateMVC {
           shrinkWrap: true,
           itemCount: 2,
           itemBuilder: (context, i) {
-            return AdviceBlock(articles[i].title, articles[i].image, articles[i].id,(){});
+            return AdviceBlock(fav[i],(){});
           },
           padding: const EdgeInsets.all(8),
           scrollDirection: Axis.horizontal,
         ),
-      ),*/
+      ),
     ]);
   }
 }

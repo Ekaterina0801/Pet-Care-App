@@ -19,39 +19,47 @@ class ArticleBlock extends StatelessWidget {
               height: 250,
               width: 1000,
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: Image.network(
-                      image,
-                    ).image,
-                    fit: BoxFit.fill,
-                  ),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30))),
+                image: DecorationImage(
+                  image: Image.network(
+                    image,
+                  ).image,
+                  fit: BoxFit.fill,
+                ),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
             ),
             Container(
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(255, 223, 142, 1),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30))),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    height: 50,
-                    width: 200,
-                    padding: EdgeInsets.all(5),
-                    child: Center(
-                        child: Text(title,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.comfortaa(
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 14))),
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(255, 223, 142, 1),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
+                ),
+              ),
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  height: 50,
+                  width: 200,
+                  padding: EdgeInsets.all(5),
+                  child: Center(
+                    child: Text(
+                      title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.comfortaa(
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14),
+                    ),
                   ),
-                )),
+                ),
+              ),
+            ),
           ],
         ),
       ),
