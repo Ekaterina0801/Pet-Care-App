@@ -107,9 +107,10 @@ class InfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(5),
-      child: Row(children: [
-        Expanded(
-          child: Card(
+      child: Row(
+        children: [
+          Expanded(
+            child: Card(
               color: Color.fromRGBO(240, 240, 240, 1),
               shadowColor: Colors.grey,
               child: ListTile(
@@ -128,27 +129,15 @@ class InfoWidget extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       fontSize: 15),
                 ),
-                leading: IconButton(
-                  icon: Icon(Icons.edit),
-                  //                 color: Colors.grey.shade100,
-                  color: Colors.black,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            opaque: false,
-                            pageBuilder: (BuildContext context, _, __) =>
-                                ChooseRemakeWidget(title, info)));
-                  },
-                ),
                 isThreeLine: true,
-              )),
-        )
-      ]),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
-
 
 //Функция, выбирающая нужное диалоговое окно
 //ignore: must_be_immutable
