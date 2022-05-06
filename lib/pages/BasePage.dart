@@ -42,12 +42,13 @@ class _BasePageState extends State<BasePage> {
 
 //виджет навигационной панели
 class HomePage extends StatefulWidget {
+  int currind;
+  HomePage(this.currind);
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentindex = 0;
   final titles = [
     'Советы',
     'Сервис',
@@ -65,14 +66,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      title: titles[currentindex],
-      body: children[currentindex],
+      title: titles[widget.currind],
+      body: children[widget.currind],
       navigationbar: SalomonBottomBar(
         selectedItemColor: Colors.black,
-        currentIndex: currentindex,
+        currentIndex: widget.currind,
         onTap: (index) {
           setState(() {
-            currentindex = index;
+            widget.currind = index;
           });
         },
         items: [

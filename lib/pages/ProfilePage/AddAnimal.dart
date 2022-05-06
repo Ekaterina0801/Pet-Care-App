@@ -258,7 +258,7 @@ class _AddAnimalState extends State<AddAnimal> {
                                     Navigator.of(context).pop(),
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) => HomePage(),
+                                        builder: (context) => HomePage(0),
                                       ),
                                     ),
                                   }

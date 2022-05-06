@@ -26,11 +26,15 @@ class _NotesPageState extends StateMVC {
   void initState() {
     super.initState();
     _controller.init();
-    UserPreferences().getUser().then((result) {
-      setState(() {
-        user = result;
-      });
-    });
+    UserPreferences().getUser().then(
+      (result) {
+        setState(
+          () {
+            user = result;
+          },
+        );
+      },
+    );
   }
 
   void update() {
@@ -73,10 +77,13 @@ class _NotesPageState extends StateMVC {
                     primary: Colors.grey.shade200,
                   ),
                   onPressed: () {
-                    setState(() {
-                      _displayNoteAdd(
-                          context, _body, _date, user.userid, update);
-                    });
+                    setState(
+                      () {
+                        _displayNoteAdd(
+                            context, _body, _date, user.userid, update);
+                            update();
+                      },
+                    );
                   },
                   child: Align(
                     alignment: Alignment.bottomLeft,
@@ -87,16 +94,19 @@ class _NotesPageState extends StateMVC {
                   ),
                 ),
                 notes.length == 0
-                    ? ListBody(children: [
-                        Container(height: window.physicalSize.height / 2 - 32),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Заметок пока нет",
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                        )
-                      ])
+                    ? ListBody(
+                        children: [
+                          Container(
+                              height: window.physicalSize.height / 2 - 32),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Заметок пока нет",
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ),
+                          )
+                        ],
+                      )
                     : GridView.builder(
                         shrinkWrap: true,
                         physics: ScrollPhysics(),
@@ -104,12 +114,15 @@ class _NotesPageState extends StateMVC {
                         itemCount: notes.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 14,
+                          mainAxisSpacing: 8,
                           childAspectRatio: 1.2,
                         ),
                         itemBuilder: (BuildContext context, int index) =>
-                            Container(child: NotesWidget(notes[index])))
+                            Container(
+                          child: NotesWidget(notes[index]),
+                        ),
+                      )
               ],
             );
           },

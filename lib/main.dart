@@ -47,14 +47,14 @@ class MyApp extends StatelessWidget {
                     return Login();
                   else
                     //UserPreferences().removeUser();
-                    return HomePage();
+                    return HomePage(0);
               }
             }),
         routes: {
           '/login': (context) => Login(),
           //'test':(context)=>DisplayAddNote(),
           '/register': (context) => Register(),
-          '/home': (BuildContext context) => HomePage(),
+          '/home': (BuildContext context) => HomePage(0),
           '/notes': (context) => NotesPage(),
           '/welcome': (context) => WelcomeScreen()
         },
