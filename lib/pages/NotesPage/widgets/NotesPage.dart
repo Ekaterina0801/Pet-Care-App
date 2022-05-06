@@ -81,7 +81,7 @@ class _NotesPageState extends StateMVC {
                       () {
                         _displayNoteAdd(
                             context, _body, _date, user.userid, update);
-                            update();
+                        update();
                       },
                     );
                   },
@@ -135,9 +135,8 @@ class _NotesPageState extends StateMVC {
 _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
     void update()) {
   final formKey = new GlobalKey<FormState>();
-
   AlertDialog alert = AlertDialog(
-     shape: RoundedRectangleBorder(
+    shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(20.0),
       ),
@@ -152,21 +151,24 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
             style: Theme.of(context).textTheme.bodyText1,
           ),
           onPressed: () {
-            addNote(_body, _date, userID);
-            update();
-            Navigator.of(context).pop(true);
+            if (formKey.currentState.validate()) {
+              addNote(_body, _date, userID);
+              update();
+              Navigator.of(context).pop(true);
+            }
+            //
           },
         ),
       ),
     ],
     content: Container(
-      decoration: BoxDecoration(
-        //color: Color.fromRGBO(251, 236, 192, 10),
-      ),
+      decoration: BoxDecoration(),
       padding: EdgeInsets.all(10),
       child: Form(
         key: formKey,
-        child: TextField(
+        child: TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: (value) => value.isEmpty ? "Поле пустое" : null,
           maxLines: 10,
           onChanged: (value) {
             _body = value;

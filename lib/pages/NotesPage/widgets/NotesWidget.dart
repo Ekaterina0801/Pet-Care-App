@@ -111,7 +111,6 @@ _displayNoteUpdate(
       Align(
         alignment: Alignment.center,
         child: ElevatedButton(
-          
           child: Text(
             'Применить',
             style: GoogleFonts.comfortaa(
@@ -120,8 +119,10 @@ _displayNoteUpdate(
                 fontSize: 14),
           ),
           onPressed: () {
-            RepositoryNotes().update(newbody, note);
-            update();
+            if (formKey.currentState.validate()) {
+              RepositoryNotes().update(newbody, note);
+              update();
+            }
             Navigator.of(context).pop(true);
           },
         ),
