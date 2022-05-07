@@ -190,9 +190,9 @@ _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
       child: Align(
       alignment: Alignment.bottomCenter,
       child: Text('Добавление события',
-      style: Theme.of(context).copyWith().textTheme.bodyText1),),),
+      style: Theme.of(context).copyWith().textTheme.bodyText2),),),
       actions: [
-        ElevatedButton(
+        ElevatedButton( 
           child: Text('Добавить',
             style: Theme.of(context).copyWith().textTheme.bodyText1),
           onPressed: () {

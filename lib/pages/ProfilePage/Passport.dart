@@ -34,10 +34,11 @@ class Passport extends StatelessWidget {
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DiseasePage())),
               child: Text( 'Болезни',
-                style: Theme.of(context).copyWith().textTheme.bodyText1),
+                style: Theme.of(context).copyWith().textTheme.bodyText2),
             ),
           ),
         ),
+
         Padding(
           padding: EdgeInsets.all(7),
           child: Container(
@@ -50,10 +51,11 @@ class Passport extends StatelessWidget {
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => VaccinationPage())),
               child: Text('Прививки',
-                style: Theme.of(context).copyWith().textTheme.bodyText1),
+                style: Theme.of(context).copyWith().textTheme.bodyText2),
             ),
           ),
         ),
+
         Padding(
           padding: EdgeInsets.all(7),
           child: Container(
@@ -72,7 +74,7 @@ class Passport extends StatelessWidget {
               },
               child: Text('Выйти из профиля',
                 textAlign: TextAlign.left,
-                style: Theme.of(context).copyWith().textTheme.bodyText1),
+                style: Theme.of(context).copyWith().textTheme.bodyText2),
             ),
           ),
         ),

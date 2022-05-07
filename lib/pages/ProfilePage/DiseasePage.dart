@@ -90,13 +90,13 @@ class _DiseasePageState extends StateMVC {
                               child: Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Text('Добавление болезни',
-                                    style: Theme.of(context).copyWith().textTheme.bodyText1),
+                                    style: Theme.of(context).copyWith().textTheme.bodyText2),
                               ),
                             ),
                             actions: [
                               ElevatedButton(
                                   child: Text('Добавить',
-                                    style: Theme.of(context).copyWith().textTheme.bodyText1,),
+                                    style: Theme.of(context).copyWith().textTheme.bodyText1),
                                   //color: Color.fromRGBO(255, 223, 142, 1),
                                   //shape: RoundedRectangleBorder(
                                   // borderRadius: BorderRadius.all(
