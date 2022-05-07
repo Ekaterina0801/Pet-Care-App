@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/pages/CalendarPage/repoMeetings.dart';
 
@@ -36,6 +39,37 @@ class Meeting {
     'ID':"0",
   };
 }
+
+Future<Map<String, dynamic>> addEvent(
+    String text, String datefrom, String dateto, int userID) async {
+  final Map<String, dynamic> noteData = {
+    'EventName': text,
+    'IsAllDay': true,
+    'From': datefrom,
+    'To': dateto,
+    'Id': "1",
+    'UserID': userID
+  };
+  var response = await post(
+      Uri.parse(
+          'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Meetings.json'),
+      body: json.encode(noteData));
+  Meeting m = Meeting(
+      eventName: noteData['EventName'],
+      id: noteData['Id'],
+      from: noteData['From'],
+      to: noteData['To'],
+      isAllDay: noteData['IsAllDay'],
+      userId: noteData['UserID']);
+  var result;
+  if (response.request != null)
+    result = {'status': true, 'message': 'Successfully add', 'data': m};
+  else {
+    result = {'status': false, 'message': 'Adding failed', 'data': null};
+  }
+  return result;
+}
+
 
 abstract class MeetingResult{}
 

@@ -1,12 +1,16 @@
-import 'dart:convert';
+import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../../dommain/myuser.dart';
+import '../BasePage.dart';
 import '../Registration/util/shared_preference.dart';
+import 'AddInfo.dart';
+import 'DisplayAddInfo.dart';
 import 'Meeting.dart';
+import 'MeetingDataSource.dart';
+import 'Message.dart';
 import 'repoMeetings.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 
@@ -41,130 +45,12 @@ class _CalendarPageState extends StateMVC {
     this.setState(() {});
   }
 
-  _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
-      String _dateto, int userID, void update()) {
-    final formKey1 = new GlobalKey<FormState>();
-    AlertDialog alert = AlertDialog(
-      title: Text('Добавление события'),
-      actions: [
-        ElevatedButton(
-          child: Text(
-            'Добавить',
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14),
-          ),
-          onPressed: () {
-            if (formKey1.currentState.validate() &&
-                _dateto != null &&
-                _datefrom != null)
-              addEvent(
-                  _eventname, _datefrom.toString(), _dateto.toString(), userID);
-            update();
-            Navigator.of(context).pop(true);
-          },
-        ),
-      ],
-      content: Column(
-        children: [
-          addInfo('Событие', context),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Form(
-              key: formKey1,
-              child: TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => value.isEmpty ? "Поле пустое" : null,
-                maxLines: 3,
-                onChanged: (value) {
-                  _eventname = value;
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Введите событие',
-                ),
-              ),
-            ),
-          ),
-          addInfo('Начало события', context),
-          Builder(
-            builder: (context) {
-              return Theme(
-                data: ThemeData().copyWith(
-                  textTheme: Theme.of(context).textTheme,
-                  colorScheme: ColorScheme.light().copyWith(
-                    primary: Color.fromRGBO(255, 223, 142, 1),
-                    onPrimary: Colors.black,
-                  ),
-                ),
-                child: DateTimePicker(
-                  style: Theme.of(context).textTheme.bodyText1,
-                  initialValue: '',
-                  autovalidate: true,
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2100),
-                  dateLabelText: 'Date',
-                  onChanged: (val) => _datefrom = val,
-                  validator: (val) {
-                    print(val);
-                    return null;
-                  },
-                  onSaved: (val) => _datefrom = val,
-                ),
-              );
-            },
-          ),
-          addInfo('Окончание события', context),
-          Builder(
-            builder: (context) {
-              return Theme(
-                data: ThemeData().copyWith(
-                  textTheme: Theme.of(context).textTheme,
-                  colorScheme: ColorScheme.light().copyWith(
-                    primary: Color.fromRGBO(255, 223, 142, 1),
-                    onPrimary: Colors.black,
-                  ),
-                ),
-                child: DateTimePicker(
-                  style: Theme.of(context).textTheme.bodyText1,
-                  initialValue: '',
-                  autovalidate: true,
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2100),
-                  dateLabelText: 'Date',
-                  onChanged: (val) => _dateto = val,
-                  validator: (val) {
-                    print(val);
-                    return null;
-                  },
-                  onSaved: (val) => _dateto = val,
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-    Future.delayed(
-      Duration.zero,
-      () async {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return alert;
-          },
-        );
-      },
-    );
-  }
-
-  final formKey = new GlobalKey<FormState>();
   String _eventname;
   String _datefrom, _dateto;
   MyUser user;
   List<Meeting> allmeetings = [];
   List<Meeting> meetings = [];
+  GlobalKey<FormState> formKey1;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -190,8 +76,17 @@ class _CalendarPageState extends StateMVC {
                 primary: Colors.grey.shade200,
               ),
               onPressed: () {
-                _displayEventAdd(context, _eventname, _datefrom, _dateto,
-                    user.userid, update);
+                _displayEventAdd(context, _eventname, _datefrom, _dateto, user.userid, update);
+                 
+                /*
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return DisplayAddInfo(
+                        _eventname, _datefrom, _dateto, user.userid);
+                  },
+                );*/
+
               },
               child: Align(
                 alignment: Alignment.bottomLeft,
@@ -288,38 +183,138 @@ class _CalendarPageState extends StateMVC {
     );
   }
 }
-
-class MeetingDataSource extends CalendarDataSource {
-  MeetingDataSource(List<Meeting> source) {
-    appointments = source;
+_displayEventAdd(BuildContext context, String _eventname, String _datefrom,
+      String _dateto, int userID, void update()) {
+    final formKey1 = new GlobalKey<FormState>();
+    AlertDialog alert = AlertDialog(
+      title: Text('Добавление события'),
+      actions: [
+        ElevatedButton(
+          child: Text(
+            'Добавить',
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
+          ),
+          onPressed: () {
+            if (formKey1.currentState.validate() &&
+                _dateto != null &&
+                _datefrom != null)
+                {
+              addEvent(
+                  _eventname, _datefrom.toString(), _dateto.toString(), userID);
+            update();
+            Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => HomePage(3),
+                        ),
+                      );
+                }
+                else showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return Message();
+                },
+              );
+          },
+        ),
+      ],
+      content: Column(
+        children: [
+          AddInfo('Событие'),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Form(
+              key: formKey1,
+              child: TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) => value.isEmpty ? "Поле пустое" : null,
+                maxLines: 3,
+                onChanged: (value) {
+                  _eventname = value;
+                },
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Введите событие',
+                ),
+              ),
+            ),
+          ),
+          AddInfo('Начало события'),
+          Builder(
+            builder: (context) {
+              return Theme(
+                data: ThemeData().copyWith(
+                  textTheme: Theme.of(context).textTheme,
+                  colorScheme: ColorScheme.light().copyWith(
+                    primary: Color.fromRGBO(255, 223, 142, 1),
+                    onPrimary: Colors.black,
+                  ),
+                ),
+                child: DateTimePicker(
+                  style: Theme.of(context).textTheme.bodyText1,
+                  initialValue: '',
+                  autovalidate: true,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2100),
+                  dateLabelText: 'Date',
+                  onChanged: (val) => _datefrom = val,
+                  validator: (val) {
+                    print(val);
+                    return null;
+                  },
+                  onSaved: (val) => _datefrom = val,
+                ),
+              );
+            },
+          ),
+          AddInfo('Окончание события'),
+          Builder(
+            builder: (context) {
+              return Theme(
+                data: ThemeData().copyWith(
+                  textTheme: Theme.of(context).textTheme,
+                  colorScheme: ColorScheme.light().copyWith(
+                    primary: Color.fromRGBO(255, 223, 142, 1),
+                    onPrimary: Colors.black,
+                  ),
+                ),
+                child: DateTimePicker(
+                  style: Theme.of(context).textTheme.bodyText1,
+                  initialValue: '',
+                  autovalidate: true,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2100),
+                  dateLabelText: 'Date',
+                  onChanged: (val) => _dateto = val,
+                  validator: (val) {
+                    print(val);
+                    return null;
+                  },
+                  onSaved: (val) => _dateto = val,
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+    Future.delayed(
+      Duration.zero,
+      () async {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          },
+        );
+      },
+    );
   }
 
-  @override
-  DateTime getStartTime(int index) {
-    return DateTime.parse(appointments[index].from);
-  }
-
-  @override
-  DateTime getEndTime(int index) {
-    return DateTime.parse(appointments[index].to);
-  }
-
-  @override
-  String getSubject(int index) {
-    return appointments[index].eventName;
-  }
-
-  @override
-  Color getColor(int index) {
-    return Color.fromRGBO(255, 223, 142, 10);
-  }
-
-  @override
-  bool isAllDay(int index) {
-    return appointments[index].isAllDay;
-  }
-}
-
+  
 String _getMonthName(int month) {
   if (month == 01) {
     return 'Январь';
@@ -348,42 +343,3 @@ String _getMonthName(int month) {
   }
 }
 
-Future<Map<String, dynamic>> addEvent(
-    String text, String datefrom, String dateto, int userID) async {
-  final Map<String, dynamic> noteData = {
-    'EventName': text,
-    'IsAllDay': true,
-    'From': datefrom,
-    'To': dateto,
-    'Id': "1",
-    'UserID': userID
-  };
-  var response = await post(
-      Uri.parse(
-          'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Meetings.json'),
-      body: json.encode(noteData));
-  Meeting m = Meeting(
-      eventName: noteData['EventName'],
-      id: noteData['Id'],
-      from: noteData['From'],
-      to: noteData['To'],
-      isAllDay: noteData['IsAllDay'],
-      userId: noteData['UserID']);
-  var result;
-  if (response.request != null)
-    result = {'status': true, 'message': 'Successfully add', 'data': m};
-  else {
-    result = {'status': false, 'message': 'Adding failed', 'data': null};
-  }
-  return result;
-}
-
-Widget addInfo(String text, BuildContext context) {
-  return Align(
-    alignment: Alignment.bottomLeft,
-    child: Text(
-      text,
-      style: Theme.of(context).copyWith().textTheme.bodyText1,
-    ),
-  );
-}
