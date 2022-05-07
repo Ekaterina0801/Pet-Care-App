@@ -140,7 +140,7 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
     child: Align(
     alignment: Alignment.bottomCenter,
     child:Text('Добавление заметки',
-    style: Theme.of(context).copyWith().textTheme.bodyText1),
+    style: Theme.of(context).copyWith().textTheme.bodyText2),
     ),),
     actions: [
          ElevatedButton(

@@ -32,6 +32,7 @@ class _MainInfoBlockState extends State<MainInfoBlock> {
             borderRadius: BorderRadius.circular(10),
             color: widget.myColor,
           ),
+
           child: Container(
               padding: EdgeInsets.only(top: 35),
               child: Text(
@@ -40,6 +41,7 @@ class _MainInfoBlockState extends State<MainInfoBlock> {
                 style: Theme.of(context).copyWith().textTheme.bodyText1),
               ),
         ),
+        
         Container(
             padding: EdgeInsets.all(5),
             child: Text(

@@ -152,9 +152,11 @@ class _AddAnimalState extends State<AddAnimal> {
                   ),
 
                   SizedBox(height: 5.0),
+                  
                   Container(
                       padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                       child: nameField),
+
                   SizedBox(height: 20.0),
 
                   Container(
@@ -164,9 +166,11 @@ class _AddAnimalState extends State<AddAnimal> {
                   ),
 
                   SizedBox(height: 5.0),
+
                   Container(
                       padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                       child: breedField),
+
                   SizedBox(height: 20.0),
 
                   Container(

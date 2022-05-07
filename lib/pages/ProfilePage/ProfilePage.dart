@@ -428,8 +428,7 @@ _displayInfoPet(BuildContext context, Pet pet, void update()) {
               Navigator.pop(context, true);
               update();
             },
-            child: Text(
-              'Принять',
+            child: Text('Принять',
               textAlign: TextAlign.left,
               style: Theme.of(context).copyWith().textTheme.bodyText1),
           ),
