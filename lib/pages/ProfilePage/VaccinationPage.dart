@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
+import 'package:pet_care/pages/ProfilePage/ValidatorDate.dart';
 import 'package:pet_care/pages/ProfilePage/vaccinationsrepo.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:select_form_field/select_form_field.dart';
@@ -21,8 +22,7 @@ List<String> photos = [
   "./assets/images/article_1.1.jpg"
 ];
 
-class VaccinationPage extends StatefulWidget 
-{
+class VaccinationPage extends StatefulWidget {
   @override
   _VaccinationPageState createState() => _VaccinationPageState();
 }
@@ -53,7 +53,7 @@ class _VaccinationPageState extends StateMVC {
   List<Vaccination> vacc = [];
   List<Vaccination> allvacc = [];
   final formKey = new GlobalKey<FormState>();
-  
+
   @override
   Widget build(BuildContext context) {
     return BasePage(
@@ -211,14 +211,13 @@ class _VaccinationPageState extends StateMVC {
                                                 ),
                                               ),
                                               TextFormField(
-                                                maxLines: 3,
-                                                validator: (value) =>
-                                                    value.isEmpty
-                                                        ? "Введите текст"
-                                                        : null,
-                                                onChanged: (value) {
-                                                  date = value;
-                                                },
+                                                maxLines: 1,
+                                              //  validator: (value) =>
+                                              //     validateDate(value),
+                                               validator: validateDate,
+                                                //onSaved: (value) {
+                                               //   date = value;
+                                               // },
                                                 decoration: InputDecoration(
                                                   border: InputBorder.none,
                                                   hintText:
@@ -228,6 +227,7 @@ class _VaccinationPageState extends StateMVC {
                                                           153, 69, 69, 69)),
                                                 ),
                                               ),
+                                              SizedBox(height: 10.0),
                                             ],
                                           ),
                                         ),

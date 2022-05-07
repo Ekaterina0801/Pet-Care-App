@@ -59,7 +59,10 @@ class _AddAnimalState extends State<AddAnimal> {
         autofocus: false,
         //obscureText: true,
         validator: validateDate,
-        onSaved: (value) => _dateofbirthday = value,
+        onSaved: (value) {
+          _dateofbirthday = value;
+          petBirth = value;
+        },
         decoration: buildInputDecoration(
           "Дата рождения питомца",
           Icons.pets,

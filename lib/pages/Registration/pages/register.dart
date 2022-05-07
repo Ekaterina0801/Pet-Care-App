@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/BasePage.dart';
+import 'package:pet_care/pages/Registration/ValidatorsReg.dart';
 import 'package:pet_care/pages/Registration/util/validators.dart';
 import 'package:pet_care/pages/Registration/util/widgets.dart';
 import 'package:pet_care/pages/providers/auth.dart';
@@ -58,21 +59,21 @@ class _RegisterState extends State<Register> {
 
     final firstnameField = TextFormField(
       autofocus: false,
-      validator: (value) => value.isEmpty ? "Имя пустое" : null,
+      validator:validateText,
       onSaved: (value) => _firstname = value,
       decoration: buildInputDecoration("Введите имя", Icons.person_rounded),
     );
 
     final lastnameField = TextFormField(
       autofocus: false,
-      validator: (value) => value.isEmpty ? "Фамилия пустая" : null,
+      validator: validateText,
       onSaved: (value) => _lastname = value,
       decoration: buildInputDecoration("Введите фамилию", Icons.person_rounded),
     );
 
     final districtField = TextFormField(
       autofocus: false,
-      validator: (value) => value.isEmpty ? "Район пустой" : null,
+      validator: validateText,
       onSaved: (value) => _district = value,
       decoration: buildInputDecoration("Введите район", Icons.place),
     );

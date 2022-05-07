@@ -149,7 +149,6 @@ class InfoWidget extends StatelessWidget {
   }
 }
 
-
 //Функция, выбирающая нужное диалоговое окно
 //ignore: must_be_immutable
 class ChooseRemakeWidget extends StatelessWidget {
