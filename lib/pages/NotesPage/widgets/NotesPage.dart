@@ -87,10 +87,8 @@ class _NotesPageState extends StateMVC {
                   },
                   child: Align(
                     alignment: Alignment.bottomLeft,
-                    child: Text(
-                      '+ Добавить заметку',
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
+                    child: Text('+ Добавить заметку',
+                      style: Theme.of(context).textTheme.bodyText1),
                   ),
                 ),
                 notes.length == 0
@@ -100,10 +98,8 @@ class _NotesPageState extends StateMVC {
                               height: window.physicalSize.height / 2 - 32),
                           Align(
                             alignment: Alignment.center,
-                            child: Text(
-                              "Заметок пока нет",
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
+                            child: Text("Заметок пока нет",
+                              style: Theme.of(context).textTheme.bodyText1),
                           )
                         ],
                       )
@@ -144,11 +140,12 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
     child: Align(
     alignment: Alignment.bottomCenter,
     child:Text('Добавление заметки',
-    style: Theme.of(context).copyWith().textTheme.bodyText1),),),
+    style: Theme.of(context).copyWith().textTheme.bodyText1),
+    ),),
     actions: [
          ElevatedButton(
           child: Text('Добавить',
-          style: Theme.of(context).copyWith().textTheme.bodyText1,),
+          style: Theme.of(context).copyWith().textTheme.bodyText1),
           onPressed: () {
             if (formKey.currentState.validate()) {
               addNote(_body, _date, userID);

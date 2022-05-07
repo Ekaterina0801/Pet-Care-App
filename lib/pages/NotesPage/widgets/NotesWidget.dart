@@ -59,12 +59,7 @@ class _NotesWidgetState extends State<NotesWidget> {
                     decoration: BoxDecoration(),
                     child: Text(
                       widget.note.date,
-                      style: GoogleFonts.comfortaa(
-                          color: Colors.black,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 14),
-                    ),
+                      style: Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
                 ),
                 Container(
@@ -112,13 +107,8 @@ _displayNoteUpdate(
       Align(
         alignment: Alignment.center,
         child: ElevatedButton(
-          child: Text(
-            'Применить',
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14),
-          ),
+          child: Text('Применить',
+            style: Theme.of(context).copyWith().textTheme.bodyText1),
           onPressed: () {
             if (formKey.currentState.validate()) {
               RepositoryNotes().update(newbody, note);
