@@ -26,13 +26,8 @@ class _DisplayAddInfoState extends State<DisplayAddInfo> {
       title: Text('Добавление события'),
       actions: [
         ElevatedButton(
-          child: Text(
-            'Добавить',
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14),
-          ),
+          child: Text('Добавить',
+            style: Theme.of(context).copyWith().textTheme.bodyText1),
           onPressed: () {
             if (formKey1.currentState.validate() &&
                 widget.dateto != null &&

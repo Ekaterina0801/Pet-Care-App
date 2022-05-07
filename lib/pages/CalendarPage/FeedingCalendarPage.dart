@@ -90,10 +90,8 @@ class _CalendarPageState extends StateMVC {
               },
               child: Align(
                 alignment: Alignment.bottomLeft,
-                child: Text(
-                  '+ Добавить событие',
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
+                child: Text('+ Добавить событие',
+                  style: Theme.of(context).textTheme.bodyText1),
               ),
             ),
             Container(
@@ -196,11 +194,7 @@ _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
       actions: [
         ElevatedButton(
           child: Text('Добавить',
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14),
-          ),
+            style: Theme.of(context).copyWith().textTheme.bodyText1),
           onPressed: () {
             if (formKey1.currentState.validate() &&
                 _dateto != null &&
