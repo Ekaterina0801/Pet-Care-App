@@ -186,12 +186,16 @@ class _CalendarPageState extends StateMVC {
 _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
       String _dateto, int userID, void update()) {
     final formKey1 = new GlobalKey<FormState>();
+    var formKey;
     AlertDialog alert = AlertDialog(
-      title: Text('Добавление события'),
+      title: Container(
+      child: Align(
+      alignment: Alignment.bottomCenter,
+      child: Text('Добавление события',
+      style: Theme.of(context).copyWith().textTheme.bodyText1),),),
       actions: [
         ElevatedButton(
-          child: Text(
-            'Добавить',
+          child: Text('Добавить',
             style: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w800,
@@ -208,7 +212,7 @@ _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
             Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (BuildContext context) => HomePage(3),
+                          builder: (BuildContext context) => HomePage(2),
                         ),
                       );
                 }
@@ -221,27 +225,61 @@ _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
           },
         ),
       ],
-      content: Column(
-        children: [
-          AddInfo('Событие'),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Form(
-              key: formKey1,
-              child: TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => value.isEmpty ? "Поле пустое" : null,
+      
+      content: Container(
+        margin: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
+        child: Column(
+          children: [
+            Form(
+              key: formKey,
+                child: Column(
+                  children: [
+                  //AddInfo('Событие'),
+                    Container(
+             padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
+             child: Column(
+             children: [
+              Container(
+                child: Align(
+                alignment:Alignment.bottomLeft,
+                child: Text('Введите событие:',
+                style: Theme.of(context).copyWith().textTheme.bodyText1),
+                ),
+              ),
+                TextFormField(
                 maxLines: 3,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) => 
+                  value.isEmpty 
+                    ? "Поле пустое" 
+                    : null,
                 onChanged: (value) {
                   _eventname = value;
                 },
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Введите событие',
+                  hintStyle: TextStyle(
+                  color: Color.fromARGB(153, 69, 69, 69)),
+                    ),
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+              boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(43, 0, 0, 0),
+                blurRadius: 5,
+                offset: const Offset(0.0, 0.0),
+                spreadRadius: 2.0)],  
+                color: Color.fromARGB(202, 242, 242, 242),
+                border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                borderRadius: BorderRadius.circular(10),
                 ),
               ),
-            ),
-          ),
+
+          SizedBox(height: 15),
+
           AddInfo('Начало события'),
           Builder(
             builder: (context) {
@@ -268,10 +306,13 @@ _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
                   onSaved: (val) => _datefrom = val,
                 ),
               );
-            },
-          ),
-          AddInfo('Окончание события'),
-          Builder(
+              },
+            ),
+
+            SizedBox(height: 15),
+
+            AddInfo('Окончание события'),
+            Builder(
             builder: (context) {
               return Theme(
                 data: ThemeData().copyWith(
@@ -299,8 +340,10 @@ _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
             },
           ),
         ],
-      ),
+       ),),
+      ]))
     );
+    
     Future.delayed(
       Duration.zero,
       () async {

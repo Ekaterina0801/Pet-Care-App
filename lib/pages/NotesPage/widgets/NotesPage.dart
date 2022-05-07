@@ -74,7 +74,7 @@ class _NotesPageState extends StateMVC {
                 ElevatedButton(
                   //height: 50,
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.grey.shade200,
+                  primary: Colors.grey.shade200,
                   ),
                   onPressed: () {
                     setState(
@@ -137,19 +137,18 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
   final formKey = new GlobalKey<FormState>();
   AlertDialog alert = AlertDialog(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(20.0),
-      ),
+      borderRadius: BorderRadius.all(Radius.circular(5.0),
+     ),
     ),
-    title: Text('Добавление заметки'),
+    title: Container(
+    child: Align(
+    alignment: Alignment.bottomCenter,
+    child:Text('Добавление заметки',
+    style: Theme.of(context).copyWith().textTheme.bodyText1),),),
     actions: [
-      Align(
-        alignment: Alignment.center,
-        child: ElevatedButton(
-          child: Text(
-            'Добавить',
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
+         ElevatedButton(
+          child: Text('Добавить',
+          style: Theme.of(context).copyWith().textTheme.bodyText1,),
           onPressed: () {
             if (formKey.currentState.validate()) {
               addNote(_body, _date, userID);
@@ -159,11 +158,21 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
             //
           },
         ),
-      ),
     ],
+    
     content: Container(
-      decoration: BoxDecoration(),
-      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(43, 0, 0, 0),
+            blurRadius: 5,
+            offset: const Offset(0.0, 0.0),
+            spreadRadius: 2.0,
+            )],  
+              color: Color.fromARGB(202, 242, 242, 242),
+              border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+              borderRadius: BorderRadius.circular(10),),
+      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 10),
       child: Form(
         key: formKey,
         child: TextFormField(

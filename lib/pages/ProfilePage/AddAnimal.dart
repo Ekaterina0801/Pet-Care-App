@@ -55,8 +55,7 @@ class _AddAnimalState extends State<AddAnimal> {
         //obscureText: true,
         validator: (value) => value.isEmpty ? "Введите вид питомца" : null,
         onSaved: (value) => _animal = value,
-        decoration: buildInputDecoration(
-          "Вид питомца",
+        decoration: buildInputDecoration("Вид питомца",
           Icons.pets,
         ));
 
@@ -65,8 +64,7 @@ class _AddAnimalState extends State<AddAnimal> {
         //obscureText: true,
         validator: (value) => value.isEmpty ? "Введите имя питомца" : null,
         onSaved: (value) => _name = value,
-        decoration: buildInputDecoration(
-          "Имя питомца",
+        decoration: buildInputDecoration("Имя питомца",
           Icons.pets,
         ));
     final breedField = TextFormField(
@@ -74,8 +72,7 @@ class _AddAnimalState extends State<AddAnimal> {
         //obscureText: true,
         validator: (value) => value.isEmpty ? "Введите породу питомца" : null,
         onSaved: (value) => _breed = value,
-        decoration: buildInputDecoration(
-          "Порода питомца",
+        decoration: buildInputDecoration("Порода питомца",
           Icons.pets,
         ));
 
@@ -84,8 +81,7 @@ class _AddAnimalState extends State<AddAnimal> {
         //obscureText: true,
         validator: validateDate,
         onSaved: (value) => _dateofbirthday = value,
-        decoration: buildInputDecoration(
-          "Дата рождения питомца",
+        decoration: buildInputDecoration("Дата рождения питомца",
           Icons.pets,
         ));
 
@@ -94,8 +90,7 @@ class _AddAnimalState extends State<AddAnimal> {
         //obscureText: true,
         validator: (value) => value.isEmpty ? "Введите пол питомца" : null,
         onSaved: (value) => _gender = value,
-        decoration: buildInputDecoration(
-          "Пол питомца",
+        decoration: buildInputDecoration("Пол питомца",
           Icons.pets,
         ));
 
@@ -104,8 +99,7 @@ class _AddAnimalState extends State<AddAnimal> {
         //obscureText: true,
         //validator: (value) => value.isEmpty ? "Введите окрас питомца" : null,
         onSaved: (value) => _color = value,
-        decoration: buildInputDecoration(
-          "Окрас питомца",
+        decoration: buildInputDecoration("Окрас питомца",
           Icons.pets,
         ));
 
@@ -114,8 +108,7 @@ class _AddAnimalState extends State<AddAnimal> {
         //obscureText: true,
         //validator: (value) => value.isEmpty ? "Введите вес питомца" : null,
         onSaved: (value) => _weight = value,
-        decoration: buildInputDecoration(
-          "Вес питомца",
+        decoration: buildInputDecoration("Вес питомца",
           Icons.pets,
         ));
     return BasePage(
@@ -140,108 +133,87 @@ class _AddAnimalState extends State<AddAnimal> {
                   SizedBox(height: 15.0),
 
                   Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     //margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     child: Text("Вид питомца",
-                        style:
-                            Theme.of(context).copyWith().textTheme.bodyText1),
+                        style: Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
                   Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                      padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                       child: animalField),
                   SizedBox(height: 20.0),
 
                   Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     child: Text("Имя питомца",
-                        style:
-                            Theme.of(context).copyWith().textTheme.bodyText1),
+                        style: Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
                   Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                      padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                       child: nameField),
                   SizedBox(height: 20.0),
 
                   Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     child: Text("Порода питомца",
-                        style:
-                            Theme.of(context).copyWith().textTheme.bodyText1),
+                        style: Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
                   Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                      padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                       child: breedField),
                   SizedBox(height: 20.0),
 
                   Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     child: Text("Дата рождения питомца",
-                        style:
-                            Theme.of(context).copyWith().textTheme.bodyText1),
+                        style: Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
                   Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                      padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                       child: datebirthdayField),
                   SizedBox(height: 20.0),
 
                   Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     child: Text("Пол питомца",
-                        style:
-                            Theme.of(context).copyWith().textTheme.bodyText1),
+                        style:Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
                   Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                      padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                       child: genderField),
                   SizedBox(height: 20.0),
 
                   Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     child: Text("Окрас питомца",
-                        style:
-                            Theme.of(context).copyWith().textTheme.bodyText1),
+                        style:Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
                   Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                      padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                       child: colorField),
                   SizedBox(height: 20.0),
 
                   Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     child: Text("Вес питомца",
-                        style:
-                            Theme.of(context).copyWith().textTheme.bodyText1),
+                        style:Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
                   Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                      padding:EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                       child: weightField),
                   SizedBox(height: 20.0),
 
@@ -249,11 +221,8 @@ class _AddAnimalState extends State<AddAnimal> {
                   Container(
                       child: ElevatedButton(
                           child: Text('Добавить',
-                              style: Theme.of(context)
-                                  .copyWith()
-                                  .textTheme
-                                  .bodyText1),
-                          style: ButtonStyle(
+                            style: Theme.of(context) .copyWith().textTheme.bodyText1),
+                            style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
                                   Color.fromRGBO(255, 223, 142, 1))),
                           onPressed: () => {
