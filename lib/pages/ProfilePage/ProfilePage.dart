@@ -382,8 +382,7 @@ class _ProfilePageState extends StateMVC {
                 Navigator.pop(context, true);
                 update();
               },
-              child: Text(
-                'Принять',
+              child: Text('Принять',
                 textAlign: TextAlign.left,
                 style: GoogleFonts.comfortaa(
                     fontStyle: FontStyle.normal,
