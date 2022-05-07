@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:pet_care/pages/ProfilePage/Pet.dart';
 import 'package:http/http.dart' as http;
 class MyUser {
   int userid;
@@ -79,7 +78,6 @@ class MyUserController extends ControllerMVC {
 class RepositoryUsers{
   Future<List<MyUser>> getusers() async {
     Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
-    var rb = res.body;
     if (res.statusCode == 200) {
       //var rb = res.body;
       List<MyUser> list=[];

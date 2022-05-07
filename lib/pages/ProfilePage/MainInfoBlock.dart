@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MainInfoBlock extends StatelessWidget {
+class MainInfoBlock extends StatefulWidget {
   final String title;
   final String info;
   final Color myColor;
   MainInfoBlock(this.title, this.info, this.myColor);
+
+  @override
+  State<MainInfoBlock> createState() => _MainInfoBlockState();
+}
+
+class _MainInfoBlockState extends State<MainInfoBlock> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,12 +30,12 @@ class MainInfoBlock extends StatelessWidget {
               )
             ],
             borderRadius: BorderRadius.circular(10),
-            color: myColor,
+            color: widget.myColor,
           ),
           child: Container(
               padding: EdgeInsets.only(top: 35),
               child: Text(
-                info,
+                widget.info,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.comfortaa(
                     fontStyle: FontStyle.normal,
@@ -40,7 +46,7 @@ class MainInfoBlock extends StatelessWidget {
         Container(
             padding: EdgeInsets.all(5),
             child: Text(
-              title,
+              widget.title,
               style: GoogleFonts.comfortaa(
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800,

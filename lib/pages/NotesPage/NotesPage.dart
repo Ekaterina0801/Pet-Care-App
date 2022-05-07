@@ -165,18 +165,18 @@ class _NotesPageState extends StateMVC {
                                       ),
                                     )),
                                     decoration: BoxDecoration(
-                                    boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(43, 0, 0, 0),
-                                      blurRadius: 5,
-                                      offset: const Offset(0.0, 0.0),
-                                      spreadRadius: 2.0,
-                                    )
-                                  ],  
-                                    color: Color.fromARGB(202, 242, 242, 242),
-                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
-                                    borderRadius: BorderRadius.circular(10),
-                                    ),), 
+                                            boxShadow: [
+                                            BoxShadow(
+                                            color: Color.fromARGB(43, 0, 0, 0),
+                                            blurRadius: 5,
+                                            offset: const Offset(0.0, 0.0),
+                                            spreadRadius: 2.0,
+                                            )],  
+                                              color: Color.fromARGB(202, 242, 242, 242),
+                                              border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                    ), 
                                 );
 
                           Future.delayed(Duration.zero, () async {
@@ -320,7 +320,20 @@ class _NotesPageState extends StateMVC {
                   hintText: 'Введите текст',
                   hintStyle: TextStyle(color: Colors.white60),
                 ),
-              ))),
+              )),
+              decoration: BoxDecoration(
+                boxShadow: [
+                BoxShadow(
+                color: Color.fromARGB(43, 0, 0, 0),
+                blurRadius: 5,
+                offset: const Offset(0.0, 0.0),
+                spreadRadius: 2.0,
+                )],  
+                color: Color.fromARGB(202, 242, 242, 242),
+                border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                borderRadius: BorderRadius.circular(10),
+                ),
+              ),
     );
 
     Future.delayed(Duration.zero, () async {
@@ -426,9 +439,23 @@ final formKey = new GlobalKey<FormState>();
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Введите текст',
-                  hintStyle: TextStyle(color: Colors.white60),
+                  hintStyle: TextStyle( color: Color.fromARGB(153, 69, 69, 69)),
                 ),
-              ))),
+              )
+            ),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                color: Color.fromARGB(43, 0, 0, 0),
+                blurRadius: 5,
+                offset: const Offset(0.0, 0.0),
+                spreadRadius: 2.0,
+                )],  
+                color: Color.fromARGB(202, 242, 242, 242),
+                border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                borderRadius: BorderRadius.circular(10),
+                ),            
+          ),
     );
 
     Future.delayed(Duration.zero, () async {
