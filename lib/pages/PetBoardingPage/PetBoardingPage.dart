@@ -177,7 +177,7 @@ class _PetBoardingPageState extends StateMVC {
             fontSize: 18),
       ),
       actions: [
-        FlatButton(
+        ElevatedButton(
           child: Text(
             'Принять',
             style: GoogleFonts.comfortaa(

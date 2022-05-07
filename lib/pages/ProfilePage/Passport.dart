@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/welcomescreen.dart';
-import 'Disease.dart';
+import 'DiseasePage.dart';
+import 'VaccinationPage.dart';
 
+//ignore: must_be_immutable
 class Passport extends StatelessWidget {
   String nameowner;
   String dateb;
@@ -20,63 +22,83 @@ class Passport extends StatelessWidget {
         InfoWidget("Владелец:", nameowner),
         InfoWidget("Порода:", breed),
         InfoWidget("Дата рождения питомца:", dateb),
-        /*
         Padding(
-            padding: EdgeInsets.all(7),
-            child: Container(
-                height: 55,
-                width: 400,
-                child: RaisedButton(
-                    color: Color.fromRGBO(255, 223, 142, 10),
-                    splashColor: Color.fromRGBO(240, 240, 240, 10),
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => VaccinationsPage())),
-                    child: Text('Прививки',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 17))))),*/
+          padding: EdgeInsets.all(7),
+          child: Container(
+            height: 55,
+            width: 400,
+            child: ElevatedButton(
+              style: Theme.of(context).elevatedButtonTheme.style,
+              //color: Color.fromRGBO(255, 223, 142, 10),
+              // splashColor: Color.fromRGBO(240, 240, 240, 10),
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DiseasePage())),
+              child: Text(
+                'Болезни',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 17),
+              ),
+            ),
+          ),
+        ),
         Padding(
-            padding: EdgeInsets.all(7),
-            child: Container(
-                height: 55,
-                width: 400,
-                child: RaisedButton(
-                    color: Color.fromRGBO(255, 223, 142, 10),
-                    splashColor: Color.fromRGBO(240, 240, 240, 10),
-                    onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => DiseasePage())),
-                    child: Text('Болезни',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 17))))),
-                            Padding(
-            padding: EdgeInsets.all(7),
-            child: Container(
-                height: 55,
-                width: 400,
-                child: RaisedButton(
-                    color: Color.fromRGBO(255, 223, 142, 10),
-                    splashColor: Color.fromRGBO(240, 240, 240, 10),
-                    onPressed: () {Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => WelcomeScreen()));
-                        },
-                    child: Text('Выйти из профиля',
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 17))))),
+          padding: EdgeInsets.all(7),
+          child: Container(
+            height: 55,
+            width: 400,
+            child: ElevatedButton(
+              style: Theme.of(context).elevatedButtonTheme.style,
+              //color: Color.fromRGBO(255, 223, 142, 10),
+              // splashColor: Color.fromRGBO(240, 240, 240, 10),
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => VaccinationPage())),
+              child: Text(
+                'Прививки',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 17),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(7),
+          child: Container(
+            height: 55,
+            width: 400,
+            child: ElevatedButton(
+              //color: Color.fromRGBO(255, 223, 142, 10),
+              //splashColor: Color.fromRGBO(240, 240, 240, 10),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WelcomeScreen(),
+                  ),
+                );
+              },
+              child: Text(
+                'Выйти из профиля',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 17),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
 }
 
+//ignore: must_be_immutable
 class InfoWidget extends StatelessWidget {
   final String title;
   String info;
@@ -108,7 +130,7 @@ class InfoWidget extends StatelessWidget {
                 ),
                 leading: IconButton(
                   icon: Icon(Icons.edit),
- //                 color: Colors.grey.shade100,
+                  //                 color: Colors.grey.shade100,
                   color: Colors.black,
                   onPressed: () {
                     Navigator.push(
@@ -116,7 +138,8 @@ class InfoWidget extends StatelessWidget {
                         PageRouteBuilder(
                             opaque: false,
                             pageBuilder: (BuildContext context, _, __) =>
-                                ChooseRemakeWidget(title, info))); },
+                                ChooseRemakeWidget(title, info)));
+                  },
                 ),
                 isThreeLine: true,
               )),
@@ -126,7 +149,9 @@ class InfoWidget extends StatelessWidget {
   }
 }
 
+
 //Функция, выбирающая нужное диалоговое окно
+//ignore: must_be_immutable
 class ChooseRemakeWidget extends StatelessWidget {
   final String title;
   String info;
@@ -142,8 +167,8 @@ class ChooseRemakeWidget extends StatelessWidget {
   }
 }
 
-
 //Диалоговое окно для изменения имени владельца
+//ignore: must_be_immutable
 class RemakeNameWidget extends StatelessWidget {
   final String title;
   String info;
@@ -173,7 +198,6 @@ class RemakeNameWidget extends StatelessWidget {
                     fontWeight: FontWeight.w800,
                     fontSize: 14))),
         TextFormField(
-          
           autofocus: false,
           onSaved: (value) => name = value,
         ),
@@ -194,10 +218,11 @@ class RemakeNameWidget extends StatelessWidget {
 //        longButtons(
 //          "Принять", doRename(info,name, surname)
 //       )
-        RaisedButton(
-            color: Color.fromRGBO(255, 223, 142, 10),
-            splashColor: Color.fromARGB(199, 240, 240, 240),
-            onPressed: () => {doRename(info, name, surname), (Navigator.pop(context, true)) },
+        ElevatedButton(
+            // color: Color.fromRGBO(255, 223, 142, 10),
+            //splashColor: Color.fromARGB(199, 240, 240, 240),
+            onPressed: () =>
+                {doRename(info, name, surname), (Navigator.pop(context, true))},
             child: Text('Принять',
                 textAlign: TextAlign.left,
                 style: GoogleFonts.comfortaa(
@@ -214,6 +239,7 @@ var doRename = (info, name, surname) {
 };
 
 //Диалоговое окно для изменения породы питомца
+//ignore: must_be_immutable
 class RemakeBreedWidget extends StatefulWidget {
   final String title;
   String info;
@@ -225,7 +251,7 @@ class RemakeBreedWidget extends StatefulWidget {
 
 class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
   @override
-     _changeBreed(String value) {
+  _changeBreed(String value) {
     setState(() => widget.info = value);
   }
 
@@ -250,15 +276,16 @@ class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
                     fontSize: 14))),
         TextFormField(
           autofocus: false,
-          onChanged:  _changeBreed,
+          onChanged: _changeBreed,
         ),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
 //        longButtons(
 //          "Принять",
 //       )
-        RaisedButton(
-            color: Color.fromRGBO(255, 223, 142, 10),
-            splashColor: Color.fromARGB(199, 240, 240, 240),
+        ElevatedButton(
+            //color: Color.fromRGBO(255, 223, 142, 10),
+            //splashColor: Color.fromARGB(199, 240, 240, 240),
+            style: Theme.of(context).elevatedButtonTheme.style,
             onPressed: () => (Navigator.pop(context, true)),
             child: Text('Принять',
                 textAlign: TextAlign.left,
@@ -272,6 +299,7 @@ class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
 }
 
 //Диалоговое окно для изменения даты рождения питомца
+//ignore: must_be_immutable
 class RemakeDateBirthWidget extends StatelessWidget {
   final String title;
   String info;
@@ -302,9 +330,9 @@ class RemakeDateBirthWidget extends StatelessWidget {
 //        longButtons(
 //          "Принять",
 //       )
-        RaisedButton(
-            color: Color.fromRGBO(255, 223, 142, 10),
-            splashColor: Color.fromARGB(199, 240, 240, 240),
+        ElevatedButton(
+            // color: Color.fromRGBO(255, 223, 142, 10),
+            //splashColor: Color.fromARGB(199, 240, 240, 240),
             onPressed: () => (Navigator.pop(context, true)),
             child: Text('Принять',
                 textAlign: TextAlign.left,

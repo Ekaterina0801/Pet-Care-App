@@ -1,37 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:pet_care/pages/Registration/util/widgets.dart';
 
 import '../BasePage.dart';
-
-String validateDate(String value) {
-  String _msg;
-  RegExp regex = new RegExp(r'^(\d{2})[.|-|\|/](\d{2})[.|-|\|/](\d{4})$');
-  var match = regex.firstMatch(value);
-  if (value.isEmpty) {
-    _msg = "Дата пустая";
-  } else if (!regex.hasMatch(value)) {
-    _msg = "Введите дату в формате ДД.ММ.ГГГГ";
-  } else if (int.parse(match.group(2)) <= 0 || int.parse(match.group(2)) >= 13)
-    _msg = "Введите месяц в диапазоне [01;12]";
-  else if (int.parse(match.group(1)) <= 0 || int.parse(match.group(1)) >= 32)
-    _msg = "Введите день в диапазоне [01;31]";
-  else if (int.parse(match.group(3)) > DateTime.now().year ||
-      (int.parse(match.group(3)) == DateTime.now().year &&
-          int.parse(match.group(2)) > DateTime.now().month) ||
-      (int.parse(match.group(3)) == DateTime.now().year &&
-          int.parse(match.group(2)) == DateTime.now().month &&
-          int.parse(match.group(1)) > DateTime.now().day))
-    _msg = "Эта дата ещё не наступила";
-  else if (int.parse(match.group(3)) <= 1995 &&
-      int.parse(match.group(2)) <= 1 &&
-      int.parse(match.group(1)) <= 1) _msg = "Введите дату больше 01.01.1995";
-  return _msg;
-}
+import 'ValidatorDate.dart';
 
 String commaValid(String str) {
   RegExp exp = new RegExp(r',');
@@ -144,14 +119,9 @@ class _AddAnimalState extends State<AddAnimal> {
                     padding:
                         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     //margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    child: Text(
-                      "Вид питомца",
-                      style: GoogleFonts.comfortaa(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
+                    child: Text("Вид питомца",
+                        style:
+                            Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
@@ -164,14 +134,9 @@ class _AddAnimalState extends State<AddAnimal> {
                   Container(
                     padding:
                         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    child: Text(
-                      "Имя питомца",
-                      style: GoogleFonts.comfortaa(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
+                    child: Text("Имя питомца",
+                        style:
+                            Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
@@ -184,14 +149,9 @@ class _AddAnimalState extends State<AddAnimal> {
                   Container(
                     padding:
                         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    child: Text(
-                      "Порода питомца",
-                      style: GoogleFonts.comfortaa(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
+                    child: Text("Порода питомца",
+                        style:
+                            Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
@@ -204,14 +164,9 @@ class _AddAnimalState extends State<AddAnimal> {
                   Container(
                     padding:
                         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    child: Text(
-                      "Дата рождения питомца",
-                      style: GoogleFonts.comfortaa(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
+                    child: Text("Дата рождения питомца",
+                        style:
+                            Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
@@ -224,14 +179,9 @@ class _AddAnimalState extends State<AddAnimal> {
                   Container(
                     padding:
                         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    child: Text(
-                      "Пол питомца",
-                      style: GoogleFonts.comfortaa(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
+                    child: Text("Пол питомца",
+                        style:
+                            Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
@@ -244,14 +194,9 @@ class _AddAnimalState extends State<AddAnimal> {
                   Container(
                     padding:
                         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    child: Text(
-                      "Окрас питомца",
-                      style: GoogleFonts.comfortaa(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
+                    child: Text("Окрас питомца",
+                        style:
+                            Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
@@ -264,14 +209,9 @@ class _AddAnimalState extends State<AddAnimal> {
                   Container(
                     padding:
                         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    child: Text(
-                      "Вес питомца",
-                      style: GoogleFonts.comfortaa(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14),
-                    ),
+                    child: Text("Вес питомца",
+                        style:
+                            Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
 
                   SizedBox(height: 5.0),
@@ -285,10 +225,10 @@ class _AddAnimalState extends State<AddAnimal> {
                   Container(
                       child: ElevatedButton(
                           child: Text('Добавить',
-                              style: GoogleFonts.comfortaa(
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 15)),
+                              style: Theme.of(context)
+                                  .copyWith()
+                                  .textTheme
+                                  .bodyText1),
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
                                   Color.fromRGBO(255, 223, 142, 1))),

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/pages/AdviceScreen/requests/data/repoarticles.dart';
 import 'package:pet_care/pages/BasePage.dart';
-import 'requests/controllers/ArticleController.dart';
 import 'requests/models/Article.dart';
 import 'widget_pages/ArticlePage.dart';
 import 'widgets/Advice_Block.dart';
 
-//страница со списком статей
+
 class ArticleListPage extends StatelessWidget {
   final Repository httpService = Repository();
 

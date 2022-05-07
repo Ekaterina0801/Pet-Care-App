@@ -63,7 +63,7 @@ class AuthProvider with ChangeNotifier {
     );
     print(response.body);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      final Map<String, dynamic> responseData = json.decode(response.body);
+     // final Map<String, dynamic> responseData = json.decode(response.body);
 
       //var userData = responseData['data'];
       //var jsonString = '{"email":$email,"username":$password}';

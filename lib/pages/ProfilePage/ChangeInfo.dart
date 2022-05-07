@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care/pages/ProfilePage/Pet.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+//ignore: must_be_immutable
 class ChangeInfoPage extends StatelessWidget {
   Pet pet;
   ChangeInfoPage(this.pet);
@@ -16,21 +16,13 @@ class ChangeInfoPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 10),
               children: [
                 Text('Введите имя питомца:',
-                    style: GoogleFonts.comfortaa(
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16)),
+                   style: Theme.of(context).copyWith().textTheme.bodyText1),
                 TextFormField(
                   autofocus: false,
                   onSaved: (value) => pet.name = value,
                 ),
                  Text('Введите вес питомца:',
-                    style: GoogleFonts.comfortaa(
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16)),
+                    style: Theme.of(context).copyWith().textTheme.bodyText1),
                 TextFormField(
                   autofocus: false,
                   onSaved: (value) => pet.weight = value, 

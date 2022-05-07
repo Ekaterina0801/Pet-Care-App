@@ -61,7 +61,7 @@ class _CalendarPageState extends StateMVC {
       ],
       content: Column(
         children: [
-          addInfo('Событие'),
+          addInfo('Событие',context),
           Container(
             padding: EdgeInsets.all(10),
             child: Form(
@@ -78,7 +78,7 @@ class _CalendarPageState extends StateMVC {
               ),
             ),
           ),
-          addInfo('Начало события'),
+          addInfo('Начало события',context),
           DateTimePicker(
             initialValue: '',
             firstDate: DateTime(2000),
@@ -89,9 +89,9 @@ class _CalendarPageState extends StateMVC {
               print(val);
               return null;
             },
-            onSaved: (val) => _datefrom=val,
+            onSaved: (val) => _datefrom = val,
           ),
-          addInfo('Окончание события'),
+          addInfo('Окончание события',context),
           DateTimePicker(
             initialValue: '',
             firstDate: DateTime(2000),
@@ -102,7 +102,7 @@ class _CalendarPageState extends StateMVC {
               print(val);
               return null;
             },
-            onSaved: (val) => _dateto=val,
+            onSaved: (val) => _dateto = val,
           )
         ],
       ),
@@ -158,11 +158,7 @@ class _CalendarPageState extends StateMVC {
                 alignment: Alignment.bottomLeft,
                 child: Text(
                   '+ Добавить событие',
-                  style: GoogleFonts.comfortaa(
-                      color: Colors.black,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 16),
+                  style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
             ),
@@ -276,7 +272,7 @@ class MeetingDataSource extends CalendarDataSource {
 
   @override
   Color getColor(int index) {
-    return Colors.red;
+    return Color.fromRGBO(255, 223, 142, 10);
   }
 
   @override
@@ -343,13 +339,12 @@ Future<Map<String, dynamic>> addEvent(
   return result;
 }
 
-Widget addInfo(String text) {
+Widget addInfo(String text,BuildContext context) {
   return Align(
-      alignment: Alignment.bottomLeft,
-      child: Text(text,
-          style: GoogleFonts.comfortaa(
-              color: Colors.black,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w800,
-              fontSize: 14)));
+    alignment: Alignment.bottomLeft,
+    child: Text(
+      text,
+      style: Theme.of(context).copyWith().textTheme.bodyText1,
+    ),
+  );
 }

@@ -81,11 +81,16 @@ class _ProfilePageState extends StateMVC {
   void initState() {
     super.initState();
     _controller.init();
-    UserPreferences().getUser().then((result) {
-      setState(() {
-        user = result;
-      });
-    });
+    // allpets = getPets().then((value) => setState);
+    UserPreferences().getUser().then(
+      (result) {
+        setState(
+          () {
+            user = result;
+          },
+        );
+      },
+    );
   }
 
   void update() {
@@ -94,7 +99,7 @@ class _ProfilePageState extends StateMVC {
 
   final formKey = new GlobalKey<FormState>();
   MyUser user;
-  Pet pet;
+  Pet pet = new Pet();
   List<Pet> allpets = [];
 
   @override
@@ -109,69 +114,74 @@ class _ProfilePageState extends StateMVC {
     } else if (state is PetResultFailure) {
       // ошибка
       return Center(
-        child: Text(state.error,
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headline4
-                .copyWith(color: Colors.red)),
+        child: Text(
+          state.error,
+          textAlign: TextAlign.center,
+          style:
+              Theme.of(context).textTheme.headline4.copyWith(color: Colors.red),
+        ),
       );
     } else {
       //final pets = (state as PetResultSuccess).petsList;
       return FutureBuilder(
-          future: getPets(),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-              case ConnectionState.waiting:
-                return CircularProgressIndicator();
-              default:
-                if (snapshot.hasError)
-                  return Text('Error: ${snapshot.error}');
-                else
-                  allpets = snapshot.data;
-                pet = new Pet();
-                for (var i in allpets) {
-                  if (i.userID == user.userid) {
-                    pet = i;
-                    break;
-                  }
+        future: getPets(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+              return CircularProgressIndicator();
+            default:
+              if (snapshot.hasError)
+                return Text('Error: ${snapshot.error}');
+              else
+                allpets = snapshot.data;
+              //pet = new Pet();
+
+              for (var i in allpets) {
+                if (i.userID == user.userid) {
+                  pet = i;
+                  break;
                 }
-                return pet.animal == null
-                    ? Container(
-                        padding: EdgeInsets.all(20),
-                        child: Center(
-                            child: Column(
+              }
+
+              return pet.animal == null
+                  ? Container(
+                      padding: EdgeInsets.all(20),
+                      child: Center(
+                        child: Column(
                           children: [
                             Container(
                               child: Column(
                                 children: [
                                   Container(
-                                      height: 70,
-                                      width: 70,
-                                      child: FloatingActionButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) => AddAnimal(),
-                                          ),
+                                    height: 70,
+                                    width: 70,
+                                    child: FloatingActionButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) => AddAnimal(),
                                         ),
-                                        child: Container(
-                                            child: Icon(
-                                              CupertinoIcons.add,
-                                              size: 55,
-                                              color: Colors.black,
+                                      ),
+                                      child: Container(
+                                          child: Icon(
+                                            CupertinoIcons.add,
+                                            size: 55,
+                                            color: Colors.black,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            color: Color.fromRGBO(
+                                                240, 240, 240, 1),
+                                            border:
+                                                Border.all(color: Colors.black),
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(50),
                                             ),
-                                            decoration: BoxDecoration(
-                                                color: Color.fromRGBO(
-                                                    240, 240, 240, 1),
-                                                border: Border.all(
-                                                    color: Colors.black),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(50))),
-                                            height: 70,
-                                            width: 70),
-                                      )),
+                                          ),
+                                          height: 70,
+                                          width: 70),
+                                    ),
+                                  ),
                                   Container(
                                     margin: EdgeInsets.all(10),
                                     child: Text(
@@ -184,33 +194,38 @@ class _ProfilePageState extends StateMVC {
                                   ),
                                 ],
                               ),
-                            )
+                            ),
                           ],
-                        )),
-                      )
-                    : ListView(children: [
+                        ),
+                      ),
+                    )
+                  : ListView(
+                      children: [
                         Container(
                           decoration: BoxDecoration(
-                              color: Color.fromRGBO(255, 223, 142, 10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 4,
-                                  offset: const Offset(0.0, 0.0),
-                                  spreadRadius: 0.0,
-                                )
-                              ]),
+                            color: Color.fromRGBO(255, 223, 142, 10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 4,
+                                offset: const Offset(0.0, 0.0),
+                                spreadRadius: 0.0,
+                              ),
+                            ],
+                          ),
                           padding: EdgeInsets.all(10),
                           child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                AvatarBlock(
-                                    pet.name, 'assets/images/article_1.2.jpg'),
-                              ]),
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AvatarBlock(
+                                  pet.name, 'assets/images/article_1.2.jpg'),
+                            ],
+                          ),
                         ),
                         Container(
-                            alignment: Alignment.topRight,
-                            child: Row(children: [
+                          alignment: Alignment.topRight,
+                          child: Row(
+                            children: [
                               Container(
                                 padding: EdgeInsets.all(10),
                                 alignment: Alignment.topRight,
@@ -224,20 +239,28 @@ class _ProfilePageState extends StateMVC {
                                 ),
                               ),
                               Container(
-                                  alignment: Alignment.topRight,
-                                  width: 30,
-                                  child: FloatingActionButton(
-                                      child: Icon(Icons.edit,
-                                          color: Colors.grey, size: 20),
-                                      backgroundColor: Colors.white,
-                                      //onPressed: () => Navigator.push(context,
-                                      //                      MaterialPageRoute(builder: (context) => ChangeInfoPage(pet))),
-                                      onPressed: () {
-                                        setState(() {
-                                          _displayInfoPet(context, pet, update);
-                                        });
-                                      })),
-                            ])),
+                                alignment: Alignment.topRight,
+                                width: 30,
+                                child: FloatingActionButton(
+                                  child: Icon(Icons.edit,
+                                      color: Colors.grey, size: 20),
+                                  backgroundColor: Colors.white,
+                                  //onPressed: () => Navigator.push(context,
+                                  //                      MaterialPageRoute(builder: (context) => ChangeInfoPage(pet))),
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        _displayInfoPet(pet, update);
+                                        update();
+                                      },
+                                    );
+                                    update();
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         Container(
                           margin: EdgeInsets.all(8),
                           decoration: BoxDecoration(
@@ -248,16 +271,20 @@ class _ProfilePageState extends StateMVC {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               MainInfoBlock(
-                                  "Возраст",
-                                  AgeCalculate(pet.dateofbirthday),
-                                  Color.fromRGBO(131, 184, 107, 80)),
+                                "Возраст",
+                               AgeCalculate(pet.dateofbirthday),
+                                Color.fromRGBO(131, 184, 107, 80),
+                              ),
                               MainInfoBlock(
                                 "Вес",
                                 pet.weight + " кг",
                                 Color.fromRGBO(255, 223, 142, 10),
                               ),
-                              MainInfoBlock("Пол", pet.gender,
-                                  Color.fromRGBO(129, 181, 217, 90)),
+                              MainInfoBlock(
+                                "Пол",
+                                pet.gender,
+                                Color.fromRGBO(129, 181, 217, 90),
+                              ),
                             ],
                           ),
                         ),
@@ -287,71 +314,184 @@ class _ProfilePageState extends StateMVC {
                             ],
                           ),
                         ),
-                      ]);
-            }
-          });
+                      ],
+                    );
+          }
+        },
+      );
     }
+  }
+
+  _displayInfoPet(Pet pet, void update()) {
+    final formKey1 = new GlobalKey<FormState>();
+    final formKey2 = new GlobalKey<FormState>();
+    var newname = pet.name;
+    var newweight = pet.weight;
+    AlertDialog alert = AlertDialog(
+      title: Align(
+        alignment: Alignment.bottomCenter,
+        child: Text(
+          'Изменить основные данные',
+          style: GoogleFonts.comfortaa(
+              color: Colors.black,
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w800,
+              fontSize: 16),
+        ),
+      ),
+      actions: [
+        Column(
+          children: [
+            Form(
+              key: formKey1,
+              child: Column(
+                children: [
+                  addInfo('Введите имя питомца'),
+                  TextFormField(
+                    initialValue: pet.name,
+                    autofocus: false,
+                    onChanged: (value) => newname = value,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                  ),
+                ],
+              ),
+            ),
+            Form(
+              key: formKey2,
+              child: Column(
+                children: [
+                  addInfo('Введите вес питомца'),
+                  TextFormField(
+                    autofocus: false,
+                    initialValue: pet.weight,
+                    onChanged: (value) => newweight = value,
+                  ),
+                ],
+              ),
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+            ElevatedButton(
+              //color: Color.fromRGBO(255, 223, 142, 10),
+              //splashColor: Color.fromARGB(199, 240, 240, 240),
+              onPressed: () {
+                updateName(newname, pet);
+                updateWeight(newweight, pet);
+                update();
+                Navigator.pop(context, true);
+                update();
+              },
+              child: Text(
+                'Принять',
+                textAlign: TextAlign.left,
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 11),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+
+    Future.delayed(
+      Duration.zero,
+      () async {
+        await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          },
+        );
+      },
+    );
   }
 }
 
 _displayInfoPet(BuildContext context, Pet pet, void update()) {
-  final formKey = new GlobalKey<FormState>();
+  final formKey1 = new GlobalKey<FormState>();
+  final formKey2 = new GlobalKey<FormState>();
   var newname = pet.name;
   var newweight = pet.weight;
   AlertDialog alert = AlertDialog(
-      title: Align(
-          alignment: Alignment.bottomCenter,
-          child: Text('Изменить основные данные',
+    title: Align(
+      alignment: Alignment.bottomCenter,
+      child: Text(
+        'Изменить основные данные',
+        style: GoogleFonts.comfortaa(
+            color: Colors.black,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w800,
+            fontSize: 16),
+      ),
+    ),
+    actions: [
+      Column(
+        children: [
+          Form(
+            key: formKey1,
+            child: Column(
+              children: [
+                addInfo('Введите имя питомца'),
+                TextFormField(
+                  initialValue: pet.name,
+                  autofocus: false,
+                  onChanged: (value) => newname = value,
+                ),
+                Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+              ],
+            ),
+          ),
+          Form(
+            key: formKey2,
+            child: Column(
+              children: [
+                addInfo('Введите вес питомца'),
+                TextFormField(
+                  autofocus: false,
+                  initialValue: pet.weight,
+                  onChanged: (value) => newweight = value,
+                ),
+              ],
+            ),
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+          ElevatedButton(
+            //color: Color.fromRGBO(255, 223, 142, 10),
+            //splashColor: Color.fromARGB(199, 240, 240, 240),
+            onPressed: () {
+              updateName(newname, pet);
+              updateWeight(newweight, pet);
+              Navigator.pop(context, true);
+              update();
+            },
+            child: Text(
+              'Принять',
+              textAlign: TextAlign.left,
               style: GoogleFonts.comfortaa(
-                  color: Colors.black,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800,
-                  fontSize: 16))),
-      actions: [
-        Form(
-          key: formKey,
-          child: Column(
-            children: [
-              addInfo('Введите имя питомца'),
-              TextFormField(
-                initialValue: pet.name,
-                autofocus: false,
-                onChanged: (value) => newname = value,
-              ),
-              Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-              addInfo('Введите вес питомца'),
-              TextFormField(
-                autofocus: false,
-                initialValue: pet.weight,
-                onChanged: (value) => newweight = value,
-              ),
-              Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-              RaisedButton(
-                  color: Color.fromRGBO(255, 223, 142, 10),
-                  splashColor: Color.fromARGB(199, 240, 240, 240),
-                  onPressed: () {
-                    updateName(newname, pet);
-                    updateWeight(newweight, pet);
-                    update();
-                    Navigator.pop(context, true);
-                  },
-                  child: Text('Принять',
-                      textAlign: TextAlign.left,
-                      style: GoogleFonts.comfortaa(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 11)))
-            ],
+                  fontSize: 11),
+            ),
           ),
-        )
-      ]);
-  Future.delayed(Duration.zero, () async {
-    showDialog(
+        ],
+      ),
+    ],
+  );
+
+  Future.delayed(
+    Duration.zero,
+    () async {
+      await showDialog(
         context: context,
         builder: (BuildContext context) {
           return alert;
-        });
-  });
+        },
+      );
+    },
+  );
 }
 
 /*
@@ -438,11 +578,14 @@ Future<http.Response> updateWeight(String newtext, Pet pet) async {
 
 Widget addInfo(String text) {
   return Align(
-      alignment: Alignment.bottomLeft,
-      child: Text(text,
-          style: GoogleFonts.comfortaa(
-              color: Colors.black,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w800,
-              fontSize: 14)));
+    alignment: Alignment.bottomLeft,
+    child: Text(
+      text,
+      style: GoogleFonts.comfortaa(
+          color: Colors.black,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.w800,
+          fontSize: 14),
+    ),
+  );
 }
