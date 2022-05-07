@@ -26,11 +26,15 @@ class _CalendarPageState extends StateMVC {
   void initState() {
     super.initState();
     _controller.init();
-    UserPreferences().getUser().then((result) {
-      setState(() {
-        user = result;
-      });
-    });
+    UserPreferences().getUser().then(
+      (result) {
+        setState(
+          () {
+            user = result;
+          },
+        );
+      },
+    );
   }
 
   void update() {
@@ -52,8 +56,11 @@ class _CalendarPageState extends StateMVC {
                 fontSize: 14),
           ),
           onPressed: () {
-            addEvent(
-                _eventname, _datefrom.toString(), _dateto.toString(), userID);
+            if (formKey1.currentState.validate() &&
+                _dateto != null &&
+                _datefrom != null)
+              addEvent(
+                  _eventname, _datefrom.toString(), _dateto.toString(), userID);
             update();
             Navigator.of(context).pop(true);
           },
@@ -61,12 +68,14 @@ class _CalendarPageState extends StateMVC {
       ],
       content: Column(
         children: [
-          addInfo('Событие',context),
+          addInfo('Событие', context),
           Container(
             padding: EdgeInsets.all(10),
             child: Form(
               key: formKey1,
-              child: TextField(
+              child: TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) => value.isEmpty ? "Поле пустое" : null,
                 maxLines: 3,
                 onChanged: (value) {
                   _eventname = value;
@@ -78,32 +87,62 @@ class _CalendarPageState extends StateMVC {
               ),
             ),
           ),
-          addInfo('Начало события',context),
-          DateTimePicker(
-            initialValue: '',
-            firstDate: DateTime(2000),
-            lastDate: DateTime(2100),
-            dateLabelText: 'Date',
-            onChanged: (val) => _datefrom = val,
-            validator: (val) {
-              print(val);
-              return null;
+          addInfo('Начало события', context),
+          Builder(
+            builder: (context) {
+              return Theme(
+                data: ThemeData().copyWith(
+                  textTheme: Theme.of(context).textTheme,
+                  colorScheme: ColorScheme.light().copyWith(
+                    primary: Color.fromRGBO(255, 223, 142, 1),
+                    onPrimary: Colors.black,
+                  ),
+                ),
+                child: DateTimePicker(
+                  style: Theme.of(context).textTheme.bodyText1,
+                  initialValue: '',
+                  autovalidate: true,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2100),
+                  dateLabelText: 'Date',
+                  onChanged: (val) => _datefrom = val,
+                  validator: (val) {
+                    print(val);
+                    return null;
+                  },
+                  onSaved: (val) => _datefrom = val,
+                ),
+              );
             },
-            onSaved: (val) => _datefrom = val,
           ),
-          addInfo('Окончание события',context),
-          DateTimePicker(
-            initialValue: '',
-            firstDate: DateTime(2000),
-            lastDate: DateTime(2100),
-            dateLabelText: 'Date',
-            onChanged: (val) => _dateto = val,
-            validator: (val) {
-              print(val);
-              return null;
+          addInfo('Окончание события', context),
+          Builder(
+            builder: (context) {
+              return Theme(
+                data: ThemeData().copyWith(
+                  textTheme: Theme.of(context).textTheme,
+                  colorScheme: ColorScheme.light().copyWith(
+                    primary: Color.fromRGBO(255, 223, 142, 1),
+                    onPrimary: Colors.black,
+                  ),
+                ),
+                child: DateTimePicker(
+                  style: Theme.of(context).textTheme.bodyText1,
+                  initialValue: '',
+                  autovalidate: true,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2100),
+                  dateLabelText: 'Date',
+                  onChanged: (val) => _dateto = val,
+                  validator: (val) {
+                    print(val);
+                    return null;
+                  },
+                  onSaved: (val) => _dateto = val,
+                ),
+              );
             },
-            onSaved: (val) => _dateto = val,
-          )
+          ),
         ],
       ),
     );
@@ -339,7 +378,7 @@ Future<Map<String, dynamic>> addEvent(
   return result;
 }
 
-Widget addInfo(String text,BuildContext context) {
+Widget addInfo(String text, BuildContext context) {
   return Align(
     alignment: Alignment.bottomLeft,
     child: Text(

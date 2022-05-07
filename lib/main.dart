@@ -89,7 +89,8 @@ class MyApp extends StatelessWidget {
             bodyText1: GoogleFonts.comfortaa(
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w800,
-                      fontSize: 16)
+                      fontSize: 16),
+            
             
           ),
         ),
