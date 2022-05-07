@@ -33,14 +33,8 @@ class Passport extends StatelessWidget {
               // splashColor: Color.fromRGBO(240, 240, 240, 10),
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DiseasePage())),
-              child: Text(
-                'Болезни',
-                textAlign: TextAlign.left,
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 17),
-              ),
+              child: Text( 'Болезни',
+                style: Theme.of(context).copyWith().textTheme.bodyText1),
             ),
           ),
         ),
@@ -55,14 +49,8 @@ class Passport extends StatelessWidget {
               // splashColor: Color.fromRGBO(240, 240, 240, 10),
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => VaccinationPage())),
-              child: Text(
-                'Прививки',
-                textAlign: TextAlign.left,
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 17),
-              ),
+              child: Text('Прививки',
+                style: Theme.of(context).copyWith().textTheme.bodyText1),
             ),
           ),
         ),
@@ -82,14 +70,9 @@ class Passport extends StatelessWidget {
                   ),
                 );
               },
-              child: Text(
-                'Выйти из профиля',
+              child: Text('Выйти из профиля',
                 textAlign: TextAlign.left,
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 17),
-              ),
+                style: Theme.of(context).copyWith().textTheme.bodyText1),
             ),
           ),
         ),
@@ -114,21 +97,11 @@ class InfoWidget extends StatelessWidget {
               color: Color.fromRGBO(240, 240, 240, 1),
               shadowColor: Colors.grey,
               child: ListTile(
-                title: Text(
-                  title,
-                  style: GoogleFonts.comfortaa(
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20),
-                ),
+                title: Text(title,
+                  style: Theme.of(context).copyWith().textTheme.bodyText2),
                 subtitle: Text(
                   info,
-                  style: GoogleFonts.comfortaa(
-                      color: Colors.black,
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15),
-                ),
+                  style: Theme.of(context).copyWith().textTheme.bodyText1),
                 isThreeLine: true,
               ),
             ),
@@ -172,20 +145,14 @@ class RemakeNameWidget extends StatelessWidget {
       title: Align(
           alignment: Alignment.bottomCenter,
           child: Text('Изменение имени владельца',
-              style: GoogleFonts.comfortaa(
-                  color: Colors.black,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 16))),
+              style: Theme.of(context).copyWith().textTheme.bodyText1),
+      ),
       actions: [
         Align(
             alignment: Alignment.bottomLeft,
             child: Text('Введите имя:',
-                style: GoogleFonts.comfortaa(
-                    color: Colors.black,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14))),
+                style: Theme.of(context).copyWith().textTheme.bodyText1),
+          ),
         TextFormField(
           autofocus: false,
           onSaved: (value) => name = value,
@@ -194,11 +161,8 @@ class RemakeNameWidget extends StatelessWidget {
         Align(
             alignment: Alignment.bottomLeft,
             child: Text('Введите фамилию:',
-                style: GoogleFonts.comfortaa(
-                    color: Colors.black,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14))),
+                style: Theme.of(context).copyWith().textTheme.bodyText1),
+        ),
         TextFormField(
           autofocus: false,
           onSaved: (value) => surname = value,
@@ -214,10 +178,8 @@ class RemakeNameWidget extends StatelessWidget {
                 {doRename(info, name, surname), (Navigator.pop(context, true))},
             child: Text('Принять',
                 textAlign: TextAlign.left,
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 11)))
+                style: Theme.of(context).copyWith().textTheme.bodyText1),
+        )
       ],
     );
   }
@@ -249,20 +211,12 @@ class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
       title: Align(
           alignment: Alignment.bottomCenter,
           child: Text('Изменение породы питомца',
-              style: GoogleFonts.comfortaa(
-                  color: Colors.black,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 16))),
+              style: Theme.of(context).copyWith().textTheme.bodyText1),),
       actions: [
         Align(
             alignment: Alignment.bottomLeft,
             child: Text('Введите породу:',
-                style: GoogleFonts.comfortaa(
-                    color: Colors.black,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14))),
+                style: Theme.of(context).copyWith().textTheme.bodyText1),),
         TextFormField(
           autofocus: false,
           onChanged: _changeBreed,
@@ -278,10 +232,7 @@ class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
             onPressed: () => (Navigator.pop(context, true)),
             child: Text('Принять',
                 textAlign: TextAlign.left,
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 11))),
+                style: Theme.of(context).copyWith().textTheme.bodyText1),),
       ],
     );
   }
@@ -300,20 +251,12 @@ class RemakeDateBirthWidget extends StatelessWidget {
       title: Align(
           alignment: Alignment.bottomCenter,
           child: Text('Изменение даты рождения питомца',
-              style: GoogleFonts.comfortaa(
-                  color: Colors.black,
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 16))),
+              style: Theme.of(context).copyWith().textTheme.bodyText1),),
       actions: [
         Align(
             alignment: Alignment.bottomLeft,
             child: Text('Введите дату рождения:',
-                style: GoogleFonts.comfortaa(
-                    color: Colors.black,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14))),
+                style: Theme.of(context).copyWith().textTheme.bodyText1),),
         TextFormField(autofocus: false, onSaved: (value) => info = value),
         Padding(padding: EdgeInsets.symmetric(vertical: 10)),
 //        longButtons(
@@ -325,10 +268,7 @@ class RemakeDateBirthWidget extends StatelessWidget {
             onPressed: () => (Navigator.pop(context, true)),
             child: Text('Принять',
                 textAlign: TextAlign.left,
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 11))),
+                style: Theme.of(context).copyWith().textTheme.bodyText1),),
       ],
     );
   }

@@ -95,7 +95,7 @@ class _VaccinationPageState extends StateMVC {
                               child: Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Text('Добавление прививки',
-                                style: Theme.of(context).copyWith().textTheme.bodyText1),
+                                style: Theme.of(context).copyWith().textTheme.bodyText2),
                                   /*style: GoogleFonts.comfortaa(
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.w900,
@@ -106,11 +106,7 @@ class _VaccinationPageState extends StateMVC {
                             actions: [
                               ElevatedButton(
                                 child: Text('Добавить',
-                                  style: GoogleFonts.comfortaa(
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 14),
-                                ),
+                                  style: Theme.of(context).copyWith().textTheme.bodyText1),
                                 //color: Color.fromRGBO(255, 223, 142, 1),
                                 //shape: RoundedRectangleBorder(
                                 //   borderRadius:
@@ -293,7 +289,7 @@ class _VaccinationPageState extends StateMVC {
                                     borderRadius: BorderRadius.circular(10),
                                     ),
                                         ),
-                                        
+
                                       ],
                                     ),
                                   ),
@@ -317,14 +313,8 @@ class _VaccinationPageState extends StateMVC {
                     },
                     child: Align(
                       alignment: Alignment.bottomLeft,
-                      child: Text(
-                        '+ Добавить прививку',
-                        style: GoogleFonts.comfortaa(
-                            color: Colors.black,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 16),
-                      ),
+                      child: Text('+ Добавить прививку',
+                        style: Theme.of(context).copyWith().textTheme.bodyText1),
                     ),
                   ),
                   vacc.length == 0
@@ -339,13 +329,8 @@ class _VaccinationPageState extends StateMVC {
                                           window.physicalSize.height / 2 - 48),
                                   Align(
                                     alignment: Alignment.center,
-                                    child: Text(
-                                      "Отмеченных прививок пока нет",
-                                      style: GoogleFonts.comfortaa(
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 16),
-                                    ),
+                                    child: Text("Отмеченных прививок пока нет",
+                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
                                   ),
                                 ],
                               ),

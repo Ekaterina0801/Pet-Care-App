@@ -181,13 +181,8 @@ class _DiseasePageState extends StateMVC {
                                                 child: Align(
                                                   alignment:
                                                       Alignment.bottomLeft,
-                                                  child: Text(
-                                                      'Введите дату начала болезни:',
-                                                      //textAlign: TextAlign.left,
-                                                      style: Theme.of(context)
-                                                          .copyWith()
-                                                          .textTheme
-                                                          .bodyText1),
+                                                  child: Text('Введите дату начала болезни:',
+                                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
                                                 ),
                                               ),
                                               TextFormField(
@@ -201,11 +196,9 @@ class _DiseasePageState extends StateMVC {
                                                 },
                                                 decoration: InputDecoration(
                                                   border: InputBorder.none,
-                                                  hintText:
-                                                      'Введите дату начала болезни',
+                                                  hintText:'Введите дату начала болезни',
                                                   hintStyle: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          153, 69, 69, 69)),
+                                                      color: Color.fromARGB(153, 69, 69, 69)),
                                                 ),
                                               ),
                                             ],
@@ -235,13 +228,8 @@ class _DiseasePageState extends StateMVC {
                                                 child: Align(
                                                   alignment:
                                                       Alignment.bottomLeft,
-                                                  child: Text(
-                                                      'Введите дату окончания болезни:',
-                                                      //textAlign: TextAlign.left,
-                                                      style: Theme.of(context)
-                                                          .copyWith()
-                                                          .textTheme
-                                                          .bodyText1),
+                                                  child: Text('Введите дату окончания болезни:',
+                                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
                                                 ),
                                               ),
                                               TextFormField(
@@ -255,11 +243,9 @@ class _DiseasePageState extends StateMVC {
                                                 },
                                                 decoration: InputDecoration(
                                                   border: InputBorder.none,
-                                                  hintText:
-                                                      'Введите дату окончания болезни',
+                                                  hintText:'Введите дату окончания болезни',
                                                   hintStyle: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          153, 69, 69, 69)),
+                                                      color: Color.fromARGB(153, 69, 69, 69)),
                                                 ),
                                               ),
                                             ],
@@ -301,10 +287,8 @@ class _DiseasePageState extends StateMVC {
                     },
                     child: Align(
                       alignment: Alignment.bottomLeft,
-                      child: Text(
-                        '+ Добавить болезнь',
-                        style: Theme.of(context).copyWith().textTheme.bodyText1,
-                      ),
+                      child: Text('+ Добавить болезнь',
+                        style: Theme.of(context).copyWith().textTheme.bodyText1),
                     ),
                   ),
                   diseases.length == 0
@@ -319,13 +303,8 @@ class _DiseasePageState extends StateMVC {
                                           window.physicalSize.height / 2 - 48),
                                   Align(
                                     alignment: Alignment.center,
-                                    child: Text(
-                                      "Отмеченных болезней пока нет",
-                                      style: Theme.of(context)
-                                          .copyWith()
-                                          .textTheme
-                                          .bodyText1,
-                                    ),
+                                    child: Text("Отмеченных болезней пока нет",
+                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
                                   ),
                                 ],
                               ),
@@ -359,8 +338,7 @@ Widget _displayDiseaseAdd(BuildContext context, String type, String datebeg,
       ElevatedButton(
         child: Text(
           'Добавить',
-          style: Theme.of(context).copyWith().textTheme.bodyText1,
-        ),
+          style: Theme.of(context).copyWith().textTheme.bodyText1),
         onPressed: () {
           addDisease(type, datebeg, dateend, userID);
           //notifyListeners();
