@@ -94,6 +94,7 @@ class _NotesWidgetState extends State<NotesWidget> {
 void deleteNote(Note note, void update()) {
   RepositoryNotes().delete(note);
   update();
+  
 }
 
 _displayNoteUpdate(

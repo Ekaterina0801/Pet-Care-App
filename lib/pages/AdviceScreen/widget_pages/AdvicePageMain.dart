@@ -50,7 +50,7 @@ class _AdvicePageState extends StateMVC {
       List<Article> fav = [];
       for(var a in articles)
         if(a.isFav)
-        fav.add(a);
+          fav.add(a);
     return ListView(children: [
       AdviceMainBlock(articles[0].title, articles[0].image,() => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -72,7 +72,7 @@ class _AdvicePageState extends StateMVC {
                     fontSize: 24)),
             TextButton(
               onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ArticleListPage(),),),
+                  MaterialPageRoute(builder: (context) => ArticleListPage(articles),),),
               child: Text("Показать все",
                   style: GoogleFonts.comfortaa(
                       decoration: TextDecoration.underline,
@@ -88,7 +88,7 @@ class _AdvicePageState extends StateMVC {
         height: 209.0,
         child: ListView.builder(
           shrinkWrap: true,
-          itemCount: 2,
+          itemCount: articles.length,
           itemBuilder: (context, i) {
             return AdviceBlock(articles[i],() => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -100,6 +100,7 @@ class _AdvicePageState extends StateMVC {
           },
           padding: const EdgeInsets.all(8),
           scrollDirection: Axis.horizontal,
+         
         ),
       ),
       
@@ -118,7 +119,7 @@ class _AdvicePageState extends StateMVC {
               onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ArticleListPage(),),),
+                      builder: (context) => ArticleListPage(fav),),),
               child: Text("Показать все",
                   style: GoogleFonts.comfortaa(
                       decoration: TextDecoration.underline,

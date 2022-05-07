@@ -179,7 +179,7 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: 'Введите текст',
-            hintStyle: TextStyle(color: Colors.white60),
+            hintStyle: TextStyle(color: Colors.grey),
           ),
         ),
       ),

@@ -25,36 +25,45 @@ double FindCenterForPlus(double h) {
   return n;
 }
 */
-
-DateTime dateToday =
-    DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-String ageToString(String date) {
+String AgeCalculate(String date) {
   int dateBirthYear = int.parse(date.substring(6, 10));
   int dateBirthMonth = int.parse(date.substring(3, 5));
+  int dateBirthDay = int.parse(date.substring(0, 2));
 
-  var ageYears = (dateToday.year - dateBirthYear).round();
-  var ageMonth = (dateToday.month - dateBirthMonth).round().abs();
-  String years = "";
-  String month = "";
-  if (ageYears == 0)
-    years = "";
-  else if (ageYears == 1)
-    years = "1 год";
-  else if ((ageYears == 2) || (ageYears == 3) || (ageYears == 4))
+  var ageYears = (DateTime.now().year - dateBirthYear).round();
+  var thisMonth = DateTime.now().month;
+  var thisDay = DateTime.now().day;
+  var years = "";
+  var month = 0;
+  var month_str = "";
+
+  if (ageYears % 10 == 1 && ageYears != 11)
+    years = "$ageYears год";
+  else if ((ageYears % 10 == 2 || ageYears % 10 == 3 || ageYears % 10 == 4) &&
+      (ageYears != 12 && ageYears != 13 && ageYears != 14))
     years = "$ageYears года";
   else
     years = "$ageYears лет";
 
-  if (ageMonth == 0)
-    month = "0 месяцев";
-  else if (ageMonth == 1)
-    month = "1 месяц";
-  else if ((ageMonth == 2) || (ageMonth == 3) || (ageMonth == 4))
-    month = "$ageMonth месяца";
-  else
-    month = "$ageMonth месяцев";
+  if (thisMonth > dateBirthMonth)
+    month = thisMonth - dateBirthMonth - 1;
+  else if (thisMonth < dateBirthMonth)
+    month = 12 - (dateBirthMonth - thisMonth) - 1;
 
-  String ageString = years + "\n" + month;
+  if (thisDay >= dateBirthDay) month += 1;
+
+  if (thisMonth == dateBirthDay) {
+    if (thisDay >= dateBirthDay)
+      month = 0;
+    else if (thisDay < dateBirthDay) month = 12;
+  }
+
+  if (month == 1) month_str = "1 месяц";
+  else if (month == 2 || month == 3 || month ==4)
+  month_str = "$month месяца";
+  else month_str="$month месяцев";
+
+  String ageString = years + "\n" + month_str;
   return ageString;
 }
 
@@ -263,7 +272,7 @@ class _ProfilePageState extends StateMVC {
                             children: [
                               MainInfoBlock(
                                 "Возраст",
-                                ageToString(pet.dateofbirthday),
+                                AgeCalculate(pet.dateofbirthday),
                                 Color.fromRGBO(131, 184, 107, 80),
                               ),
                               MainInfoBlock(
