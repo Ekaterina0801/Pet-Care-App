@@ -10,15 +10,21 @@ class Meeting {
   String textOfMention;
   String date;
   String time;
+  DateTime from;
+  DateTime to;
 
-  Meeting({this.mentionId, this.textOfMention, this.date, this.time});
+
+  Meeting({this.mentionId, this.textOfMention, this.date, this.time,this.from,this.to});
 
   factory Meeting.fromJson(Map<String, dynamic> json) {
     return Meeting(
         mentionId: json['mentionId'],
         textOfMention: json['textOfMention'],
         date: json['date'].toString().substring(0, 10),
-        time: json['time']);
+        time: json['time'],
+        from: DateTime.parse(json['date'].toString().substring(0, 10)+" "+json['time']),
+        to: DateTime.parse(json['date'].toString().substring(0, 10)+" "+json['time'])
+        );
   }
 
   Map<String, dynamic> toJson() => {

@@ -9,7 +9,6 @@ import '../Registration/util/shared_preference.dart';
 import 'AddInfo.dart';
 import 'DisplayAddInfo.dart';
 import 'Meeting.dart';
-import 'MeetingDataSource.dart';
 import 'Message.dart';
 import 'repoMeetings.dart';
 import 'package:date_time_picker/date_time_picker.dart';
@@ -31,15 +30,7 @@ class _CalendarPageState extends StateMVC {
   void initState() {
     super.initState();
     _controller.init();
-    UserPreferences().getUser().then(
-      (result) {
-        setState(
-          () {
-            user = result;
-          },
-        );
-      },
-    );
+
   }
 
   void update() {
@@ -172,7 +163,7 @@ class _CalendarPageState extends StateMVC {
                     CalendarView.schedule
                   ],
                   view: CalendarView.month,
-                  dataSource: MeetingDataSource(meetings),
+                  dataSource: _getCalendarDataSource(meetings),
                   showDatePickerButton: true,
                 ),
                 height: 700),
@@ -335,5 +326,28 @@ String _getMonthName(int month) {
     return 'Ноябрь';
   } else {
     return 'Декабрь';
+  }
+}
+
+_AppointmentDataSource _getCalendarDataSource(List<Meeting> l) {
+  List<Appointment> appointments = <Appointment>[];
+  for(var i in l)
+  {
+    appointments.add(Appointment(
+    startTime: i.from,
+    endTime: i.to,
+    subject: i.textOfMention,
+    color: Color.fromRGBO(255, 223, 142, 10),
+    startTimeZone: '',
+    endTimeZone: '',
+  ));
+  }
+
+  return _AppointmentDataSource(appointments);
+}
+
+class _AppointmentDataSource extends CalendarDataSource {
+  _AppointmentDataSource(List<Appointment> source){
+   appointments = source; 
   }
 }
