@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/BasePage.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'Article.dart';
 
 //Станица статьи
 class ArticlePage extends StatelessWidget {
   final Article article;
+  final RegExp exp =
+      new RegExp("\\b" + "https://" + "[a-zA-Z.]+", caseSensitive: false);
+
   ArticlePage(this.article);
   @override
   Widget build(BuildContext context) {
@@ -30,6 +34,33 @@ class ArticlePage extends StatelessWidget {
                         fontSize: 16)),
               ),
             ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                color: Color.fromRGBO(255, 223, 142, 1),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30))),
+            child: Align(
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  child: Center(
+                      child: Text(exp.stringMatch(article.text) ?? "",
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.comfortaa(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14))),
+                  onTap: () {
+                    if (canLaunch(exp.stringMatch(article.text)) != null) {
+                      launch(exp.stringMatch(article.text));
+                    } else {
+                      throw 'Could not launch';
+                    }
+                  },
+                )),
           )
         ]));
   }
@@ -39,6 +70,7 @@ class ArticlePage extends StatelessWidget {
 class ArticleBlock extends StatelessWidget {
   final String title;
   final String image;
+
   ArticleBlock(this.title, this.image);
 
   @override
