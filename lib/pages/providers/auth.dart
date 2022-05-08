@@ -36,33 +36,32 @@ class AuthProvider with ChangeNotifier {
   Future<Map<String, dynamic>> login(String email, String password) async {
     var result;
     var jsonString = await http.get(Uri.parse(Uri.encodeFull(
-        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
-    var l = jsonDecode(jsonString.body);
+     'http://vadimivanov-001-site1.itempurl.com/Enter/EnterUserProfile?email=$email&password=$password' )));
+    var l;
+    if(jsonString.body!="")
+       l = jsonDecode(jsonString.body);
     MyUser user;
-
-    for (var i in l.values) {
-      if (i['Email'] == email && i['Password'] == password) {
-        user = MyUser.fromJson(i);
-      } else {
+    if(jsonString.body==null)
+      user = null;
+    
+      if(jsonString.body!="")
+      {
+        _loggedInStatus = Status.Authenticating;
+        user = MyUser.fromJson(l);
+      }
+       else {
         _loggedInStatus = Status.NotLoggedIn;
         notifyListeners();
         //Login();
       }
-    }
+    
     // print(i['Email']);
     //print(i['UserID']);
 
-    _loggedInStatus = Status.Authenticating;
-    notifyListeners();
+    
+    //notifyListeners();
 
-    Response response = await get(
-      Uri.parse(AppUrl.login),
-      //body: json.encode(user.toMap()),
-      //print(body);
-      //headers: {'Content-Type': 'application/json'},
-    );
-    print(response.body);
-    if (response.statusCode == 200 || response.statusCode == 201) {
+   if(_loggedInStatus==Status.Authenticating) {
      // final Map<String, dynamic> responseData = json.decode(response.body);
 
       //var userData = responseData['data'];
@@ -83,7 +82,6 @@ class AuthProvider with ChangeNotifier {
       notifyListeners();
       result = {
         'status': false,
-        'message': json.decode(response.body)['error']
       };
     }
     return result;
@@ -125,8 +123,7 @@ class AuthProvider with ChangeNotifier {
       readyforoverposure: registrationData['ReadyForOverposure'],
       email: registrationData['Email'],
       district: registrationData['District'],
-      typePets: registrationData['TypePets'],
-      price: registrationData['Price'],
+      
       //stringID: registrationData['StringID']
       //pet: registrationData['Pet'],
     );

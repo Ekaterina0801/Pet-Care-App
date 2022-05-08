@@ -52,7 +52,7 @@ class _NotesPageState extends StateMVC {
     return AppBuilder(
       builder: (context) {
         return FutureBuilder(
-          future: RepositoryNotes().getNotes(),
+          future: RepositoryNotes().getNotesByID(2002),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -62,12 +62,10 @@ class _NotesPageState extends StateMVC {
                 if (snapshot.hasError)
                   return Text('Error: ${snapshot.error}');
                 else
-                  allnotes = snapshot.data;
+                  notes = snapshot.data;
             }
-            notes = [];
-            for (var n in allnotes) {
-              if (n.userID == user.userid) notes.add(n);
-            }
+          
+            
             return ListView(
               shrinkWrap: true,
               children: [
@@ -211,7 +209,7 @@ Future<Map<String, dynamic>> addNote(
           'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Notes.json'),
       body: json.encode(noteData));
   Note note =
-      Note(body: noteData['Text'], id: noteData['Id'], date: noteData['Date']);
+      Note(body: noteData['Text'], date: noteData['Date']);
   var result;
   if (response.request != null)
     result = {'status': true, 'message': 'Successfully add', 'data': note};

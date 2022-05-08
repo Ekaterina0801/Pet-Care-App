@@ -53,9 +53,8 @@ class _PetBoardingPageState extends StateMVC {
     } else {
       final l = (state as MyUserResultSuccess).usersList;
       final k = [];
-      for (var t in l) {
-        if (t.readyforoverposure == "Да") k.add(t);
-      }
+      k.add(l);
+       
       return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => AuthProvider()),

@@ -5,11 +5,14 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 // импортируем http пакет
 import 'package:http/http.dart' as http;
 
+import 'Disease.dart';
+import 'Vaccination.dart';
+
 
 class Pet
 {
-  int petID;
-  int userID;
+  int petId;
+  int userId;
   String animal;
   String name;
   String breed;
@@ -17,35 +20,41 @@ class Pet
   String gender;
   String weight;
   String color;
-  String petidString;
+  String photo;
+  List<Disease> illnesses;
+  List<Vaccination> vaccinations;
   //List<Vaccination> vaccinations;
   //List<Disease> diseases;
-  Pet({this.petID,this.userID,this.animal,this.name,this.breed,this.dateofbirthday,this.gender,this.weight,this.color,this.petidString});
+  Pet({this.petId,this.userId,this.animal,this.name,this.breed,this.dateofbirthday,this.gender,this.weight,this.color,this.photo, this.illnesses,this.vaccinations});
 
 factory Pet.fromJson(Map<String, Object> json) => Pet(
-       petID: json['PetID'],
-       userID: json['UserID'],
-       animal: json['Animal'],
-       name: json['Name'],
-       breed: json['Breed'],
-       dateofbirthday: json['DateOfBirthday'],
-       gender:json['Gender'],
-       weight: json['Weight'],
-       color: json['Color'],
-       petidString:json['PetIDString']
+       petId: json['petId'],
+       userId: json['userId'],
+       animal: json['animal'],
+       name: json['name'],
+       breed: json['breed'],
+       dateofbirthday: json['dateOfBirth'],
+       gender:json['gender'],
+       weight: json['weight'],
+       color: json['color'],
+       photo: json['photo'],
+       illnesses: json['illnesses'],
+       vaccinations: json['vaccinations']
       );
 
   Map<String, dynamic> toJson() => {
-        'PetID':petID,
-        'UserID':userID,
-        'Animal':animal,
-        'Name':name,
-        'Breed':breed,
-        'DateOfBirthday':dateofbirthday,
-        'Gender':gender,
-        'Weight':weight,
-        'Color':color,
-        'PetIDString':"-"
+        'petId':petId,
+        'dserID':userId,
+        'animal':animal,
+        'name':name,
+        'breed':breed,
+        'dateOfBirth':dateofbirthday,
+        'gender':gender,
+        'weight':weight,
+        'color':color,
+        'photo':"-",
+        'illnesses':illnesses,
+        'vaccinations':vaccinations
       };
 }
 
@@ -53,15 +62,18 @@ Future<Pet> getPet(int userID) async {
     Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets.json')));
     
     Pet pet = Pet(
-        petID: 1,
-        userID: userID,
+        petId: 1,
+        userId: userID,
         animal:"-",
         name:"-",
         breed:"-",
         dateofbirthday: "-",
         gender: "-",
         weight: "0",
-        color:"-"
+        color:"-",
+        photo: "-",
+        illnesses: [],
+        vaccinations: []
       );
     if (res.statusCode == 200) {
       var ll = jsonDecode(res.body);
@@ -89,7 +101,7 @@ Future<Pet> getPet(int userID) async {
       for(var t in ll.keys)
       {
         var a = Pet.fromJson(ll[t]);
-        a.petidString=t;
+        //a.petidString=t;
         //ll[t].petidString=t;
         pets.add(a); 
       }
@@ -134,7 +146,7 @@ class RepositoryPets{
       for(var t in ll.keys)
       {
         Pet a = Pet.fromJson(ll[t]);
-        a.petidString=t;
+        //a.petidString=t;
         //if(a.userID==)
         list.add(a);
       }

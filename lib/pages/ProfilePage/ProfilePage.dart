@@ -153,7 +153,7 @@ class _ProfilePageState extends StateMVC {
               //pet = new Pet();
 
               for (var i in allpets) {
-                if (i.userID == user.userid) {
+                if (i.userId == user.userid) {
                   pet = i;
                   break;
                 }
@@ -591,7 +591,7 @@ Future<http.Response> updateName(String newtext, Pet pet) async {
   return http.put(
     Uri.parse(Uri.encodeFull(
         'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets/' +
-            pet.petidString +
+            //pet.petidString +
             '.json')),
     body: jsonEncode(pet),
   );
@@ -602,7 +602,7 @@ Future<http.Response> updateWeight(String newtext, Pet pet) async {
   return http.put(
     Uri.parse(Uri.encodeFull(
         'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets/' +
-            pet.petidString +
+           // pet.petidString +
             '.json')),
     body: jsonEncode(pet),
   );
