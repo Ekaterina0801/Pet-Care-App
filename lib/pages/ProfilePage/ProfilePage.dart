@@ -27,8 +27,8 @@ double FindCenterForPlus(double h) {
 */
 String AgeCalculate(String date) {
   int dateBirthYear = int.parse(date.substring(0, 4));
-  int dateBirthMonth = int.parse(date.substring(5, 7));
-  int dateBirthDay = int.parse(date.substring(8, 10));
+  int dateBirthMonth = int.parse(date.substring(8, 10));
+  int dateBirthDay = int.parse(date.substring(5, 7));
 
   var ageYears = (DateTime.now().year - dateBirthYear).round();
   var thisMonth = DateTime.now().month;

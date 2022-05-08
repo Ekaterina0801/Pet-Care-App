@@ -8,26 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../dommain/myuser.dart';
 
 class RepositoryNotes {
-  Future<List<Note>> getNotes() async {
-    Response res = await http.get(Uri.parse(Uri.encodeFull(
-        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Notes.json')));
-
-    if (res.statusCode == 200) {
-      //var rb = res.body;
-      List<Note> list = [];
-      //list = user.notes;
-      var ll = jsonDecode(res.body);
-      for (var t in ll.keys) {
-        Note a = Note.fromJson(ll[t]);
-        //a.noteid=t;
-        list.add(a);
-      }
-      return list;
-    } else {
-      throw "Unable to retrieve notes.";
-    }
-  }
-
   Future<Map<String, dynamic>> update(String newtext, Note note) async {
     final Map<String, dynamic> noteData = {
     'what':"note",  

@@ -21,7 +21,7 @@ class Passport extends StatelessWidget {
       children: [
         InfoWidget("Владелец:", nameowner),
         InfoWidget("Порода:", breed),
-        InfoWidget("Дата рождения питомца:", dateb.substring(0,10)),
+        InfoWidget("Дата рождения питомца:", dateb.substring(5,7)+"-"+dateb.substring(8,10)+"-"+dateb.substring(0,4)),
         Padding(
           padding: EdgeInsets.all(7),
           child: Container(
