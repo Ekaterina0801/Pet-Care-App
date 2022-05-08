@@ -580,24 +580,31 @@ class _ChangeInfoState extends State<ChangeInfo> {
 }
 */
 Future<http.Response> updateName(String newtext, Pet pet) async {
-  pet.name = newtext;
-  return http.put(
+
+  final Map<String, dynamic> petData = {
+    'what':"pet_name",  
+    'id': pet.petId,
+    'new_value': newtext,
+  };
+  return http.post(
     Uri.parse(Uri.encodeFull(
-        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets/' +
-            //pet.petidString +
-            '.json')),
-    body: jsonEncode(pet),
+        'http://vadimivanov-001-site1.itempurl.com/Update/UpdateInformation')),
+    body: jsonEncode(petData),
+    headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
   );
 }
 
 Future<http.Response> updateWeight(String newtext, Pet pet) async {
-  pet.weight = double.parse(newtext);
-  return http.put(
+  final Map<String, dynamic> petData = {
+    'what':"weight",  
+    'id': pet.petId,
+    'new_value': newtext,
+  };
+  return http.post(
     Uri.parse(Uri.encodeFull(
-        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets/' +
-           // pet.petidString +
-            '.json')),
-    body: jsonEncode(pet),
+        'http://vadimivanov-001-site1.itempurl.com/Update/UpdateInformation')),
+    body: jsonEncode(petData),
+    headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
   );
 }
 
