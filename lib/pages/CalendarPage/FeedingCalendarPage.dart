@@ -208,7 +208,7 @@ _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
             Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (BuildContext context) => HomePage(3),
+                          builder: (BuildContext context) => HomePage(2),
                         ),
                       );
                 }
