@@ -21,7 +21,7 @@ class Passport extends StatelessWidget {
       children: [
         InfoWidget("Владелец:", nameowner),
         InfoWidget("Порода:", breed),
-        InfoWidget("Дата рождения питомца:", dateb),
+        InfoWidget("Дата рождения питомца:", dateb.substring(0,10)),
         Padding(
           padding: EdgeInsets.all(7),
           child: Container(
@@ -122,7 +122,7 @@ class InfoWidget extends StatelessWidget {
                       fontSize: 20),
                 ),
                 subtitle: Text(
-                  info,
+                  info==null?"-":info,
                   style: GoogleFonts.comfortaa(
                       color: Colors.black,
                       fontStyle: FontStyle.normal,

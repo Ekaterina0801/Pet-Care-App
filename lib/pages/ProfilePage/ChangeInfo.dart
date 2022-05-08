@@ -25,7 +25,7 @@ class ChangeInfoPage extends StatelessWidget {
                     style: Theme.of(context).copyWith().textTheme.bodyText1),
                 TextFormField(
                   autofocus: false,
-                  onSaved: (value) => pet.weight = value, 
+                  onSaved: (value) => pet.weight = double.parse(value), 
                 ),
               ],
             )));

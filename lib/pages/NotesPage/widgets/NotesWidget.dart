@@ -58,7 +58,7 @@ class _NotesWidgetState extends State<NotesWidget> {
                     padding: EdgeInsets.only(left: 8),
                     decoration: BoxDecoration(),
                     child: Text(
-                      widget.note.date.substring(0,10),
+                      widget.note.date.substring(0, 10),
                       style: GoogleFonts.comfortaa(
                           color: Colors.black,
                           fontStyle: FontStyle.normal,
@@ -94,7 +94,6 @@ class _NotesWidgetState extends State<NotesWidget> {
 void deleteNote(Note note, void update()) {
   RepositoryNotes().delete(note);
   update();
-  
 }
 
 _displayNoteUpdate(
@@ -124,7 +123,12 @@ _displayNoteUpdate(
               RepositoryNotes().update(newbody, note);
               update();
             }
-            Navigator.of(context).pop(true);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => HomePage(3),
+              ),
+            );
           },
         ),
       ),

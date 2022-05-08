@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
-import 'package:pet_care/pages/ProfilePage/AvatarBlock.dart';
 import 'package:pet_care/pages/ProfilePage/MainInfoBlock.dart';
 import 'package:pet_care/pages/ProfilePage/Passport.dart';
 import 'package:pet_care/pages/ProfilePage/Pet.dart';
@@ -28,9 +26,9 @@ double FindCenterForPlus(double h) {
 }
 */
 String AgeCalculate(String date) {
-  int dateBirthYear = int.parse(date.substring(6, 10));
-  int dateBirthMonth = int.parse(date.substring(3, 5));
-  int dateBirthDay = int.parse(date.substring(0, 2));
+  int dateBirthYear = int.parse(date.substring(0, 4));
+  int dateBirthMonth = int.parse(date.substring(5, 7));
+  int dateBirthDay = int.parse(date.substring(8, 10));
 
   var ageYears = (DateTime.now().year - dateBirthYear).round();
   var thisMonth = DateTime.now().month;
@@ -152,12 +150,7 @@ class _ProfilePageState extends StateMVC {
                 allpets = snapshot.data;
               //pet = new Pet();
 
-              for (var i in allpets) {
-                if (i.userId == user.userid) {
-                  pet = i;
-                  break;
-                }
-              }
+              pet = allpets[0];
 
               return pet.animal == null
                   ? Container(
@@ -309,7 +302,7 @@ class _ProfilePageState extends StateMVC {
                               ),
                               MainInfoBlock(
                                 "Вес",
-                                pet.weight + " кг",
+                                pet.weight.toString() + " кг",
                                 Color.fromRGBO(255, 223, 142, 10),
                               ),
                               MainInfoBlock(
@@ -358,7 +351,7 @@ class _ProfilePageState extends StateMVC {
     final formKey1 = new GlobalKey<FormState>();
     final formKey2 = new GlobalKey<FormState>();
     var newname = pet.name;
-    var newweight = pet.weight;
+    var newweight = pet.weight.toString();
     AlertDialog alert = AlertDialog(
       title: Align(
         alignment: Alignment.bottomCenter,
@@ -397,8 +390,8 @@ class _ProfilePageState extends StateMVC {
                   addInfo('Введите вес питомца'),
                   TextFormField(
                     autofocus: false,
-                    initialValue: pet.weight,
-                    onChanged: (value) => newweight = value,
+                    initialValue: pet.weight.toString(),
+                    onChanged: (value) => newweight = value.toString(),
                   ),
                 ],
               ),
@@ -446,7 +439,7 @@ _displayInfoPet(BuildContext context, Pet pet, void update()) {
   final formKey1 = new GlobalKey<FormState>();
   final formKey2 = new GlobalKey<FormState>();
   var newname = pet.name;
-  var newweight = pet.weight;
+  var newweight = pet.weight.toString();
   AlertDialog alert = AlertDialog(
     title: Align(
       alignment: Alignment.bottomCenter,
@@ -483,7 +476,7 @@ _displayInfoPet(BuildContext context, Pet pet, void update()) {
                 addInfo('Введите вес питомца'),
                 TextFormField(
                   autofocus: false,
-                  initialValue: pet.weight,
+                  initialValue: pet.weight.toString(),
                   onChanged: (value) => newweight = value,
                 ),
               ],
@@ -598,7 +591,7 @@ Future<http.Response> updateName(String newtext, Pet pet) async {
 }
 
 Future<http.Response> updateWeight(String newtext, Pet pet) async {
-  pet.weight = newtext;
+  pet.weight = double.parse(newtext);
   return http.put(
     Uri.parse(Uri.encodeFull(
         'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets/' +
