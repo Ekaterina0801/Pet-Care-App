@@ -38,7 +38,7 @@ class _DisplayAddInfoState extends State<DisplayAddInfo> {
                 widget.dateto != null &&
                 widget.datefrom != null) {
               addEvent(widget.eventname, widget.datefrom.toString(),
-                  widget.dateto.toString(), widget.userID);
+                  widget.dateto.toString());
                   Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

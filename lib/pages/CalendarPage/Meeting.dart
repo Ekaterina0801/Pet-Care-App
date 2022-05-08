@@ -3,75 +3,67 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/pages/CalendarPage/repoMeetings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Meeting {
-  
-  String eventName;
-  String from;
-  String to;
-  bool isAllDay;
-  int userId;
-  String id;
+  int mentionId;
+  String textOfMention;
+  String date;
+  String time;
 
-  Meeting({this.eventName, this.from, this.to,this.isAllDay,this.userId,this.id});
-  
-  
+  Meeting({this.mentionId, this.textOfMention, this.date, this.time});
+
   factory Meeting.fromJson(Map<String, dynamic> json) {
     return Meeting(
-        eventName: json['EventName'],
-        from: json['From'],
-        to: json['To'],
-        isAllDay: json['IsAllDay'],
-        userId: json['UserID'],
-        id: json['ID'],
-        );
-
+        mentionId: json['mentionId'],
+        textOfMention: json['textOfMention'],
+        date: json['date'].toString().substring(0, 10),
+        time: json['time']);
   }
 
+  Map<String, dynamic> toJson() => {
+        'mentionId': mentionId,
+        'textOfMention': textOfMention,
+        'date': date,
+        'time': time
+      };
 
-  Map<String, dynamic> toJson()=>
-  {
-    'EventName':eventName,
-    'From':from,
-    'To':to,
-    'IsAllDay':true,
-    'UserID':userId,
-    'ID':"0",
-  };
+  Map<String, dynamic> toMap() {
+    return ({
+      'mentionId': mentionId,
+      'textOfMention': textOfMention,
+      'date': date,
+      'time': time
+    });
+  }
 }
 
 Future<Map<String, dynamic>> addEvent(
-    String text, String datefrom, String dateto, int userID) async {
+    String text, String date, String time) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  int userId = prefs.get('userId');
   final Map<String, dynamic> noteData = {
-    'EventName': text,
-    'IsAllDay': true,
-    'From': datefrom,
-    'To': dateto,
-    'Id': "1",
-    'UserID': userID
+    'user_id': userId,
+    'text': text,
+    'date': date,
+    'time': time.substring(11,19),
   };
   var response = await post(
-      Uri.parse(
-          'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Meetings.json'),
-      body: json.encode(noteData));
-  Meeting m = Meeting(
-      eventName: noteData['EventName'],
-      id: noteData['Id'],
-      from: noteData['From'],
-      to: noteData['To'],
-      isAllDay: noteData['IsAllDay'],
-      userId: noteData['UserID']);
+    Uri.parse(
+        'http://vadimivanov-001-site1.itempurl.com/Register/RegisterMention'),
+    body: json.encode(noteData),
+    headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
+  );
   var result;
   if (response.request != null)
-    result = {'status': true, 'message': 'Successfully add', 'data': m};
+    result = {'status': true, 'message': 'Successfully add', 'data': noteData};
   else {
     result = {'status': false, 'message': 'Adding failed', 'data': null};
   }
   return result;
 }
 
-
-abstract class MeetingResult{}
+abstract class MeetingResult {}
 
 //указатель на успешный запрос
 class MeetingResultSuccess extends MeetingResult {
@@ -96,7 +88,7 @@ class MeetingController extends ControllerMVC {
 
   // конструктор нашего контроллера
   MeetingController();
-  
+
   // первоначальное состояние - загрузка данных
   MeetingResult currentState = MeetingResultLoading();
 
@@ -111,5 +103,4 @@ class MeetingController extends ControllerMVC {
       setState(() => currentState = MeetingResultFailure("Нет интернета"));
     }
   }
-
 }

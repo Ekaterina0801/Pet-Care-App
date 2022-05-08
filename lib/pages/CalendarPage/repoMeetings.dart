@@ -1,25 +1,25 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Meeting.dart';
 // импортируем http пакет
 import 'package:http/http.dart' as http;
 
-
 class RepositoryMeetings {
   Future<List<Meeting>> getMeetings() async {
-    Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Meetings.json')));
-    
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    int userId = prefs.get('userId');
+    Response res = await http.get(Uri.parse(Uri.encodeFull(
+        'http://vadimivanov-001-site1.itempurl.com/Load/LoadMentions?user_id=$userId')));
+
     if (res.statusCode == 200) {
       //var rb = res.body;
-      List<Meeting> list=[];
+      List<Meeting> list = [];
       var ll = jsonDecode(res.body);
-      for(var t in ll.keys)
-      {
-       Meeting a = Meeting.fromJson(ll[t]);
-
-        a.id=t;
+      for (var t in ll) {
+        Meeting a = Meeting.fromJson(t);
         list.add(a);
       }
       return list;
@@ -28,20 +28,13 @@ class RepositoryMeetings {
     }
   }
 
-  Future<http.Response> update(String newtext,Meeting m) async {
-    m.eventName=newtext;
-    return http.put(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Meetings/'+m.id+'.json')),
-    body: jsonEncode(m
-    ),);
-    
-    
-  }
-
   Future<http.Response> delete(Meeting m) async {
-    return http.delete(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Meetings/'+m.id+'.json')),
-    body: jsonEncode(m
-    ),);
+    int id = m.mentionId;
+    return http.delete(
+      Uri.parse(Uri.encodeFull(
+          'http://vadimivanov-001-site1.itempurl.com/Delete/DeleteMention?mention_id=$id')),
+      body: jsonEncode(m),
+      headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
+    );
   }
-
-  }
-  
+}

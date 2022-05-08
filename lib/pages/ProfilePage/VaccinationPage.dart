@@ -51,7 +51,6 @@ class _VaccinationPageState extends StateMVC {
   bool revaccination = false;
   MyUser user;
   List<Vaccination> vacc = [];
-  List<Vaccination> allvacc = [];
   final formKey = new GlobalKey<FormState>();
   
   @override
@@ -71,12 +70,9 @@ class _VaccinationPageState extends StateMVC {
                   if (snapshot.hasError)
                     return Text('Error: ${snapshot.error}');
                   else
-                    allvacc = snapshot.data;
+                    vacc = snapshot.data;
               }
-              vacc = [];
-              for (var n in allvacc) {
-                if (n.userID == user.userid) vacc.add(n);
-              }
+              
               return ListView(
                 shrinkWrap: true,
                 children: [
@@ -119,8 +115,7 @@ class _VaccinationPageState extends StateMVC {
                                     () {
                                       if (formKey.currentState.validate()) {
                                         formKey.currentState.save();
-                                        addVaccination("0", user.userid, "0",
-                                            date, type, "", revaccination);
+                                        addVaccination(date,type,"",revaccination);
                                       }
                                       this.setState(() {});
                                     },

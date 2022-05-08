@@ -26,7 +26,7 @@ class _VaccinationsCardState extends State<VaccinationsCard> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.vac.revaccination)
+    if (widget.vac.revaccination||widget.vac.revaccination==null)
       _info = "Да";
     else
       _info = "Нет";

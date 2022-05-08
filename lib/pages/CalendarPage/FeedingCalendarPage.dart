@@ -13,6 +13,7 @@ import 'MeetingDataSource.dart';
 import 'Message.dart';
 import 'repoMeetings.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 
 //Страница для отображения календаря
 class CalendarPage extends StatefulWidget {
@@ -64,11 +65,9 @@ class _CalendarPageState extends StateMVC {
             if (snapshot.hasError)
               return Text('Error: ${snapshot.error}');
             else
-              allmeetings = snapshot.data;
+              meetings = snapshot.data;
         }
-        for (var n in allmeetings) {
-          if (n.userId == user.userid) meetings.add(n);
-        }
+
         return ListView(
           children: [
             ElevatedButton(
@@ -76,8 +75,9 @@ class _CalendarPageState extends StateMVC {
                 primary: Colors.grey.shade200,
               ),
               onPressed: () {
-                _displayEventAdd(context, _eventname, _datefrom, _dateto, user.userid, update);
-                 
+                _displayEventAdd(context, _eventname, _datefrom, _dateto,
+                    user.userid, update);
+
                 /*
                 showDialog(
                   context: context,
@@ -86,7 +86,6 @@ class _CalendarPageState extends StateMVC {
                         _eventname, _datefrom, _dateto, user.userid);
                   },
                 );*/
-
               },
               child: Align(
                 alignment: Alignment.bottomLeft,
@@ -173,7 +172,7 @@ class _CalendarPageState extends StateMVC {
                     CalendarView.schedule
                   ],
                   view: CalendarView.month,
-                  dataSource: MeetingDataSource(allmeetings),
+                  dataSource: MeetingDataSource(meetings),
                   showDatePickerButton: true,
                 ),
                 height: 700),
@@ -183,138 +182,134 @@ class _CalendarPageState extends StateMVC {
     );
   }
 }
+
 _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
-      String _dateto, int userID, void update()) {
-    final formKey1 = new GlobalKey<FormState>();
-    AlertDialog alert = AlertDialog(
-      title: Text('Добавление события'),
-      actions: [
-        ElevatedButton(
-          child: Text(
-            'Добавить',
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14),
-          ),
-          onPressed: () {
-            if (formKey1.currentState.validate() &&
-                _dateto != null &&
-                _datefrom != null)
-                {
-              addEvent(
-                  _eventname, _datefrom.toString(), _dateto.toString(), userID);
+    String _dateto, int userID, void update()) {
+  final formKey1 = new GlobalKey<FormState>();
+  AlertDialog alert = AlertDialog(
+    title: Text('Добавление события'),
+    actions: [
+      ElevatedButton(
+        child: Text(
+          'Добавить',
+          style: GoogleFonts.comfortaa(
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w800,
+              fontSize: 14),
+        ),
+        onPressed: () {
+          if (formKey1.currentState.validate() &&
+              _dateto != null &&
+              _datefrom != null) {
+            addEvent(_eventname, _datefrom.toString(), _dateto.toString());
             update();
             Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => HomePage(2),
-                        ),
-                      );
-                }
-                else showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return Message();
-                },
-              );
-          },
-        ),
-      ],
-      content: Column(
-        children: [
-          AddInfo('Событие'),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: Form(
-              key: formKey1,
-              child: TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => value.isEmpty ? "Поле пустое" : null,
-                maxLines: 3,
-                onChanged: (value) {
-                  _eventname = value;
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Введите событие',
-                ),
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => HomePage(2),
+              ),
+            );
+          } else
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Message();
+              },
+            );
+        },
+      ),
+    ],
+    content: Column(
+      children: [
+        AddInfo('Событие'),
+        Container(
+          padding: EdgeInsets.all(10),
+          child: Form(
+            key: formKey1,
+            child: TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) => value.isEmpty ? "Поле пустое" : null,
+              maxLines: 3,
+              onChanged: (value) {
+                _eventname = value;
+              },
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Введите событие',
               ),
             ),
           ),
-          AddInfo('Начало события'),
-          Builder(
-            builder: (context) {
-              return Theme(
-                data: ThemeData().copyWith(
-                  textTheme: Theme.of(context).textTheme,
-                  colorScheme: ColorScheme.light().copyWith(
-                    primary: Color.fromRGBO(255, 223, 142, 1),
-                    onPrimary: Colors.black,
-                  ),
+        ),
+        AddInfo('Начало события'),
+        Builder(
+          builder: (context) {
+            return Theme(
+              data: ThemeData().copyWith(
+                textTheme: Theme.of(context).textTheme,
+                colorScheme: ColorScheme.light().copyWith(
+                  primary: Color.fromRGBO(255, 223, 142, 1),
+                  onPrimary: Colors.black,
                 ),
-                child: DateTimePicker(
-                  style: Theme.of(context).textTheme.bodyText1,
-                  initialValue: '',
-                  autovalidate: true,
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2100),
-                  dateLabelText: 'Date',
-                  onChanged: (val) => _datefrom = val,
-                  validator: (val) {
-                    print(val);
-                    return null;
-                  },
-                  onSaved: (val) => _datefrom = val,
-                ),
-              );
-            },
-          ),
-          AddInfo('Окончание события'),
-          Builder(
-            builder: (context) {
-              return Theme(
-                data: ThemeData().copyWith(
-                  textTheme: Theme.of(context).textTheme,
-                  colorScheme: ColorScheme.light().copyWith(
-                    primary: Color.fromRGBO(255, 223, 142, 1),
-                    onPrimary: Colors.black,
-                  ),
-                ),
-                child: DateTimePicker(
-                  style: Theme.of(context).textTheme.bodyText1,
-                  initialValue: '',
-                  autovalidate: true,
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2100),
-                  dateLabelText: 'Date',
-                  onChanged: (val) => _dateto = val,
-                  validator: (val) {
-                    print(val);
-                    return null;
-                  },
-                  onSaved: (val) => _dateto = val,
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-    );
-    Future.delayed(
-      Duration.zero,
-      () async {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return alert;
+              ),
+              child: DateTimePicker(
+                style: Theme.of(context).textTheme.bodyText1,
+                initialValue: '',
+                autovalidate: true,
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2100),
+                dateLabelText: 'Date',
+                onChanged: (val) => _datefrom = val,
+                validator: (val) {
+                  print(val);
+                  return null;
+                },
+                onSaved: (val) => _datefrom = val,
+              ),
+            );
           },
-        );
-      },
-    );
-  }
+        ),
+        AddInfo('Окончание события'),
+        Builder(
+          builder: (context) {
+            return Theme(
+                data: ThemeData().copyWith(
+                  textTheme: Theme.of(context).textTheme,
+                  colorScheme: ColorScheme.light().copyWith(
+                    primary: Color.fromRGBO(255, 223, 142, 1),
+                    onPrimary: Colors.black,
+                  ),
+                ),
+                child: TimePickerSpinner(
+                  is24HourMode: false,
+                  normalTextStyle:
+                      TextStyle(fontSize: 24, color: Colors.deepOrange),
+                  highlightedTextStyle:
+                      TextStyle(fontSize: 24, color: Colors.yellow),
+                  spacing: 50,
+                  itemHeight: 80,
+                  isForce2Digits: true,
+                  onTimeChange: (time) {
+                    _dateto = time.toString();
+                  },
+                ));
+          },
+        ),
+      ],
+    ),
+  );
+  Future.delayed(
+    Duration.zero,
+    () async {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
+    },
+  );
+}
 
-  
 String _getMonthName(int month) {
   if (month == 01) {
     return 'Январь';
@@ -342,4 +337,3 @@ String _getMonthName(int month) {
     return 'Декабрь';
   }
 }
-

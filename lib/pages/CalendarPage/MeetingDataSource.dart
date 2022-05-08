@@ -11,12 +11,12 @@ class MeetingDataSource extends CalendarDataSource {
 
   @override
   DateTime getStartTime(int index) {
-    return DateTime.parse(appointments[index].from);
+    return DateTime.parse(appointments[index].date);
   }
 
   @override
   DateTime getEndTime(int index) {
-    return DateTime.parse(appointments[index].to);
+    return DateTime.parse(appointments[index].time);
   }
 
   @override
