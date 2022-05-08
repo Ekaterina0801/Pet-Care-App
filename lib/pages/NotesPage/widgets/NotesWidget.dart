@@ -58,7 +58,7 @@ class _NotesWidgetState extends State<NotesWidget> {
                     padding: EdgeInsets.only(left: 8),
                     decoration: BoxDecoration(),
                     child: Text(
-                      widget.note.date,
+                      widget.note.date.substring(0,10),
                       style: GoogleFonts.comfortaa(
                           color: Colors.black,
                           fontStyle: FontStyle.normal,

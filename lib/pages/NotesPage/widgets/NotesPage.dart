@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/NotesPage/widgets/NotesWidget.dart';
 import 'package:pet_care/pages/NotesPage/controllers/reponotes.dart';
-import 'package:pet_care/pages/Registration/util/shared_preference.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../BasePage.dart';
 import '../AppBuilder.dart';
 import '../Note.dart';
 import '../controllers/NoteController.dart';
+
+int userID;
 
 class NotesPage extends StatefulWidget {
   @override
@@ -26,15 +28,6 @@ class _NotesPageState extends StateMVC {
   void initState() {
     super.initState();
     _controller.init();
-    UserPreferences().getUser().then(
-      (result) {
-        setState(
-          () {
-            user = result;
-          },
-        );
-      },
-    );
   }
 
   void update() {
@@ -42,17 +35,16 @@ class _NotesPageState extends StateMVC {
   }
 
   final formKey = new GlobalKey<FormState>();
-  String _body, _date;
-  MyUser user;
+  String _body;
+  String _date;
   List<Note> notes = [];
-  List<Note> allnotes = [];
 
   @override
   Widget build(BuildContext context) {
     return AppBuilder(
       builder: (context) {
         return FutureBuilder(
-          future: RepositoryNotes().getNotesByID(2002),
+          future: RepositoryNotes().getNotesByID(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -64,8 +56,7 @@ class _NotesPageState extends StateMVC {
                 else
                   notes = snapshot.data;
             }
-          
-            
+
             return ListView(
               shrinkWrap: true,
               children: [
@@ -77,8 +68,7 @@ class _NotesPageState extends StateMVC {
                   onPressed: () {
                     setState(
                       () {
-                        _displayNoteAdd(
-                            context, _body, _date, user.userid, update);
+                        _displayNoteAdd(context, _body, _date, update);
                         update();
                       },
                     );
@@ -130,8 +120,8 @@ class _NotesPageState extends StateMVC {
   }
 }
 
-_displayNoteAdd(BuildContext context, String _body, String _date, int userID,
-    void update()) {
+_displayNoteAdd(
+    BuildContext context, String _body, String _date, void update()) {
   final formKey = new GlobalKey<FormState>();
   AlertDialog alert = AlertDialog(
     shape: RoundedRectangleBorder(
@@ -150,9 +140,15 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
           ),
           onPressed: () {
             if (formKey.currentState.validate()) {
-              addNote(_body, _date, userID);
-              update();
-              Navigator.of(context).pop(true);
+              addNote(_body, _date);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => HomePage(3),
+                ),
+              );
+              //update();
+              //Navigator.of(context).pop(true);
             }
             //
           },
@@ -171,7 +167,7 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
           onChanged: (value) {
             _body = value;
             var now = DateTime.now();
-            String formattedDate = DateFormat('dd-MM-yyyy  kk:mm').format(now);
+            String formattedDate = DateFormat('dd-MM-yyyy').format(now);
             _date = formattedDate;
           },
           decoration: InputDecoration(
@@ -196,20 +192,21 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
   );
 }
 
-Future<Map<String, dynamic>> addNote(
-    String text, String date, int userID) async {
+Future<Map<String, dynamic>> addNote(String text, String date) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  int userId = prefs.get('userId');
   final Map<String, dynamic> noteData = {
-    'Text': text,
-    'Date': date,
-    'Id': 1,
-    'UserID': userID
+    'user_id': userId,
+    'text': text,
+    'date': date,
   };
   var response = await post(
-      Uri.parse(
-          'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Notes.json'),
-      body: json.encode(noteData));
-  Note note =
-      Note(body: noteData['Text'], date: noteData['Date']);
+    Uri.parse(
+        'http://vadimivanov-001-site1.itempurl.com/Register/RegisterNote'),
+    body: json.encode(noteData),
+    headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
+  );
+  Note note = Note(body: noteData['text'], date: noteData['date']);
   var result;
   if (response.request != null)
     result = {'status': true, 'message': 'Successfully add', 'data': note};

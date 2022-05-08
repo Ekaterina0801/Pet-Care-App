@@ -3,6 +3,7 @@ import 'package:http/http.dart';
 import 'package:pet_care/pages/NotesPage/Note.dart';
 // импортируем http пакет
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../dommain/myuser.dart';
 
@@ -43,17 +44,17 @@ class RepositoryNotes {
     ),);
   }
 
-  Future<List<Note>> getNotesByID(int userid) async {
-    Response res = await http.get(Uri.parse(Uri.encodeFull('http://vadimivanov-001-site1.itempurl.com/Load/LoadNotes?user_id=2002')));
+  Future<List<Note>> getNotesByID() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    int userId = prefs.get('userId');
+    Response res = await http.get(Uri.parse(Uri.encodeFull('http://vadimivanov-001-site1.itempurl.com/Load/LoadNotes?user_id=$userId')));
+    
     if (res.statusCode == 200) {
-      //var rb = res.body;
       List<Note> list=[];
       var ll = jsonDecode(res.body);
       for(var t in ll)
       {
         Note a = Note.fromJson(t);
-        //if(a.userID==)
-        
           list.add(a);
       }
       return list;

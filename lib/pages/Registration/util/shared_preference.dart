@@ -83,9 +83,12 @@ class UserPreferences {
     String photo = prefs.getString("photoPet");
     return photo;
   }
+  
+  Future<int> getUserID() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  int userId = prefs.get('userId');
+  return userId;
+}
 }
 
-Future<Pet> getUserID() async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  int userId = prefs.get('photoPet');
-}
+
