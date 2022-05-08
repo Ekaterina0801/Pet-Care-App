@@ -192,31 +192,34 @@ _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
       child: Text('Добавление события',
       style: Theme.of(context).copyWith().textTheme.bodyText2),),),
       actions: [
-        ElevatedButton( 
-          child: Text('Добавить',
-            style: Theme.of(context).copyWith().textTheme.bodyText1),
-          onPressed: () {
-            if (formKey1.currentState.validate() &&
-                _dateto != null &&
-                _datefrom != null)
-                {
-              addEvent(
-                  _eventname, _datefrom.toString(), _dateto.toString(), userID);
-            update();
-            Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => HomePage(2),
-                        ),
-                      );
-                }
-                else showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return Message();
-                },
-              );
-          },
+        Container(
+          height: 35,
+          child: ElevatedButton( 
+            child: Text('Добавить',
+              style: Theme.of(context).copyWith().textTheme.bodyText1),
+            onPressed: () {
+              if (formKey1.currentState.validate() &&
+                  _dateto != null &&
+                  _datefrom != null)
+                  {
+                addEvent(
+                    _eventname, _datefrom.toString(), _dateto.toString(), userID);
+              update();
+              Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => HomePage(2),
+                          ),
+                        );
+                  }
+                  else showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Message();
+                  },
+                );
+            },
+          ),
         ),
       ],
       

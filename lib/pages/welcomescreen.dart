@@ -36,6 +36,7 @@ body: Column(children: [
        SizedBox(height: 100),
 
        Container( 
+        height: 35,
         child: ElevatedButton(onPressed: () {
           Navigator.of(context).push(
                         MaterialPageRoute(
@@ -57,6 +58,7 @@ body: Column(children: [
        SizedBox(height: 10),
 
        Container( 
+        height: 35,
         //padding: EdgeInsets.symmetric(horizontal: 170, vertical: 0),
         child: ElevatedButton(onPressed: () {
          // Navigator.push()
@@ -74,7 +76,6 @@ body: Column(children: [
           //RoundedRectangleBorder(
          // borderRadius: BorderRadius.all(Radius.circular(10))
           ),
-          height: 45,
         ),
       // )
 

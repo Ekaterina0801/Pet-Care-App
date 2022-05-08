@@ -143,18 +143,21 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
     style: Theme.of(context).copyWith().textTheme.bodyText2),
     ),),
     actions: [
-         ElevatedButton(
-          child: Text('Добавить',
-          style: Theme.of(context).copyWith().textTheme.bodyText1),
-          onPressed: () {
-            if (formKey.currentState.validate()) {
-              addNote(_body, _date, userID);
-              update();
-              Navigator.of(context).pop(true);
-            }
-            //
-          },
+         Container(
+           height: 35,
+           child: ElevatedButton(
+            child: Text('Добавить',
+            style: Theme.of(context).copyWith().textTheme.bodyText1),
+            onPressed: () {
+              if (formKey.currentState.validate()) {
+                addNote(_body, _date, userID);
+                update();
+                Navigator.of(context).pop(true);
+              }
+              //
+            },
         ),
+         ),
     ],
     
     content: Container(

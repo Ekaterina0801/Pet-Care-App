@@ -104,29 +104,32 @@ class _VaccinationPageState extends StateMVC {
                               ),
                             ),
                             actions: [
-                              ElevatedButton(
-                                child: Text('Добавить',
-                                  style: Theme.of(context).copyWith().textTheme.bodyText1),
-                                //color: Color.fromRGBO(255, 223, 142, 1),
-                                //shape: RoundedRectangleBorder(
-                                //   borderRadius:
-                                //      BorderRadius.all(Radius.circular(10))),
-                                // height: 45,
-                                onPressed: () {
-                                  setState(
-                                    () {
-                                      if (formKey.currentState.validate()) {
-                                        formKey.currentState.save();
-                                        addVaccination("0", user.userid, "0",
-                                            date, type, "", revaccination);
-                                      }
-                                      this.setState(() {});
-                                    },
-                                  );
-                                  Navigator.of(context).pop(true);
+                              Container(
+                                height: 35,
+                                child: ElevatedButton(
+                                  child: Text('Добавить',
+                                    style: Theme.of(context).copyWith().textTheme.bodyText1),
+                                  //color: Color.fromRGBO(255, 223, 142, 1),
+                                  //shape: RoundedRectangleBorder(
+                                  //   borderRadius:
+                                  //      BorderRadius.all(Radius.circular(10))),
+                                  // height: 45,
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        if (formKey.currentState.validate()) {
+                                          formKey.currentState.save();
+                                          addVaccination("0", user.userid, "0",
+                                              date, type, "", revaccination);
+                                        }
+                                        this.setState(() {});
+                                      },
+                                    );
+                                    Navigator.of(context).pop(true);
 
-                                  //Navigator.pushNamed(context, "/notes");
-                                },
+                                    //Navigator.pushNamed(context, "/notes");
+                                  },
+                                ),
                               ),
                             ],
 

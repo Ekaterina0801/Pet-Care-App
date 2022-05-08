@@ -4,6 +4,24 @@ import 'package:pet_care/pages/welcomescreen.dart';
 import 'DiseasePage.dart';
 import 'VaccinationPage.dart';
 
+
+            /*decoration: BoxDecoration(  
+              color: Color.fromARGB(202, 242, 242, 242),
+              border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+              borderRadius: BorderRadius.circular(10),
+            ),*/
+
+              /*decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(43, 0, 0, 0),
+                    blurRadius: 5,
+                    offset: const Offset(0.0, 0.0),
+                    spreadRadius: 2.0)],  
+                  color: Color.fromARGB(202, 242, 242, 242),
+                  border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                  borderRadius: BorderRadius.circular(10)),*/
+
 //ignore: must_be_immutable
 class Passport extends StatelessWidget {
   String nameowner;
@@ -25,7 +43,7 @@ class Passport extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(7),
           child: Container(
-            height: 55,
+            height: 50,
             width: 400,
             child: ElevatedButton(
               style: Theme.of(context).elevatedButtonTheme.style,
@@ -42,7 +60,7 @@ class Passport extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(7),
           child: Container(
-            height: 55,
+            height: 50,
             width: 400,
             child: ElevatedButton(
               style: Theme.of(context).elevatedButtonTheme.style,
@@ -51,7 +69,7 @@ class Passport extends StatelessWidget {
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => VaccinationPage())),
               child: Text('Прививки',
-                style: Theme.of(context).copyWith().textTheme.bodyText2),
+                style: Theme.of(context).copyWith().textTheme.bodyText2), 
             ),
           ),
         ),
@@ -59,14 +77,13 @@ class Passport extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(7),
           child: Container(
-            height: 55,
+            height: 50,
             width: 400,
             child: ElevatedButton(
               //color: Color.fromRGBO(255, 223, 142, 10),
               //splashColor: Color.fromRGBO(240, 240, 240, 10),
               onPressed: () {
-                Navigator.push(
-                  context,
+                Navigator.push(context,
                   MaterialPageRoute(
                     builder: (context) => WelcomeScreen(),
                   ),
@@ -96,13 +113,12 @@ class InfoWidget extends StatelessWidget {
         children: [
           Expanded(
             child: Card(
-              color: Color.fromRGBO(240, 240, 240, 1),
-              shadowColor: Colors.grey,
+            color: Color.fromRGBO(240, 240, 240, 1),
+            shadowColor: Colors.grey, 
               child: ListTile(
-                title: Text(title,
+                title: Text(title, 
                   style: Theme.of(context).copyWith().textTheme.bodyText2),
-                subtitle: Text(
-                  info,
+                subtitle: Text(info, 
                   style: Theme.of(context).copyWith().textTheme.bodyText1),
                 isThreeLine: true,
               ),
