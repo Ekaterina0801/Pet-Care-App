@@ -135,18 +135,22 @@ class _AdvicePageState extends StateMVC {
             ],
           ),
         ),
-        Container(
-          height: 209.0,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 2,
-            itemBuilder: (context, i) {
-              return AdviceBlock(fav[i], () {});
-            },
-            padding: const EdgeInsets.all(8),
-            scrollDirection: Axis.horizontal,
-          ),
-        ),
+        fav.length == 0
+            ? Container(
+              padding: EdgeInsets.all(10),
+              child: Text("Нет избранных постов"))
+            : Container(
+                height: 209.0,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: fav.length,
+                  itemBuilder: (context, i) {
+                    return AdviceBlock(fav[i], () {});
+                  },
+                  padding: const EdgeInsets.all(8),
+                  scrollDirection: Axis.horizontal,
+                ),
+              ),
       ]);
     }
   }

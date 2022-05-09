@@ -33,7 +33,7 @@ class AdviceMainBlock extends StatelessWidget {
               decoration: BoxDecoration(
                   image: DecorationImage(
                     image: FadeInImage.assetNetwork(
-                      image: image,
+                      image: 'https://www.wikihow.com/images/thumb/c/c3/Take-Care-of-Your-Pet-Step-6-Version-2.jpg/v4-728px-Take-Care-of-Your-Pet-Step-6-Version-2.jpg',
                       placeholder: 'assets/article_1.1.jpg',
                     ).image,
                     fit: BoxFit.cover,
@@ -56,7 +56,7 @@ class AdviceMainBlock extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   child: Center(
                     child: Text(title,
-                        maxLines: 2,
+                        maxLines: 5,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         style: GoogleFonts.comfortaa(

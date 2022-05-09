@@ -21,7 +21,7 @@ class ArticleBlock extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: Image.network(
-                    image,
+                    'https://www.wikihow.com/images/thumb/c/c3/Take-Care-of-Your-Pet-Step-6-Version-2.jpg/v4-728px-Take-Care-of-Your-Pet-Step-6-Version-2.jpg',
                   ).image,
                   fit: BoxFit.fill,
                 ),
@@ -42,13 +42,13 @@ class ArticleBlock extends StatelessWidget {
               child: Align(
                 alignment: Alignment.center,
                 child: Container(
-                  height: 50,
+                  height: 80,
                   width: 200,
                   padding: EdgeInsets.all(5),
                   child: Center(
                     child: Text(
                       title,
-                      maxLines: 2,
+                      maxLines: 4,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.comfortaa(

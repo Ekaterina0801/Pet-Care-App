@@ -53,14 +53,24 @@ class _FavouriteWidgetState extends State<FavouriteWidget> {
 }
 
 Future<http.Response> update(Article article) async {
-  article.isFav = !article.isFav;
-  return http.put(
-    Uri.parse(Uri.encodeFull(
-        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Articles/' +
-            article.id +
-            '.json')),
-    body: jsonEncode(article.toMap()),
-  );
+  final Map<String, dynamic> data = {
+    'what':"favourite",  
+    'id': article.id,
+    'new_value': !article.isFav,
+  };
+    var response = await http.post(
+      Uri.parse(Uri.encodeFull(
+          'http://vadimivanov-001-site1.itempurl.com/Update/UpdateInformation')),
+      body: jsonEncode(data),
+      headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
+    );
+    var result;
+  if (response.request != null)
+    result = {'status': true, 'message': 'Successfully add', 'data': data};
+  else {
+    result = {'status': false, 'message': 'Adding failed', 'data': null};
+  }
+  return response;
 }
 
 void updateFav(Article article) {
