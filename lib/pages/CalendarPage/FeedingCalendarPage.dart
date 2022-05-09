@@ -67,7 +67,7 @@ class _CalendarPageState extends StateMVC {
               ),
               onPressed: () {
                 _displayEventAdd(context, _eventname, _datefrom, _dateto,
-                    user.userid, update);
+                     update);
 
                 /*
                 showDialog(
@@ -175,7 +175,7 @@ class _CalendarPageState extends StateMVC {
 }
 
 _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
-    String _dateto, int userID, void update()) {
+    String _dateto, void update()) {
   final formKey1 = new GlobalKey<FormState>();
   AlertDialog alert = AlertDialog(
     title: Text('Добавление события'),

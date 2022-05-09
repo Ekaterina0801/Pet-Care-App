@@ -4,6 +4,8 @@ import 'package:http/http.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:pet_care/pages/Registration/util/widgets.dart';
+import 'package:select_form_field/select_form_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../BasePage.dart';
 
@@ -50,16 +52,19 @@ class _AddAnimalState extends State<AddAnimal> {
   @override
   Widget build(BuildContext context) {
     Future<MyUser> getUserData() => UserPreferences().getUser();
-    final animalField = TextFormField(
-        autofocus: false,
-        //obscureText: true,
-        validator: (value) => value.isEmpty ? "Введите вид питомца" : null,
-        onSaved: (value) => _animal = value,
-        decoration: buildInputDecoration(
-          "Вид питомца",
-          Icons.pets,
-        ));
-
+    final animalField = SelectFormField(
+      autofocus: false,
+      items: [
+        {'value': 'Кот/кошка', 'label': 'Кот/кошка'},
+        {'value': 'Собака', 'label': 'Собака'},
+        {'value': 'Черепаха', 'label': 'Черепаха'},
+        {'value': 'Рыбка', 'label': 'Рыбка'},
+      ],
+      validator: (value) => value.isEmpty ? "Поле пустое" : null,
+      onChanged: (value) => _animal = value,
+      onSaved: (value) => _animal = value,
+      decoration: buildInputDecoration("Вид питомца", Icons.pets),
+    );
     final nameField = TextFormField(
         autofocus: false,
         //obscureText: true,
@@ -89,15 +94,17 @@ class _AddAnimalState extends State<AddAnimal> {
           Icons.pets,
         ));
 
-    final genderField = TextFormField(
-        autofocus: false,
-        //obscureText: true,
-        validator: (value) => value.isEmpty ? "Введите пол питомца" : null,
-        onSaved: (value) => _gender = value,
-        decoration: buildInputDecoration(
-          "Пол питомца",
-          Icons.pets,
-        ));
+    final genderField = SelectFormField(
+      autofocus: false,
+      items: [
+        {'value': 'W', 'label': 'W'},
+        {'value': 'M', 'label': 'M'},
+      ],
+      validator: (value) => value.isEmpty ? "Поле пустое" : null,
+      onChanged: (value) => _gender = value,
+      onSaved: (value) => _gender = value,
+      decoration: buildInputDecoration("Пол питомца", Icons.pets),
+    );
 
     final colorField = TextFormField(
         autofocus: false,
@@ -261,7 +268,6 @@ class _AddAnimalState extends State<AddAnimal> {
                                   {
                                     formKey.currentState.save(),
                                     addPet(
-                                        userID,
                                         _animal,
                                         _name,
                                         _breed,
@@ -285,30 +291,26 @@ class _AddAnimalState extends State<AddAnimal> {
   }
 }
 
-Future<Map<String, dynamic>> addPet(
-    int userID,
-    String animal,
-    String name,
-    String breed,
-    String dateofbirthday,
-    String gender,
-    String color,
-    String weight) async {
+Future<Map<String, dynamic>> addPet(String animal, String name, String breed,
+    String dateofbirthday, String gender, String color, String weight) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  int userId = prefs.get('userId');
   final Map<String, dynamic> petData = {
-    'UserID': userID,
-    'Animal': animal,
-    'Name': name,
-    'Breed': breed,
-    'DateOfBirthday': dateofbirthday,
-    'Gender': gender,
-    'Color': color,
-    'Weight': weight,
-    'PetID': 1,
+    'user_id': userId,
+    'animal': animal,
+    'name': name,
+    'breed': breed,
+    'date_of_birth': dateofbirthday,
+    'gender': gender,
+    'color': color,
+    'weight': weight,
   };
   var response = await post(
       Uri.parse(
-          'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets.json'),
-      body: json.encode(petData));
+          'http://vadimivanov-001-site1.itempurl.com/Register/RegisterPet'),
+      body: json.encode(petData),
+      headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
+      );
   var result;
   if (response.request != null)
     result = {'status': true, 'message': 'Successfully add', 'data': null};

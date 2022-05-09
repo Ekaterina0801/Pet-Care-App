@@ -86,7 +86,6 @@ Future<Pet> getPet() async {
     List<Pet> pets = [];
     var ll = jsonDecode(res.body);
     if (res.statusCode == 200&&ll!="Not successful, there are no pets") {
-
       
       
       for(var t in ll)
