@@ -14,6 +14,9 @@ class NotesWidget extends StatefulWidget {
 }
 
 class _NotesWidgetState extends State<NotesWidget> {
+  Note get note => null;
+  String get oldbody => null;
+
   void update() {
     this.setState(() {});
   }
@@ -21,17 +24,15 @@ class _NotesWidgetState extends State<NotesWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        _displayNoteUpdate(context, widget.note.body, widget.note, update);
-      },
+
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           shape: BoxShape.rectangle,
-          color: Color.fromRGBO(251, 236, 192, 10),
+          color: Color.fromARGB(255, 251, 236, 192),
           boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(198, 191, 172, 1),
+              color: Color.fromARGB(159, 198, 191, 172),
               blurRadius: 0.5,
               offset: const Offset(0.0, 0.0),
               spreadRadius: 2.0,
@@ -50,6 +51,7 @@ class _NotesWidgetState extends State<NotesWidget> {
                   softWrap: true,
                   style: Theme.of(context).copyWith().textTheme.bodyText1),
             ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -57,31 +59,41 @@ class _NotesWidgetState extends State<NotesWidget> {
                   child: Container(
                     padding: EdgeInsets.only(left: 8),
                     decoration: BoxDecoration(),
-                    child: Text(
-                      widget.note.date.substring(0, 10),
-                      style: GoogleFonts.comfortaa(
-                          color: Colors.black,
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 14),
-                    ),
+                    child: Text(widget.note.date,
+                      style: Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
                 ),
+
+                // Кнопка "Изменить"
+                Container(
+                  child: IconButton(
+                    onPressed: () {
+                      setState(
+                        () {
+                           _displayNoteUpdate(context, widget.note.body, widget.note, update);
+                           update();
+                        },
+                      );
+                      update();
+                    },
+                    icon: Icon(Icons.edit, size: 18),
+                  ),
+                ),
+
+                // Кнопка "Удалить"
                 Container(
                   child: IconButton(
                     onPressed: () {
                       deleteNote(widget.note, update);
                       update();
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => HomePage(3),
-                        ),
+                      Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (BuildContext context) => HomePage(3),),
                       );
                     },
-                    icon: Icon(Icons.delete, size: 16),
+                    icon: Icon(Icons.delete, size: 18),
                   ),
-                )
+                ),
+
               ],
             ),
           ],
@@ -101,12 +113,10 @@ _displayNoteUpdate(
   final formKey = new GlobalKey<FormState>();
   var newbody = oldbody;
   AlertDialog alert = AlertDialog(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(20.0),
-      ),
-    ),
-    title: Text('Редактирование'),
+    title: Align(
+      alignment: Alignment.bottomCenter,
+      child: Text('Редактирование',
+        style: Theme.of(context).copyWith().textTheme.headline2),),
     actions: [
       Align(
         alignment: Alignment.center,
@@ -131,15 +141,22 @@ _displayNoteUpdate(
             );
           },
         ),
-      ),
+         ),
     ],
+
     content: Container(
-      decoration: new BoxDecoration(
-        shape: BoxShape.rectangle,
-        borderRadius: new BorderRadius.all(
-          new Radius.circular(50),
-        ),
-      ),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(43, 0, 0, 0),
+            blurRadius: 5,
+            offset: const Offset(0.0, 0.0),
+            spreadRadius: 2.0,
+            )],  
+              color: Color.fromARGB(202, 242, 242, 242),
+              border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+              borderRadius: BorderRadius.circular(10),),
+      margin: EdgeInsets.symmetric(vertical: 20),
       padding: EdgeInsets.all(10),
       child: Form(
         key: formKey,
@@ -153,7 +170,7 @@ _displayNoteUpdate(
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: 'Введите текст',
-            hintStyle: TextStyle(color: Colors.white60),
+            hintStyle: TextStyle(color: Colors.grey),
           ),
         ),
       ),

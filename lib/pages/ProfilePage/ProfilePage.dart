@@ -130,8 +130,7 @@ class _ProfilePageState extends StateMVC {
         child: Text(
           state.error,
           textAlign: TextAlign.center,
-          style:
-              Theme.of(context).textTheme.headline4.copyWith(color: Colors.red),
+          style:Theme.of(context).textTheme.headline4.copyWith(color: Colors.red),
         ),
       );
     } else {
@@ -194,13 +193,8 @@ class _ProfilePageState extends StateMVC {
                                   ),
                                   Container(
                                     margin: EdgeInsets.all(10),
-                                    child: Text(
-                                      "Добавить нового питомца",
-                                      style: GoogleFonts.comfortaa(
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 18),
-                                    ),
+                                    child: Text("Добавить нового питомца",
+                                      style: Theme.of(context).copyWith().textTheme.headline1),
                                   ),
                                 ],
                               ),
@@ -260,14 +254,9 @@ class _ProfilePageState extends StateMVC {
                               Container(
                                 padding: EdgeInsets.all(10),
                                 alignment: Alignment.topRight,
-                                child: Text(
-                                  "Основные данные",
+                                child: Text("Основные данные",
                                   textAlign: TextAlign.center,
-                                  style: GoogleFonts.comfortaa(
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 20),
-                                ),
+                                 style: Theme.of(context).copyWith().textTheme.headline2),
                               ),
                               Container(
                                 alignment: Alignment.topRight,
@@ -301,9 +290,7 @@ class _ProfilePageState extends StateMVC {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              MainInfoBlock(
-                                "Возраст",
-                                AgeCalculate(pet.dateofbirthday),
+                              MainInfoBlock( "Возраст",AgeCalculate(pet.dateofbirthday),
                                 Color.fromRGBO(131, 184, 107, 80),
                               ),
                               MainInfoBlock(
@@ -311,24 +298,17 @@ class _ProfilePageState extends StateMVC {
                                 pet.weight.toString() + " кг",
                                 Color.fromRGBO(255, 223, 142, 10),
                               ),
-                              MainInfoBlock(
-                                "Пол",
-                                pet.gender,
+                              MainInfoBlock("Пол",pet.gender,
                                 Color.fromRGBO(129, 181, 217, 90),
                               ),
                             ],
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.all(10),
-                          child: Text(
-                            "Паспорт питомца",
+                          padding: EdgeInsets.all(8),
+                          child: Text("Паспорт питомца",
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.comfortaa(
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 18),
-                          ),
+                            style: Theme.of(context).copyWith().textTheme.headline2),
                         ),
                         Container(
                           padding: EdgeInsets.only(left: 0, top: 10),
@@ -361,14 +341,8 @@ class _ProfilePageState extends StateMVC {
     AlertDialog alert = AlertDialog(
       title: Align(
         alignment: Alignment.bottomCenter,
-        child: Text(
-          'Изменить основные данные',
-          style: GoogleFonts.comfortaa(
-              color: Colors.black,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w800,
-              fontSize: 16),
-        ),
+        child: Text('Изменить основные данные',
+          style: Theme.of(context).copyWith().textTheme.bodyText1),
       ),
       actions: [
         Column(
@@ -383,8 +357,7 @@ class _ProfilePageState extends StateMVC {
                     autofocus: false,
                     onChanged: (value) => newname = value,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 15),
                   ),
                 ],
               ),
@@ -402,24 +375,24 @@ class _ProfilePageState extends StateMVC {
                 ],
               ),
             ),
-            Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-            ElevatedButton(
-              //color: Color.fromRGBO(255, 223, 142, 10),
-              //splashColor: Color.fromARGB(199, 240, 240, 240),
-              onPressed: () {
-                updateName(newname, pet);
-                updateWeight(newweight, pet);
-                update();
-                Navigator.pop(context, true);
-                update();
-              },
-              child: Text(
-                'Принять',
-                textAlign: TextAlign.left,
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 11),
+
+            Padding(padding: EdgeInsets.symmetric(vertical: 25)),
+
+            Container(
+              height: 33,
+              child: ElevatedButton(
+                //color: Color.fromRGBO(255, 223, 142, 10),
+                //splashColor: Color.fromARGB(199, 240, 240, 240),
+                onPressed: () {
+                  updateName(newname, pet);
+                  updateWeight(newweight, pet);
+                  update();
+                  Navigator.pop(context, true);
+                  update();
+                },
+                child: Text('Применить',
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context).copyWith().textTheme.bodyText1),
               ),
             ),
           ],
@@ -449,14 +422,8 @@ _displayInfoPet(BuildContext context, Pet pet, void update()) {
   AlertDialog alert = AlertDialog(
     title: Align(
       alignment: Alignment.bottomCenter,
-      child: Text(
-        'Изменить основные данные',
-        style: GoogleFonts.comfortaa(
-            color: Colors.black,
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w800,
-            fontSize: 16),
-      ),
+      child: Text('Изменить основные данные',
+          style: Theme.of(context).copyWith().textTheme.bodyText1),
     ),
     actions: [
       Column(
@@ -471,7 +438,9 @@ _displayInfoPet(BuildContext context, Pet pet, void update()) {
                   autofocus: false,
                   onChanged: (value) => newname = value,
                 ),
-                Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+
+                Padding(padding: EdgeInsets.symmetric(vertical: 15)),
+
               ],
             ),
           ),
@@ -488,23 +457,23 @@ _displayInfoPet(BuildContext context, Pet pet, void update()) {
               ],
             ),
           ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-          ElevatedButton(
-            //color: Color.fromRGBO(255, 223, 142, 10),
-            //splashColor: Color.fromARGB(199, 240, 240, 240),
-            onPressed: () {
-              updateName(newname, pet);
-              updateWeight(newweight, pet);
-              Navigator.pop(context, true);
-              update();
-            },
-            child: Text(
-              'Принять',
-              textAlign: TextAlign.left,
-              style: GoogleFonts.comfortaa(
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 11),
+
+          Padding(padding: EdgeInsets.symmetric(vertical: 25)),
+
+          Container(
+            height: 33,
+            child: ElevatedButton(
+              //color: Color.fromRGBO(255, 223, 142, 10),
+              //splashColor: Color.fromARGB(199, 240, 240, 240),
+              onPressed: () {
+                updateName(newname, pet);
+                updateWeight(newweight, pet);
+                Navigator.pop(context, true);
+                update();
+              },
+              child: Text('Применить',
+                textAlign: TextAlign.left,
+                style: Theme.of(context).copyWith().textTheme.bodyText1),
             ),
           ),
         ],
@@ -617,8 +586,7 @@ Future<http.Response> updateWeight(String newtext, Pet pet) async {
 Widget addInfo(String text) {
   return Align(
     alignment: Alignment.bottomLeft,
-    child: Text(
-      text,
+    child: Text(text,
       style: GoogleFonts.comfortaa(
           color: Colors.black,
           fontStyle: FontStyle.normal,

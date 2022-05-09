@@ -8,7 +8,6 @@ import '../../dommain/myuser.dart';
 import '../BasePage.dart';
 import '../Registration/util/shared_preference.dart';
 import 'AddInfo.dart';
-import 'DisplayAddInfo.dart';
 import 'Meeting.dart';
 import 'Message.dart';
 import 'repoMeetings.dart';
@@ -81,10 +80,8 @@ class _CalendarPageState extends StateMVC {
               },
               child: Align(
                 alignment: Alignment.bottomLeft,
-                child: Text(
-                  '+ Добавить событие',
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
+                child: Text('+ Добавить событие',
+                  style: Theme.of(context).textTheme.bodyText1),
               ),
             ),
             Container(

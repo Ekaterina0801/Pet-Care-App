@@ -32,26 +32,21 @@ class _MainInfoBlockState extends State<MainInfoBlock> {
             borderRadius: BorderRadius.circular(10),
             color: widget.myColor,
           ),
+
           child: Container(
               padding: EdgeInsets.only(top: 35),
               child: Text(
                 widget.info,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 14),
-              )),
+                style: Theme.of(context).copyWith().textTheme.bodyText1),
+              ),
         ),
+        
         Container(
             padding: EdgeInsets.all(5),
             child: Text(
               widget.title,
-              style: GoogleFonts.comfortaa(
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 16),
-            )
+              style: Theme.of(context).copyWith().textTheme.bodyText1),
           )
       ],
     );

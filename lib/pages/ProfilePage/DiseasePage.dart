@@ -73,6 +73,9 @@ class _DiseasePageState extends StateMVC {
                   ElevatedButton(
                     //height: 50,
                     //color: Colors.grey.shade200,
+                    style: ElevatedButton.styleFrom(
+                    primary: Colors.grey.shade200,
+                    ),
                     onPressed: () {
                       setState(
                         () {
@@ -84,10 +87,7 @@ class _DiseasePageState extends StateMVC {
                               child: Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Text('Добавление болезни',
-                                    style: Theme.of(context)
-                                        .copyWith()
-                                        .textTheme
-                                        .bodyText1),
+                                    style: Theme.of(context).copyWith().textTheme.headline2),
                               ),
                             ),
                             actions: [
@@ -123,12 +123,14 @@ class _DiseasePageState extends StateMVC {
 
                                     //Navigator.of(context).pop(true);
 
-                                    //Navigator.pushNamed(context, "/notes");
-                                  }),
+                                      //Navigator.pushNamed(context, "/notes");
+                                    }
+                                  ),
+                    
                             ],
+
                             content: Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 1, vertical: 10),
+                              margin: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
                               child: Column(
                                 children: [
                                   Form(
@@ -136,21 +138,14 @@ class _DiseasePageState extends StateMVC {
                                     child: Column(
                                       children: [
                                         Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 7, vertical: 12),
+                                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
                                           child: Column(
                                             children: [
                                               Container(
                                                 child: Align(
-                                                  alignment:
-                                                      Alignment.bottomLeft,
-                                                  child: Text(
-                                                      'Введите описание болезни:',
-                                                      //textAlign: TextAlign.left,
-                                                      style: Theme.of(context)
-                                                          .copyWith()
-                                                          .textTheme
-                                                          .bodyText1),
+                                                  alignment:Alignment.bottomLeft,
+                                                  child: Text('Введите описание болезни:',
+                                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
                                                 ),
                                               ),
                                               TextFormField(
@@ -164,22 +159,31 @@ class _DiseasePageState extends StateMVC {
                                                 },
                                                 decoration: InputDecoration(
                                                   border: InputBorder.none,
-                                                  hintText:
-                                                      'Введите информацию о болезни',
+                                                  hintText:'Введите информацию о болезни',
                                                   hintStyle: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          153, 69, 69, 69)),
+                                                  color: Color.fromARGB(153, 69, 69, 69)),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          color: Color.fromARGB(
-                                              153, 229, 229, 229),
-                                        ),
-                                        SizedBox(height: 10),
+                                    decoration: BoxDecoration(
+                                    boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(43, 0, 0, 0),
+                                      blurRadius: 5,
+                                      offset: const Offset(0.0, 0.0),
+                                      spreadRadius: 2.0,
+                                    )
+                                  ],  
+                                    color: Color.fromARGB(202, 242, 242, 242),
+                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                                    borderRadius: BorderRadius.circular(10),
+                                    ),),
+
+                                        SizedBox(height: 15),
+
                                         Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 7, vertical: 12),
+                                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
                                           //margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                                           child: Column(
                                             children: [
@@ -187,13 +191,8 @@ class _DiseasePageState extends StateMVC {
                                                 child: Align(
                                                   alignment:
                                                       Alignment.bottomLeft,
-                                                  child: Text(
-                                                      'Введите дату начала болезни:',
-                                                      //textAlign: TextAlign.left,
-                                                      style: Theme.of(context)
-                                                          .copyWith()
-                                                          .textTheme
-                                                          .bodyText1),
+                                                  child: Text('Введите дату начала болезни:',
+                                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
                                                 ),
                                               ),
                                               TextFormField(
@@ -207,17 +206,29 @@ class _DiseasePageState extends StateMVC {
                                                 },
                                                 decoration: InputDecoration(
                                                   border: InputBorder.none,
-                                                  hintText:
-                                                      'Введите дату начала болезни',
+                                                  hintText:'Введите дату начала болезни',
                                                   hintStyle: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          153, 69, 69, 69)),
+                                                      color: Color.fromARGB(153, 69, 69, 69)),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                        ),
-                                        SizedBox(height: 10),
+                                    decoration: BoxDecoration(
+                                    boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(43, 0, 0, 0),
+                                      blurRadius: 5,
+                                      offset: const Offset(0.0, 0.0),
+                                      spreadRadius: 2.0,
+                                    )
+                                  ],  
+                                    color: Color.fromARGB(202, 242, 242, 242),
+                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                                    borderRadius: BorderRadius.circular(10),
+                                    ),),
+
+                                        SizedBox(height: 15),
+
                                         Container(
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 7, vertical: 12),
@@ -227,13 +238,8 @@ class _DiseasePageState extends StateMVC {
                                                 child: Align(
                                                   alignment:
                                                       Alignment.bottomLeft,
-                                                  child: Text(
-                                                      'Введите дату окончания болезни:',
-                                                      //textAlign: TextAlign.left,
-                                                      style: Theme.of(context)
-                                                          .copyWith()
-                                                          .textTheme
-                                                          .bodyText1),
+                                                  child: Text('Введите дату окончания болезни:',
+                                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
                                                 ),
                                               ),
                                               TextFormField(
@@ -247,18 +253,26 @@ class _DiseasePageState extends StateMVC {
                                                 },
                                                 decoration: InputDecoration(
                                                   border: InputBorder.none,
-                                                  hintText:
-                                                      'Введите дату окончания болезни',
+                                                  hintText:'Введите дату окончания болезни',
                                                   hintStyle: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          153, 69, 69, 69)),
+                                                      color: Color.fromARGB(153, 69, 69, 69)),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          color: Color.fromARGB(
-                                              153, 229, 229, 229),
-                                        ),
+                                    decoration: BoxDecoration(
+                                    boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(43, 0, 0, 0),
+                                      blurRadius: 5,
+                                      offset: const Offset(0.0, 0.0),
+                                      spreadRadius: 2.0,
+                                    )
+                                  ],  
+                                    color: Color.fromARGB(202, 242, 242, 242),
+                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                                    borderRadius: BorderRadius.circular(10),
+                                    ),),
                                       ],
                                     ),
                                   ),
@@ -282,10 +296,8 @@ class _DiseasePageState extends StateMVC {
                     },
                     child: Align(
                       alignment: Alignment.bottomLeft,
-                      child: Text(
-                        '+ Добавить болезнь',
-                        style: Theme.of(context).copyWith().textTheme.bodyText1,
-                      ),
+                      child: Text('+ Добавить болезнь',
+                        style: Theme.of(context).copyWith().textTheme.bodyText1),
                     ),
                   ),
                   alldisease.length == 0
@@ -300,13 +312,8 @@ class _DiseasePageState extends StateMVC {
                                           window.physicalSize.height / 2 - 48),
                                   Align(
                                     alignment: Alignment.center,
-                                    child: Text(
-                                      "Отмеченных болезней пока нет",
-                                      style: Theme.of(context)
-                                          .copyWith()
-                                          .textTheme
-                                          .bodyText1,
-                                    ),
+                                    child: Text("Отмеченных болезней пока нет",
+                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
                                   ),
                                 ],
                               ),
@@ -335,18 +342,20 @@ Widget _displayDiseaseAdd(BuildContext context, String type, String datebeg,
     String dateend, int userID) {
   final formKey = new GlobalKey<FormState>();
   AlertDialog alert = AlertDialog(
-    title: Text('Добавление информации'),
+    title: Text('Добавление информации',
+    style: Theme.of(context).copyWith().textTheme.headline2),
     actions: [
-      ElevatedButton(
-        child: Text(
-          'Добавить',
-          style: Theme.of(context).copyWith().textTheme.bodyText1,
+      Container(
+        height: 30,
+        child: ElevatedButton(
+          child: Text('Добавить',
+            style: Theme.of(context).copyWith().textTheme.headline1),
+          onPressed: () {
+            addDisease(type, datebeg, dateend, userID);
+            //notifyListeners();
+            Navigator.of(context).pop();
+          },
         ),
-        onPressed: () {
-          addDisease(type, datebeg, dateend, userID);
-          //notifyListeners();
-          Navigator.of(context).pop();
-        },
       ),
     ],
     content: Container(

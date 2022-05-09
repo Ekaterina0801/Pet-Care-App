@@ -7,10 +7,8 @@ class AddInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomLeft,
-      child: Text(
-        text,
-        style: Theme.of(context).copyWith().textTheme.bodyText1,
-      ),
+      child: Text(text,
+        style: Theme.of(context).copyWith().textTheme.bodyText1,),
     );
   }
 }

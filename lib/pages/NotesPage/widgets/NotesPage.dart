@@ -63,7 +63,7 @@ class _NotesPageState extends StateMVC {
                 ElevatedButton(
                   //height: 50,
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.grey.shade200,
+                  primary: Colors.grey.shade200,
                   ),
                   onPressed: () {
                     setState(
@@ -75,10 +75,8 @@ class _NotesPageState extends StateMVC {
                   },
                   child: Align(
                     alignment: Alignment.bottomLeft,
-                    child: Text(
-                      '+ Добавить заметку',
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
+                    child: Text('+ Добавить заметку',
+                      style: Theme.of(context).textTheme.bodyText1),
                   ),
                 ),
                 notes.length == 0
@@ -88,10 +86,8 @@ class _NotesPageState extends StateMVC {
                               height: window.physicalSize.height / 2 - 32),
                           Align(
                             alignment: Alignment.center,
-                            child: Text(
-                              "Заметок пока нет",
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
+                            child: Text("Заметок пока нет",
+                              style: Theme.of(context).textTheme.bodyText1),
                           )
                         ],
                       )
@@ -125,11 +121,15 @@ _displayNoteAdd(
   final formKey = new GlobalKey<FormState>();
   AlertDialog alert = AlertDialog(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(20.0),
-      ),
+      borderRadius: BorderRadius.all(Radius.circular(5.0),
+     ),
     ),
-    title: Text('Добавление заметки'),
+    title: Container(
+    child: Align(
+    alignment: Alignment.bottomCenter,
+    child:Text('Добавление заметки',
+    style: Theme.of(context).copyWith().textTheme.headline2),
+    ),),
     actions: [
       Align(
         alignment: Alignment.center,
@@ -153,11 +153,22 @@ _displayNoteAdd(
             //
           },
         ),
-      ),
+         ),
     ],
+    
     content: Container(
-      decoration: BoxDecoration(),
-      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(43, 0, 0, 0),
+            blurRadius: 5,
+            offset: const Offset(0.0, 0.0),
+            spreadRadius: 2.0,
+            )],  
+              color: Color.fromARGB(202, 242, 242, 242),
+              border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+              borderRadius: BorderRadius.circular(10),),
+      padding: EdgeInsets.symmetric(horizontal: 7, vertical: 10),
       child: Form(
         key: formKey,
         child: TextFormField(

@@ -30,17 +30,13 @@ body: Column(children: [
   padding: EdgeInsets.symmetric(horizontal: 70, vertical: 0),
   child: Text('Добро пожаловать!', 
   textAlign: TextAlign.center, 
-  style: GoogleFonts.comfortaa(
-         color: Colors.black,
-         fontStyle: FontStyle.normal,
-         fontWeight: FontWeight.w800,
-         fontSize: 24),
-         ),
+      style: Theme.of(context).copyWith().textTheme.headline2),
         ),
 
        SizedBox(height: 100),
 
        Container( 
+        height: 35,
         child: ElevatedButton(onPressed: () {
           Navigator.of(context).push(
                         MaterialPageRoute(
@@ -50,12 +46,7 @@ body: Column(children: [
           }, 
           child: Text('Создать аккаунт',
           textAlign: TextAlign.center, 
-          style: GoogleFonts.comfortaa(
-          color: Colors.black,
-          fontStyle: FontStyle.normal,
-          fontWeight: FontWeight.w800,
-          fontSize: 18),
-          ),
+          style: Theme.of(context).copyWith().textTheme.headline1),
           //color: Color.fromRGBO(255, 223, 142, 1),
          // shape: RoundedRectangleBorder(
          // borderRadius: BorderRadius.all(Radius.circular(10))
@@ -67,6 +58,7 @@ body: Column(children: [
        SizedBox(height: 10),
 
        Container( 
+        height: 35,
         //padding: EdgeInsets.symmetric(horizontal: 170, vertical: 0),
         child: ElevatedButton(onPressed: () {
          // Navigator.push()
@@ -79,17 +71,11 @@ body: Column(children: [
           }, 
           child: Text('У меня уже есть аккаунт',
           textAlign: TextAlign.center, 
-          style: GoogleFonts.comfortaa(
-          color: Colors.black,
-          fontStyle: FontStyle.normal,
-          fontWeight: FontWeight.w800,
-          fontSize: 18),
-          ),
+          style: Theme.of(context).copyWith().textTheme.headline1),
          // color: Color.fromRGBO(255, 223, 142, 1), shape: 
           //RoundedRectangleBorder(
          // borderRadius: BorderRadius.all(Radius.circular(10))
           ),
-          height: 45,
         ),
       // )
 
