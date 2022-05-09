@@ -4,24 +4,6 @@ import 'package:pet_care/pages/welcomescreen.dart';
 import 'DiseasePage.dart';
 import 'VaccinationPage.dart';
 
-
-            /*decoration: BoxDecoration(  
-              color: Color.fromARGB(202, 242, 242, 242),
-              border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
-              borderRadius: BorderRadius.circular(10),
-            ),*/
-
-              /*decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(43, 0, 0, 0),
-                    blurRadius: 5,
-                    offset: const Offset(0.0, 0.0),
-                    spreadRadius: 2.0)],  
-                  color: Color.fromARGB(202, 242, 242, 242),
-                  border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
-                  borderRadius: BorderRadius.circular(10)),*/
-
 //ignore: must_be_immutable
 class Passport extends StatelessWidget {
   String nameowner;
@@ -40,13 +22,14 @@ class Passport extends StatelessWidget {
         InfoWidget("Владелец:", nameowner),
         InfoWidget("Порода:", breed),
         InfoWidget("Дата рождения питомца:", dateb),
+
         Padding(
           padding: EdgeInsets.all(7),
           child: Container(
             height: 50,
             width: 400,
             child: ElevatedButton(
-              style: Theme.of(context).elevatedButtonTheme.style,
+              style: Theme.of(context).elevatedButtonTheme.style, 
               //color: Color.fromRGBO(255, 223, 142, 10),
               // splashColor: Color.fromRGBO(240, 240, 240, 10),
               onPressed: () => Navigator.push(context,
@@ -112,18 +95,23 @@ class InfoWidget extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Card(
-            color: Color.fromRGBO(240, 240, 240, 1),
-            shadowColor: Colors.grey, 
-              child: ListTile(
-                title: Text(title, 
-                  style: Theme.of(context).copyWith().textTheme.bodyText2),
-                subtitle: Text(info, 
-                  style: Theme.of(context).copyWith().textTheme.bodyText1),
-                isThreeLine: true,
+              child: Card(
+              shape: RoundedRectangleBorder(
+              borderRadius:BorderRadius.all(Radius.circular(7))),
+              color: Color.fromRGBO(240, 240, 240, 1),
+              shadowColor: Colors.grey, 
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 7, vertical: 5),
+                child: ListTile(
+                  title: Text(title, 
+                    style: Theme.of(context).copyWith().textTheme.bodyText2), 
+                    leading: Icon(Icons.wysiwyg_outlined),
+                  subtitle: Text(info, 
+                    style: Theme.of(context).copyWith().textTheme.bodyText1),
+                  isThreeLine: true,
+                ),),
               ),
             ),
-          )
         ],
       ),
     );
@@ -163,7 +151,7 @@ class RemakeNameWidget extends StatelessWidget {
       title: Align(
           alignment: Alignment.bottomCenter,
           child: Text('Изменение имени владельца',
-              style: Theme.of(context).copyWith().textTheme.bodyText1),
+              style: Theme.of(context).copyWith().textTheme.bodyText2),
       ),
       actions: [
         Align(
@@ -175,7 +163,9 @@ class RemakeNameWidget extends StatelessWidget {
           autofocus: false,
           onSaved: (value) => name = value,
         ),
-        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+
+        Padding(padding: EdgeInsets.symmetric(vertical: 15)),
+
         Align(
             alignment: Alignment.bottomLeft,
             child: Text('Введите фамилию:',
@@ -185,19 +175,21 @@ class RemakeNameWidget extends StatelessWidget {
           autofocus: false,
           onSaved: (value) => surname = value,
         ),
-        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-//        longButtons(
-//          "Принять", doRename(info,name, surname)
-//       )
-        ElevatedButton(
-            // color: Color.fromRGBO(255, 223, 142, 10),
-            //splashColor: Color.fromARGB(199, 240, 240, 240),
-            onPressed: () =>
-                {doRename(info, name, surname), (Navigator.pop(context, true))},
-            child: Text('Принять',
-                textAlign: TextAlign.left,
-                style: Theme.of(context).copyWith().textTheme.bodyText1),
-        )
+        
+        Padding(padding: EdgeInsets.symmetric(vertical: 25)),
+
+        Container(
+          height: 33,
+          child: ElevatedButton(
+              // color: Color.fromRGBO(255, 223, 142, 10),
+              //splashColor: Color.fromARGB(199, 240, 240, 240),
+              onPressed: () =>
+                  {doRename(info, name, surname), (Navigator.pop(context, true))},
+              child: Text('Применить',
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context).copyWith().textTheme.bodyText1),
+          ),
+        ),
       ],
     );
   }
@@ -239,18 +231,21 @@ class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
           autofocus: false,
           onChanged: _changeBreed,
         ),
-        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+        Padding(padding: EdgeInsets.symmetric(vertical: 25)),
 //        longButtons(
 //          "Принять",
 //       )
-        ElevatedButton(
-            //color: Color.fromRGBO(255, 223, 142, 10),
-            //splashColor: Color.fromARGB(199, 240, 240, 240),
-            style: Theme.of(context).elevatedButtonTheme.style,
-            onPressed: () => (Navigator.pop(context, true)),
-            child: Text('Принять',
-                textAlign: TextAlign.left,
-                style: Theme.of(context).copyWith().textTheme.bodyText1),),
+        Container(
+          height: 33,
+          child: ElevatedButton(
+              //color: Color.fromRGBO(255, 223, 142, 10),
+              //splashColor: Color.fromARGB(199, 240, 240, 240),
+              style: Theme.of(context).elevatedButtonTheme.style,
+              onPressed: () => (Navigator.pop(context, true)),
+              child: Text('Применить',
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context).copyWith().textTheme.bodyText1),),
+        ),
       ],
     );
   }
@@ -276,7 +271,7 @@ class RemakeDateBirthWidget extends StatelessWidget {
             child: Text('Введите дату рождения:',
                 style: Theme.of(context).copyWith().textTheme.bodyText1),),
         TextFormField(autofocus: false, onSaved: (value) => info = value),
-        Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+        Padding(padding: EdgeInsets.symmetric(vertical: 25)),
 //        longButtons(
 //          "Принять",
 //       )
@@ -284,7 +279,7 @@ class RemakeDateBirthWidget extends StatelessWidget {
             // color: Color.fromRGBO(255, 223, 142, 10),
             //splashColor: Color.fromARGB(199, 240, 240, 240),
             onPressed: () => (Navigator.pop(context, true)),
-            child: Text('Принять',
+            child: Text('Применить',
                 textAlign: TextAlign.left,
                 style: Theme.of(context).copyWith().textTheme.bodyText1),),
       ],

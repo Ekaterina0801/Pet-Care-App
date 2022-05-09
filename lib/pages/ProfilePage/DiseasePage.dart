@@ -95,7 +95,7 @@ class _DiseasePageState extends StateMVC {
                             ),
                             actions: [
                               Container(
-                                height: 35,
+                                height: 33,
                                 child: ElevatedButton(
                                     child: Text('Добавить',
                                       style: Theme.of(context).copyWith().textTheme.bodyText1),
@@ -175,8 +175,7 @@ class _DiseasePageState extends StateMVC {
                                         SizedBox(height: 15),
 
                                         Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 7, vertical: 12),
+                                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
                                           //margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                                           child: Column(
                                             children: [

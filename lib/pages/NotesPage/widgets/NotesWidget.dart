@@ -28,10 +28,10 @@ class _NotesWidgetState extends State<NotesWidget> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           shape: BoxShape.rectangle,
-          color: Color.fromRGBO(251, 236, 192, 10),
+          color: Color.fromARGB(255, 251, 236, 192),
           boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(198, 191, 172, 1),
+              color: Color.fromARGB(159, 198, 191, 172),
               blurRadius: 0.5,
               offset: const Offset(0.0, 0.0),
               spreadRadius: 2.0,
@@ -62,6 +62,7 @@ class _NotesWidgetState extends State<NotesWidget> {
                       style: Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
                 ),
+
                 Container(
                   child: IconButton(
                     onPressed: () {
@@ -98,34 +99,38 @@ _displayNoteUpdate(
   var newbody = oldbody;
   AlertDialog alert = AlertDialog(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(20.0),
-      ),
+      borderRadius: BorderRadius.all(Radius.circular(0.0),),
     ),
     title: Text('Редактирование'),
     actions: [
-      Align(
-        alignment: Alignment.center,
-        child: ElevatedButton(
-          child: Text('Применить',
-            style: Theme.of(context).copyWith().textTheme.bodyText1),
-          onPressed: () {
-            if (formKey.currentState.validate()) {
-              RepositoryNotes().update(newbody, note);
-              update();
-            }
-            Navigator.of(context).pop(true);
-          },
+         Container(
+           height: 3,
+           child: ElevatedButton(
+            child: Text('Применить',
+              style: Theme.of(context).copyWith().textTheme.bodyText1),
+            onPressed: () {
+              if (formKey.currentState.validate()) {
+                RepositoryNotes().update(newbody, note);
+                update();
+              }
+              Navigator.of(context).pop(true);
+            },
         ),
-      ),
+         ),
+      
     ],
     content: Container(
-      decoration: new BoxDecoration(
-        shape: BoxShape.rectangle,
-        borderRadius: new BorderRadius.all(
-          new Radius.circular(50),
-        ),
-      ),
+decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(43, 0, 0, 0),
+            blurRadius: 5,
+            offset: const Offset(0.0, 0.0),
+            spreadRadius: 2.0,
+            )],  
+              color: Color.fromARGB(202, 242, 242, 242),
+              border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+              borderRadius: BorderRadius.circular(10),),
       padding: EdgeInsets.all(10),
       child: Form(
         key: formKey,

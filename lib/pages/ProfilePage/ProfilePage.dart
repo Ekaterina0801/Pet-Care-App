@@ -324,8 +324,7 @@ class _ProfilePageState extends StateMVC {
                     autofocus: false,
                     onChanged: (value) => newname = value,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 15),
                   ),
                 ],
               ),
@@ -343,20 +342,25 @@ class _ProfilePageState extends StateMVC {
                 ],
               ),
             ),
-            Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-            ElevatedButton(
-              //color: Color.fromRGBO(255, 223, 142, 10),
-              //splashColor: Color.fromARGB(199, 240, 240, 240),
-              onPressed: () {
-                updateName(newname, pet);
-                updateWeight(newweight, pet);
-                update();
-                Navigator.pop(context, true);
-                update();
-              },
-              child: Text('Принять',
-                textAlign: TextAlign.left,
-                style: Theme.of(context).copyWith().textTheme.bodyText1),
+
+            Padding(padding: EdgeInsets.symmetric(vertical: 25)),
+
+            Container(
+              height: 33,
+              child: ElevatedButton(
+                //color: Color.fromRGBO(255, 223, 142, 10),
+                //splashColor: Color.fromARGB(199, 240, 240, 240),
+                onPressed: () {
+                  updateName(newname, pet);
+                  updateWeight(newweight, pet);
+                  update();
+                  Navigator.pop(context, true);
+                  update();
+                },
+                child: Text('Применить',
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context).copyWith().textTheme.bodyText1),
+              ),
             ),
           ],
         ),
@@ -401,7 +405,9 @@ _displayInfoPet(BuildContext context, Pet pet, void update()) {
                   autofocus: false,
                   onChanged: (value) => newname = value,
                 ),
-                Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+
+                Padding(padding: EdgeInsets.symmetric(vertical: 15)),
+
               ],
             ),
           ),
@@ -418,19 +424,24 @@ _displayInfoPet(BuildContext context, Pet pet, void update()) {
               ],
             ),
           ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-          ElevatedButton(
-            //color: Color.fromRGBO(255, 223, 142, 10),
-            //splashColor: Color.fromARGB(199, 240, 240, 240),
-            onPressed: () {
-              updateName(newname, pet);
-              updateWeight(newweight, pet);
-              Navigator.pop(context, true);
-              update();
-            },
-            child: Text('Принять',
-              textAlign: TextAlign.left,
-              style: Theme.of(context).copyWith().textTheme.bodyText1),
+
+          Padding(padding: EdgeInsets.symmetric(vertical: 25)),
+
+          Container(
+            height: 33,
+            child: ElevatedButton(
+              //color: Color.fromRGBO(255, 223, 142, 10),
+              //splashColor: Color.fromARGB(199, 240, 240, 240),
+              onPressed: () {
+                updateName(newname, pet);
+                updateWeight(newweight, pet);
+                Navigator.pop(context, true);
+                update();
+              },
+              child: Text('Применить',
+                textAlign: TextAlign.left,
+                style: Theme.of(context).copyWith().textTheme.bodyText1),
+            ),
           ),
         ],
       ),

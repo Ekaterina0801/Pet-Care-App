@@ -193,7 +193,7 @@ _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
       style: Theme.of(context).copyWith().textTheme.bodyText2),),),
       actions: [
         Container(
-          height: 35,
+          height: 33,
           child: ElevatedButton( 
             child: Text('Добавить',
               style: Theme.of(context).copyWith().textTheme.bodyText1),

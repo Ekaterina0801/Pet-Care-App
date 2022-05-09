@@ -144,7 +144,7 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
     ),),
     actions: [
          Container(
-           height: 35,
+           height: 33,
            child: ElevatedButton(
             child: Text('Добавить',
             style: Theme.of(context).copyWith().textTheme.bodyText1),
@@ -154,7 +154,6 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
                 update();
                 Navigator.of(context).pop(true);
               }
-              //
             },
         ),
          ),
