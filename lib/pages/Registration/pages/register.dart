@@ -58,28 +58,42 @@ class _RegisterState extends State<Register> {
 
     final firstnameField = TextFormField(
       autofocus: false,
-      validator: validateText,
+      validator: (value) => value.isEmpty ? "Введите имя" : validateText(value),
       onSaved: (value) => _firstname = value,
       decoration: buildInputDecoration("Введите имя", Icons.person_rounded),
     );
 
     final lastnameField = TextFormField(
       autofocus: false,
-      validator: validateText,
+      validator: (value) => value.isEmpty ? "Введите фамилию" : validateText(value),
       onSaved: (value) => _lastname = value,
       decoration: buildInputDecoration("Введите фамилию", Icons.person_rounded),
     );
 
-    final districtField = TextFormField(
+    final districtField = SelectFormField(
       autofocus: false,
-      validator: validateText,
+      items: [
+        {'value': 'Ворошиловский', 'label': 'Ворошиловский'},
+        {'value': 'Советский', 'label': 'Советский'},
+        {'value': 'Железнодорожный', 'label': 'Железнодорожный'},
+        {'value': 'Кировский', 'label': 'Кировский'},
+        {'value': 'Ленинский', 'label': 'Ленинский'},
+        {'value': 'Октябрьский', 'label': 'Октябрьский'},
+        {'value': 'Первомайский', 'label': 'Первомайский'},
+        {'value': 'Пролетарский', 'label': 'Пролетарский'},
+        {'value': 'Другое', 'label': 'Другое'},
+      ],
+      validator: (value) => value.isEmpty ? "Поле пустое" : null,
+      onChanged: (value) => _district = value,
       onSaved: (value) => _district = value,
-      decoration: buildInputDecoration("Введите район", Icons.place),
+      decoration: buildInputDecoration(
+          "Введите район", Icons.home),
     );
+
 
     final priceField = TextFormField(
       autofocus: false,
-      validator:  validateMoney,
+      validator:  validateDigits,
       onSaved: (value) => _price = value,
       decoration:
           buildInputDecoration("Введите цену", Icons.monetization_on_rounded),

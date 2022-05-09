@@ -3,7 +3,7 @@ String validateText(String value) {
   RegExp regex = new RegExp(r'^[А-Я][а-я]+$');
   var match = regex.firstMatch(value);
   if (value.isEmpty)
-    _msg = "Введите имя";
+    _msg = "Введите текст";
   else if (!regex.hasMatch(value))
     _msg = "Введите символами кириллицы с заглавной буквы";
   return _msg;
@@ -32,14 +32,16 @@ String validatePassword(String value) {
   return _msg;
 }
 
-String validateMoney(String value) {
+String validateDigits(String value) {
   String _msg;
   RegExp regex = new RegExp(
       r'^((\d+[.,\,]\d+)|(\d+))$');
   if (value.isEmpty) {
-    _msg = "Введите цену";
+    _msg = "Введите число";
   } else if (!regex.hasMatch(value)) 
    _msg = "Введите только число (не обязательное целое)";
   return _msg;
 }
+
+
 

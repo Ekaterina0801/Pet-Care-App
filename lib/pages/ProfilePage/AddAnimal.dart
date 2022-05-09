@@ -4,8 +4,10 @@ import 'package:http/http.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:pet_care/pages/Registration/util/widgets.dart';
+import 'package:select_form_field/select_form_field.dart';
 
 import '../BasePage.dart';
+import '../Registration/ValidatorsReg.dart';
 import 'ValidatorDate.dart';
 
 String commaValid(String str) {
@@ -26,29 +28,32 @@ class _AddAnimalState extends State<AddAnimal> {
   @override
   Widget build(BuildContext context) {
     Future<MyUser> getUserData() => UserPreferences().getUser();
-    final animalField = TextFormField(
-        autofocus: false,
-        //obscureText: true,
-        validator: (value) => value.isEmpty ? "Введите вид питомца" : null,
-        onSaved: (value) => _animal = value,
-        decoration: buildInputDecoration(
-          "Вид питомца",
-          Icons.pets,
-        ));
+    final animalField = SelectFormField(
+      autofocus: false,
+      items: [
+        {'value': 'Кошка', 'label': 'Кошка'},
+        {'value': 'Собака', 'label': 'Собака'}
+      ],
+      validator: (value) => value.isEmpty ? "Введите вид питомца" : null,
+      onChanged: (value) => _animal = value,
+      onSaved: (value) => _animal = value,
+      decoration: buildInputDecoration("Вид питомца", Icons.pets),
+    );
 
     final nameField = TextFormField(
         autofocus: false,
         //obscureText: true,
-        validator: (value) => value.isEmpty ? "Введите имя питомца" : null,
+        validator: (value) => value.isEmpty ? "Введите имя питомца" : validateText(value),
         onSaved: (value) => _name = value,
         decoration: buildInputDecoration(
           "Имя питомца",
           Icons.pets,
         ));
+
     final breedField = TextFormField(
         autofocus: false,
         //obscureText: true,
-        validator: (value) => value.isEmpty ? "Введите породу питомца" : null,
+        validator:  (value) => value.isEmpty ? "Введите породу питомца" : validateText(value),
         onSaved: (value) => _breed = value,
         decoration: buildInputDecoration(
           "Порода питомца",
@@ -68,20 +73,22 @@ class _AddAnimalState extends State<AddAnimal> {
           Icons.pets,
         ));
 
-    final genderField = TextFormField(
-        autofocus: false,
-        //obscureText: true,
-        validator: (value) => value.isEmpty ? "Введите пол питомца" : null,
-        onSaved: (value) => _gender = value,
-        decoration: buildInputDecoration(
-          "Пол питомца",
-          Icons.pets,
-        ));
+    final genderField = SelectFormField(
+      autofocus: false,
+      items: [
+        {'value': 'Самка', 'label': 'Самка'},
+        {'value': 'Cамец', 'label': 'Cамец'}
+      ],
+      validator: (value) => value.isEmpty ? "Введите пол питомца" : null,
+      onChanged: (value) => _gender = value,
+      onSaved: (value) => _gender = value,
+      decoration: buildInputDecoration("Пол питомца", Icons.pets),
+    );
 
     final colorField = TextFormField(
         autofocus: false,
         //obscureText: true,
-        //validator: (value) => value.isEmpty ? "Введите окрас питомца" : null,
+        validator:  (value) => value.isEmpty ? "Введите окрас" : validateText(value),
         onSaved: (value) => _color = value,
         decoration: buildInputDecoration(
           "Окрас питомца",
@@ -91,12 +98,13 @@ class _AddAnimalState extends State<AddAnimal> {
     final weightField = TextFormField(
         autofocus: false,
         //obscureText: true,
-        //validator: (value) => value.isEmpty ? "Введите вес питомца" : null,
+        validator: validateDigits,
         onSaved: (value) => _weight = value,
         decoration: buildInputDecoration(
           "Вес питомца",
           Icons.pets,
         ));
+
     return BasePage(
         title: "Добавление питомца",
         body: FutureBuilder(
@@ -212,7 +220,7 @@ class _AddAnimalState extends State<AddAnimal> {
                   Container(
                     padding:
                         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    child: Text("Вес питомца",
+                    child: Text("Вес питомца (кг)",
                         style:
                             Theme.of(context).copyWith().textTheme.bodyText1),
                   ),
