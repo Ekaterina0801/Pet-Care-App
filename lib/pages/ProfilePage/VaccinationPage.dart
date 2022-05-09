@@ -114,7 +114,7 @@ class _VaccinationPageState extends StateMVC {
                                 //   borderRadius:
                                 //      BorderRadius.all(Radius.circular(10))),
                                 // height: 45,
-                                onPressed: () {
+                                /*onPressed: () {
                                   setState(
                                     () {
                                       if (formKey.currentState.validate()) {
@@ -128,7 +128,20 @@ class _VaccinationPageState extends StateMVC {
                                   Navigator.of(context).pop(true);
 
                                   //Navigator.pushNamed(context, "/notes");
+                                },*/
+                              
+                                onPressed: () {
+                                  if (formKey.currentState.validate())
+                                    setState(() {
+                                      formKey.currentState.save();
+                                      addVaccination("0", user.userid, "0",
+                                          date, type, "", revaccination);
+                                      this.setState(() {});
+                                      Navigator.of(context).pop(true);
+                                    });
                                 },
+
+                                //Navigator.pushNamed(context, "/notes");
                               ),
                             ],
                             content: Container(
@@ -212,12 +225,10 @@ class _VaccinationPageState extends StateMVC {
                                               ),
                                               TextFormField(
                                                 maxLines: 1,
-                                              //  validator: (value) =>
-                                              //     validateDate(value),
-                                               validator: validateDate,
-                                                //onSaved: (value) {
-                                               //   date = value;
-                                               // },
+                                                validator: validateDate,
+                                                onSaved: (value) {
+                                                  date = value;
+                                                },
                                                 decoration: InputDecoration(
                                                   border: InputBorder.none,
                                                   hintText:
