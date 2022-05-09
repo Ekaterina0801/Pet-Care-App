@@ -93,40 +93,26 @@ class AuthProvider with ChangeNotifier {
       String lastname,
       String password,
       String district,
-      String typeofpets,
-      String price,
-      String ready) async {
-    var jsonString = await http.get(Uri.parse(Uri.encodeFull(
-        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
-    var l = jsonDecode(jsonString.body);
-    int id = l.length + 1;
+      bool ready) async {
     final Map<String, dynamic> registrationData = {
-      'District': district,
-      'Email': email,
-      'FirstName': firstname, //Map<tttt,User>
-      'LastName': lastname,
-      'Password': password,
-      'ReadyForOverposure': ready,
-      'UserID': id,
-      'TypeOfPets': typeofpets,
-      'Price': price,
+      'fname': firstname,
+      'lname': lastname,
+      'email': email, //Map<tttt,User>
+      'password': password,
+      'district': district,
+      'confirmation': ready,
     };
-    var response = await post(Uri.parse(AppUrl.register),
-        body: json.encode(registrationData));
-    //headers: {'content-type': 'text/plain'})
-    //headers: {'Content-Type': 'application/json'})
-    MyUser authUser = MyUser(
-      userid: registrationData['UserID'],
-      firstname: registrationData['FirstName'],
-      lastname: registrationData['LastName'],
-      password: registrationData['Password'],
-      readyforoverposure: registrationData['ReadyForOverposure'],
-      email: registrationData['Email'],
-      district: registrationData['District'],
-      
-      //stringID: registrationData['StringID']
-      //pet: registrationData['Pet'],
-    );
+    var response = await post(Uri.parse('http://vadimivanov-001-site1.itempurl.com/Register/RegisterUser'),
+        body: json.encode(registrationData),
+        headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
+        );
+    //var js = json.decode(response);
+    var jsonString = await http.get(Uri.parse(Uri.encodeFull(
+     'http://vadimivanov-001-site1.itempurl.com/Enter/EnterUserProfile?email=$email&password=$password' )));
+    var l;
+    if(jsonString.body!="")
+       l = jsonDecode(jsonString.body);
+    MyUser authUser = MyUser.fromJson(l);
     UserPreferences().saveUser(authUser);
     var result;
     if (response.request != null)

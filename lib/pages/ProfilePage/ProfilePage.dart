@@ -149,10 +149,12 @@ class _ProfilePageState extends StateMVC {
               else
                 allpets = snapshot.data;
               //pet = new Pet();
-
+              if(allpets.length!=0)
               pet = allpets[0];
+              else 
+              pet=null;
 
-              return pet.animal == null
+              return pet==null
                   ? Container(
                       padding: EdgeInsets.all(20),
                       child: Center(

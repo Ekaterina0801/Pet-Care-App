@@ -84,9 +84,10 @@ Future<Pet> getPet() async {
     int userid = prefs.getInt('userId') ;
     Response res = await http.get(Uri.parse(Uri.encodeFull('http://vadimivanov-001-site1.itempurl.com/Load/LoadPets?user_id=$userid')));
     List<Pet> pets = [];
-    if (res.statusCode == 200) {
+    var ll = jsonDecode(res.body);
+    if (res.statusCode == 200&&ll!="Not successful, there are no pets") {
 
-      var ll = jsonDecode(res.body);
+      
       
       for(var t in ll)
       {
@@ -97,7 +98,8 @@ Future<Pet> getPet() async {
       }
       
     } else {
-      throw "Unable to retrieve pets.";
+      return pets;
+      
     }return pets;
   }
 
