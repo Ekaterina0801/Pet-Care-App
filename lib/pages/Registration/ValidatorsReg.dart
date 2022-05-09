@@ -31,3 +31,15 @@ String validatePassword(String value) {
    _msg = "Пароль должен содержать символы латиницы в обоих регистрах \n и не менее 1 цифры и спецсимвола";
   return _msg;
 }
+
+String validateMoney(String value) {
+  String _msg;
+  RegExp regex = new RegExp(
+      r'^((\d+[.,\,]\d+)|(\d+))$');
+  if (value.isEmpty) {
+    _msg = "Введите цену";
+  } else if (!regex.hasMatch(value)) 
+   _msg = "Введите только число (не обязательное целое)";
+  return _msg;
+}
+

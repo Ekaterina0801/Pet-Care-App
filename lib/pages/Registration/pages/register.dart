@@ -79,7 +79,7 @@ class _RegisterState extends State<Register> {
 
     final priceField = TextFormField(
       autofocus: false,
-      validator: (value) => value.isEmpty ? "Цена пустая" : null,
+      validator:  validateMoney,
       onSaved: (value) => _price = value,
       decoration:
           buildInputDecoration("Введите цену", Icons.monetization_on_rounded),
