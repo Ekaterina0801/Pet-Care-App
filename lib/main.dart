@@ -71,19 +71,24 @@ class MyApp extends StatelessWidget {
         locale: Locale('ru'),
         theme: ThemeData(
           primarySwatch: Colors.yellow,
-          elevatedButtonTheme: ElevatedButtonThemeData(
+          
+          elevatedButtonTheme: ElevatedButtonThemeData( 
             style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                borderRadius:
+                BorderRadius.all(Radius.circular(10))),
               primary:
                Color.fromRGBO(255, 223, 142, 10),
             ),
           ),
-          textTheme: TextTheme(
+
+          textTheme: TextTheme( 
 
             //основной текст статьи, прививок, заметок и болезней
             bodyText1: GoogleFonts.comfortaa(
                       fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 16),
+                      fontWeight: FontWeight.w800, 
+                      fontSize: 16), 
 
             //appbar
             bodyText2: GoogleFonts.comfortaa(
