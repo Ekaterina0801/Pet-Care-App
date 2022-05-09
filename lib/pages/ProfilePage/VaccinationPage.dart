@@ -5,6 +5,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/ProfilePage/ValidatorDate.dart';
 import 'package:pet_care/pages/ProfilePage/vaccinationsrepo.dart';
+import 'package:pet_care/pages/Registration/ValidatorsReg.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:select_form_field/select_form_field.dart';
 
@@ -178,10 +179,7 @@ class _VaccinationPageState extends StateMVC {
                                               ),
                                               TextFormField(
                                                 maxLines: 3,
-                                                validator: (value) =>
-                                                    value.isEmpty
-                                                        ? "Введите текст"
-                                                        : null,
+                                                validator: validateText,
                                                 onChanged: (value) {
                                                   type = value;
                                                 },

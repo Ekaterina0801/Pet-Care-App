@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:pet_care/pages/Registration/ValidatorsReg.dart';
 
 import '../../dommain/myuser.dart';
 import '../BasePage.dart';
@@ -150,10 +151,7 @@ class _DiseasePageState extends StateMVC {
                                               ),
                                               TextFormField(
                                                 maxLines: 3,
-                                                validator: (value) =>
-                                                    value.isEmpty
-                                                        ? "Введите текст"
-                                                        : null,
+                                                validator:  validateText,
                                                 onChanged: (value) {
                                                   type = value;
                                                 },
