@@ -15,7 +15,6 @@ class NotesWidget extends StatefulWidget {
 
 class _NotesWidgetState extends State<NotesWidget> {
   Note get note => null;
-
   String get oldbody => null;
 
   void update() {
@@ -71,7 +70,7 @@ class _NotesWidgetState extends State<NotesWidget> {
                     onPressed: () {
                       setState(
                         () {
-                           _displayNoteUpdate(context, oldbody, note, update);
+                           _displayNoteUpdate(context, widget.note.body, widget.note, update);
                            update();
                         },
                       );
