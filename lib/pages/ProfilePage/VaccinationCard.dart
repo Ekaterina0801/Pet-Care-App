@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/pages/ProfilePage/vaccinationsrepo.dart';
 
+import '../BasePage.dart';
 import 'Vaccination.dart';
 import 'VaccinationPage.dart';
 
@@ -20,63 +21,70 @@ class _VaccinationsCardState extends State<VaccinationsCard> {
   void update() {
     this.setState(() {});
   }
+
   String _info;
-  
+
   @override
-  
   Widget build(BuildContext context) {
-    if(widget.vac.revaccination)
-    _info="Да";
-    else _info="Нет";
+    if (widget.vac.revaccination||widget.vac.revaccination==null)
+      _info = "Да";
+    else
+      _info = "Нет";
     return Container(
+       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       decoration: BoxDecoration(color: Color.fromRGBO(255, 223, 142, 100)),
       child: Column(
         children: [
           Image.asset(photos[0]),
           Row(
             children: [
+              
               Container(
-                margin: EdgeInsets.all(15),
+                margin: EdgeInsets.all(5),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     widget.vac.date,
                     textAlign: TextAlign.left,
-                    style: GoogleFonts.comfortaa(
-                        decoration: TextDecoration.underline,
-                        //fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 15),
-                  ),
+                    style: Theme.of(context).copyWith().textTheme.bodyText1),
                 ),
               ),
               IconButton(
-                  onPressed: () => deleteVacc(widget.vac, update),
+                  onPressed: () {
+                    deleteVacc(widget.vac, update);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => HomePage(4),
+                      ),
+                    );
+                  },
                   icon: Icon(Icons.delete))
             ],
           ),
+
           Container(
             child: Row(
               children: [
                 Container(
                   //padding: EdgeInsets.all(10.0),
-                  margin: EdgeInsets.all(18),
+                  margin: EdgeInsets.all(15),
                   child: Text(
                     widget.vac.type,
                     textAlign: TextAlign.left,
-                    style:Theme.of(context).copyWith().textTheme.bodyText1,
+                    style: Theme.of(context).copyWith().textTheme.bodyText1,
                   ),
                 ),
               ],
             ),
           ),
+
           Align(
             alignment: Alignment.centerLeft,
             child: Container(
-                padding: EdgeInsets.all(18),
+                padding: EdgeInsets.all(15),
                 child: Text(
-                  'Нужна ли ревакцинация: ' +
-                      _info,
+                  'Нужна ли ревакцинация: ' + _info,
                   style: Theme.of(context).copyWith().textTheme.bodyText1,
                 )),
           )

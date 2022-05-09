@@ -1,18 +1,19 @@
 import 'dart:convert';
-
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
-import 'package:pet_care/pages/ProfilePage/AvatarBlock.dart';
-import 'package:pet_care/pages/ProfilePage/MainInfoBlock.dart';
 import 'package:pet_care/pages/ProfilePage/Passport.dart';
 import 'package:pet_care/pages/ProfilePage/Pet.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'AddAnimal.dart';
 // импортируем http пакет
 import 'package:http/http.dart' as http;
+
+import 'MainInfoBlock.dart';
 
 /*
 var h = window.physicalSize.height;
@@ -26,9 +27,9 @@ double FindCenterForPlus(double h) {
 }
 */
 String AgeCalculate(String date) {
-  int dateBirthYear = int.parse(date.substring(6, 10));
-  int dateBirthMonth = int.parse(date.substring(3, 5));
-  int dateBirthDay = int.parse(date.substring(0, 2));
+  int dateBirthYear = int.parse(date.substring(0, 4));
+  int dateBirthMonth = int.parse(date.substring(8, 10));
+  int dateBirthDay = int.parse(date.substring(5, 7));
 
   var ageYears = (DateTime.now().year - dateBirthYear).round();
   var thisMonth = DateTime.now().month;
@@ -58,10 +59,12 @@ String AgeCalculate(String date) {
     else if (thisDay < dateBirthDay) month = 12;
   }
 
-  if (month == 1) month_str = "1 месяц";
-  else if (month == 2 || month == 3 || month ==4)
-  month_str = "$month месяца";
-  else month_str="$month месяцев";
+  if (month == 1)
+    month_str = "1 месяц";
+  else if (month == 2 || month == 3 || month == 4)
+    month_str = "$month месяца";
+  else
+    month_str = "$month месяцев";
 
   String ageString = years + "\n" + month_str;
   return ageString;
@@ -101,7 +104,18 @@ class _ProfilePageState extends StateMVC {
   MyUser user;
   Pet pet = new Pet();
   List<Pet> allpets = [];
-
+  File imageFile;
+  _getFromGallery() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      imageFile = File(pickedFile.path);
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     //Future<MyUser> getUserData() => UserPreferences().getUser();
@@ -117,8 +131,7 @@ class _ProfilePageState extends StateMVC {
         child: Text(
           state.error,
           textAlign: TextAlign.center,
-          style:
-              Theme.of(context).textTheme.headline4.copyWith(color: Colors.red),
+          style:Theme.of(context).textTheme.headline4.copyWith(color: Colors.red),
         ),
       );
     } else {
@@ -136,15 +149,12 @@ class _ProfilePageState extends StateMVC {
               else
                 allpets = snapshot.data;
               //pet = new Pet();
+              if(allpets.length!=0)
+              pet = allpets[0];
+              else 
+              pet=null;
 
-              for (var i in allpets) {
-                if (i.userID == user.userid) {
-                  pet = i;
-                  break;
-                }
-              }
-
-              return pet.animal == null
+              return pet==null
                   ? Container(
                       padding: EdgeInsets.all(20),
                       child: Center(
@@ -184,13 +194,8 @@ class _ProfilePageState extends StateMVC {
                                   ),
                                   Container(
                                     margin: EdgeInsets.all(10),
-                                    child: Text(
-                                      "Добавить нового питомца",
-                                      style: GoogleFonts.comfortaa(
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 18),
-                                    ),
+                                    child: Text("Добавить нового питомца",
+                                      style: Theme.of(context).copyWith().textTheme.headline1),
                                   ),
                                 ],
                               ),
@@ -214,11 +219,32 @@ class _ProfilePageState extends StateMVC {
                             ],
                           ),
                           padding: EdgeInsets.all(10),
-                          child: Row(
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              AvatarBlock(
-                                  pet.name, 'assets/images/article_1.2.jpg'),
+                              imageFile != null
+                                  ? Container(
+                                      child: Image.file(
+                                        imageFile,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Container(
+                                      child: Image.asset(
+                                        'assets/images/article_1.2.jpg',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                              //  AvatarBlock(
+                              //     pet.name, 'assets/images/article_1.2.jpg'),
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(pet.name,style: Theme.of(context).textTheme.bodyText1),
+                              ),
+                              ElevatedButton(
+                                onPressed: _getFromGallery,
+                                child: Text("Добавить фото из галереи",style: Theme.of(context).textTheme.bodyText1),
+                              )
                             ],
                           ),
                         ),
@@ -229,14 +255,9 @@ class _ProfilePageState extends StateMVC {
                               Container(
                                 padding: EdgeInsets.all(10),
                                 alignment: Alignment.topRight,
-                                child: Text(
-                                  "Основные данные",
+                                child: Text("Основные данные",
                                   textAlign: TextAlign.center,
-                                  style: GoogleFonts.comfortaa(
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 20),
-                                ),
+                                 style: Theme.of(context).copyWith().textTheme.headline2),
                               ),
                               Container(
                                 alignment: Alignment.topRight,
@@ -270,34 +291,25 @@ class _ProfilePageState extends StateMVC {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              MainInfoBlock(
-                                "Возраст",
-                               AgeCalculate(pet.dateofbirthday),
+                              MainInfoBlock( "Возраст",AgeCalculate(pet.dateofbirthday),
                                 Color.fromRGBO(131, 184, 107, 80),
                               ),
                               MainInfoBlock(
                                 "Вес",
-                                pet.weight + " кг",
+                                pet.weight.toString() + " кг",
                                 Color.fromRGBO(255, 223, 142, 10),
                               ),
-                              MainInfoBlock(
-                                "Пол",
-                                pet.gender,
+                              MainInfoBlock("Пол",pet.gender,
                                 Color.fromRGBO(129, 181, 217, 90),
                               ),
                             ],
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.all(10),
-                          child: Text(
-                            "Паспорт питомца",
+                          padding: EdgeInsets.all(8),
+                          child: Text("Паспорт питомца",
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.comfortaa(
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 18),
-                          ),
+                            style: Theme.of(context).copyWith().textTheme.headline2),
                         ),
                         Container(
                           padding: EdgeInsets.only(left: 0, top: 10),
@@ -326,18 +338,12 @@ class _ProfilePageState extends StateMVC {
     final formKey1 = new GlobalKey<FormState>();
     final formKey2 = new GlobalKey<FormState>();
     var newname = pet.name;
-    var newweight = pet.weight;
+    var newweight = pet.weight.toString();
     AlertDialog alert = AlertDialog(
       title: Align(
         alignment: Alignment.bottomCenter,
-        child: Text(
-          'Изменить основные данные',
-          style: GoogleFonts.comfortaa(
-              color: Colors.black,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w800,
-              fontSize: 16),
-        ),
+        child: Text('Изменить основные данные',
+          style: Theme.of(context).copyWith().textTheme.bodyText1),
       ),
       actions: [
         Column(
@@ -352,8 +358,7 @@ class _ProfilePageState extends StateMVC {
                     autofocus: false,
                     onChanged: (value) => newname = value,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 15),
                   ),
                 ],
               ),
@@ -365,30 +370,30 @@ class _ProfilePageState extends StateMVC {
                   addInfo('Введите вес питомца'),
                   TextFormField(
                     autofocus: false,
-                    initialValue: pet.weight,
-                    onChanged: (value) => newweight = value,
+                    initialValue: pet.weight.toString(),
+                    onChanged: (value) => newweight = value.toString(),
                   ),
                 ],
               ),
             ),
-            Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-            ElevatedButton(
-              //color: Color.fromRGBO(255, 223, 142, 10),
-              //splashColor: Color.fromARGB(199, 240, 240, 240),
-              onPressed: () {
-                updateName(newname, pet);
-                updateWeight(newweight, pet);
-                update();
-                Navigator.pop(context, true);
-                update();
-              },
-              child: Text(
-                'Принять',
-                textAlign: TextAlign.left,
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 11),
+
+            Padding(padding: EdgeInsets.symmetric(vertical: 25)),
+
+            Container(
+              height: 33,
+              child: ElevatedButton(
+                //color: Color.fromRGBO(255, 223, 142, 10),
+                //splashColor: Color.fromARGB(199, 240, 240, 240),
+                onPressed: () {
+                  updateName(newname, pet);
+                  updateWeight(newweight, pet);
+                  update();
+                  Navigator.pop(context, true);
+                  update();
+                },
+                child: Text('Применить',
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context).copyWith().textTheme.bodyText1),
               ),
             ),
           ],
@@ -414,18 +419,12 @@ _displayInfoPet(BuildContext context, Pet pet, void update()) {
   final formKey1 = new GlobalKey<FormState>();
   final formKey2 = new GlobalKey<FormState>();
   var newname = pet.name;
-  var newweight = pet.weight;
+  var newweight = pet.weight.toString();
   AlertDialog alert = AlertDialog(
     title: Align(
       alignment: Alignment.bottomCenter,
-      child: Text(
-        'Изменить основные данные',
-        style: GoogleFonts.comfortaa(
-            color: Colors.black,
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w800,
-            fontSize: 16),
-      ),
+      child: Text('Изменить основные данные',
+          style: Theme.of(context).copyWith().textTheme.bodyText1),
     ),
     actions: [
       Column(
@@ -440,7 +439,9 @@ _displayInfoPet(BuildContext context, Pet pet, void update()) {
                   autofocus: false,
                   onChanged: (value) => newname = value,
                 ),
-                Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+
+                Padding(padding: EdgeInsets.symmetric(vertical: 15)),
+
               ],
             ),
           ),
@@ -451,29 +452,29 @@ _displayInfoPet(BuildContext context, Pet pet, void update()) {
                 addInfo('Введите вес питомца'),
                 TextFormField(
                   autofocus: false,
-                  initialValue: pet.weight,
+                  initialValue: pet.weight.toString(),
                   onChanged: (value) => newweight = value,
                 ),
               ],
             ),
           ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-          ElevatedButton(
-            //color: Color.fromRGBO(255, 223, 142, 10),
-            //splashColor: Color.fromARGB(199, 240, 240, 240),
-            onPressed: () {
-              updateName(newname, pet);
-              updateWeight(newweight, pet);
-              Navigator.pop(context, true);
-              update();
-            },
-            child: Text(
-              'Принять',
-              textAlign: TextAlign.left,
-              style: GoogleFonts.comfortaa(
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 11),
+
+          Padding(padding: EdgeInsets.symmetric(vertical: 25)),
+
+          Container(
+            height: 33,
+            child: ElevatedButton(
+              //color: Color.fromRGBO(255, 223, 142, 10),
+              //splashColor: Color.fromARGB(199, 240, 240, 240),
+              onPressed: () {
+                updateName(newname, pet);
+                updateWeight(newweight, pet);
+                Navigator.pop(context, true);
+                update();
+              },
+              child: Text('Применить',
+                textAlign: TextAlign.left,
+                style: Theme.of(context).copyWith().textTheme.bodyText1),
             ),
           ),
         ],
@@ -555,32 +556,38 @@ class _ChangeInfoState extends State<ChangeInfo> {
 }
 */
 Future<http.Response> updateName(String newtext, Pet pet) async {
-  pet.name = newtext;
-  return http.put(
+
+  final Map<String, dynamic> petData = {
+    'what':"pet_name",  
+    'id': pet.petId,
+    'new_value': newtext,
+  };
+  return http.post(
     Uri.parse(Uri.encodeFull(
-        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets/' +
-            pet.petidString +
-            '.json')),
-    body: jsonEncode(pet),
+        'http://vadimivanov-001-site1.itempurl.com/Update/UpdateInformation')),
+    body: jsonEncode(petData),
+    headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
   );
 }
 
 Future<http.Response> updateWeight(String newtext, Pet pet) async {
-  pet.weight = newtext;
-  return http.put(
+  final Map<String, dynamic> petData = {
+    'what':"weight",  
+    'id': pet.petId,
+    'new_value': newtext,
+  };
+  return http.post(
     Uri.parse(Uri.encodeFull(
-        'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets/' +
-            pet.petidString +
-            '.json')),
-    body: jsonEncode(pet),
+        'http://vadimivanov-001-site1.itempurl.com/Update/UpdateInformation')),
+    body: jsonEncode(petData),
+    headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
   );
 }
 
 Widget addInfo(String text) {
   return Align(
     alignment: Alignment.bottomLeft,
-    child: Text(
-      text,
+    child: Text(text,
       style: GoogleFonts.comfortaa(
           color: Colors.black,
           fontStyle: FontStyle.normal,

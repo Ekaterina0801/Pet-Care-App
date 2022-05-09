@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care/pages/ProfilePage/diseaserepo.dart';
 
+import '../BasePage.dart';
 import 'Disease.dart';
 
 //ignore: must_be_immutable
@@ -19,6 +20,7 @@ class _DiseaseCardState extends State<DiseaseCard> {
   void update() {
     this.setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,7 +35,7 @@ class _DiseaseCardState extends State<DiseaseCard> {
                   textAlign: TextAlign.left,
                   style: Theme.of(context).copyWith().textTheme.bodyText1),
               subtitle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                       "Начало: " +
@@ -42,13 +44,25 @@ class _DiseaseCardState extends State<DiseaseCard> {
                           "Конец: " +
                           widget.disease.dateofending,
                       style: Theme.of(context).copyWith().textTheme.bodyText1),
-                      Container(child: IconButton(onPressed: ()=>deleteDisease(widget.disease,update), icon: Icon(Icons.delete)))
+                  Container(
+                    child: IconButton(
+                      onPressed: () {
+                        deleteDisease(widget.disease, update);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => HomePage(4),
+                          ),
+                        );
+                      },
+                      icon: Icon(Icons.delete),
+                    ),
+                  )
                 ],
               ),
             ),
           ),
         ),
-      
       ],
     );
   }

@@ -23,10 +23,8 @@ class _RegisterState extends State<Register> {
       _password,
       _firstname,
       _lastname,
-      _price,
-      _typepets,
-      _district,
-      _ready;
+      _district;
+     bool _ready;
 
   @override
   Widget build(BuildContext context) {
@@ -91,14 +89,6 @@ class _RegisterState extends State<Register> {
     );
 
 
-    final priceField = TextFormField(
-      autofocus: false,
-      validator:  validateDigits,
-      onSaved: (value) => _price = value,
-      decoration:
-          buildInputDecoration("Введите цену", Icons.monetization_on_rounded),
-    );
-
     final readyField = SelectFormField(
       autofocus: false,
       items: [
@@ -106,19 +96,10 @@ class _RegisterState extends State<Register> {
         {'value': 'Нет', 'label': 'Нет'}
       ],
       validator: (value) => value.isEmpty ? "Поле пустое" : null,
-      onChanged: (value) => _ready = value,
-      onSaved: (value) => _ready = value,
+      onChanged: (value) => value=="Да"?_ready = true:_ready=false,
+      onSaved: (value) => value=="Да"?_ready = true:_ready=false,
       decoration: buildInputDecoration(
           "Готовы брать питомцев на передержку? (true/false)", Icons.home),
-    );
-
-    final typeField = TextFormField(
-      autofocus: false,
-      validator: (value) => value.isEmpty ? "Поле пустое" : null,
-      onSaved: (value) => _typepets = value,
-      decoration: buildInputDecoration(
-          "Готовы брать питомцев на передержку? (true/false)",
-          Icons.pets_outlined),
     );
     var loading = Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -134,7 +115,7 @@ class _RegisterState extends State<Register> {
         form.save();
         auth
             .register(_email, _firstname, _lastname, _password, _district,
-                _typepets, _price, _ready)
+                 _ready)
             .then((response) {
           if (response['status']) {
             MyUser user = response['data'];
@@ -190,15 +171,15 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 10.0),
                     districtField,
                     SizedBox(height: 15.0),
-                    label("Стоимость передержки"),
-                    SizedBox(height: 10.0),
-                    priceField,
-                    SizedBox(height: 15.0),
-                    SizedBox(height: 15.0),
-                    label("Виды животных"),
-                    SizedBox(height: 10.0),
-                    typeField,
-                    SizedBox(height: 15.0),
+                    //label("Стоимость передержки"),
+                    //SizedBox(height: 10.0),
+                    //priceField,
+                    //SizedBox(height: 15.0),
+                   //SizedBox(height: 15.0),
+                    //label("Виды животных"),
+                    //SizedBox(height: 10.0),
+                    //typeField,
+                    //SizedBox(height: 15.0),
                     label("Готовы брать на передержку?"),
                     SizedBox(height: 10.0),
                     readyField,

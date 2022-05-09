@@ -15,7 +15,7 @@ class NoteController extends ControllerMVC {
   void init() async {
     try {
       // получаем данные из репозитория
-      final notesList = await repo.getNotes();
+      final notesList = await repo.getNotesByID();
       // если все ок то обновляем состояние на успешное
       setState(() => currentState = NoteResultSuccess(notesList));
     } catch (error) {

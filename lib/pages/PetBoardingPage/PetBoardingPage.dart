@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
+import 'package:pet_care/pages/PetBoardingPage/repo.dart';
 import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
@@ -31,6 +32,7 @@ class _PetBoardingPageState extends StateMVC {
 
   //final formKey = new GlobalKey<FormState>();
   MyUser user;
+  List<MyUser> k=[];
   @override
   Widget build(BuildContext context) {
     Future<MyUser> getUserData() => UserPreferences().getUser();
@@ -51,18 +53,16 @@ class _PetBoardingPageState extends StateMVC {
                 .copyWith(color: Colors.red)),
       );
     } else {
-      final l = (state as MyUserResultSuccess).usersList;
-      final k = [];
-      for (var t in l) {
-        if (t.readyforoverposure == "Да") k.add(t);
-      }
+      //final l = (state as MyUserResultSuccess).usersList;
+      //k.add(l);
+       
       return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => AuthProvider()),
           ChangeNotifierProvider(create: (_) => UserProvider()),
         ],
         child: FutureBuilder(
-            future: getUserData(),
+            future: RepositoryUsersList().getUsersList(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
@@ -72,7 +72,7 @@ class _PetBoardingPageState extends StateMVC {
                   if (snapshot.hasError)
                     return Text('Error: ${snapshot.error}');
                   else
-                    user = snapshot.data;
+                    k = snapshot.data;
                   return ListView(
                     physics: ScrollPhysics(),
                     children: [

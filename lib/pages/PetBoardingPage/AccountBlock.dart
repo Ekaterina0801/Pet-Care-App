@@ -67,9 +67,9 @@ class _AccountBlockState extends State<AccountBlock> {
                         Text(
                             widget.account.firstname + " "+widget.account.lastname+
                                 '\n' +
-                                widget.account.typePets +
-                                '\n' +
-                                widget.account.price +
+                                widget.account.pets[0].animal +
+                                '\n' +"1000"
+                                //widget.account.price +
                                 ' руб/день',
                             maxLines: 9,
                             overflow: TextOverflow.ellipsis,
@@ -123,13 +123,14 @@ class _AccountBlockState extends State<AccountBlock> {
               user.firstname+" " +user.lastname+
               "\n" +
               "Кого готовы взять на передержку: " +
-             user.typePets +
+             user.pets[0].animal +
               "\n" +
               "Контакты: " +
               user.email +
               "\n" +
               "Стоимость передержки: " +
-              user.price +
+              //user.price +
+              "1000"
               "\nРайон: " +
               user.district,
           style: GoogleFonts.comfortaa(

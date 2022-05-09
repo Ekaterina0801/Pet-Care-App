@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/dommain/myuser.dart';
@@ -14,7 +15,26 @@ import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'pages/BasePage.dart';
 import 'pages/welcomescreen.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var initializationSettingsAndroid =
+      AndroidInitializationSettings('icon');
+  var initializationSettingsIOS = IOSInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+      onDidReceiveLocalNotification:
+          (int id, String title, String body, String payload) async {});
+  var initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+      onSelectNotification: (String payload) async {
+    if (payload != null) {
+      debugPrint('notification payload: ' + payload);
+    }
+  });
   runApp(MyApp());
 }
 
@@ -47,14 +67,14 @@ class MyApp extends StatelessWidget {
                     return Login();
                   else
                     //UserPreferences().removeUser();
-                    return HomePage();
+                    return HomePage(0);
               }
             }),
         routes: {
           '/login': (context) => Login(),
           //'test':(context)=>DisplayAddNote(),
           '/register': (context) => Register(),
-          '/home': (BuildContext context) => HomePage(),
+          '/home': (BuildContext context) => HomePage(0),
           '/notes': (context) => NotesPage(),
           '/welcome': (context) => WelcomeScreen()
         },
@@ -71,26 +91,42 @@ class MyApp extends StatelessWidget {
         locale: Locale('ru'),
         theme: ThemeData(
           primarySwatch: Colors.yellow,
-          elevatedButtonTheme: ElevatedButtonThemeData(
+          
+          elevatedButtonTheme: ElevatedButtonThemeData( 
             style: ElevatedButton.styleFrom(
-              primary:
-               Color.fromRGBO(255, 223, 142, 10),
+                shape: RoundedRectangleBorder(
+                borderRadius:
+                BorderRadius.all(Radius.circular(10))),
+              primary:Color.fromRGBO(255, 223, 142, 10),
             ),
           ),
-          textTheme: TextTheme(
+
+          textTheme: TextTheme( 
+
+            //основной текст статьи, прививок, заметок и болезней
+            bodyText1: GoogleFonts.comfortaa(
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800, 
+                      fontSize: 16), 
 
             //appbar
             bodyText2: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w800,
                 fontSize: 20),
+          
+            // кнопки
+            headline1: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 17),
 
-            //основной текст статьи, прививок, заметок и болезней
-            bodyText1: GoogleFonts.comfortaa(
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 16)
-            
+            // заголовки шапок окон изменений и добавлений
+            headline2: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w900,
+                fontSize: 20),
+
           ),
         ),
       ),

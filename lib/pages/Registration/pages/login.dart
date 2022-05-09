@@ -25,17 +25,14 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     AuthProvider auth = Provider.of<AuthProvider>(context);
 
-    final emailField = 
-
-    TextFormField(
+    final emailField = TextFormField(
       autofocus: false,
       validator: validateEmail,
       onSaved: (value) => _email = value,
       decoration: buildInputDecoration("Confirm password", Icons.email),
     );
 
-    final passwordField = 
-    TextFormField(
+    final passwordField = TextFormField(
       autofocus: false,
       obscureText: true,
       validator: validatePassword,
@@ -67,16 +64,16 @@ class _LoginState extends State<Login> {
         ),*/
         TextButton(
           //padding: EdgeInsets.only(left: 0.0),
-          child: Text("Регистрация", 
-          style: GoogleFonts.comfortaa(color: Color.fromARGB(255, 54, 28, 0),
-                           fontWeight: FontWeight.w300,
-                           fontStyle: FontStyle.italic,
-                           fontSize: 18)),
+          child: Text("Регистрация",
+              style: GoogleFonts.comfortaa(
+                  color: Color.fromARGB(255, 54, 28, 0),
+                  fontWeight: FontWeight.w300,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 18)),
           onPressed: () {
             //Navigator.pushNamed(context, '/register');
-            Navigator.push(context, MaterialPageRoute(
-  	builder: (context) => Register()
-  ));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Register()));
           },
         ),
       ],
@@ -111,62 +108,75 @@ class _LoginState extends State<Login> {
     };
 
     return BasePage(
-      title: "Авторизация",
-      body: Scaffold(
-        body: Container(
-         padding: EdgeInsets.all(30.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  //child: Align(
+        title: "Авторизация",
+        body: Scaffold(
+          body: Container(
+            padding: EdgeInsets.all(30.0),
+            child: Form(
+              key: formKey,
+              child: Column(
+                //crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    //child: Align(
                     //alignment: Alignment.topCenter,
-                  child: Row(
-                    children: [
-                    ],
-                    //),
-                  ),
-                ),
-                SizedBox(height: 12.0), // отступ (высота) между "Авторизация" и "почта"
-                label("Электронная почта"),
-                SizedBox(height: 5.0), // отступ (высота) между "почта" и белым контейнером "почта"
-                emailField,
-                SizedBox(height: 20.0), // отступ (высота) между желтым контейнером "почта" и белым контейнером "почта"
-                label("Пароль"),
-                SizedBox(height: 5.0), // отступ (высота) между "пароль" и белым контейнером "пароль"
-                passwordField,
-                SizedBox(height: 20.0), // отступ (высота) между желтым контейнером "вход" и белым контейнером "пароль"
-                
-                auth.loggedInStatus == Status.Authenticating
-                    ? loading
-                    : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        longButtons("Вход", doLogin),
-                      ],
+                    child: Row(
+                      children: [],
+                      //),
                     ),
-                    
-                SizedBox(height: 5.0), // отступ (высота) между желтым контейнером "вход" и контейнерами "ЗП?" и "Регистрация"
-                forgotLabel,
-                SizedBox(height: 10,),
-                Container(
-                              child: Flexible(
-                                child: Text(
-                                  "Баг: при попытке ввести несуществующие в БД данные приложение ломается. Будет устранен", style:  GoogleFonts.comfortaa(
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w400, 
-              fontSize: 12                  
+                  ),
+                  SizedBox(
+                      height:
+                          12.0), // отступ (высота) между "Авторизация" и "почта"
+                  label("Электронная почта"),
+                  SizedBox(
+                      height:
+                          5.0), // отступ (высота) между "почта" и белым контейнером "почта"
+                  emailField,
+                  SizedBox(
+                      height:
+                          20.0), // отступ (высота) между желтым контейнером "почта" и белым контейнером "почта"
+                  label("Пароль"),
+                  SizedBox(
+                      height:
+                          5.0), // отступ (высота) между "пароль" и белым контейнером "пароль"
+                  passwordField,
+                  SizedBox(
+                      height:
+                          20.0), // отступ (высота) между желтым контейнером "вход" и белым контейнером "пароль"
+
+                  auth.loggedInStatus == Status.Authenticating
+                      ? loading
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            longButtons("Вход", doLogin),
+                          ],
+                        ),
+
+                  SizedBox(
+                      height:
+                          5.0), // отступ (высота) между желтым контейнером "вход" и контейнерами "ЗП?" и "Регистрация"
+                  forgotLabel,
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    child: Flexible(
+                      child: Text(
+                        "Баг: при попытке ввести несуществующие в БД данные приложение ломается. Будет устранен",
+                        style: GoogleFonts.comfortaa(
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12),
+                        softWrap: true,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-                                  softWrap: true,),
-                              ),
-                            ),
-              ],
             ),
-          
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 }

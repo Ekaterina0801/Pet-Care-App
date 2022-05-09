@@ -6,37 +6,29 @@ import 'package:http/http.dart' as http;
 
 
 class Disease {
-  String diseaseID;
-  int petID;
-  int userID;
+  int diseaseID;
   String type;
   String dateofbeggining;
   String dateofending;
 
   Disease(
       {this.diseaseID,
-      this.userID,
-      this.petID,
       this.type,
       this.dateofbeggining,
       this.dateofending});
 
   factory Disease.fromJson(Map<String, Object> json) => Disease(
-        diseaseID: json['DiseaseID'],
-        type: json['Type'],
-        petID: json['PetID'],
-        dateofbeggining: json['DateOfBeggining'],
-        dateofending: json['DateOfEnding'],
-        userID: json['UserID'],
+        diseaseID: json['illnessId'],
+        type: json['type'],
+        dateofbeggining: json['dateOfBegining'],
+        dateofending: json['dateOfEnding'],
       );
 
   Map<String, dynamic> toJson() => {
-        'DiseaseID': diseaseID,
-        'Type': type,
-        'PetID': petID,
-        'DateOfBeggining': dateofbeggining,
-        'DateOfEnding': dateofending,
-        'UserID': userID
+        'illnessId': diseaseID,
+        'type': type,
+        'dateOfBegining': dateofbeggining,
+        'dateOfEnding': dateofending,
       };
 }
 
@@ -44,12 +36,11 @@ Future<List<Disease>> getDiseases(int userID) async {
   Response res = await http.get(Uri.parse(Uri.encodeFull(
       'https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Diseases.json')));
   Disease(
-      diseaseID: "0",
+      diseaseID: 0,
       type: "-",
-      petID: 0,
       dateofbeggining: "-",
       dateofending: "-",
-      userID: userID);
+      );
   List<Disease> vacc = [];
   if (res.statusCode == 200) {
     var ll = jsonDecode(res.body);

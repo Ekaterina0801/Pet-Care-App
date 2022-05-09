@@ -52,7 +52,6 @@ class _VaccinationPageState extends StateMVC {
   bool revaccination = false;
   MyUser user;
   List<Vaccination> vacc = [];
-  List<Vaccination> allvacc = [];
   final formKey = new GlobalKey<FormState>();
 
   @override
@@ -72,18 +71,18 @@ class _VaccinationPageState extends StateMVC {
                   if (snapshot.hasError)
                     return Text('Error: ${snapshot.error}');
                   else
-                    allvacc = snapshot.data;
+                    vacc = snapshot.data;
               }
-              vacc = [];
-              for (var n in allvacc) {
-                if (n.userID == user.userid) vacc.add(n);
-              }
+              
               return ListView(
                 shrinkWrap: true,
                 children: [
                   ElevatedButton(
                     //height: 50,
                     //color: Colors.grey.shade200,
+                    style: ElevatedButton.styleFrom(
+                    primary: Colors.grey.shade200,
+                  ),
                     onPressed: () {
                       setState(
                         () {
@@ -92,13 +91,13 @@ class _VaccinationPageState extends StateMVC {
                             title: Container(
                               child: Align(
                                 alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  'Добавление прививки',
-                                  style: GoogleFonts.comfortaa(
+                                child: Text('Добавление прививки',
+                                style: Theme.of(context).copyWith().textTheme.headline2),
+                                  /*style: GoogleFonts.comfortaa(
                                       fontStyle: FontStyle.normal,
                                       fontWeight: FontWeight.w900,
                                       fontSize: 18),
-                                ),
+                                ),*/
                               ),
                             ),
                             actions: [
@@ -120,8 +119,7 @@ class _VaccinationPageState extends StateMVC {
                                     () {
                                       if (formKey.currentState.validate()) {
                                         formKey.currentState.save();
-                                        addVaccination("0", user.userid, "0",
-                                            date, type, "", revaccination);
+                                        addVaccination(date,type,"",revaccination);
                                       }
                                       this.setState(() {});
                                     },
@@ -135,19 +133,16 @@ class _VaccinationPageState extends StateMVC {
                                   if (formKey.currentState.validate())
                                     setState(() {
                                       formKey.currentState.save();
-                                      addVaccination("0", user.userid, "0",
-                                          date, type, "", revaccination);
+                                      addVaccination(date,type,"",revaccination);
                                       this.setState(() {});
                                       Navigator.of(context).pop(true);
                                     });
                                 },
-
-                                //Navigator.pushNamed(context, "/notes");
                               ),
                             ],
+
                             content: Container(
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 1, vertical: 10),
+                              margin: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
                               child: Column(
                                 children: [
                                   Form(
@@ -155,26 +150,14 @@ class _VaccinationPageState extends StateMVC {
                                     child: Column(
                                       children: [
                                         Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 7, vertical: 12),
+                                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
                                           child: Column(
                                             children: [
                                               Container(
                                                 child: Align(
-                                                  alignment:
-                                                      Alignment.bottomLeft,
-                                                  child: Text(
-                                                      'Введите описание прививки:',
-                                                      //textAlign: TextAlign.left,
-                                                      style:
-                                                          GoogleFonts.comfortaa(
-                                                              fontStyle:
-                                                                  FontStyle
-                                                                      .normal,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w800,
-                                                              fontSize: 14)),
+                                                  alignment:Alignment.bottomLeft,
+                                                  child: Text('Введите описание прививки:',
+                                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
                                                 ),
                                               ),
                                               TextFormField(
@@ -185,22 +168,31 @@ class _VaccinationPageState extends StateMVC {
                                                 },
                                                 decoration: InputDecoration(
                                                   border: InputBorder.none,
-                                                  hintText:
-                                                      'Введите информацию о прививке',
+                                                  hintText:'Введите информацию о прививке',
                                                   hintStyle: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          153, 69, 69, 69)),
+                                                      color: Color.fromARGB(153, 69, 69, 69)),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          color: Color.fromARGB(
-                                              153, 229, 229, 229),
-                                        ),
-                                        SizedBox(height: 10),
+                                    decoration: BoxDecoration(
+                                    boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(43, 0, 0, 0),
+                                      blurRadius: 5,
+                                      offset: const Offset(0.0, 0.0),
+                                      spreadRadius: 2.0,
+                                    )
+                                  ],  
+                                    color: Color.fromARGB(202, 242, 242, 242),
+                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                                    borderRadius: BorderRadius.circular(10),
+                                    ),),
+
+                                        SizedBox(height: 15),
+
                                         Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 7, vertical: 12),
+                                          padding: EdgeInsets.symmetric( horizontal: 7, vertical: 12),
                                           //margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                                           child: Column(
                                             children: [
@@ -208,17 +200,8 @@ class _VaccinationPageState extends StateMVC {
                                                 child: Align(
                                                   alignment:
                                                       Alignment.bottomLeft,
-                                                  child: Text(
-                                                    'Введите дату прививки:',
-                                                    //textAlign: TextAlign.left,
-                                                    style:
-                                                        GoogleFonts.comfortaa(
-                                                            fontStyle: FontStyle
-                                                                .normal,
-                                                            fontWeight:
-                                                                FontWeight.w800,
-                                                            fontSize: 14),
-                                                  ),
+                                                  child: Text('Введите дату прививки:',
+                                                    style: Theme.of(context).copyWith().textTheme.bodyText1),
                                                 ),
                                               ),
                                               TextFormField(
@@ -229,40 +212,43 @@ class _VaccinationPageState extends StateMVC {
                                                 },
                                                 decoration: InputDecoration(
                                                   border: InputBorder.none,
-                                                  hintText:
-                                                      'Введите дату прививки',
+                                                  hintText:'Введите дату прививки',
                                                   hintStyle: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          153, 69, 69, 69)),
+                                                      color: Color.fromARGB(153, 69, 69, 69)),
                                                 ),
                                               ),
                                               SizedBox(height: 10.0),
                                             ],
                                           ),
-                                        ),
-                                        SizedBox(height: 10),
+                                    decoration: BoxDecoration(
+                                    boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(43, 0, 0, 0),
+                                      blurRadius: 5,
+                                      offset: const Offset(0.0, 0.0),
+                                      spreadRadius: 2.0,
+                                    )
+                                  ],  
+                                    color: Color.fromARGB(202, 242, 242, 242),
+                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                                    borderRadius: BorderRadius.circular(10),
+                                    ),),
+
+                                        SizedBox(height: 15),
+
                                         Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 7, vertical: 12),
+                                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 6),
                                           child: Column(
                                             children: [
                                               Container(
+                                                 padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
                                                 child: Align(
-                                                  alignment:
-                                                      Alignment.bottomLeft,
-                                                  child: Text(
-                                                    'Нужна ли ревакцинация:',
-                                                    //textAlign: TextAlign.left,
-                                                    style:
-                                                        GoogleFonts.comfortaa(
-                                                            fontStyle: FontStyle
-                                                                .normal,
-                                                            fontWeight:
-                                                                FontWeight.w800,
-                                                            fontSize: 14),
-                                                  ),
+                                                  alignment: Alignment.bottomLeft,
+                                                  child: Text('Нужна ли ревакцинация:',
+                                                    style: Theme.of(context).copyWith().textTheme.bodyText1),
                                                 ),
                                               ),
+
                                               Container(
                                                 child: SelectFormField(
                                                   autofocus: false,
@@ -290,14 +276,26 @@ class _VaccinationPageState extends StateMVC {
                                                       : revaccination = false,
                                                   decoration: buildInputDecoration(
                                                       "Нужна ли ревакцинация?",
-                                                      Icons.home),
+                                                      Icons.vaccines),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          color: Color.fromARGB(
-                                              153, 229, 229, 229),
+                                    decoration: BoxDecoration(
+                                    boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromARGB(43, 0, 0, 0),
+                                      blurRadius: 5,
+                                      offset: const Offset(0.0, 0.0),
+                                      spreadRadius: 2.0,
+                                    )
+                                  ],  
+                                    color: Color.fromARGB(202, 242, 242, 242),
+                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
+                                    borderRadius: BorderRadius.circular(10),
+                                    ),
                                         ),
+
                                       ],
                                     ),
                                   ),
@@ -321,14 +319,8 @@ class _VaccinationPageState extends StateMVC {
                     },
                     child: Align(
                       alignment: Alignment.bottomLeft,
-                      child: Text(
-                        '+ Добавить прививку',
-                        style: GoogleFonts.comfortaa(
-                            color: Colors.black,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 16),
-                      ),
+                      child: Text('+ Добавить прививку',
+                        style: Theme.of(context).copyWith().textTheme.bodyText1),
                     ),
                   ),
                   vacc.length == 0
@@ -343,13 +335,8 @@ class _VaccinationPageState extends StateMVC {
                                           window.physicalSize.height / 2 - 48),
                                   Align(
                                     alignment: Alignment.center,
-                                    child: Text(
-                                      "Отмеченных прививок пока нет",
-                                      style: GoogleFonts.comfortaa(
-                                          fontStyle: FontStyle.normal,
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 16),
-                                    ),
+                                    child: Text("Отмеченных прививок пока нет",
+                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
                                   ),
                                 ],
                               ),

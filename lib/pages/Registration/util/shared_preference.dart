@@ -14,7 +14,10 @@ class UserPreferences {
     prefs.setString('email', user.email);
     prefs.setString('password', user.password);
     prefs.setString('district', user.district);
-    prefs.setString('readyforoverposure', user.readyforoverposure);
+    prefs.setString('photoPet', "");
+    prefs.setBool('readyForOverposure', user.readyforoverposure);
+    //prefs.
+    //prefs.setString('imageProfile','');
     //prefs.set
     //prefs.setStringList('vaccinations');
     print("object prefere");
@@ -32,7 +35,9 @@ class UserPreferences {
     String password = prefs.getString('password');
     String lastname = prefs.getString('lastname');
     String district = prefs.getString('district');
-    String readyforoverposure = prefs.getString('readyforoverposure');
+    bool readyForOvereposure = prefs.getBool('readyforoverposure');
+    String photo  = prefs.getString('photoPet');
+    // prefs.getString('pets');
     print(email);
     print(lastname);
     print(password);
@@ -45,7 +50,7 @@ class UserPreferences {
         email: email,
         password: password,
         district: district,
-        readyforoverposure: readyforoverposure);
+        readyforoverposure: readyForOvereposure);
     return MyUser(
         userid: userId,
         firstname: firstname,
@@ -53,7 +58,7 @@ class UserPreferences {
         email: email,
         password: password,
         district: district,
-        readyforoverposure: readyforoverposure);
+        readyforoverposure: readyForOvereposure);
   }
 
   void removeUser() async {
@@ -72,9 +77,18 @@ class UserPreferences {
     String id = prefs.getString("userid");
     return id;
   }
+
+  Future<String> getPhoto(args) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String photo = prefs.getString("photoPet");
+    return photo;
+  }
+  
+  Future<int> getUserID() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  int userId = prefs.get('userId');
+  return userId;
+}
 }
 
-Future<Pet> getUserID() async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  int userId = prefs.getInt('userId');
-}
+

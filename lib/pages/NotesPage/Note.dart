@@ -2,43 +2,37 @@
 
 import 'dart:core';
 
-class Note
-{
-  int id;
-  int userID;
+class Note {
   String body;
   String date;
-  String noteid;
-  Note({this.id,this.body,this.date,this.userID,this.noteid});
+  int noteId;
 
-  Map<String,dynamic> toMap()
-  {
-    return({
-      "id":id,
-      "UserID":userID,
-      "body":body,
-      "date":date,
-      "nodeid":noteid
-    });
+  Note({this.noteId, this.body, this.date});
+
+  Map<String, dynamic> toMap() {
+    return (
+      {
+      "textOfNote": body,
+      "date": date,
+      "nodeId": noteId
+    }
+    );
   }
-factory Note.fromJson(Map<String, Object> json) => Note(
-        id: json['Id'] as int,
-        userID: json['UserID'],
-        body: json['Text'] as String,
-        date: json['Date'],
-        noteid: json['NoteID']
+  //List<Note> notesList()
+  factory Note.fromJson(Map<String, Object> json) => Note(
+      body: json['textOfNote'] as String,
+      date: json['date'],
+      noteId: json['noteId']
       );
 
   Map<String, dynamic> toJson() => {
-        'Id': id,
-        'UserID':userID,
-        'Text': body,
-        'Date': date,
-        'NoteID':"0",
+        'textOfNote': body,
+        'date': date,
+        'noteId': noteId,
       };
 }
 
-abstract class NoteResult{}
+abstract class NoteResult {}
 
 //указатель на успешный запрос
 class NoteResultSuccess extends NoteResult {
@@ -56,6 +50,3 @@ class NoteResultFailure extends NoteResult {
 class NoteResultLoading extends NoteResult {
   NoteResultLoading();
 }
-
- 
-

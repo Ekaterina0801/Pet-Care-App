@@ -7,24 +7,42 @@ class Article
   String title;
   String body;
   String image;
+  bool isFav;
+  String animal;
   //final String _image;
 
 
   
   //String get image =>_image;
 
-  Article({this.id, this.body,this.image,this.title});
+  Article({this.id, this.body,this.image,this.title,this.isFav,this.animal});
   // Dart позволяет создавать конструкторы с разными именами
   // В данном случае Article.fromJson(json) - это конструктор
   // здесь мы принимаем JSON объект поста и извлекаем его поля
   factory Article.fromJson(Map<String, dynamic> json){
     return Article(
-    id: json["ArticleID"],
-    image: json["Image"],
-    title:json["Title"],
-    body:json["Text"])
+    id: json["articleId"],
+    image: json["image"],
+    title:json["title"],
+    body:json["textOfArticle"],
+    isFav: json['isFavourite'],
+    animal:json['animal'])
+    
+    
     ;
     }
+
+    Map<String, dynamic> toMap() {
+    return (
+      {
+      "ArticleID": id,
+      "Image": image,
+      "Title": title,
+      "Text": body,
+      "IsFav": isFav
+    }
+    );
+  }
     //this._image = json["image"];
 }
 

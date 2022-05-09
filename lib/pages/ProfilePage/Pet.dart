@@ -4,98 +4,102 @@ import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 // импортируем http пакет
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../dommain/myuser.dart';
+import 'Disease.dart';
+import 'Vaccination.dart';
 
 
 class Pet
 {
-  int petID;
-  int userID;
+  int petId;
+  int userId;
   String animal;
   String name;
   String breed;
   String dateofbirthday;
   String gender;
-  String weight;
+  double weight;
   String color;
-  String petidString;
+  String photo;
+  List<Disease> illnesses;
+  List<Vaccination> vaccinations;
   //List<Vaccination> vaccinations;
   //List<Disease> diseases;
-  Pet({this.petID,this.userID,this.animal,this.name,this.breed,this.dateofbirthday,this.gender,this.weight,this.color,this.petidString});
+  Pet({this.petId,this.userId,this.animal,this.name,this.breed,this.dateofbirthday,this.gender,this.weight,this.color,this.photo, this.illnesses,this.vaccinations});
 
 factory Pet.fromJson(Map<String, Object> json) => Pet(
-       petID: json['PetID'],
-       userID: json['UserID'],
-       animal: json['Animal'],
-       name: json['Name'],
-       breed: json['Breed'],
-       dateofbirthday: json['DateOfBirthday'],
-       gender:json['Gender'],
-       weight: json['Weight'],
-       color: json['Color'],
-       petidString:json['PetIDString']
+       petId: json['petId'],
+       userId: json['userId'],
+       animal: json['animal'],
+       name: json['name'],
+       breed: json['breed'],
+       dateofbirthday: json['dateOfBirth'],
+       gender:json['gender'],
+       weight: json['weight'],
+       color: json['color'],
+       photo: json['photo'],
+       illnesses: json['illnesses'],
+       vaccinations: json['vaccinations']
       );
 
   Map<String, dynamic> toJson() => {
-        'PetID':petID,
-        'UserID':userID,
-        'Animal':animal,
-        'Name':name,
-        'Breed':breed,
-        'DateOfBirthday':dateofbirthday,
-        'Gender':gender,
-        'Weight':weight,
-        'Color':color,
-        'PetIDString':"-"
+        'petId':petId,
+        'dserID':userId,
+        'animal':animal,
+        'name':name,
+        'breed':breed,
+        'dateOfBirth':dateofbirthday,
+        'gender':gender,
+        'weight':weight,
+        'color':color,
+        'photo':"-",
+        'illnesses':illnesses,
+        'vaccinations':vaccinations
       };
 }
 
-Future<Pet> getPet(int userID) async {
-    Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets.json')));
-    
-    Pet pet = Pet(
-        petID: 1,
-        userID: userID,
-        animal:"-",
-        name:"-",
-        breed:"-",
-        dateofbirthday: "-",
-        gender: "-",
-        weight: "0",
-        color:"-"
-      );
+Future<Pet> getPet() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String email = prefs.getString('email') ;
+    String password = prefs.getString('password');
+    Pet pet;
+    Response res = await http.get(Uri.parse(Uri.encodeFull('http://vadimivanov-001-site1.itempurl.com/Enter/EnterUserProfile?email=$email&password=$password')));
+    String jsonString;
+    if(res.statusCode==200)
+    {
+      jsonString = json.decode(res.body);
+    }
     if (res.statusCode == 200) {
       var ll = jsonDecode(res.body);
-      for(var t in ll.keys)
-      {
-        if(ll[t].userID==userID)
-        {
-          pet = Pet.fromJson(ll[t]);
-          break;
-        }
-      }
-      
     } else {
       throw "Unable to retrieve pets.";
     }return pet;
   }
 
   Future<List<Pet>> getPets() async {
-    Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Pets.json')));
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    int userid = prefs.getInt('userId') ;
+    print (userid);
+    Response res = await http.get(Uri.parse(Uri.encodeFull('http://vadimivanov-001-site1.itempurl.com/Load/LoadPets?user_id=$userid')));
     List<Pet> pets = [];
-    if (res.statusCode == 200) {
-
-      var ll = jsonDecode(res.body);
+    var ll = jsonDecode(res.body);
+    if (res.statusCode == 200&&ll!="Not successful, there are no pets") {
       
-      for(var t in ll.keys)
+      
+      for(var t in ll)
       {
-        var a = Pet.fromJson(ll[t]);
-        a.petidString=t;
+        var a = Pet.fromJson(t);
+        //a.petidString=t;
         //ll[t].petidString=t;
         pets.add(a); 
       }
       
     } else {
-      throw "Unable to retrieve pets.";
+      return pets;
+      
     }return pets;
   }
 
@@ -134,7 +138,7 @@ class RepositoryPets{
       for(var t in ll.keys)
       {
         Pet a = Pet.fromJson(ll[t]);
-        a.petidString=t;
+        //a.petidString=t;
         //if(a.userID==)
         list.add(a);
       }

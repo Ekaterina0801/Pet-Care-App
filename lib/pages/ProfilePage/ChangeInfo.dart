@@ -28,7 +28,7 @@ class ChangeInfoPage extends StatelessWidget {
                 TextFormField(
                   autofocus: false,
                   validator: validateDigits,
-                  onSaved: (value) => pet.weight = value, 
+                  onSaved: (value) => pet.weight = double.parse(value), 
                 ),
               ],
             )));
