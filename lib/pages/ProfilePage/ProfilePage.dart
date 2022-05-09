@@ -242,9 +242,13 @@ class _ProfilePageState extends StateMVC {
                                     ),
                               //  AvatarBlock(
                               //     pet.name, 'assets/images/article_1.2.jpg'),
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                child: Text(pet.name,style: Theme.of(context).textTheme.bodyText1),
+                              ),
                               ElevatedButton(
                                 onPressed: _getFromGallery,
-                                child: Text("PICK FROM GALLERY"),
+                                child: Text("Добавить фото из галереи",style: Theme.of(context).textTheme.bodyText1),
                               )
                             ],
                           ),

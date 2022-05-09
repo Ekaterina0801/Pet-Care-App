@@ -82,6 +82,7 @@ Future<Pet> getPet() async {
   Future<List<Pet>> getPets() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     int userid = prefs.getInt('userId') ;
+    print (userid);
     Response res = await http.get(Uri.parse(Uri.encodeFull('http://vadimivanov-001-site1.itempurl.com/Load/LoadPets?user_id=$userid')));
     List<Pet> pets = [];
     var ll = jsonDecode(res.body);

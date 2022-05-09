@@ -5,6 +5,8 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/pages/CalendarPage/repoMeetings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'AlarmInfo.dart';
+
 class Meeting {
   int mentionId;
   String textOfMention;
@@ -13,8 +15,13 @@ class Meeting {
   DateTime from;
   DateTime to;
 
-
-  Meeting({this.mentionId, this.textOfMention, this.date, this.time,this.from,this.to});
+  Meeting(
+      {this.mentionId,
+      this.textOfMention,
+      this.date,
+      this.time,
+      this.from,
+      this.to});
 
   factory Meeting.fromJson(Map<String, dynamic> json) {
     return Meeting(
@@ -22,9 +29,10 @@ class Meeting {
         textOfMention: json['textOfMention'],
         date: json['date'].toString().substring(0, 10),
         time: json['time'],
-        from: DateTime.parse(json['date'].toString().substring(0, 10)+" "+json['time']),
-        to: DateTime.parse(json['date'].toString().substring(0, 10)+" "+json['time'])
-        );
+        from: DateTime.parse(
+            json['date'].toString().substring(0, 10) + " " + json['time']),
+        to: DateTime.parse(
+            json['date'].toString().substring(0, 10) + " " + json['time']));
   }
 
   Map<String, dynamic> toJson() => {
@@ -52,7 +60,7 @@ Future<Map<String, dynamic>> addEvent(
     'user_id': userId,
     'text': text,
     'date': date,
-    'time': time.substring(11,19),
+    'time': time.substring(11, 19),
   };
   var response = await post(
     Uri.parse(
@@ -60,6 +68,8 @@ Future<Map<String, dynamic>> addEvent(
     body: json.encode(noteData),
     headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
   );
+  
+  scheduleNotification(DateTime.parse(date+" "+time.substring(11, 19)), text);
   var result;
   if (response.request != null)
     result = {'status': true, 'message': 'Successfully add', 'data': noteData};

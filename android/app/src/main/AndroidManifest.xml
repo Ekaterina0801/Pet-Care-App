@@ -6,6 +6,8 @@
         <activity
             android:name=".MainActivity"
             android:requestLegacyExternalStorage="true"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

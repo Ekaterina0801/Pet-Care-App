@@ -2,6 +2,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:pet_care/pages/CalendarPage/AlarmInfo.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../../dommain/myuser.dart';
 import '../BasePage.dart';
@@ -68,7 +69,7 @@ class _CalendarPageState extends StateMVC {
               onPressed: () {
                 _displayEventAdd(context, _eventname, _datefrom, _dateto,
                      update);
-
+                
                 /*
                 showDialog(
                   context: context,
