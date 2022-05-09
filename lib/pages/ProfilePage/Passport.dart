@@ -35,7 +35,7 @@ class Passport extends StatelessWidget {
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DiseasePage())),
               child: Text( 'Болезни',
-                style: Theme.of(context).copyWith().textTheme.bodyText2),
+                style: Theme.of(context).copyWith().textTheme.headline1),
             ),
           ),
         ),
@@ -52,7 +52,7 @@ class Passport extends StatelessWidget {
               onPressed: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => VaccinationPage())),
               child: Text('Прививки',
-                style: Theme.of(context).copyWith().textTheme.bodyText2), 
+                style: Theme.of(context).copyWith().textTheme.headline1), 
             ),
           ),
         ),
@@ -74,7 +74,7 @@ class Passport extends StatelessWidget {
               },
               child: Text('Выйти из профиля',
                 textAlign: TextAlign.left,
-                style: Theme.of(context).copyWith().textTheme.bodyText2),
+                style: Theme.of(context).copyWith().textTheme.headline1),
             ),
           ),
         ),
@@ -151,7 +151,7 @@ class RemakeNameWidget extends StatelessWidget {
       title: Align(
           alignment: Alignment.bottomCenter,
           child: Text('Изменение имени владельца',
-              style: Theme.of(context).copyWith().textTheme.bodyText2),
+              style: Theme.of(context).copyWith().textTheme.headline2),
       ),
       actions: [
         Align(
@@ -179,7 +179,7 @@ class RemakeNameWidget extends StatelessWidget {
         Padding(padding: EdgeInsets.symmetric(vertical: 25)),
 
         Container(
-          height: 33,
+          height: 30,
           child: ElevatedButton(
               // color: Color.fromRGBO(255, 223, 142, 10),
               //splashColor: Color.fromARGB(199, 240, 240, 240),
@@ -187,7 +187,7 @@ class RemakeNameWidget extends StatelessWidget {
                   {doRename(info, name, surname), (Navigator.pop(context, true))},
               child: Text('Применить',
                   textAlign: TextAlign.left,
-                  style: Theme.of(context).copyWith().textTheme.bodyText1),
+                  style: Theme.of(context).copyWith().textTheme.headline1),
           ),
         ),
       ],
@@ -221,7 +221,7 @@ class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
       title: Align(
           alignment: Alignment.bottomCenter,
           child: Text('Изменение породы питомца',
-              style: Theme.of(context).copyWith().textTheme.bodyText1),),
+              style: Theme.of(context).copyWith().textTheme.headline2),),
       actions: [
         Align(
             alignment: Alignment.bottomLeft,
@@ -236,7 +236,7 @@ class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
 //          "Принять",
 //       )
         Container(
-          height: 33,
+          height: 30,
           child: ElevatedButton(
               //color: Color.fromRGBO(255, 223, 142, 10),
               //splashColor: Color.fromARGB(199, 240, 240, 240),
@@ -244,7 +244,7 @@ class _RemakeBreedWidgetState extends State<RemakeBreedWidget> {
               onPressed: () => (Navigator.pop(context, true)),
               child: Text('Применить',
                   textAlign: TextAlign.left,
-                  style: Theme.of(context).copyWith().textTheme.bodyText1),),
+                  style: Theme.of(context).copyWith().textTheme.headline1),),
         ),
       ],
     );
@@ -264,7 +264,7 @@ class RemakeDateBirthWidget extends StatelessWidget {
       title: Align(
           alignment: Alignment.bottomCenter,
           child: Text('Изменение даты рождения питомца',
-              style: Theme.of(context).copyWith().textTheme.bodyText1),),
+              style: Theme.of(context).copyWith().textTheme.headline2),),
       actions: [
         Align(
             alignment: Alignment.bottomLeft,
@@ -275,13 +275,16 @@ class RemakeDateBirthWidget extends StatelessWidget {
 //        longButtons(
 //          "Принять",
 //       )
-        ElevatedButton(
-            // color: Color.fromRGBO(255, 223, 142, 10),
-            //splashColor: Color.fromARGB(199, 240, 240, 240),
-            onPressed: () => (Navigator.pop(context, true)),
-            child: Text('Применить',
-                textAlign: TextAlign.left,
-                style: Theme.of(context).copyWith().textTheme.bodyText1),),
+        Container(
+          height: 30,
+          child: ElevatedButton(
+              // color: Color.fromRGBO(255, 223, 142, 10),
+              //splashColor: Color.fromARGB(199, 240, 240, 240),
+              onPressed: () => (Navigator.pop(context, true)),
+              child: Text('Применить',
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context).copyWith().textTheme.headline1),),
+        ),
       ],
     );
   }

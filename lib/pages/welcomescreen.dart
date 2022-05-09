@@ -30,7 +30,7 @@ body: Column(children: [
   padding: EdgeInsets.symmetric(horizontal: 70, vertical: 0),
   child: Text('Добро пожаловать!', 
   textAlign: TextAlign.center, 
-      style: Theme.of(context).copyWith().textTheme.bodyText2),
+      style: Theme.of(context).copyWith().textTheme.headline2),
         ),
 
        SizedBox(height: 100),
@@ -46,7 +46,7 @@ body: Column(children: [
           }, 
           child: Text('Создать аккаунт',
           textAlign: TextAlign.center, 
-          style: Theme.of(context).copyWith().textTheme.bodyText1),
+          style: Theme.of(context).copyWith().textTheme.headline1),
           //color: Color.fromRGBO(255, 223, 142, 1),
          // shape: RoundedRectangleBorder(
          // borderRadius: BorderRadius.all(Radius.circular(10))
@@ -71,7 +71,7 @@ body: Column(children: [
           }, 
           child: Text('У меня уже есть аккаунт',
           textAlign: TextAlign.center, 
-          style: Theme.of(context).copyWith().textTheme.bodyText1),
+          style: Theme.of(context).copyWith().textTheme.headline1),
          // color: Color.fromRGBO(255, 223, 142, 1), shape: 
           //RoundedRectangleBorder(
          // borderRadius: BorderRadius.all(Radius.circular(10))

@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/ProfilePage/AvatarBlock.dart';
@@ -58,10 +60,12 @@ String AgeCalculate(String date) {
     else if (thisDay < dateBirthDay) month = 12;
   }
 
-  if (month == 1) month_str = "1 месяц";
-  else if (month == 2 || month == 3 || month ==4)
-  month_str = "$month месяца";
-  else month_str="$month месяцев";
+  if (month == 1)
+    month_str = "1 месяц";
+  else if (month == 2 || month == 3 || month == 4)
+    month_str = "$month месяца";
+  else
+    month_str = "$month месяцев";
 
   String ageString = years + "\n" + month_str;
   return ageString;
@@ -101,7 +105,18 @@ class _ProfilePageState extends StateMVC {
   MyUser user;
   Pet pet = new Pet();
   List<Pet> allpets = [];
-
+  File imageFile;
+  _getFromGallery() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      imageFile = File(pickedFile.path);
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     //Future<MyUser> getUserData() => UserPreferences().getUser();
@@ -184,7 +199,7 @@ class _ProfilePageState extends StateMVC {
                                   Container(
                                     margin: EdgeInsets.all(10),
                                     child: Text("Добавить нового питомца",
-                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
+                                      style: Theme.of(context).copyWith().textTheme.headline1),
                                   ),
                                 ],
                               ),
@@ -208,11 +223,39 @@ class _ProfilePageState extends StateMVC {
                             ],
                           ),
                           padding: EdgeInsets.all(10),
-                          child: Row(
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              AvatarBlock(
-                                  pet.name, 'assets/images/article_1.2.jpg'),
+                              imageFile != null
+                                  ? Container(
+                                      child: Image.file(
+                                        imageFile,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Container(
+                                      child: Image.asset(
+                                        'assets/images/article_1.2.jpg',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                              //  AvatarBlock(
+                              //     pet.name, 'assets/images/article_1.2.jpg'),
+
+                              Container(
+                                margin: EdgeInsets.symmetric(vertical: 10),
+                                height: 30,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                  //shape: RoundedRectangleBorder(
+                                  //borderRadius:BorderRadius.all(Radius.circular(10))),
+                                  //shadowColor: Colors.grey,
+                                  primary: Color.fromARGB(237, 250, 246, 235),),
+                                  onPressed: _getFromGallery,
+                                  child: Text("Изменить фото",
+                                  style: Theme.of(context).copyWith().textTheme.headline1),
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -225,7 +268,7 @@ class _ProfilePageState extends StateMVC {
                                 alignment: Alignment.topRight,
                                 child: Text("Основные данные",
                                   textAlign: TextAlign.center,
-                                 style: Theme.of(context).copyWith().textTheme.bodyText2),
+                                 style: Theme.of(context).copyWith().textTheme.headline2),
                               ),
                               Container(
                                 alignment: Alignment.topRight,
@@ -275,7 +318,7 @@ class _ProfilePageState extends StateMVC {
                           padding: EdgeInsets.all(8),
                           child: Text("Паспорт питомца",
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).copyWith().textTheme.bodyText1),
+                            style: Theme.of(context).copyWith().textTheme.headline2),
                         ),
                         Container(
                           padding: EdgeInsets.only(left: 0, top: 10),

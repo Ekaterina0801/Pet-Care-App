@@ -90,15 +90,15 @@ class _DiseasePageState extends StateMVC {
                               child: Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Text('Добавление болезни',
-                                    style: Theme.of(context).copyWith().textTheme.bodyText2),
+                                    style: Theme.of(context).copyWith().textTheme.headline2),
                               ),
                             ),
                             actions: [
                               Container(
-                                height: 33,
+                                height: 30,
                                 child: ElevatedButton(
                                     child: Text('Добавить',
-                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
+                                      style: Theme.of(context).copyWith().textTheme.headline1),
                                     /*color: Color.fromRGBO(255, 223, 142, 1),
                                     shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.all(
@@ -335,17 +335,20 @@ Widget _displayDiseaseAdd(BuildContext context, String type, String datebeg,
     String dateend, int userID) {
   final formKey = new GlobalKey<FormState>();
   AlertDialog alert = AlertDialog(
-    title: Text('Добавление информации'),
+    title: Text('Добавление информации',
+    style: Theme.of(context).copyWith().textTheme.headline2),
     actions: [
-      ElevatedButton(
-        child: Text(
-          'Добавить',
-          style: Theme.of(context).copyWith().textTheme.bodyText1),
-        onPressed: () {
-          addDisease(type, datebeg, dateend, userID);
-          //notifyListeners();
-          Navigator.of(context).pop();
-        },
+      Container(
+        height: 30,
+        child: ElevatedButton(
+          child: Text('Добавить',
+            style: Theme.of(context).copyWith().textTheme.headline1),
+          onPressed: () {
+            addDisease(type, datebeg, dateend, userID);
+            //notifyListeners();
+            Navigator.of(context).pop();
+          },
+        ),
       ),
     ],
     content: Container(

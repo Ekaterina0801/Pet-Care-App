@@ -77,8 +77,7 @@ class MyApp extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                 borderRadius:
                 BorderRadius.all(Radius.circular(10))),
-              primary:
-               Color.fromRGBO(255, 223, 142, 10),
+              primary:Color.fromRGBO(255, 223, 142, 10),
             ),
           ),
 
@@ -95,6 +94,19 @@ class MyApp extends StatelessWidget {
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w800,
                 fontSize: 20),
+            
+            // кнопки
+            headline1: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 17),
+
+            // заголовки шапок окон изменений и добавлений
+            headline2: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w900,
+                fontSize: 20),
+
           ),
         ),
       ),

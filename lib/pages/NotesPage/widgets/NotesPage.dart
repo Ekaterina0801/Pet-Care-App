@@ -140,14 +140,14 @@ _displayNoteAdd(BuildContext context, String _body, String _date, int userID,
     child: Align(
     alignment: Alignment.bottomCenter,
     child:Text('Добавление заметки',
-    style: Theme.of(context).copyWith().textTheme.bodyText2),
+    style: Theme.of(context).copyWith().textTheme.headline2),
     ),),
     actions: [
          Container(
-           height: 33,
+           height: 30,
            child: ElevatedButton(
             child: Text('Добавить',
-            style: Theme.of(context).copyWith().textTheme.bodyText1),
+            style: Theme.of(context).copyWith().textTheme.headline1),
             onPressed: () {
               if (formKey.currentState.validate()) {
                 addNote(_body, _date, userID);
