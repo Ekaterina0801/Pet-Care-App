@@ -4,11 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/BasePage.dart';
 import 'package:pet_care/pages/Registration/pages/register.dart';
-import 'package:pet_care/pages/Registration/util/validators.dart';
 import 'package:pet_care/pages/Registration/util/widgets.dart';
 import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
 import 'package:provider/provider.dart';
+
+import '../ValidatorsReg.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -37,7 +38,7 @@ class _LoginState extends State<Login> {
     TextFormField(
       autofocus: false,
       obscureText: true,
-      validator: (value) => value.isEmpty ? "Please enter password" : null,
+      validator: validatePassword,
       onSaved: (value) => _password = value,
       decoration: buildInputDecoration("Confirm password", Icons.lock),
     );

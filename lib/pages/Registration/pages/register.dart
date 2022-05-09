@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/BasePage.dart';
 import 'package:pet_care/pages/Registration/ValidatorsReg.dart';
-import 'package:pet_care/pages/Registration/util/validators.dart';
 import 'package:pet_care/pages/Registration/util/widgets.dart';
 import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
@@ -43,7 +42,7 @@ class _RegisterState extends State<Register> {
     final passwordField = TextFormField(
       autofocus: false,
       obscureText: true,
-      validator: (value) => value.isEmpty ? "Введите пароль" : null,
+      validator: validatePassword,
       onSaved: (value) => _password = value,
       decoration: buildInputDecoration("Подтвердите пароль", Icons.lock),
     );
@@ -59,7 +58,7 @@ class _RegisterState extends State<Register> {
 
     final firstnameField = TextFormField(
       autofocus: false,
-      validator:validateText,
+      validator: validateText,
       onSaved: (value) => _firstname = value,
       decoration: buildInputDecoration("Введите имя", Icons.person_rounded),
     );
