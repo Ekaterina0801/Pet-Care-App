@@ -134,6 +134,13 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w900,
                 color: Colors.black87,
                 fontSize: 16),
+
+          //для цифр в TimePicker
+                headline4: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w900,
+                color: Color.fromARGB(175, 226, 81, 52),
+                fontSize: 20),
           ),
         ),
       ),
