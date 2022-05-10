@@ -21,7 +21,7 @@ class ArticleBlock extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: Image.network(
-                    'https://www.wikihow.com/images/thumb/c/c3/Take-Care-of-Your-Pet-Step-6-Version-2.jpg/v4-728px-Take-Care-of-Your-Pet-Step-6-Version-2.jpg',
+                    image,
                   ).image,
                   fit: BoxFit.fill,
                 ),

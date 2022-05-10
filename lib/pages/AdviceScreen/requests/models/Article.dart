@@ -9,13 +9,14 @@ class Article
   String image;
   bool isFav;
   String animal;
+  String imageAdress;
   //final String _image;
 
 
   
   //String get image =>_image;
 
-  Article({this.id, this.body,this.image,this.title,this.isFav,this.animal});
+  Article({this.id, this.body,this.image,this.title,this.isFav,this.animal,this.imageAdress});
   // Dart позволяет создавать конструкторы с разными именами
   // В данном случае Article.fromJson(json) - это конструктор
   // здесь мы принимаем JSON объект поста и извлекаем его поля
@@ -26,7 +27,8 @@ class Article
     title:json["title"],
     body:json["textOfArticle"],
     isFav: json['isFavourite'],
-    animal:json['animal'])
+    animal:json['animal'],
+    imageAdress: json['imageAdress'])
     
     
     ;
@@ -39,7 +41,8 @@ class Article
       "Image": image,
       "Title": title,
       "Text": body,
-      "IsFav": isFav
+      "IsFav": isFav,
+      //'imageAdress':
     }
     );
   }

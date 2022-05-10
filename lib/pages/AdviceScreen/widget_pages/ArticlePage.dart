@@ -14,7 +14,7 @@ class ArticlePage extends StatelessWidget {
       title: 'Статья',
       body: ListView(
         children: [
-          ArticleBlock(article.title, article.image),
+          ArticleBlock(article.title, article.imageAdress),
           Container(
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(10),

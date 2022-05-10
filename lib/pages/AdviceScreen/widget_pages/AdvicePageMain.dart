@@ -51,7 +51,7 @@ class _AdvicePageState extends StateMVC {
       return ListView(children: [
         AdviceMainBlock(
           articles[0].title,
-          articles[0].image,
+          articles[0].imageAdress,
           () => Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => ArticlePage(articles[0]),

@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
 import 'package:pet_care/pages/PetBoardingPage/Overexposure.dart';
+import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'AccountBlock.dart';
 import 'SettingsService.dart';
 
@@ -22,9 +23,19 @@ class _PetBoardingPageState extends StateMVC {
   void initState() {
     super.initState();
     _controller.init();
+    UserPreferences().getUser().then(
+      (result) {
+        setState(
+          () {
+            user = result;
+          },
+        );
+      },
+    );
   }
 
   //final formKey = new GlobalKey<FormState>();
+  MyUser user;
   List<Overexposure> k = [];
   @override
   Widget build(BuildContext context) {
@@ -44,53 +55,56 @@ class _PetBoardingPageState extends StateMVC {
               return ListView(
                 physics: ScrollPhysics(),
                 children: [
-                  /*
                   Container(
-                      decoration: BoxDecoration(
-                          color: Color.fromRGBO(255, 223, 142, 10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 4,
-                              offset: const Offset(0.0, 0.0),
-                              spreadRadius: 0.0,
-                            )
-                          ]),
-                      child: Column(children: [
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(255, 223, 142, 10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 4,
+                            offset: const Offset(0.0, 0.0),
+                            spreadRadius: 0.0,
+                          )
+                        ]),
+                    child: Column(
+                      children: [
                         Container(
-                          child: Avatar(
-                           // "name: user.firstname + user.lastname",
+                          margin: EdgeInsets.all(10),
+                          child: Avatar(name: user.firstname + user.lastname),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(user.firstname + " " + user.lastname,
+                                maxLines: 12,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.comfortaa(
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 18)),
                           ),
                         ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Text("user.firstname + " " + user.lastname",
-                              maxLines: 12,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
+                        Container(
+                            child: TextButton(
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SettingsService(user.email, user.district,"","",user.userid),
+                            ),
+                          ),
+                          child: Text("Перейти к настройкам моих передержек",
                               style: GoogleFonts.comfortaa(
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.black,
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w800,
-                                  fontSize: 18)),
-                        ),
-                      ])),
-                  Container(
-                      child: TextButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SettingsService(),
-                      ),
+                                  fontSize: 14)),
+                        )),
+                      ],
                     ),
-                    child: Text(
-                        "Перейти к настройкам моего профиля для сервиса",
-                        style: GoogleFonts.comfortaa(
-                            decoration: TextDecoration.underline,
-                            color: Colors.black,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14)),
-                  )),*/
+                  ),
                   Row(
                     children: [
                       Flexible(

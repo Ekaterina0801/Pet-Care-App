@@ -14,8 +14,8 @@ class NotesWidget extends StatefulWidget {
 }
 
 class _NotesWidgetState extends State<NotesWidget> {
-  Note get note => null;
-  String get oldbody => null;
+  Note note;
+  String oldbody;
 
   void update() {
     this.setState(() {});
