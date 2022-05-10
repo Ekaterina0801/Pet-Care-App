@@ -4,8 +4,6 @@ import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet_care/pages/CalendarPage/Meeting.dart';
-import 'package:pet_care/pages/ProfilePage/Disease.dart';
-import 'package:pet_care/pages/ProfilePage/Vaccination.dart';
 
 import '../pages/NotesPage/Note.dart';
 import '../pages/ProfilePage/Pet.dart';
@@ -91,24 +89,7 @@ class MyUserController extends ControllerMVC {
 }
 
 class RepositoryUsers{
-  /*
-  Future<List<MyUser>> getusers() async {
-    Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
-    if (res.statusCode == 200) {
-      //var rb = res.body;
-      List<MyUser> list=[];
-      var ll = jsonDecode(res.body);
-      for(var t in ll.keys)
-      {
-        MyUser a = MyUser.fromJson(ll[t]);
-        //if(a.userID==)
-        list.add(a);
-      }
-      return list;
-    } else {
-      throw "Unable to retrieve pets.";
-    }
-  }*/
+
   Future<MyUser> getuser() async {
     Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
     if (res.statusCode == 200) {

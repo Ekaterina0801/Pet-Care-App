@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:pet_care/pages/NotesPage/widgets/NotesPage.dart';
 import 'package:pet_care/pages/PetBoardingPage/Overexposure.dart';
 import 'package:select_form_field/select_form_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -61,9 +60,14 @@ class _SettingsServiceState extends StateMVC {
     };
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    if (what == "email")
+switch (what) {
+    case "email":
       prefs.setString('email', newtext);
-    else if (what == "district") prefs.setString('district', newtext);
+      break;
+    case "district":
+      prefs.setString('district', newtext);
+      break;
+  }
 
     var response = await http.post(
       Uri.parse(Uri.encodeFull(
@@ -79,6 +83,8 @@ class _SettingsServiceState extends StateMVC {
     }
     return result;
   }
+
+  
 
   void update() {
     this.setState(() {});
@@ -176,6 +182,36 @@ class _SettingsServiceState extends StateMVC {
                           icon: Icon(Icons.edit, size: 16),
                           onPressed: () => _displayDialogDistrict(user.userid),
                         ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    //margin: EdgeInsets.only(top: 5, bottom: 5),
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(242, 242, 242, 1),
+                        //borderRadius: BorderRadius.all(Radius.circular(30)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 5,
+                            offset: const Offset(1.0, 1.0),
+                            spreadRadius: 0.0,
+                          )
+                        ]),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text("Согласие на передержку: ",
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.comfortaa(
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 14)),
+                        ),
+                        MyCheckBox(user.readyforoverposure,user.userid)
                       ],
                     ),
                   ),
@@ -621,3 +657,68 @@ class Message2 extends StatelessWidget {
     );
   }
 }
+
+class MyCheckBox extends StatefulWidget {
+
+  bool isChecked;
+  int id;
+  MyCheckBox(this.isChecked,this.id);
+  @override
+  State<MyCheckBox> createState() => _MyCheckBoxState();
+}
+
+class _MyCheckBoxState extends State<MyCheckBox> {
+
+  @override
+  Widget build(BuildContext context) {
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.blue;
+      }
+      return Colors.red;
+    }
+
+    return Checkbox(
+      checkColor: Colors.white,
+      fillColor: MaterialStateProperty.resolveWith(getColor),
+      value: widget.isChecked,
+      onChanged: (bool value) {
+        setState(() {
+          _changeReady(!widget.isChecked,widget.id, "state");
+          widget.isChecked = value;
+          
+        });
+      },
+    );
+  }
+}
+
+Future<Map<String, dynamic>> _changeReady(
+      bool newtext, int id, String what) async {
+    final Map<String, dynamic> data = {
+      'what': what,
+      'id': id,
+      'new_value': newtext,
+    };
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('readyForOverposure', newtext);
+
+    var response = await http.post(
+      Uri.parse(Uri.encodeFull(
+          'http://vadimivanov-001-site1.itempurl.com/Update/UpdateInformation')),
+      body: jsonEncode(data),
+      headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
+    );
+    var result;
+    if (response.request != null)
+      result = {'status': true, 'message': 'Successfully add', 'data': data};
+    else {
+      result = {'status': false, 'message': 'Adding failed', 'data': null};
+    }
+    return result;
+  }

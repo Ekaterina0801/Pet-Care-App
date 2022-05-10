@@ -35,7 +35,7 @@ class UserPreferences {
     String password = prefs.getString('password');
     String lastname = prefs.getString('lastname');
     String district = prefs.getString('district');
-    bool readyForOvereposure = prefs.getBool('readyforoverposure');
+    bool readyForOvereposure = prefs.getBool('readyForOverposure');
     String photo  = prefs.getString('photoPet');
     // prefs.getString('pets');
     print(email);
