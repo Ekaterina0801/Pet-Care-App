@@ -190,13 +190,13 @@ _displayEventAdd(BuildContext context, String _eventname, String _datefrom,
       child: Align(
       alignment: Alignment.bottomCenter,
       child: Text('Добавление события',
-      style: Theme.of(context).copyWith().textTheme.bodyText2),),),
+      style: Theme.of(context).copyWith().textTheme.headline2),),),
       actions: [
         Container(
-          height: 33,
+          height: 30,
           child: ElevatedButton( 
             child: Text('Добавить',
-              style: Theme.of(context).copyWith().textTheme.bodyText1),
+              style: Theme.of(context).copyWith().textTheme.headline1),
             onPressed: () {
               if (formKey1.currentState.validate() &&
                   _dateto != null &&
