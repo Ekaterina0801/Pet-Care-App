@@ -1,15 +1,9 @@
 import 'package:avatars/avatars.dart';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pet_care/dommain/myuser.dart';
-import 'package:pet_care/pages/PetBoardingPage/repo.dart';
-import 'package:pet_care/pages/Registration/util/shared_preference.dart';
-import 'package:pet_care/pages/providers/auth.dart';
-import 'package:pet_care/pages/providers/userprovider.dart';
-
-import 'package:provider/provider.dart';
+import 'package:pet_care/pages/PetBoardingPage/Overexposure.dart';
 import 'AccountBlock.dart';
 import 'SettingsService.dart';
 
@@ -31,139 +25,112 @@ class _PetBoardingPageState extends StateMVC {
   }
 
   //final formKey = new GlobalKey<FormState>();
-  MyUser user;
-  List<MyUser> k=[];
+  List<Overexposure> k = [];
   @override
   Widget build(BuildContext context) {
-    Future<MyUser> getUserData() => UserPreferences().getUser();
     final state = _controller.currentState;
-    if (state is MyUserResultLoading) {
-      // загрузка
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    } else if (state is MyUserResultFailure) {
-      // ошибка
-      return Center(
-        child: Text(state.error,
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headline4
-                .copyWith(color: Colors.red)),
-      );
-    } else {
-      //final l = (state as MyUserResultSuccess).usersList;
-      //k.add(l);
-       
-      return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => AuthProvider()),
-          ChangeNotifierProvider(create: (_) => UserProvider()),
-        ],
-        child: FutureBuilder(
-            future: RepositoryUsersList().getUsersList(),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                case ConnectionState.waiting:
-                  return CircularProgressIndicator();
-                default:
-                  if (snapshot.hasError)
-                    return Text('Error: ${snapshot.error}');
-                  else
-                    k = snapshot.data;
-                  return ListView(
-                    physics: ScrollPhysics(),
+    return FutureBuilder(
+        future: getOverexposures(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+              return CircularProgressIndicator();
+            default:
+              if (snapshot.hasError)
+                return Text('Error: ${snapshot.error}');
+              else
+                k = snapshot.data;
+              return ListView(
+                physics: ScrollPhysics(),
+                children: [
+                  /*
+                  Container(
+                      decoration: BoxDecoration(
+                          color: Color.fromRGBO(255, 223, 142, 10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 4,
+                              offset: const Offset(0.0, 0.0),
+                              spreadRadius: 0.0,
+                            )
+                          ]),
+                      child: Column(children: [
+                        Container(
+                          child: Avatar(
+                           // "name: user.firstname + user.lastname",
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text("user.firstname + " " + user.lastname",
+                              maxLines: 12,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.comfortaa(
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 18)),
+                        ),
+                      ])),
+                  Container(
+                      child: TextButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SettingsService(),
+                      ),
+                    ),
+                    child: Text(
+                        "Перейти к настройкам моего профиля для сервиса",
+                        style: GoogleFonts.comfortaa(
+                            decoration: TextDecoration.underline,
+                            color: Colors.black,
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 14)),
+                  )),*/
+                  Row(
                     children: [
-                      Container(
-                          decoration: BoxDecoration(
-                              color: Color.fromRGBO(255, 223, 142, 10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  blurRadius: 4,
-                                  offset: const Offset(0.0, 0.0),
-                                  spreadRadius: 0.0,
-                                )
-                              ]),
-                          child: Column(children: [
-                            Container(
-                              child: Avatar(
-                                name: user.firstname + " " + user.lastname,
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: Text(user.firstname + " " + user.lastname,
-                                  maxLines: 12,
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.comfortaa(
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 18)),
-                            ),
-                          ])),
-                      Container(
-                          child: TextButton(
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SettingsService())),
-                        child: Text(
-                            "Перейти к настройкам моего профиля для сервиса",
+                      Flexible(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                            "Кто готов взять питомцев на передержку: ",
+                            textAlign: TextAlign.center,
                             style: GoogleFonts.comfortaa(
-                                decoration: TextDecoration.underline,
                                 color: Colors.black,
                                 fontStyle: FontStyle.normal,
                                 fontWeight: FontWeight.w800,
-                                fontSize: 14)),
-                      )),
-                      Row(
-                        children: [
-                          Flexible(
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              child: Text(
-                                "Кто готов взять питомцев на передержку: ",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.comfortaa(
-                                    color: Colors.black,
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 16),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
-                            ),
+                                fontSize: 16),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
                           ),
-                          IconButton(
-                              onPressed: (() => _displayFilter(context)),
-                              icon: Icon(Icons.sort,
-                                  size: 25, color: Colors.grey))
-                        ],
+                        ),
                       ),
-                      GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisExtent: 255,
-                            crossAxisSpacing: 5,
-                            mainAxisSpacing: 5,
-                          ),
-                          shrinkWrap: true,
-                          physics: ScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          itemCount: k.length,
-                          itemBuilder: (BuildContext context, int index) =>
-                              Container(child: AccountBlock(k[index], index))),
+                      IconButton(
+                          onPressed: (() => _displayFilter(context)),
+                          icon: Icon(Icons.sort, size: 25, color: Colors.grey))
                     ],
-                  );
-              }
-            }),
-      );
-    }
+                  ),
+                  GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisExtent: 255,
+                        crossAxisSpacing: 5,
+                        mainAxisSpacing: 5,
+                      ),
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemCount: k.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          Container(child: AccountBlock(k[index], index))),
+                ],
+              );
+          }
+        });
   }
 
   double _value = 20;
@@ -193,7 +160,6 @@ class _PetBoardingPageState extends StateMVC {
       content: Column(
         children: [
           Container(
-            //width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.all(10),
             child: Center(
               child: Text(
@@ -206,7 +172,6 @@ class _PetBoardingPageState extends StateMVC {
             ),
           ),
           Container(
-            //width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.all(10),
             child: Center(
               child: Text(

@@ -95,6 +95,7 @@ class _LoginState extends State<Login> {
             Provider.of<UserProvider>(context, listen: false).setUser(user);
             Navigator.pushReplacementNamed(context, '/home');
           } else {
+            print("Ohohoh");
             Flushbar(
               title: "Failed Login",
               message: response['message']['message'].toString(),
