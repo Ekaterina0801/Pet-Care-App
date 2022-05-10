@@ -108,10 +108,7 @@ class _VaccinationPageState extends StateMVC {
                               ElevatedButton(
                                 child: Text(
                                   'Добавить',
-                                  style: GoogleFonts.comfortaa(
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 14),
+                                  style: Theme.of(context).copyWith().textTheme.labelSmall,
                                 ),
                                 //color: Color.fromRGBO(255, 223, 142, 1),
                                 //shape: RoundedRectangleBorder(

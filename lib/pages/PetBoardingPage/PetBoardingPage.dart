@@ -80,10 +80,7 @@ class _PetBoardingPageState extends StateMVC {
                                 maxLines: 12,
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.center,
-                                style: GoogleFonts.comfortaa(
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 18)),
+                                style: Theme.of(context).copyWith().textTheme.labelSmall),
                           ),
                         ),
                         Container(
@@ -95,12 +92,7 @@ class _PetBoardingPageState extends StateMVC {
                             ),
                           ),
                           child: Text("Перейти к настройкам моих передержек",
-                              style: GoogleFonts.comfortaa(
-                                  decoration: TextDecoration.underline,
-                                  color: Colors.black,
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 14)),
+                              style: Theme.of(context).copyWith().textTheme.titleSmall),
                         )),
                       ],
                     ),
@@ -113,11 +105,7 @@ class _PetBoardingPageState extends StateMVC {
                           child: Text(
                             "Кто готов взять питомцев на передержку: ",
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.comfortaa(
-                                color: Colors.black,
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 16),
+                            style: Theme.of(context).copyWith().textTheme.bodyText1,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                           ),
@@ -152,19 +140,13 @@ class _PetBoardingPageState extends StateMVC {
     AlertDialog alert = AlertDialog(
       title: Text(
         'Фильтр: ',
-        style: GoogleFonts.comfortaa(
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w800,
-            fontSize: 18),
+        style: Theme.of(context).copyWith().textTheme.labelLarge,
       ),
       actions: [
         ElevatedButton(
           child: Text(
             'Принять',
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14),
+            style: Theme.of(context).copyWith().textTheme.labelSmall,
           ),
           onPressed: () {
             Navigator.of(context).pop();
@@ -177,11 +159,8 @@ class _PetBoardingPageState extends StateMVC {
             padding: EdgeInsets.all(10),
             child: Center(
               child: Text(
-                "(Фильтр с заглушками, на стадии разработки)",
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16),
+                "Фильтр",
+                style: Theme.of(context).copyWith().textTheme.bodyText1,
               ),
             ),
           ),
@@ -190,10 +169,7 @@ class _PetBoardingPageState extends StateMVC {
             child: Center(
               child: Text(
                 "Вид животного",
-                style: GoogleFonts.comfortaa(
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16),
+                style: Theme.of(context).copyWith().textTheme.bodyText1,
               ),
             ),
           ),
@@ -206,10 +182,7 @@ class _PetBoardingPageState extends StateMVC {
                   children: [
                     Text(
                       'Собаки',
-                      style: GoogleFonts.comfortaa(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 16),
+                      style: Theme.of(context).copyWith().textTheme.bodyText1,
                     ),
                     Icon(Icons.check_box_outlined, size: 20)
                   ],
@@ -219,10 +192,7 @@ class _PetBoardingPageState extends StateMVC {
                 children: [
                   Text(
                     'Кошки',
-                    style: GoogleFonts.comfortaa(
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16),
+                    style: Theme.of(context).copyWith().textTheme.bodyText1,
                   ),
                   Icon(Icons.check_box_outlined, size: 20)
                 ],
@@ -231,10 +201,7 @@ class _PetBoardingPageState extends StateMVC {
           ),
           Text(
             "Стоимость",
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 16),
+            style: Theme.of(context).copyWith().textTheme.bodyText1,
           ),
           Slider(
             divisions: 3000,

@@ -77,12 +77,7 @@ class _AdvicePageState extends StateMVC {
                   ),
                 ),
                 child: Text("Показать все",
-                    style: GoogleFonts.comfortaa(
-                        decoration: TextDecoration.underline,
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 14)),
+                    style: Theme.of(context).copyWith().textTheme.titleSmall),
               )
             ],
           ),
@@ -125,12 +120,7 @@ class _AdvicePageState extends StateMVC {
                   ),
                 ),
                 child: Text("Показать все",
-                    style: GoogleFonts.comfortaa(
-                        decoration: TextDecoration.underline,
-                        color: Colors.black,
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 14)),
+                    style: Theme.of(context).copyWith().textTheme.titleSmall),
               )
             ],
           ),

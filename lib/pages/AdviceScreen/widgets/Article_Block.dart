@@ -51,10 +51,7 @@ class ArticleBlock extends StatelessWidget {
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.comfortaa(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 14),
+                      style: Theme.of(context).copyWith().textTheme.labelSmall,
                     ),
                   ),
                 ),

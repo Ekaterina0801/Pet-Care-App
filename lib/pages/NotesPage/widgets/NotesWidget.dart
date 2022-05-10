@@ -123,10 +123,7 @@ _displayNoteUpdate(
         child: ElevatedButton(
           child: Text(
             'Применить',
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14),
+            style: Theme.of(context).copyWith().textTheme.labelSmall,
           ),
           onPressed: () {
             if (formKey.currentState.validate()) {
