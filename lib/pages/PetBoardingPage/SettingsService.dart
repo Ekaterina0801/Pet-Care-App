@@ -680,7 +680,7 @@ class _MyCheckBoxState extends State<MyCheckBox> {
       if (states.any(interactiveStates.contains)) {
         return Colors.blue;
       }
-      return Colors.red;
+      return Colors.black;
     }
 
     return Checkbox(
