@@ -88,20 +88,44 @@ class _CalendarPageState extends StateMVC {
                 child: SfCalendar(
                   firstDayOfWeek: 1,
                   todayHighlightColor: Color.fromRGBO(208, 76, 49, 80),
-                  todayTextStyle: Theme.of(context).copyWith().textTheme.labelSmall,
+                  todayTextStyle: GoogleFonts.comfortaa(
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14),
                   allowAppointmentResize: true,
-                  blackoutDatesTextStyle: Theme.of(context).copyWith().textTheme.labelSmall,
+                  blackoutDatesTextStyle: GoogleFonts.comfortaa(
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 14),
                   appointmentTimeTextFormat: 'HH:mm',
-                  appointmentTextStyle: Theme.of(context).copyWith().textTheme.bodyText1,
+                  appointmentTextStyle: GoogleFonts.comfortaa(
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 16),
                   monthViewSettings: MonthViewSettings(
                     showAgenda: true,
                     agendaItemHeight: 70,
                     appointmentDisplayMode:
                         MonthAppointmentDisplayMode.indicator,
                     agendaStyle: AgendaStyle(
-                      dayTextStyle: Theme.of(context).copyWith().textTheme.labelSmall,
-                      dateTextStyle: Theme.of(context).copyWith().textTheme.labelSmall,
-                      appointmentTextStyle: Theme.of(context).copyWith().textTheme.labelSmall,
+                      dayTextStyle: GoogleFonts.comfortaa(
+                          color: Colors.black,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14),
+                      dateTextStyle: GoogleFonts.comfortaa(
+                          color: Colors.black,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14),
+                      appointmentTextStyle: GoogleFonts.comfortaa(
+                          color: Colors.black,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14),
                     ),
                   ),
                   scheduleViewMonthHeaderBuilder: (BuildContext buildContext,

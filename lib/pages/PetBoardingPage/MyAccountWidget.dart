@@ -32,7 +32,10 @@ class MyAccountWidget extends StatelessWidget {
                   maxLines: 12,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).copyWith().textTheme.labelLarge),
+                  style: GoogleFonts.comfortaa(
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 18)),
             ),
             SetAgreement(),
           ],
@@ -54,7 +57,10 @@ class _SetAgreementState extends State<SetAgreement> {
         child: Container(
           padding: EdgeInsets.all(5),
           child: Text("Согласие брать питомцев на передержку:",
-              style: Theme.of(context).copyWith().textTheme.labelSmall),
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 14)),
         ),
       ),
       Checkbox(

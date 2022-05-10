@@ -94,7 +94,10 @@ class _SettingsServiceState extends StateMVC {
         elevation: 0,
         backgroundColor: Color.fromRGBO(255, 223, 142, 10),
         title: Text("Настройки",
-            style: Theme.of(context).copyWith().textTheme.headline2),
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 20)),
       ),
       body: FutureBuilder(
         future: getMyOverexposures(),
@@ -102,7 +105,7 @@ class _SettingsServiceState extends StateMVC {
           switch(snapshot.connectionState){
             case ConnectionState.none:
             case ConnectionState.waiting:
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             default:
               if (snapshot.hasError)
                 return Text('Error: ${snapshot.error}');
@@ -133,7 +136,10 @@ class _SettingsServiceState extends StateMVC {
                       padding: EdgeInsets.all(10),
                       child: Text("Контакты: "+user.email,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).copyWith().textTheme.labelSmall),
+                          style: GoogleFonts.comfortaa(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14)),
                     ),
                     IconButton(
                       icon: Icon(Icons.edit, size: 16),
@@ -163,7 +169,10 @@ class _SettingsServiceState extends StateMVC {
                       padding: EdgeInsets.all(10),
                       child: Text("Район: "+user.district,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).copyWith().textTheme.labelSmall),
+                          style: GoogleFonts.comfortaa(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 14)),
                     ),
                     IconButton(
                       icon: Icon(Icons.edit, size: 16),
@@ -195,7 +204,10 @@ class _SettingsServiceState extends StateMVC {
                             child: Text("Кого готовы брать на передержку?",
                                 textAlign: TextAlign.left,
                                 overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).copyWith().textTheme.labelSmall),
+                                style: GoogleFonts.comfortaa(
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 14)),
                           ),
                         ]),
                     SetKindPets(),
@@ -252,7 +264,10 @@ class _SettingsServiceState extends StateMVC {
           ElevatedButton(
             child: Text(
               'Принять',
-              style: Theme.of(context).copyWith().textTheme.labelSmall,
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 14),
             ),
             onPressed: () {
               if (formKey.currentState.validate()) {
@@ -267,7 +282,10 @@ class _SettingsServiceState extends StateMVC {
           padding: EdgeInsets.all(10),
           child: TextFormField(
             maxLength: 12,
-            style: Theme.of(context).copyWith().textTheme.bodyText1,
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 16),
             onChanged: (value) {
               newtext = value;
               //_date = DateTime.now().toString();
@@ -292,7 +310,10 @@ class _SettingsServiceState extends StateMVC {
           ElevatedButton(
             child: Text(
               'Принять',
-              style: Theme.of(context).copyWith().textTheme.labelSmall,
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 14),
             ),
             onPressed: () {
               if (newtext != "") 
@@ -347,7 +368,10 @@ class _SettingsServiceState extends StateMVC {
           ElevatedButton(
             child: Text(
               'Принять',
-              style: Theme.of(context).copyWith().textTheme.labelSmall,
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 14),
             ),
             onPressed: () {
               
@@ -373,7 +397,10 @@ class _SettingsServiceState extends StateMVC {
           padding: EdgeInsets.all(10),
           child: TextFormField(
             maxLength: 26,
-            style: Theme.of(context).copyWith().textTheme.bodyText1,
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 16),
             onChanged: (value) {
               newtext = value;
               //_date = DateTime.now().toString();
@@ -573,7 +600,10 @@ class _SetKindPetsState extends State<SetKindPets> {
         Container(
           padding: EdgeInsets.all(5),
           child: Text("Собаки",
-              style: Theme.of(context).copyWith().textTheme.labelSmall),
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 14)),
         ),
         Checkbox(
             checkColor: Colors.black,
@@ -586,7 +616,10 @@ class _SetKindPetsState extends State<SetKindPets> {
         Container(
           padding: EdgeInsets.all(5),
           child: Text("Кошки",
-              style: Theme.of(context).copyWith().textTheme.labelSmall),
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 14)),
         ),
       ]),
     );

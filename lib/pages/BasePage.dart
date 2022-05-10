@@ -83,7 +83,11 @@ class _HomePageState extends State<HomePage> {
               size: 23,
             ),
             title: Text('Советы',
-                style:Theme.of(context).copyWith().textTheme.headline5),
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
           ),
           SalomonBottomBarItem(
             icon: Icon(
@@ -91,7 +95,11 @@ class _HomePageState extends State<HomePage> {
               size: 23,
             ),
             title: Text('Сервис',
-               style:Theme.of(context).copyWith().textTheme.headline5),
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
           ),
           SalomonBottomBarItem(
             icon: Icon(
@@ -99,7 +107,11 @@ class _HomePageState extends State<HomePage> {
               size: 23,
             ),
             title: Text('Календарь',
-                style:Theme.of(context).copyWith().textTheme.headline5),
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
           ),
           SalomonBottomBarItem(
             icon: Icon(
@@ -107,7 +119,11 @@ class _HomePageState extends State<HomePage> {
               size: 23,
             ),
             title: Text('Записки',
-                style:Theme.of(context).copyWith().textTheme.headline5),
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
           ),
           SalomonBottomBarItem(
             icon: Icon(
@@ -115,7 +131,11 @@ class _HomePageState extends State<HomePage> {
               size: 23,
             ),
             title: Text('Профиль',
-                style:Theme.of(context).copyWith().textTheme.headline5),
+                style: GoogleFonts.comfortaa(
+                  fontSize: 12,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                )),
           ),
         ],
       ),

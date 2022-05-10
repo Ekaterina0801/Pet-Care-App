@@ -75,14 +75,22 @@ class _AccountBlockState extends State<AccountBlock> {
                             maxLines: 9,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).copyWith().textTheme.labelMedium),
+                            style: GoogleFonts.comfortaa(
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 15)),
                         TextButton(
                             onPressed: () =>
                                 _displayDialogInfo(context, widget.account),
                             child: Text('Подробнее',
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).copyWith().textTheme.displaySmall))
+                                style: GoogleFonts.comfortaa(
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.black,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 13)))
                       ])),
                     ),
                   )),
@@ -105,7 +113,10 @@ class _AccountBlockState extends State<AccountBlock> {
         ElevatedButton(
           child: Text(
             'Ок',
-            style: Theme.of(context).copyWith().textTheme.labelSmall,
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
           ),
           onPressed: () {
             Navigator.of(context).pop();

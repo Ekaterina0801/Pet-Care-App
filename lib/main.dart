@@ -19,7 +19,8 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  var initializationSettingsAndroid = AndroidInitializationSettings('icon');
+  var initializationSettingsAndroid =
+      AndroidInitializationSettings('icon');
   var initializationSettingsIOS = IOSInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
@@ -90,26 +91,31 @@ class MyApp extends StatelessWidget {
         locale: Locale('ru'),
         theme: ThemeData(
           primarySwatch: Colors.yellow,
-          elevatedButtonTheme: ElevatedButtonThemeData(
+          
+          elevatedButtonTheme: ElevatedButtonThemeData( 
             style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              primary: Color.fromRGBO(255, 223, 142, 10),
+                shape: RoundedRectangleBorder(
+                borderRadius:
+                BorderRadius.all(Radius.circular(10))),
+              primary:Color.fromRGBO(255, 223, 142, 10),
             ),
           ),
-          textTheme: TextTheme(
+
+          textTheme: TextTheme( 
+
             //основной текст статьи, прививок, заметок и болезней
             bodyText1: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 16),
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800, 
+                      fontSize: 16), 
 
             //appbar
             bodyText2: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w800,
                 fontSize: 20),
-
+          
+          
             // кнопки
             headline1: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
@@ -130,56 +136,12 @@ class MyApp extends StatelessWidget {
                 color: Colors.black87,
                 fontSize: 16),
 
-            //для цифр в TimePicker
-            headline4: GoogleFonts.comfortaa(
+          //для цифр в TimePicker
+                headline4: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w900,
                 color: Color.fromARGB(175, 226, 81, 52),
                 fontSize: 20),
-
-            //Для BasePage
-            headline5: GoogleFonts.comfortaa(
-              fontSize: 12,
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w800,
-            ),
-            //Для регистрации
-            headline6: GoogleFonts.comfortaa(
-                color: Color.fromARGB(255, 54, 28, 0),
-                fontWeight: FontWeight.w300,
-                fontStyle: FontStyle.italic,
-                fontSize: 18),
-
-            labelSmall: GoogleFonts.comfortaa(
-                color: Colors.black,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14),
-                
-            labelMedium: GoogleFonts.comfortaa(
-                color: Colors.black,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w600,
-                fontSize: 15),
-
-            labelLarge: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 18),
-
-            titleSmall: GoogleFonts.comfortaa(
-                decoration: TextDecoration.underline,
-                color: Colors.black,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14),
-
-            displaySmall: GoogleFonts.comfortaa(
-                decoration: TextDecoration.underline,
-                color: Colors.black,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 13),
           ),
         ),
       ),

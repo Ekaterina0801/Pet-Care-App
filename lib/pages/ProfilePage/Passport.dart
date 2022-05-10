@@ -102,11 +102,18 @@ class InfoWidget extends StatelessWidget {
               child: ListTile(
                 title: Text(
                   title,
-                  style: Theme.of(context).copyWith().textTheme.bodyText2,
+                  style: GoogleFonts.comfortaa(
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20),
                 ),
                 subtitle: Text(
                   info==null?"-":info,
-                  style: Theme.of(context).copyWith().textTheme.labelMedium,
+                  style: GoogleFonts.comfortaa(
+                      color: Colors.black,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15),
                 ),
                 isThreeLine: true,
               ),

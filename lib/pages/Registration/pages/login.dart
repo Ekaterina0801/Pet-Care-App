@@ -65,7 +65,11 @@ class _LoginState extends State<Login> {
         TextButton(
           //padding: EdgeInsets.only(left: 0.0),
           child: Text("Регистрация",
-              style: Theme.of(context).copyWith().textTheme.headline6),
+              style: GoogleFonts.comfortaa(
+                  color: Color.fromARGB(255, 54, 28, 0),
+                  fontWeight: FontWeight.w300,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 18)),
           onPressed: () {
             //Navigator.pushNamed(context, '/register');
             Navigator.push(
