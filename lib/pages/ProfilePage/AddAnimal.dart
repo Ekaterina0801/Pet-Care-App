@@ -66,7 +66,6 @@ class _AddAnimalState extends State<AddAnimal> {
         validator: validateDate,
         onSaved: (value) => {
           _dateofbirthday = value,
-          petBirth = value,
         },
         decoration: buildInputDecoration(
           "Дата рождения питомца",
@@ -97,7 +96,7 @@ class _AddAnimalState extends State<AddAnimal> {
     final weightField = TextFormField(
         autofocus: false,
         //obscureText: true,
-        validator: validateDigits,
+        validator: validateReal,
         onSaved: (value) => _weight = value,
         decoration: buildInputDecoration("Вес питомца",
           Icons.pets,

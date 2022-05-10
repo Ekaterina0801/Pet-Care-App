@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:pet_care/pages/ProfilePage/ValidatorDate.dart';
 import 'package:pet_care/pages/Registration/ValidatorsReg.dart';
 
 import '../../dommain/myuser.dart';
@@ -17,11 +18,15 @@ import 'Pet.dart';
 import 'diseaserepo.dart';
 
 class DiseasePage extends StatefulWidget {
+   String petBirth;
+   
+   DiseasePage(this.petBirth);
   @override
   _DiseasePageState createState() => _DiseasePageState();
 }
-
+ 
 class _DiseasePageState extends StateMVC {
+  String petBirth;
   DiseaseController _controller;
   _DiseasePageState() : super(DiseaseController()) {
     _controller = controller as DiseaseController;
@@ -75,7 +80,7 @@ class _DiseasePageState extends StateMVC {
                     //height: 50,
                     //color: Colors.grey.shade200,
                     style: ElevatedButton.styleFrom(
-                    primary: Colors.grey.shade200,
+                      primary: Colors.grey.shade200,
                     ),
                     onPressed: () {
                       setState(
@@ -88,7 +93,10 @@ class _DiseasePageState extends StateMVC {
                               child: Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Text('Добавление болезни',
-                                    style: Theme.of(context).copyWith().textTheme.headline2),
+                                    style: Theme.of(context)
+                                        .copyWith()
+                                        .textTheme
+                                        .headline2),
                               ),
                             ),
                             actions: [
@@ -124,109 +132,18 @@ class _DiseasePageState extends StateMVC {
 
                                     //Navigator.of(context).pop(true);
 
-                                      //Navigator.pushNamed(context, "/notes");
-                                    }
-                                  ),
-                    
+                                    //Navigator.pushNamed(context, "/notes");
+                                  }),
                             ],
-
                             content: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 1, vertical: 10),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 1, vertical: 10),
                               child: Column(
                                 children: [
                                   Form(
                                     key: formKey,
                                     child: Column(
                                       children: [
-                                        Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                child: Align(
-                                                  alignment:Alignment.bottomLeft,
-                                                  child: Text('Введите описание болезни:',
-                                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
-                                                ),
-                                              ),
-                                              TextFormField(
-                                                maxLines: 3,
-                                                validator:  validateText,
-                                                onChanged: (value) {
-                                                  type = value;
-                                                },
-                                                decoration: InputDecoration(
-                                                  border: InputBorder.none,
-                                                  hintText:'Введите информацию о болезни',
-                                                  hintStyle: TextStyle(
-                                                  color: Color.fromARGB(153, 69, 69, 69)),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                    decoration: BoxDecoration(
-                                    boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(43, 0, 0, 0),
-                                      blurRadius: 5,
-                                      offset: const Offset(0.0, 0.0),
-                                      spreadRadius: 2.0,
-                                    )
-                                  ],  
-                                    color: Color.fromARGB(202, 242, 242, 242),
-                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
-                                    borderRadius: BorderRadius.circular(10),
-                                    ),),
-
-                                        SizedBox(height: 15),
-
-                                        Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
-                                          //margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                child: Align(
-                                                  alignment:
-                                                      Alignment.bottomLeft,
-                                                  child: Text('Введите дату начала болезни:',
-                                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
-                                                ),
-                                              ),
-                                              TextFormField(
-                                                maxLines: 3,
-                                                validator: (value) =>
-                                                    value.isEmpty
-                                                        ? "Введите текст"
-                                                        : null,
-                                                onChanged: (value) {
-                                                  datebeg = value;
-                                                },
-                                                decoration: InputDecoration(
-                                                  border: InputBorder.none,
-                                                  hintText:'Введите дату начала болезни',
-                                                  hintStyle: TextStyle(
-                                                      color: Color.fromARGB(153, 69, 69, 69)),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                    decoration: BoxDecoration(
-                                    boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(43, 0, 0, 0),
-                                      blurRadius: 5,
-                                      offset: const Offset(0.0, 0.0),
-                                      spreadRadius: 2.0,
-                                    )
-                                  ],  
-                                    color: Color.fromARGB(202, 242, 242, 242),
-                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
-                                    borderRadius: BorderRadius.circular(10),
-                                    ),),
-
-                                        SizedBox(height: 15),
-
                                         Container(
                                           padding: EdgeInsets.symmetric(
                                               horizontal: 7, vertical: 12),
@@ -236,41 +153,163 @@ class _DiseasePageState extends StateMVC {
                                                 child: Align(
                                                   alignment:
                                                       Alignment.bottomLeft,
-                                                  child: Text('Введите дату окончания болезни:',
-                                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
+                                                  child: Text(
+                                                      'Введите описание болезни:',
+                                                      style: Theme.of(context)
+                                                          .copyWith()
+                                                          .textTheme
+                                                          .bodyText1),
+                                                ),
+                                              ),
+                                              TextFormField(
+                                                maxLines: 3,
+                                                validator: validateText,
+                                                onChanged: (value) {
+                                                  type = value;
+                                                },
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  hintText:
+                                                      'Введите информацию о болезни',
+                                                  hintStyle: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          153, 69, 69, 69)),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color:
+                                                    Color.fromARGB(43, 0, 0, 0),
+                                                blurRadius: 5,
+                                                offset: const Offset(0.0, 0.0),
+                                                spreadRadius: 2.0,
+                                              )
+                                            ],
+                                            color: Color.fromARGB(
+                                                202, 242, 242, 242),
+                                            border: Border.all(
+                                                color: Color.fromARGB(
+                                                    202, 242, 242, 242)),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        SizedBox(height: 15),
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 7, vertical: 12),
+                                          //margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.bottomLeft,
+                                                  child: Text(
+                                                      'Введите дату начала болезни:',
+                                                      style: Theme.of(context)
+                                                          .copyWith()
+                                                          .textTheme
+                                                          .bodyText1),
+                                                ),
+                                              ),
+                                              TextFormField(
+                                                maxLines: 1,
+                                                validator: (value) =>
+                                                    validateDatewithPet(
+                                                        value, petBirth),
+                                                onChanged: (value) {
+                                                  datebeg = value;
+                                                },
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  hintText:
+                                                      'Введите дату начала болезни',
+                                                  hintStyle: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          153, 69, 69, 69)),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color:
+                                                    Color.fromARGB(43, 0, 0, 0),
+                                                blurRadius: 5,
+                                                offset: const Offset(0.0, 0.0),
+                                                spreadRadius: 2.0,
+                                              )
+                                            ],
+                                            color: Color.fromARGB(
+                                                202, 242, 242, 242),
+                                            border: Border.all(
+                                                color: Color.fromARGB(
+                                                    202, 242, 242, 242)),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        SizedBox(height: 15),
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 7, vertical: 12),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.bottomLeft,
+                                                  child: Text(
+                                                      'Введите дату окончания болезни:',
+                                                      style: Theme.of(context)
+                                                          .copyWith()
+                                                          .textTheme
+                                                          .bodyText1),
                                                 ),
                                               ),
                                               TextFormField(
                                                 validator: (value) =>
-                                                    value.isEmpty
-                                                        ? "Введите текст"
-                                                        : null,
-                                                maxLines: 3,
+                                                    validateDatewithPetSecond(
+                                                        value, datebeg),
+                                                maxLines: 1,
                                                 onChanged: (value) {
                                                   dateend = value;
                                                 },
                                                 decoration: InputDecoration(
                                                   border: InputBorder.none,
-                                                  hintText:'Введите дату окончания болезни',
+                                                  hintText:
+                                                      'Введите дату окончания болезни',
                                                   hintStyle: TextStyle(
-                                                      color: Color.fromARGB(153, 69, 69, 69)),
+                                                      color: Color.fromARGB(
+                                                          153, 69, 69, 69)),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                    decoration: BoxDecoration(
-                                    boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromARGB(43, 0, 0, 0),
-                                      blurRadius: 5,
-                                      offset: const Offset(0.0, 0.0),
-                                      spreadRadius: 2.0,
-                                    )
-                                  ],  
-                                    color: Color.fromARGB(202, 242, 242, 242),
-                                    border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),
-                                    borderRadius: BorderRadius.circular(10),
-                                    ),),
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color:
+                                                    Color.fromARGB(43, 0, 0, 0),
+                                                blurRadius: 5,
+                                                offset: const Offset(0.0, 0.0),
+                                                spreadRadius: 2.0,
+                                              )
+                                            ],
+                                            color: Color.fromARGB(
+                                                202, 242, 242, 242),
+                                            border: Border.all(
+                                                color: Color.fromARGB(
+                                                    202, 242, 242, 242)),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -295,7 +334,8 @@ class _DiseasePageState extends StateMVC {
                     child: Align(
                       alignment: Alignment.bottomLeft,
                       child: Text('+ Добавить болезнь',
-                        style: Theme.of(context).copyWith().textTheme.bodyText1),
+                          style:
+                              Theme.of(context).copyWith().textTheme.bodyText1),
                     ),
                   ),
                   alldisease.length == 0
@@ -311,7 +351,10 @@ class _DiseasePageState extends StateMVC {
                                   Align(
                                     alignment: Alignment.center,
                                     child: Text("Отмеченных болезней пока нет",
-                                      style: Theme.of(context).copyWith().textTheme.bodyText1),
+                                        style: Theme.of(context)
+                                            .copyWith()
+                                            .textTheme
+                                            .bodyText1),
                                   ),
                                 ],
                               ),
@@ -341,13 +384,13 @@ Widget _displayDiseaseAdd(BuildContext context, String type, String datebeg,
   final formKey = new GlobalKey<FormState>();
   AlertDialog alert = AlertDialog(
     title: Text('Добавление информации',
-    style: Theme.of(context).copyWith().textTheme.headline2),
+        style: Theme.of(context).copyWith().textTheme.headline2),
     actions: [
       Container(
         height: 30,
         child: ElevatedButton(
           child: Text('Добавить',
-            style: Theme.of(context).copyWith().textTheme.headline1),
+              style: Theme.of(context).copyWith().textTheme.headline1),
           onPressed: () {
             addDisease(type, datebeg, dateend, userID);
             //notifyListeners();

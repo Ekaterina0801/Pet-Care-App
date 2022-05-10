@@ -1,6 +1,6 @@
 String validateText(String value) {
   String _msg;
-  RegExp regex = new RegExp(r'^[А-Я][а-я]+$');
+  RegExp regex = new RegExp(r'^[А-ЯЁ][а-яё]+$');
   var match = regex.firstMatch(value);
   if (value.isEmpty)
     _msg = "Введите текст";
@@ -32,16 +32,29 @@ String validatePassword(String value) {
   return _msg;
 }
 
+String validateReal(String value) {
+  String _msg;
+  RegExp regex = new RegExp(
+      r'^((\d+\.\d+)|(\d+))$');
+  if (value.isEmpty) {
+    _msg = "Введите вес в кг";
+  } else if (!regex.hasMatch(value)) 
+   _msg = "Допускаются только цифры и точка";
+  return _msg;
+}
+
 String validateDigits(String value) {
   String _msg;
   RegExp regex = new RegExp(
-      r'^((\d+[.,\,]\d+)|(\d+))$');
+      r'^(\d+)$');
   if (value.isEmpty) {
     _msg = "Введите число";
   } else if (!regex.hasMatch(value)) 
-   _msg = "Введите только число (не обязательное целое)";
+   _msg = "Можно ввести только целое число";
   return _msg;
 }
+
+
 
 
 
