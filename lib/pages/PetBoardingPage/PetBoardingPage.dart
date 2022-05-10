@@ -91,7 +91,7 @@ class _PetBoardingPageState extends StateMVC {
                           onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SettingsService(),
+                              builder: (context) => SettingsService(user.email, user.district,"","",user.userid),
                             ),
                           ),
                           child: Text("Перейти к настройкам моих передержек",
