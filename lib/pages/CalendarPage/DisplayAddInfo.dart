@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../BasePage.dart';
+import '../Registration/ValidatorsReg.dart';
 import 'AddInfo.dart';
 import 'Meeting.dart';
 import 'Message.dart';
@@ -23,23 +24,29 @@ class _DisplayAddInfoState extends State<DisplayAddInfo> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Добавление события'),
+      title: Container(
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Text('Добавление события',
+              style: Theme.of(context).copyWith().textTheme.headline2),
+        ),
+      ),
       actions: [
         ElevatedButton(
           child: Text('Добавить',
-            style: Theme.of(context).copyWith().textTheme.bodyText1),
+              style: Theme.of(context).copyWith().textTheme.bodyText1),
           onPressed: () {
             if (formKey1.currentState.validate() &&
                 widget.dateto != null &&
                 widget.datefrom != null) {
               addEvent(widget.eventname, widget.datefrom.toString(),
                   widget.dateto.toString());
-                  Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => HomePage(2),
-                        ),
-                      );
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => HomePage(2),
+                ),
+              );
               //Navigator.of(context).pop(true);
             } else
               showDialog(
@@ -53,80 +60,140 @@ class _DisplayAddInfoState extends State<DisplayAddInfo> {
       ],
       content: Column(
         children: [
-          AddInfo('Событие'),
           Container(
-            padding: EdgeInsets.all(10),
-            child: Form(
-              key: formKey1,
-              child: TextFormField(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => value.isEmpty ? "Поле пустое" : null,
-                maxLines: 3,
-                onChanged: (value) {
-                  widget.eventname = value;
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Введите событие',
+            padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
+            child: Column(
+              children: [
+                AddInfo('Введите название события:'),
+                TextFormField(
+                  maxLines: 3,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: validateText,
+                  onChanged: (value) {
+                    widget.eventname = value;
+                  },
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Введите название и описание событие',
+                    hintStyle:
+                        TextStyle(color: Color.fromARGB(153, 69, 69, 69)),
+                  ),
                 ),
-              ),
+              ],
+            ),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(43, 0, 0, 0),
+                  blurRadius: 5,
+                  offset: const Offset(0.0, 0.0),
+                  spreadRadius: 2.0,
+                )
+              ],
+              color: Color.fromARGB(202, 242, 242, 242),
+              border: Border.all(color: Color.fromARGB(202, 242, 242, 242)),
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
-          AddInfo('Начало события'),
-          Builder(
-            builder: (context) {
-              return Theme(
-                data: ThemeData().copyWith(
-                  textTheme: Theme.of(context).textTheme,
-                  colorScheme: ColorScheme.light().copyWith(
-                    primary: Color.fromRGBO(255, 223, 142, 1),
-                    onPrimary: Colors.black,
-                  ),
-                ),
-                child: DateTimePicker(
-                  style: Theme.of(context).textTheme.bodyText1,
-                  initialValue: '',
-                  autovalidate: true,
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2100),
-                  dateLabelText: 'Date',
-                  onChanged: (val) => widget.datefrom = val,
-                  validator: (val) {
-                    print(val);
-                    return null;
+          SizedBox(height: 10),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
+            //margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+            child: Column(
+              children: [
+                AddInfo('Введите дату события:'),
+                Builder(
+                  builder: (context) {
+                    return Theme(
+                      data: ThemeData().copyWith(
+                        textTheme: Theme.of(context).textTheme,
+                        colorScheme: ColorScheme.light().copyWith(
+                          primary: Color.fromRGBO(255, 223, 142, 1),
+                          onPrimary: Colors.black,
+                        ),
+                      ),
+                      child: DateTimePicker(
+                        style: Theme.of(context).textTheme.bodyText1,
+                        initialValue: '',
+                        autovalidate: true,
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                        dateHintText: 'Дата события',
+                        onChanged: (val) => widget.datefrom = val,
+                        validator: (val) {
+                          print(val);
+                          return null;
+                        },
+                        onSaved: (val) => widget.datefrom = val,
+                      ),
+                    );
                   },
-                  onSaved: (val) => widget.datefrom = val,
                 ),
-              );
-            },
+              ],
+            ),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(43, 0, 0, 0),
+                  blurRadius: 5,
+                  offset: const Offset(0.0, 0.0),
+                  spreadRadius: 2.0,
+                )
+              ],
+              color: Color.fromARGB(202, 242, 242, 242),
+              border: Border.all(color: Color.fromARGB(202, 242, 242, 242)),
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
-          AddInfo('Окончание события'),
-          Builder(
-            builder: (context) {
-              return Theme(
-                data: ThemeData().copyWith(
-                  textTheme: Theme.of(context).textTheme,
-                  colorScheme: ColorScheme.light().copyWith(
-                    primary: Color.fromRGBO(255, 223, 142, 1),
-                    onPrimary: Colors.black,
-                  ),
-                ),
-                child: DateTimePicker(
-                  style: Theme.of(context).textTheme.bodyText1,
-                  initialValue: '',
-                  autovalidate: true,
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(2100),
-                  dateLabelText: 'Date',
-                  onChanged: (val) => widget.dateto = val,
-                  validator: (val) {
-                    print(val);
-                    return null;
+          SizedBox(height: 10.0),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 7, vertical: 12),
+            //margin: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+            child: Column(
+              children: [
+                AddInfo('Введите время события:'),
+                Builder(
+                  builder: (context) {
+                    return Theme(
+                      data: ThemeData().copyWith(
+                        textTheme: Theme.of(context).textTheme,
+                        colorScheme: ColorScheme.light().copyWith(
+                          primary: Color.fromRGBO(255, 223, 142, 1),
+                          onPrimary: Colors.black,
+                        ),
+                      ),
+                      child: DateTimePicker(
+                        style: Theme.of(context).textTheme.bodyText1,
+                        initialValue: '',
+                        autovalidate: true,
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                        dateLabelText: 'Время события',
+                        onChanged: (val) => widget.dateto = val,
+                        validator: (val) {
+                          print(val);
+                          return null;
+                        },
+                        onSaved: (val) => widget.dateto = val,
+                      ),
+                    );
                   },
-                  onSaved: (val) => widget.dateto = val,
                 ),
-              );
-            },
+              ],
+            ),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(43, 0, 0, 0),
+                  blurRadius: 5,
+                  offset: const Offset(0.0, 0.0),
+                  spreadRadius: 2.0,
+                )
+              ],
+              color: Color.fromARGB(202, 242, 242, 242),
+              border: Border.all(color: Color.fromARGB(202, 242, 242, 242)),
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
         ],
       ),

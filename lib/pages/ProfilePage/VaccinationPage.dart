@@ -24,11 +24,15 @@ List<String> photos = [
 ];
 
 class VaccinationPage extends StatefulWidget {
+   String petBirth;
+   
+  VaccinationPage(this.petBirth);
   @override
   _VaccinationPageState createState() => _VaccinationPageState();
 }
 
 class _VaccinationPageState extends StateMVC {
+   String petBirth;
   VaccinationController _controller;
   _VaccinationPageState() : super(VaccinationController()) {
     _controller = controller as VaccinationController;
@@ -206,7 +210,7 @@ class _VaccinationPageState extends StateMVC {
                                               ),
                                               TextFormField(
                                                 maxLines: 1,
-                                                validator: validateDate,
+                                                validator: (value) => validateDatewithPet(value, petBirth),
                                                 onSaved: (value) {
                                                   date = value;
                                                 },
@@ -228,6 +232,7 @@ class _VaccinationPageState extends StateMVC {
                                       offset: const Offset(0.0, 0.0),
                                       spreadRadius: 2.0,
                                     )
+                                    
                                   ],  
                                     color: Color.fromARGB(202, 242, 242, 242),
                                     border: Border.all(color:Color.fromARGB(202, 242, 242, 242)),

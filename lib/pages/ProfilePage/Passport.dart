@@ -49,7 +49,7 @@ class Passport extends StatelessWidget {
               //color: Color.fromRGBO(255, 223, 142, 10),
               // splashColor: Color.fromRGBO(240, 240, 240, 10),
               onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => VaccinationPage())),
+                  MaterialPageRoute(builder: (context) => VaccinationPage(dateb))),
               child: Text('Прививки',
                 style: Theme.of(context).copyWith().textTheme.headline1), 
             ),
