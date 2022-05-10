@@ -43,7 +43,7 @@ class _LoginState extends State<Login> {
     var loading = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        CircularProgressIndicator(),
+        Center(child: CircularProgressIndicator()),
         Text(" Авторизация...Подождите")
       ],
     );
@@ -159,21 +159,6 @@ class _LoginState extends State<Login> {
                       height:
                           5.0), // отступ (высота) между желтым контейнером "вход" и контейнерами "ЗП?" и "Регистрация"
                   forgotLabel,
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    child: Flexible(
-                      child: Text(
-                        "Баг: при попытке ввести несуществующие в БД данные приложение ломается. Будет устранен",
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12),
-                        softWrap: true,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),

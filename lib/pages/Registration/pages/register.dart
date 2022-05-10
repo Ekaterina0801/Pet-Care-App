@@ -104,7 +104,7 @@ class _RegisterState extends State<Register> {
     var loading = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        CircularProgressIndicator(),
+        Center(child: CircularProgressIndicator()),
         Text("Регистрация, пожалуйста, подождите")
       ],
     );

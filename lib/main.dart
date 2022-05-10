@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
               switch (snapshot.connectionState) {
                 case ConnectionState.none:
                 case ConnectionState.waiting:
-                  return CircularProgressIndicator();
+                  return Center(child: CircularProgressIndicator());
                 default:
                   if (snapshot.hasError)
                     return Text('Error: ${snapshot.error}');
