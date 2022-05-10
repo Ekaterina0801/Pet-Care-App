@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
           '/welcome': (context) => WelcomeScreen()
         },
         title: 'PetCare',
-        //initialRoute: '/login',
+        //initialRoute: '/welcome',
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           SfGlobalLocalizations.delegate

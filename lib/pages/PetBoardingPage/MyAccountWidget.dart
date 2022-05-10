@@ -28,14 +28,16 @@ class MyAccountWidget extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: Text(myaccount.name,
-                  maxLines: 12,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.comfortaa(
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 18)),
+              child: Text(
+                myaccount.name,
+                maxLines: 12,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.comfortaa(
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 18),
+              ),
             ),
             SetAgreement(),
           ],

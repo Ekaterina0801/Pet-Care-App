@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Message extends StatelessWidget {
+class MessageErrorLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

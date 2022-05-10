@@ -76,10 +76,7 @@ class AdviceBlock extends StatelessWidget {
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.comfortaa(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14),
+                      style: Theme.of(context).textTheme.bodyText1,
                     ),
                   ),
                 ),
