@@ -2,8 +2,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:pet_care/pages/ProfilePage/Pet.dart';
 import 'package:http/http.dart' as http;
+import 'package:pet_care/pages/CalendarPage/Meeting.dart';
+
+import '../pages/NotesPage/Note.dart';
+import '../pages/ProfilePage/Pet.dart';
 class MyUser {
   int userid;
   String firstname;
@@ -11,45 +14,54 @@ class MyUser {
   String email;
   String password;
   String district;
-  String readyforoverposure;
-  String price;
-  String typePets;
+  bool readyforoverposure;
+  List<Meeting> mentions;
+  List<Note> notes;
+  List<Pet> pets;
+  //String price;
+  //String typePets;
   //String stringID;
   //Pet pet;
 
-  MyUser({this.userid,this.email,this.password,this.firstname,this.lastname,this.district,this.readyforoverposure,this.price,this.typePets});
+  MyUser({this.userid,this.email,this.password,this.firstname,this.lastname,this.district,this.readyforoverposure,this.mentions,this.notes,this.pets});
 
   factory MyUser.fromJson(Map<String, dynamic> responseData) {
     return MyUser(
-        userid: responseData['UserID'],
-        firstname: responseData['FirstName'],
-        lastname: responseData['LastName'],
-        email: responseData['Email'],
-        password: responseData['Password'],
-        district: responseData['District'],
-        readyforoverposure: responseData['ReadyForOverposure'], 
-        typePets: responseData['TypeOfPets'],
-        price: responseData['Price'],
+        userid: responseData['userId'],
+        firstname: responseData['firstName'],
+        lastname: responseData['lastName'],
+        email: responseData['email'],
+        password: responseData['password'],
+        district: responseData['district'],
+        readyforoverposure: responseData['readyForOvereposure'], 
+        mentions: responseData['mentions'].cast<Meeting>(),
+        notes: responseData['notes'].cast<Note>(),
+        pets:responseData['pets'].cast<Pet>(),
+       // illnesses: responseData['illnesses'],
+       // vaccinations: responseData['vaccinations']
         //stringID:responseData['StringID'],
         //pet: responseData['Pet'],
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'UserID': userid,
-        'FirstName': firstname,
-        'LastName': lastname,
-        'Password':password,
-        'Email':email,
-        'District':district,
-        'ReadyForOverposure':readyforoverposure,
-        'TypeOfPets':typePets,
-        'Price':price,
+        'userId': userid,
+        'firstName': firstname,
+        'lastName': lastname,
+        'password':password,
+        'email':email,
+        'district':district,
+        'readyForOvereposure':readyforoverposure,
+        'mentions':mentions,
+        'notes':notes,
+        'pets':pets,
+        //'illnesses':illnesses,
+        //'vaccinations':vaccinations
         //'StringID':stringID
         //'Pet':pet
       };
 
-  Map toMap() => {"UserID":userid, "FirstName":firstname, "LastName":lastname,"Password": password,"Email":email,"District":district};
+  Map toMap() => {"userID":userid, "firstName":firstname, "lastName":lastname,"password": password,"email":email,"district":district, 'readyForOvereposure':readyforoverposure, 'mentions':mentions, 'notes':notes, 'pets':pets};
 }
 
 class MyUserController extends ControllerMVC {
@@ -65,7 +77,7 @@ class MyUserController extends ControllerMVC {
   void init() async {
     try {
       // получаем данные из репозитория
-      final usersList = await repo.getusers();
+      final usersList = await repo.getuser();
       // если все ок то обновляем состояние на успешное
       setState(() => currentState = MyUserResultSuccess(usersList));
     } catch (error) {
@@ -77,22 +89,21 @@ class MyUserController extends ControllerMVC {
 }
 
 class RepositoryUsers{
-  Future<List<MyUser>> getusers() async {
+
+  Future<MyUser> getuser() async {
     Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Users.json')));
-    var rb = res.body;
     if (res.statusCode == 200) {
       //var rb = res.body;
-      List<MyUser> list=[];
+      
       var ll = jsonDecode(res.body);
-      for(var t in ll.keys)
-      {
-        MyUser a = MyUser.fromJson(ll[t]);
+      
+        MyUser a = MyUser.fromJson(ll);
         //if(a.userID==)
-        list.add(a);
-      }
-      return list;
+       
+      
+      return a;
     } else {
-      throw "Unable to retrieve pets.";
+      throw "Unable to retrieve users.";
     }
   }
   }
@@ -101,7 +112,7 @@ class RepositoryUsers{
 
 //указатель на успешный запрос
 class MyUserResultSuccess extends MyUserResult {
-  final List<MyUser> usersList;
+  final MyUser usersList;
   MyUserResultSuccess(this.usersList);
 }
 

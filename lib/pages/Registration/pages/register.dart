@@ -10,8 +10,6 @@ import 'package:provider/provider.dart';
 import 'package:select_form_field/select_form_field.dart';
 //import 'package:select_form_field/select_form_field.dart';
 
-
-
 //(\d+)[\.|\-](\d+)[\.|\-](\d+)\s(.*)
 class Register extends StatefulWidget {
   @override
@@ -21,8 +19,12 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final formKey = new GlobalKey<FormState>();
 
-  String _email, _password, _firstname,_lastname,_price,_typepets,_district,_ready;
-  
+  String _email,
+      _password,
+      _firstname,
+      _lastname,
+      _district;
+     bool _ready;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,8 @@ class _RegisterState extends State<Register> {
 
     final confirmPassword = TextFormField(
       autofocus: false,
-      validator: (value) => value==_password ? "Ваш пароль не совпадает" : null,
+      validator: (value) =>
+          value == _password ? "Ваш пароль не совпадает" : null,
       onSaved: (value) => _password = value,
       obscureText: true,
       decoration: buildInputDecoration("Введите пароль еще раз", Icons.lock),
@@ -53,49 +56,36 @@ class _RegisterState extends State<Register> {
 
     final firstnameField = TextFormField(
       autofocus: false,
-      validator: (value)=>value.isEmpty?"Имя пустое":null,
+      validator: (value) => value.isEmpty ? "Имя пустое" : null,
       onSaved: (value) => _firstname = value,
-      decoration: buildInputDecoration("Введите имя", Icons.email),
+      decoration: buildInputDecoration("Введите имя", Icons.person_rounded),
     );
 
     final lastnameField = TextFormField(
       autofocus: false,
-      validator: (value)=>value.isEmpty?"Фамилия пустая":null,
+      validator: (value) => value.isEmpty ? "Фамилия пустая" : null,
       onSaved: (value) => _lastname = value,
-      decoration: buildInputDecoration("Введите фамилию", Icons.email),
+      decoration: buildInputDecoration("Введите фамилию", Icons.person_rounded),
     );
 
     final districtField = TextFormField(
       autofocus: false,
-      validator: (value)=>value.isEmpty?"Район пустой":null,
+      validator: (value) => value.isEmpty ? "Район пустой" : null,
       onSaved: (value) => _district = value,
-      decoration: buildInputDecoration("Введите район", Icons.email),
+      decoration: buildInputDecoration("Введите район", Icons.place),
     );
 
-    final priceField = TextFormField(
-      autofocus: false,
-      validator: (value)=>value.isEmpty?"Цена пустая":null,
-      onSaved: (value) => _price = value,
-      decoration: buildInputDecoration("Введите цену", Icons.email),
-    );
-
-   final readyField = SelectFormField(
+    final readyField = SelectFormField(
       autofocus: false,
       items: [
-        {'value':'Да','label':'Да'},
-        {'value':'Нет','label':'Нет'}
+        {'value': 'Да', 'label': 'Да'},
+        {'value': 'Нет', 'label': 'Нет'}
       ],
-      validator: (value)=>value.isEmpty?"Поле пустое":null,
-      onChanged: (value) => _ready= value,
-      onSaved: (value) => _ready= value,
-      decoration: buildInputDecoration("Готовы брать питомцев на передержку? (true/false)", Icons.email),
-    );
-
-    final typeField = TextFormField(
-      autofocus: false,
-      validator: (value)=>value.isEmpty?"Поле пустое":null,
-      onSaved: (value) => _typepets = value,
-      decoration: buildInputDecoration("Готовы брать питомцев на передержку? (true/false)", Icons.email),
+      validator: (value) => value.isEmpty ? "Поле пустое" : null,
+      onChanged: (value) => value=="Да"?_ready = true:_ready=false,
+      onSaved: (value) => value=="Да"?_ready = true:_ready=false,
+      decoration: buildInputDecoration(
+          "Готовы брать питомцев на передержку? (true/false)", Icons.home),
     );
     var loading = Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -109,8 +99,10 @@ class _RegisterState extends State<Register> {
       final form = formKey.currentState;
       if (form.validate()) {
         form.save();
-        auth.register(_email, _firstname,_lastname,_password,_district,_typepets,_price,_ready).
-         then((response) {
+        auth
+            .register(_email, _firstname, _lastname, _password, _district,
+                 _ready)
+            .then((response) {
           if (response['status']) {
             MyUser user = response['data'];
             Provider.of<UserProvider>(context, listen: false).setUser(user);
@@ -130,7 +122,6 @@ class _RegisterState extends State<Register> {
           duration: Duration(seconds: 10),
         ).show(context);
       }
-
     };
 
     return BasePage(
@@ -165,17 +156,16 @@ class _RegisterState extends State<Register> {
                     label("Район"),
                     SizedBox(height: 10.0),
                     districtField,
-                    
                     SizedBox(height: 15.0),
-                    label("Стоимость передержки"),
-                    SizedBox(height: 10.0),
-                    priceField,
-                    SizedBox(height: 15.0),
-                    SizedBox(height: 15.0),
-                    label("Виды животных"),
-                    SizedBox(height: 10.0),
-                    typeField,
-                    SizedBox(height: 15.0),
+                    //label("Стоимость передержки"),
+                    //SizedBox(height: 10.0),
+                    //priceField,
+                    //SizedBox(height: 15.0),
+                   //SizedBox(height: 15.0),
+                    //label("Виды животных"),
+                    //SizedBox(height: 10.0),
+                    //typeField,
+                    //SizedBox(height: 15.0),
                     label("Готовы брать на передержку?"),
                     SizedBox(height: 10.0),
                     readyField,
@@ -183,11 +173,11 @@ class _RegisterState extends State<Register> {
                     auth.loggedInStatus == Status.Authenticating
                         ? loading
                         : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            longButtons("Создать профиль", doRegister),
-                          ],
-                        ),
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              longButtons("Создать профиль", doRegister),
+                            ],
+                          ),
                   ],
                 ),
               ),

@@ -1,183 +1,270 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pet_care/pages/PetBoardingPage/MyAccountWidget.dart';
-import 'package:pet_care/repository/accounts.dart';
+import 'package:http/http.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
+import 'package:pet_care/pages/PetBoardingPage/Overexposure.dart';
+import 'package:select_form_field/select_form_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../dommain/myuser.dart';
+import '../CalendarPage/Message.dart';
+import '../ProfilePage/ProfilePage.dart';
+import '../Registration/util/shared_preference.dart';
+import '../Registration/util/widgets.dart';
+import 'AccountBlock.dart';
+import 'package:http/http.dart' as http;
 
 //Страница для настроек аккаунта для сервиса передержки
 class SettingsService extends StatefulWidget {
-  final String email;
-  final String district;
-  final String kindofanimal;
-  final String price;
-  SettingsService({this.email, this.district, this.kindofanimal, this.price});
+  String email;
+  String district;
+  String kindofanimal;
+  String price;
+  int userId;
+  SettingsService(
+      this.email, this.district, this.kindofanimal, this.price, this.userId);
 
   @override
-  State<SettingsService> createState() => _SettingsServiceState();
+  _SettingsServiceState createState() => _SettingsServiceState();
 }
 
-class _SettingsServiceState extends State<SettingsService> {
-  String district = "Советский";
-  String price = "1000";
-  String contacts = "ekaterina_dots@mail.ru";
-  var _selected_dist = "";
-  var _selected_price = "";
-  var _selected_contacts = "";
-  _changeDistrict(String text) {
-    setState(() => district = text);
+class _SettingsServiceState extends StateMVC {
+  MyUserController _controller;
+
+  _SettingsServiceState() : super(MyUserController()) {
+    _controller = controller as MyUserController;
+  }
+  @override
+  void initState() {
+    super.initState();
+    _controller.init();
+    UserPreferences().getUser().then(
+      (result) {
+        setState(
+          () {
+            user = result;
+          },
+        );
+      },
+    );
   }
 
-  _changePrice(String text) {
-    setState(() => price = text);
+  Future<Map<String, dynamic>> _changeInfo(
+      String newtext, int id, String what) async {
+    final Map<String, dynamic> data = {
+      'what': what,
+      'id': id,
+      'new_value': newtext,
+    };
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+switch (what) {
+    case "email":
+      prefs.setString('email', newtext);
+      break;
+    case "district":
+      prefs.setString('district', newtext);
+      break;
   }
 
-  _changeContacts(String text) {
-    setState(() => contacts = text);
+    var response = await http.post(
+      Uri.parse(Uri.encodeFull(
+          'http://vadimivanov-001-site1.itempurl.com/Update/UpdateInformation')),
+      body: jsonEncode(data),
+      headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
+    );
+    var result;
+    if (response.request != null)
+      result = {'status': true, 'message': 'Successfully add', 'data': data};
+    else {
+      result = {'status': false, 'message': 'Adding failed', 'data': null};
+    }
+    return result;
   }
 
+  
+
+  void update() {
+    this.setState(() {});
+  }
+
+  MyUser user;
   @override
   Widget build(BuildContext context) {
+    final state = _controller.currentState;
+    List<Overexposure> overexposures = [];
     return Scaffold(
-        appBar: AppBar(
-          actions: [],
-          elevation: 0,
-          backgroundColor: Color.fromRGBO(255, 223, 142, 10),
-          title: Text("Настройки",
-              style: GoogleFonts.comfortaa(
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 20)),
-        ),
-        body: ListView(
-          children: [
-            MyAccountWidget(accounts[0]),
-            Container(
-              decoration: BoxDecoration(
-                  color: Color.fromRGBO(242, 242, 242, 1),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5,
-                      offset: const Offset(1.0, 1.0),
-                      spreadRadius: 0.0,
-                    )
-                  ]),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      appBar: AppBar(
+        actions: [],
+        elevation: 0,
+        backgroundColor: Color.fromRGBO(255, 223, 142, 10),
+        title: Text("Настройки",
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 20)),
+      ),
+      body: FutureBuilder(
+        future: getMyOverexposures(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+              return CircularProgressIndicator();
+            default:
+              if (snapshot.hasError)
+                return Text('Error: ${snapshot.error}');
+              else
+                overexposures = snapshot.data;
+              bool flag = overexposures == null;
+              return ListView(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(10),
-                    child: Text("Контакты: $contacts ",
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14)),
-                  ),
-                  IconButton(
-                      icon: Icon(Icons.edit, size: 16),
-                      onPressed: () => _displayDialogContacts(context)),
-                ],
-              ),
-            ),
-            Container(
-              //margin: EdgeInsets.only(top: 5, bottom: 5),
-              decoration: BoxDecoration(color: Color.fromRGBO(242, 242, 242, 1),
-                  //borderRadius: BorderRadius.all(Radius.circular(30)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5,
-                      offset: const Offset(1.0, 1.0),
-                      spreadRadius: 0.0,
-                    )
-                  ]),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    child: Text("Район: $district ",
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14)),
-                  ),
-                  IconButton(
-                      icon: Icon(Icons.edit, size: 16),
-                      onPressed: () => _displayDialogDistrict(context)),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  color: Color.fromRGBO(242, 242, 242, 1),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5,
-                      offset: const Offset(1.0, 1.0),
-                      spreadRadius: 0.0,
-                    )
-                  ]),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    child: Text("Стоимость: $price руб./день",
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.comfortaa(
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14)),
-                  ),
-                  IconButton(
-                      icon: Icon(Icons.edit, size: 16),
-                      onPressed: () => _displayDialogPrice(context)),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  color: Color.fromRGBO(242, 242, 242, 1),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 5,
-                      offset: const Offset(1.0, 1.0),
-                      spreadRadius: 0.0,
-                    )
-                  ]),
-              child: Column(children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      child: Text("Кого готовы брать на передержку?",
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.comfortaa(
-                              fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 14)),
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(242, 242, 242, 1),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 5,
+                            offset: const Offset(1.0, 1.0),
+                            spreadRadius: 0.0,
+                          )
+                        ]),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text("Почта: " + user.email,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.comfortaa(
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 14)),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.edit, size: 16),
+                          onPressed: () => _displayDialogContacts(user.userid),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                SetKindPets()
-              ]),
-            ),
-          ],
-        ));
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    //margin: EdgeInsets.only(top: 5, bottom: 5),
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(242, 242, 242, 1),
+                        //borderRadius: BorderRadius.all(Radius.circular(30)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 5,
+                            offset: const Offset(1.0, 1.0),
+                            spreadRadius: 0.0,
+                          )
+                        ]),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text("Район: " + user.district,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.comfortaa(
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 14)),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.edit, size: 16),
+                          onPressed: () => _displayDialogDistrict(user.userid),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    //margin: EdgeInsets.only(top: 5, bottom: 5),
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(242, 242, 242, 1),
+                        //borderRadius: BorderRadius.all(Radius.circular(30)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 5,
+                            offset: const Offset(1.0, 1.0),
+                            spreadRadius: 0.0,
+                          )
+                        ]),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text("Согласие на передержку: ",
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.comfortaa(
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 14)),
+                        ),
+                        MyCheckBox(user.readyforoverposure,user.userid)
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      child: Text(
+                        'Добавить передержку',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      onPressed: () => _displayAddOverexposure(context, update),
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: Text('Мои передержки'),
+                    ),
+                  ),
+                  flag
+                      ? Container()
+                      : GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisExtent: 270,
+                            crossAxisSpacing: 3,
+                            mainAxisSpacing: 3,
+                          ),
+                          shrinkWrap: true,
+                          physics: ScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          itemCount: overexposures.length,
+                          itemBuilder: (BuildContext context, int index) =>
+                              Container(
+                            child: MyAccountBlockO(overexposures[index], index),
+                          ),
+                        ),
+                ],
+              );
+          }
+        },
+      ),
+    );
   }
 
-  _displayDialogDistrict(BuildContext context) {
+  _displayDialogPrice(BuildContext context, int id) {
+    final formKey = new GlobalKey<FormState>();
+    String newtext;
     AlertDialog alert = AlertDialog(
-      title: Text('Редактировать район'),
+      title: Text('Редактировать стоимость'),
       actions: [
-        FlatButton(
+        ElevatedButton(
           child: Text(
             'Принять',
             style: GoogleFonts.comfortaa(
@@ -186,6 +273,10 @@ class _SettingsServiceState extends State<SettingsService> {
                 fontSize: 14),
           ),
           onPressed: () {
+            if (formKey.currentState.validate()) {
+              _changeInfo(newtext, id, "cost");
+              update();
+            }
             Navigator.of(context).pop();
           },
         )
@@ -193,76 +284,95 @@ class _SettingsServiceState extends State<SettingsService> {
       content: Container(
         padding: EdgeInsets.all(10),
         child: TextFormField(
-          maxLength: 20,
-          initialValue: district,
+          maxLength: 12,
           style: GoogleFonts.comfortaa(
               fontStyle: FontStyle.normal,
               fontWeight: FontWeight.w800,
               fontSize: 16),
-          onChanged: _changeDistrict,
-          validator: (email) {
-            if (isDistrictValid(email))
-              return null;
-            else
-              return 'Введите корректный район';
+          onChanged: (value) {
+            newtext = value;
+            //_date = DateTime.now().toString();
           },
+          validator: validateDigits,
         ),
       ),
     );
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alert;
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
-  _displayDialogPrice(BuildContext context) {
+  _displayDialogDistrict(int id) async {
+    final formKey = new GlobalKey<FormState>();
+    String newtext;
     AlertDialog alert = AlertDialog(
-        title: Text('Редактировать стоимость'),
-        actions: [
-          FlatButton(
-            child: Text(
-              'Принять',
-              style: GoogleFonts.comfortaa(
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 14),
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          )
-        ],
-        content: Container(
-          padding: EdgeInsets.all(10),
-          child: TextFormField(
-            initialValue: price,
-            maxLength: 12,
+      title: Text('Редактировать район'),
+      actions: [
+        ElevatedButton(
+          child: Text(
+            'Принять',
             style: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w800,
-                fontSize: 16),
-            onChanged: _changePrice,
-            validator: (price) {
-              if (isPriceValid(price))
-                return null;
-              else
-                return 'Введите корректную стоимость';
-            },
+                fontSize: 14),
           ),
-        ));
+          onPressed: () {
+            if (newtext != "")
+              setState(() {
+                _changeInfo(newtext, id, "district");
+                user.district = newtext;
+              });
+
+            update();
+
+            Navigator.of(context).pop();
+          },
+        )
+      ],
+      content: Container(
+        padding: EdgeInsets.all(10),
+        child: SelectFormField(
+          autofocus: false,
+          items: [
+            {'value': 'Ворошиловский', 'label': 'Ворошиловский'},
+            {'value': 'Советский', 'label': 'Советский'},
+            {'value': 'Железнодорожный', 'label': 'Железнодорожный'},
+            {'value': 'Кировский', 'label': 'Кировский'},
+            {'value': 'Ленинский', 'label': 'Ленинский'},
+            {'value': 'Октябрьский', 'label': 'Октябрьский'},
+            {'value': 'Первомайский', 'label': 'Первомайский'},
+            {'value': 'Пролетарский', 'label': 'Пролетарский'},
+            {'value': 'Другое', 'label': 'Другое'},
+          ],
+          validator: (value) => value.isEmpty ? "Поле пустое" : null,
+          onChanged: (value) => newtext = value,
+          onSaved: (value) => newtext = value,
+          decoration: buildInputDecoration("Введите район", Icons.home),
+        ),
+      ),
+    );
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alert;
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return ListView(
+          children: [
+            alert,
+          ],
+        );
+      },
+    );
   }
 
-  _displayDialogContacts(BuildContext context) {
+  _displayDialogContacts(int id) {
+    final formKey = new GlobalKey<FormState>();
+    String newtext;
     AlertDialog alert = AlertDialog(
         title: Text('Редактировать контакты'),
         actions: [
-          FlatButton(
+          ElevatedButton(
             child: Text(
               'Принять',
               style: GoogleFonts.comfortaa(
@@ -271,7 +381,19 @@ class _SettingsServiceState extends State<SettingsService> {
                   fontSize: 14),
             ),
             onPressed: () {
-              Navigator.of(context).pop();
+              if (newtext != "") {
+                _changeInfo(newtext, id, "email");
+                user.email = newtext;
+
+                update();
+                Navigator.of(context).pop();
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Message2();
+                  },
+                );
+              }
             },
           )
         ],
@@ -279,12 +401,14 @@ class _SettingsServiceState extends State<SettingsService> {
           padding: EdgeInsets.all(10),
           child: TextFormField(
             maxLength: 26,
-            initialValue: contacts,
             style: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w800,
                 fontSize: 16),
-            onChanged: _changeContacts,
+            onChanged: (value) {
+              newtext = value;
+              //_date = DateTime.now().toString();
+            },
           ),
         ));
     showDialog(
@@ -303,6 +427,157 @@ class _SettingsServiceState extends State<SettingsService> {
     RegExp regex = new RegExp(r'[0-9]*$');
     return regex.hasMatch(price);
   }
+
+  _displayAddOverexposure(BuildContext context, void update()) {
+    final formKey1 = new GlobalKey<FormState>();
+    final formKey2 = new GlobalKey<FormState>();
+    final formKey3 = new GlobalKey<FormState>();
+    String animal;
+    String oNote;
+    String cost;
+    AlertDialog alert = AlertDialog(
+      title: Align(
+        alignment: Alignment.bottomCenter,
+        child: Text('Добавление передержки',
+            style: Theme.of(context).copyWith().textTheme.bodyText1),
+      ),
+      actions: [
+        Column(
+          children: [
+            Form(
+              key: formKey1,
+              child: Column(
+                children: [
+                  addInfo('Выберите тип питомца'),
+                  SelectFormField(
+                    autofocus: false,
+                    items: [
+                      {'value': 'Кот/кошка', 'label': 'Кот/кошка'},
+                      {'value': 'Собака', 'label': 'Собака'},
+                      {'value': 'Черепаха', 'label': 'Черепаха'},
+                      {'value': 'Рыба', 'label': 'Рыба'},
+                      {'value': 'Попугай', 'label': 'Попугай'},
+                    ],
+                    validator: (value) => value.isEmpty ? "Поле пустое" : null,
+                    onChanged: (value) => animal = value,
+                    onSaved: (value) => animal = value,
+                    decoration: buildInputDecoration("Вид питомца", Icons.pets),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                  ),
+                ],
+              ),
+            ),
+            Form(
+              key: formKey2,
+              child: Column(
+                children: [
+                  addInfo('Введите стоимость передержки'),
+                  TextFormField(
+                    validator: validateDigits,
+                    autofocus: false,
+                    onChanged: (value) => cost = value,
+                  ),
+                ],
+              ),
+            ),
+            Form(
+              key: formKey3,
+              child: Column(
+                children: [
+                  addInfo('Ваши пожелания или примечания:'),
+                  TextFormField(
+                    maxLines: 4,
+                    validator: (value) => value.isEmpty ? "Поле пустое" : null,
+                    autofocus: false,
+                    onChanged: (value) => oNote = value,
+                  ),
+                ],
+              ),
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 25)),
+            Container(
+              height: 33,
+              child: ElevatedButton(
+                onPressed: ()
+                    //formKey1.currentState.validate()&&formKey2.currentState.validate()&&formKey3.currentState.validate()?
+                    {
+                  formKey1.currentState.validate() &&
+                          formKey2.currentState.validate() &&
+                          formKey3.currentState.validate()
+                      ? addOverexposure(animal, cost, oNote)
+                      : showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Message();
+                          },
+                        );
+                  update();
+                  Navigator.pop(context, true);
+                  update();
+                },
+                child: Text('Добавить',
+                    textAlign: TextAlign.left,
+                    style: Theme.of(context).copyWith().textTheme.bodyText1),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+
+    Future.delayed(
+      Duration.zero,
+      () async {
+        await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return ListView(
+              children: [
+                alert,
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+Future<Map<String, dynamic>> addOverexposure(
+    String animal, String cost, String oNote) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  int userId = prefs.get('userId');
+  final Map<String, dynamic> data = {
+    'user_id': userId,
+    'animal': animal,
+    'cost': cost,
+    'overexposure_note': oNote,
+  };
+  var response = await post(
+    Uri.parse(
+        'http://vadimivanov-001-site1.itempurl.com/Register/RegisterOverexposure'),
+    body: json.encode(data),
+    headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
+  );
+
+  var result;
+  if (response.request != null)
+    result = {'status': true, 'message': 'Successfully add', 'data': data};
+  else {
+    result = {'status': false, 'message': 'Adding failed', 'data': null};
+  }
+  return result;
+}
+
+String validateDigits(String value) {
+  String _msg;
+  RegExp regex = new RegExp(r'^(\d+)$');
+  if (value.isEmpty) {
+    _msg = "Введите число";
+  } else if (!regex.hasMatch(value)) _msg = "Можно ввести только целое число";
+  return _msg;
 }
 
 class SetKindPets extends StatefulWidget {
@@ -315,39 +590,135 @@ class _SetKindPetsState extends State<SetKindPets> {
   bool isChecked2 = false;
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
-      Checkbox(
-          checkColor: Colors.black,
-          value: isChecked1,
-          onChanged: (value) {
-            setState(() {
-              isChecked1 = value;
-            });
-          }),
-      Container(
-        padding: EdgeInsets.all(5),
-        child: Text("Собаки",
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14)),
-      ),
-      Checkbox(
-          checkColor: Colors.black,
-          value: isChecked2,
-          onChanged: (value) {
-            setState(() {
-              isChecked2 = value;
-            });
-          }),
-      Container(
-        padding: EdgeInsets.all(5),
-        child: Text("Кошки",
-            style: GoogleFonts.comfortaa(
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w800,
-                fontSize: 14)),
-      ),
-    ]);
+    return Container(
+      margin: EdgeInsets.all(10),
+      child: Row(children: [
+        Checkbox(
+            checkColor: Colors.black,
+            value: isChecked1,
+            onChanged: (value) {
+              setState(() {
+                isChecked1 = value;
+              });
+            }),
+        Container(
+          padding: EdgeInsets.all(5),
+          child: Text("Собаки",
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 14)),
+        ),
+        Checkbox(
+            checkColor: Colors.black,
+            value: isChecked2,
+            onChanged: (value) {
+              setState(() {
+                isChecked2 = value;
+              });
+            }),
+        Container(
+          padding: EdgeInsets.all(5),
+          child: Text("Кошки",
+              style: GoogleFonts.comfortaa(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 14)),
+        ),
+      ]),
+    );
   }
 }
+
+class Message2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(20.0),
+          ),
+        ),
+        title: Text('Внимание', style: Theme.of(context).textTheme.bodyText2),
+        content: Text(
+          'Вы изменили электронную почту. При входе в профиль теперь используйте новый email',
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+        actions: [
+          ElevatedButton(
+            child: Text('Ок'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MyCheckBox extends StatefulWidget {
+
+  bool isChecked;
+  int id;
+  MyCheckBox(this.isChecked,this.id);
+  @override
+  State<MyCheckBox> createState() => _MyCheckBoxState();
+}
+
+class _MyCheckBoxState extends State<MyCheckBox> {
+
+  @override
+  Widget build(BuildContext context) {
+    Color getColor(Set<MaterialState> states) {
+      const Set<MaterialState> interactiveStates = <MaterialState>{
+        MaterialState.pressed,
+        MaterialState.hovered,
+        MaterialState.focused,
+      };
+      if (states.any(interactiveStates.contains)) {
+        return Colors.blue;
+      }
+      return Colors.black;
+    }
+
+    return Checkbox(
+      checkColor: Colors.white,
+      fillColor: MaterialStateProperty.resolveWith(getColor),
+      value: widget.isChecked,
+      onChanged: (bool value) {
+        setState(() {
+          _changeReady(!widget.isChecked,widget.id, "state");
+          widget.isChecked = value;
+          
+        });
+      },
+    );
+  }
+}
+
+Future<Map<String, dynamic>> _changeReady(
+      bool newtext, int id, String what) async {
+    final Map<String, dynamic> data = {
+      'what': what,
+      'id': id,
+      'new_value': newtext,
+    };
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('readyForOverposure', newtext);
+
+    var response = await http.post(
+      Uri.parse(Uri.encodeFull(
+          'http://vadimivanov-001-site1.itempurl.com/Update/UpdateInformation')),
+      body: jsonEncode(data),
+      headers: {"Content-Type": "application/json", "Conten-Encoding": "utf-8"},
+    );
+    var result;
+    if (response.request != null)
+      result = {'status': true, 'message': 'Successfully add', 'data': data};
+    else {
+      result = {'status': false, 'message': 'Adding failed', 'data': null};
+    }
+    return result;
+  }

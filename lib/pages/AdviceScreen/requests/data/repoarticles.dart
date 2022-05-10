@@ -3,36 +3,35 @@ import 'dart:convert';
 // импортируем http пакет
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:pet_care/pages/AdviceScreen/requests/models/ArticleJ.dart';
+import 'package:pet_care/pages/AdviceScreen/requests/models/Article.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+const String SERVER =
+    "https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Articles.json";
 
-
-const String SERVER = "https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Articles.json";
-
-  class Repository {
+class Repository {
   Future<List<Article>> getArticles() async {
-    Response res = await http.get(Uri.parse(Uri.encodeFull('https://petcare-app-3f9a4-default-rtdb.europe-west1.firebasedatabase.app/Articles.json')));
-    
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    int userId = prefs.get('userId');
+    Response res = await http.get(Uri.parse(Uri.encodeFull(
+        'http://vadimivanov-001-site1.itempurl.com/Article/LoadArticles?user_id=$userId')));
     if (res.statusCode == 200) {
-      //var rb = res.body;
-      List<Article> list=[];
-      var ll = jsonDecode(res.body);
-      for(var t in ll.keys)
-      {
-        Article a = Article.fromJson(ll[t]);
+      List<Article> list = [];
+      List ll = jsonDecode(res.body);
+
+      for (var t in ll) {
+        Article a = Article.fromJson(t);
+        int id = a.id;
+        Response res2 = await http.get(
+          Uri.parse(Uri.encodeFull(
+              'http://vadimivanov-001-site1.itempurl.com/Article/IsArticleFavourite?user_id=$userId&article_id=$id')),
+        );
+        a.isFav = res2.body == "true";
         list.add(a);
       }
-      //for(var j in res.body)
-    
-      //var body = jsonDecode(res.body);
-
-      //List<Article> l;
-    
-      //var m = body.values.values;
-      //List<Article> articles = body.values;
       return list;
     } else {
       throw "Unable to retrieve articles.";
     }
   }
-  }
+}

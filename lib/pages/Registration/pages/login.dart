@@ -10,6 +10,9 @@ import 'package:pet_care/pages/providers/auth.dart';
 import 'package:pet_care/pages/providers/userprovider.dart';
 import 'package:provider/provider.dart';
 
+import '../../PetBoardingPage/SettingsService.dart';
+import 'ErrorMessage.dart';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -24,22 +27,19 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     AuthProvider auth = Provider.of<AuthProvider>(context);
 
-    final emailField = 
-
-    TextFormField(
+    final emailField = TextFormField(
       autofocus: false,
       validator: validateEmail,
       onSaved: (value) => _email = value,
-      decoration: buildInputDecoration("Confirm password", Icons.email),
+      decoration: buildInputDecoration("Введите почту", Icons.email),
     );
 
-    final passwordField = 
-    TextFormField(
+    final passwordField = TextFormField(
       autofocus: false,
       obscureText: true,
-      validator: (value) => value.isEmpty ? "Please enter password" : null,
+      validator: (value) => value.isEmpty ? "Введите пароль" : null,
       onSaved: (value) => _password = value,
-      decoration: buildInputDecoration("Confirm password", Icons.lock),
+      decoration: buildInputDecoration("Введите пароль", Icons.lock),
     );
 
     var loading = Row(
@@ -51,31 +51,19 @@ class _LoginState extends State<Login> {
     );
     final forgotLabel = Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        /*
-        TextButton(
-          child: Text("Забыли пароль?",
-              style: GoogleFonts.comfortaa(color: Color.fromARGB(255, 54, 28, 0),
-                               fontWeight: FontWeight.w300, 
-                               fontStyle: FontStyle.italic,
-                               fontSize: 16)),
-          onPressed: () {
-//            Navigator.pushReplacementNamed(context, '/reset-password');
-          },
-        ),*/
         TextButton(
           //padding: EdgeInsets.only(left: 0.0),
-          child: Text("Регистрация", 
-          style: GoogleFonts.comfortaa(color: Color.fromARGB(255, 54, 28, 0),
-                           fontWeight: FontWeight.w300,
-                           fontStyle: FontStyle.italic,
-                           fontSize: 18)),
+          child: Text("Регистрация",
+              style: GoogleFonts.comfortaa(
+                  color: Color.fromARGB(255, 54, 28, 0),
+                  fontWeight: FontWeight.w300,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 18)),
           onPressed: () {
             //Navigator.pushNamed(context, '/register');
-            Navigator.push(context, MaterialPageRoute(
-  	builder: (context) => Register()
-  ));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Register()));
           },
         ),
       ],
@@ -97,11 +85,12 @@ class _LoginState extends State<Login> {
             Provider.of<UserProvider>(context, listen: false).setUser(user);
             Navigator.pushReplacementNamed(context, '/home');
           } else {
-            Flushbar(
-              title: "Failed Login",
-              message: response['message']['message'].toString(),
-              duration: Duration(seconds: 3),
-            ).show(context);
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return MessageErrorLogin();
+              },
+            );
           }
         });
       } else {
@@ -110,62 +99,63 @@ class _LoginState extends State<Login> {
     };
 
     return BasePage(
-      title: "Авторизация",
-      body: Scaffold(
-        body: Container(
-         padding: EdgeInsets.all(30.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  //child: Align(
+        title: "Авторизация",
+        body: Scaffold(
+          body: Container(
+            padding: EdgeInsets.all(30.0),
+            child: Form(
+              key: formKey,
+              child: Column(
+                //crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    //child: Align(
                     //alignment: Alignment.topCenter,
-                  child: Row(
-                    children: [
-                    ],
-                    //),
-                  ),
-                ),
-                SizedBox(height: 12.0), // отступ (высота) между "Авторизация" и "почта"
-                label("Электронная почта"),
-                SizedBox(height: 5.0), // отступ (высота) между "почта" и белым контейнером "почта"
-                emailField,
-                SizedBox(height: 20.0), // отступ (высота) между желтым контейнером "почта" и белым контейнером "почта"
-                label("Пароль"),
-                SizedBox(height: 5.0), // отступ (высота) между "пароль" и белым контейнером "пароль"
-                passwordField,
-                SizedBox(height: 20.0), // отступ (высота) между желтым контейнером "вход" и белым контейнером "пароль"
-                
-                auth.loggedInStatus == Status.Authenticating
-                    ? loading
-                    : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        longButtons("Вход", doLogin),
-                      ],
+                    child: Row(
+                      children: [],
+                      //),
                     ),
-                    
-                SizedBox(height: 5.0), // отступ (высота) между желтым контейнером "вход" и контейнерами "ЗП?" и "Регистрация"
-                forgotLabel,
-                SizedBox(height: 10,),
-                Container(
-                              child: Flexible(
-                                child: Text(
-                                  "Баг: при попытке ввести несуществующие в БД данные приложение ломается. Будет устранен", style:  GoogleFonts.comfortaa(
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w400, 
-              fontSize: 12                  
+                  ),
+                  SizedBox(
+                      height:
+                          12.0), // отступ (высота) между "Авторизация" и "почта"
+                  label("Электронная почта"),
+                  SizedBox(
+                      height:
+                          5.0), // отступ (высота) между "почта" и белым контейнером "почта"
+                  emailField,
+                  SizedBox(
+                      height:
+                          20.0), // отступ (высота) между желтым контейнером "почта" и белым контейнером "почта"
+                  label("Пароль"),
+                  SizedBox(
+                      height:
+                          5.0), // отступ (высота) между "пароль" и белым контейнером "пароль"
+                  passwordField,
+                  SizedBox(
+                      height:
+                          20.0), // отступ (высота) между желтым контейнером "вход" и белым контейнером "пароль"
+
+                  auth.loggedInStatus == Status.Authenticating
+                      ? loading
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            longButtons("Вход", doLogin),
+                          ],
+                        ),
+
+                  SizedBox(
+                      height:
+                          5.0), // отступ (высота) между желтым контейнером "вход" и контейнерами "ЗП?" и "Регистрация"
+                  forgotLabel,
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
               ),
-                                  softWrap: true,),
-                              ),
-                            ),
-              ],
             ),
-          
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 }

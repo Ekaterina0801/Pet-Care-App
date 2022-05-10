@@ -56,6 +56,13 @@ dependencies:
   cloud_firestore: ^3.1.10
   firebase_auth: ^3.3.12
   firebase: ^9.0.2
+  connectivity: ^3.0.6
+  intl: ^0.17.0
+  syncfusion_flutter_datepicker: ^19.4.56
+  date_time_picker: ^2.1.0
+  image_picker: ^0.8.5
+  flutter_time_picker_spinner: ^2.0.0
+  flutter_local_notifications: ^9.5.2
 
 
 dev_dependencies:
