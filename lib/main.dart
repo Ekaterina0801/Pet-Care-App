@@ -119,14 +119,21 @@ class MyApp extends StatelessWidget {
             headline1: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
                 fontWeight: FontWeight.w800,
+                color: Colors.black,
                 fontSize: 17),
 
             // заголовки шапок окон изменений и добавлений
             headline2: GoogleFonts.comfortaa(
                 fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.w800,
+                color: Colors.black,
                 fontSize: 20),
 
+            headline3: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w900,
+                color: Colors.black87,
+                fontSize: 16),
           ),
         ),
       ),
