@@ -1,8 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:pet_care/pages/Registration/util/shared_preference.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+
+import '../../dommain/myuser.dart';
 
 class Overexposure {
   int overexposureId;
@@ -14,6 +17,7 @@ class Overexposure {
   String lastname;
   String email;
   String district;
+  MyUser user;
 
   Overexposure(
       {this.overexposureId,
@@ -24,7 +28,8 @@ class Overexposure {
       this.firstname,
       this.lastname,
       this.email,
-      this.district});
+      this.district,
+      this.user});
   Map<String, dynamic> toMap() {
     return ({
       "overexposureId": overexposureId,
@@ -43,7 +48,7 @@ class Overexposure {
       overexposureId: json['overexposureId'],
       userId: json['userId'],
       animal: json['animal'],
-      oNote: json['overexposure_note'],
+      oNote: json['oNote'],
       cost: json['cost'],
       firstname: json["first_name"],
       lastname: json["last_name"],
@@ -66,6 +71,7 @@ class Overexposure {
 Future<List<Overexposure>> getOverexposures() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   int userId = prefs.get('userId');
+
   Response res = await http.get(
     Uri.parse(
       Uri.encodeFull(
@@ -79,6 +85,7 @@ Future<List<Overexposure>> getOverexposures() async {
     List ll = l['offers'];
     for (var t in ll) {
       Overexposure a = Overexposure.fromJson(t);
+      a.user = await UserPreferences().getUser();
       list.add(a);
     }
     return list;
@@ -86,3 +93,26 @@ Future<List<Overexposure>> getOverexposures() async {
     throw "Unable to retrieve overexposure.";
   }
 }
+
+Future<List<Overexposure>> getMyOverexposures() async {
+    MyUser user = await UserPreferences().getUser();
+    int userId = user.userid;
+    Response res = await http.get(Uri.parse(Uri.encodeFull(
+        'http://vadimivanov-001-site1.itempurl.com/Load/LoadOverexposures?user_id=$userId')));
+    if (res.statusCode == 200) {
+      //var rb = res.body;
+      List<Overexposure> list = [];
+      var ll = jsonDecode(res.body);
+      for (var t in ll) {
+        Overexposure a = Overexposure.fromJson(t);
+        a.district = user.district;
+        a.firstname = user.firstname;
+        a.lastname = user.lastname;
+        a.email = user.email;
+        list.add(a);
+      }
+      return list;
+    } else {
+      throw "Unable to retrieve overexposures.";
+    }
+  }
