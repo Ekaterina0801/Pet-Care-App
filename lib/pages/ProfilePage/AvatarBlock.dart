@@ -8,23 +8,25 @@ class AvatarBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.all(10),
-          child: CircleAvatar(
-            radius: 80,
-            backgroundImage: Image.asset(photo).image,
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(10),
+            child: CircleAvatar(
+              radius: 80,
+              backgroundImage: Image.asset(photo).image,
+            ),
           ),
-        ),
-        Text(
-          name,
-          style: GoogleFonts.comfortaa(
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w800,
-              fontSize: 14),
-        ),
-      ],
+          Text(
+            name,
+            style: GoogleFonts.comfortaa(
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w800,
+                fontSize: 14),
+          ),
+        ],
+      ),
     );
   }
 }
