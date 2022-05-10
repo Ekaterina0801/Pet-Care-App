@@ -45,7 +45,7 @@ class AdviceBlock extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: FadeInImage.assetNetwork(
-                    image: 'https://www.wikihow.com/images/thumb/c/c3/Take-Care-of-Your-Pet-Step-6-Version-2.jpg/v4-728px-Take-Care-of-Your-Pet-Step-6-Version-2.jpg',
+                    image: article.imageAdress,
                     placeholder: 'assets/article_1.1.jpg',
                   ).image,
                   fit: BoxFit.cover,
